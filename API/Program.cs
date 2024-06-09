@@ -21,6 +21,17 @@ builder.Services.AddDbContext<DataContext>(opts =>
     .EnableDetailedErrors();
 });
 
+// Adding CORS
+builder.Services.AddCors(opts =>
+{
+  opts.AddPolicy("AllowSpecificOrigin", builder =>
+  {
+    builder.WithOrigins("http://localhost:3000");
+    builder.AllowAnyHeader();
+    builder.AllowAnyMethod();
+  });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +40,9 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+// Using the CORS policy to allow our dev environment (Next.js (with port 3000)) to make server calls
+app.UseCors("AllowSpecificOrigin");
 
 // Using the controllers
 app.MapControllers();

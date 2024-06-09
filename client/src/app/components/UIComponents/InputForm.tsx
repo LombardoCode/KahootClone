@@ -7,13 +7,15 @@ const montserrat = Montserrat({
   style: 'normal'
 });
 
-export interface TextProps {
+export interface InputForm {
   className?: string;
   type: InputFormTypes;
   textColor: TextColors;
   fontWeight: FontWeights;
   name: string;
   id: string;
+  value?: string;
+  onChange?: (e?: any) => void;
 }
 
 export enum InputFormTypes {
@@ -27,8 +29,10 @@ const InputForm = ({
   type = InputFormTypes.TEXT,
   className,
   name,
-  id
-}: TextProps) => {
+  id,
+  value,
+  onChange
+}: InputForm) => {
   return (
     <>
       <input
@@ -36,6 +40,8 @@ const InputForm = ({
         name={name}
         id={id}
         className={`${montserrat.className} ${className} ${textColor} ${fontWeight} px-2 py-1 border-1 border-gray-300 focus:border-blue-500 outline-none transition-all duration-300 rounded-md`}
+        value={value}
+        onChange={onChange}
       />
     </>
   )
