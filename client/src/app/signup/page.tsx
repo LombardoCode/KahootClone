@@ -23,7 +23,7 @@ const Signup = () => {
       <Navbar />
       <BackgroundShapes className="-z-10"/>
       <Container>
-        <MainContent className="pt-12">
+        <MainContent>
           <Text
             textColor={TextColors.BLACK}
             className="text-4xl text-center mt-8"
