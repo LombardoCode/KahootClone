@@ -8,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Adding the controllers
+builder.Services.AddControllers();
+
 // Database
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
 var MySQLConnString = builder.Configuration.GetConnectionString("MySQLConnString");
@@ -26,6 +29,9 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+// Using the controllers
+app.MapControllers();
 
 app.UseHttpsRedirection();
 
