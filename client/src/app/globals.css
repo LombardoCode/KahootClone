@@ -4,38 +4,30 @@
 
 /********** FONTS **********/
 /* Montserrat */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap'); */
 
 .fnt-montserrat-light {
+  @apply font-light;
   font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300; 
-  font-style: normal;
 }
 
 .fnt-montserrat-regular {
+  @apply font-normal;
   font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400; 
-  font-style: normal;
 }
 
 .fnt-montserrat-bold {
+  @apply font-bold;
   font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700; 
-  font-style: normal;
 }
 
 .fnt-montserrat-black {
+  @apply font-black;
   font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 900; 
-  font-style: normal;
 }
 
 /********** CUSTOM CSS **********/
 a {
-  color: rgba(0, 200, 255, 255);
+  color: rgb(19, 104, 206);
   text-decoration: underline;
 }
