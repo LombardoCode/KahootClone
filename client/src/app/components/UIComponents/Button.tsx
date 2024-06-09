@@ -8,7 +8,7 @@ interface ButtonProps {
   backgroundColor: BackgroundColors;
   className?: string;
   fontWeight?: FontWeights;
-  onClick: (e?: any) => void;
+  onClick?: (e?: any) => void;
 };
 
 const montserrat = Montserrat({

@@ -9,43 +9,33 @@ import Container from "../components/utils/Container";
 import Navbar from "../components/utils/Navbar";
 import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
 import Card from "../components/UIComponents/Card";
-import BackgroundShapes from "../components/utils/BackgroundShapes";
 import MainContent from "../components/utils/MainContent";
 
-const Signup = () => {
-  const createAccount = (e: any) => {
+const LoginPage = () => {
+  const logIn = (e: any) => {
     e.preventDefault();
-    console.log("Creating an account.")
+    console.log("Log-in with the user's account.")
   }
 
   return (
     <>
       <Navbar />
-      <BackgroundShapes className="-z-10"/>
       <Container>
-        <MainContent className="pt-12">
+        <MainContent>
+
           <Text
             textColor={TextColors.BLACK}
-            className="text-4xl text-center mt-8"
+            className="text-2xl text-center mt-8"
             useCase={UseCases.TITLE}
             fontWeight={FontWeights.BOLD}
           >
-            Create an account
+            Log in
           </Text>
 
-          <div className="create-account-form w-96 mx-auto">
-            <Text
-              textColor={TextColors.BLACK}
-              useCase={UseCases.HEADER}
-              fontWeight={FontWeights.BOLD}
-              className="text-center text-md mt-4"
-            >
-              Sign up with your email
-            </Text>
-
+          <div className="login-form w-96 mx-auto">
             <Card className="w-96 mx-auto mt-4">
               <form
-                onSubmit={createAccount}
+                onSubmit={logIn}
               >
                 <div className="flex flex-col">
                   <Label
@@ -53,7 +43,7 @@ const Signup = () => {
                     textColor={TextColors.BLACK}
                     htmlFor="email"
                   >
-                    Email
+                    Username or email
                   </Label>
                   <InputForm
                     type={InputFormTypes.TEXT}
@@ -85,7 +75,7 @@ const Signup = () => {
                 <div className="flex flex-col mt-4">
                   <Button
                     backgroundColor={BackgroundColors.GREEN}
-                    textContent="Sign up"
+                    textContent="Log in"
                     fontWeight={FontWeights.BOLD}
                   />
                 </div>
@@ -98,7 +88,7 @@ const Signup = () => {
               useCase={UseCases.LONGTEXT}
               className={'mt-2 text-center'}
             >
-              Already have an account? <Link href="/login">Log in</Link>
+              Don&apos;t have an account yet? <Link href="/signup">Sign up</Link>
             </Text>
           </div>
         </MainContent>
@@ -107,4 +97,4 @@ const Signup = () => {
   )
 }
 
-export default Signup;
+export default LoginPage;
