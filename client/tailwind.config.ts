@@ -15,6 +15,10 @@ const config: Config = {
       },
       scale: {
         '200': '2.00'
+      },
+      borderWidth: {
+        '1': '1px',
+        '1.5': '1.5px',
       }
     },
   },

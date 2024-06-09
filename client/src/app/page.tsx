@@ -1,39 +1,45 @@
-import Image from "next/image";
+'use client'
+
 import Input from "./components/UIComponents/Input";
 import Button, { BackgroundColors } from "./components/UIComponents/Button";
-import Text, { TextColors, TextTypographies } from "./components/UIComponents/Text";
+import Text from "./components/UIComponents/Text";
 import Link from "next/link";
+import Logo, { LogoSize } from "./components/utils/Logo";
+import { FontWeights, TextColors, UseCases } from "./interfaces/Text.interface";
+import BackgroundShapes from "./components/utils/BackgroundShapes";
 
 const Home = () => {
+  const tryEnterIntoTheGame = () => {
+    console.log("Trying to enter into the game.");
+  }
+
   return (
     <div className="bg-violet-950 w-full h-screen">
-      <div className="background-shapes absolute w-full h-screen overflow-hidden">
-        <div className="absolute background-shape-square w-96 h-96 bg-black rotate-45 scale-200 opacity-15"></div>
-        <div className="absolute background-shape-circle w-96 h-96 bg-black right-0 top-full -translate-y-96 scale-200 opacity-15 rounded-full"></div>
-      </div>
+      <BackgroundShapes />
       <div className="flex flex-col h-full">
         <div className="flex flex-1 justify-center items-center flex-col relative z-10">
-          <Image
-            src={"/Kahoot_Logo.svg"}
-            alt={"Kahoot logo"}
-            width={200}
-            height={100}
+          <Logo
+            size={LogoSize.LARGE}
             className="mb-4"
           />
-          <div className="flex flex-col justify-between bg-black px-4 py-3 rounded-sm h-36">
+          <div className="flex flex-col justify-between bg-black px-4 py-3 rounded-sm">
             <Input
               placeholder="Game PIN"
             />
             <Button
               textContent="Enter"
               backgroundColor={BackgroundColors.GRAY}
+              fontWeight={FontWeights.BOLD}
+              className="mt-3"
+              onClick={() => tryEnterIntoTheGame()}
             />
           </div>
         </div>
         <footer className="text-center relative z-10 py-5">
           <Text
+            useCase={UseCases.LONGTEXT}
             textColor={TextColors.WHITE}
-            fontStyle={TextTypographies.REGULAR}
+            fontWeight={FontWeights.LIGHT}
           >
             Create your own Kahoot account for FREE by clicking <Link href="/signup">here</Link>!
           </Text>
