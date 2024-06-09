@@ -11,11 +11,35 @@ import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface"
 import Card from "../components/UIComponents/Card";
 import BackgroundShapes from "../components/utils/BackgroundShapes";
 import MainContent from "../components/utils/MainContent";
+import { useState } from "react";
+import { CreateAccount } from "../interfaces/Auth/CreateAccount.interface";
+import axios from "axios";
 
 const Signup = () => {
+  const [formData, setFormData] = useState<CreateAccount>({
+    email: '',
+    password: ''
+  });
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  }
+
   const createAccount = (e: any) => {
     e.preventDefault();
     console.log("Creating an account.")
+    console.log(formData);
+
+    axios.get('http://localhost:5000/api/user/test')
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
   }
 
   return (
@@ -61,6 +85,8 @@ const Signup = () => {
                     fontWeight={FontWeights.LIGHT}
                     name="email"
                     id="email"
+                    value={formData.email}
+                    onChange={handleFormChange}
                   />
                 </div>
 
@@ -79,6 +105,8 @@ const Signup = () => {
                     name="password"
                     id="password"
                     className="tracking-widest"
+                    value={formData.password}
+                    onChange={handleFormChange}
                   />
                 </div>
 
