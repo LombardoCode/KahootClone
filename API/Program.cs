@@ -1,6 +1,7 @@
 using System.Text;
 using API.Data;
 using API.Models;
+using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opts =>
   opts.Password.RequireNonAlphanumeric = false;
   opts.Password.RequireLowercase = false;
   opts.Password.RequireUppercase = false;
+  opts.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<DataContext>()
 .AddDefaultTokenProviders();
@@ -71,6 +73,9 @@ builder.Services.AddAuthorization();
 
 // Adding the controllers
 builder.Services.AddControllers();
+
+// Additional services
+builder.Services.AddScoped<AuthService>();
 
 var app = builder.Build();
 
