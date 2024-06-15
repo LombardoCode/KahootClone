@@ -7,19 +7,29 @@ import Label from "../components/UIComponents/Label";
 import Text from "../components/UIComponents/Text";
 import Container from "../components/utils/Container";
 import Navbar from "../components/utils/Navbar";
-import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
+import { FontWeights, TextColors, TextStyles, UseCases } from "../interfaces/Text.interface";
 import Card from "../components/UIComponents/Card";
 import BackgroundShapes from "../components/utils/BackgroundShapes";
 import MainContent from "../components/utils/MainContent";
 import { useState } from "react";
 import { CreateAccount } from "../interfaces/Auth/CreateAccount.interface";
 import axiosInstance from "../utils/axiosConfig";
+import { AccountRegistrationFormErrors } from "../interfaces/Auth/AccountRegistrationFormErrors";
+import { AccountLoginInfo } from "../interfaces/Auth/AccountLoginInfo";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState<CreateAccount>({
     username: '',
     email: '',
     password: ''
+  });
+
+  const [errors, setErrors] = useState<AccountRegistrationFormErrors>({
+    email: [],
+    username: [],
+    password: []
   });
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +47,26 @@ const Signup = () => {
     await axiosInstance.post('/auth/register', formData)
       .then(res => {
         console.log(res.data);
+        logInUser();
+      })
+      .catch(err => {
+        console.error(err);
+        if (err.response.data.errors) {
+          setErrors(err.response.data.errors);
+        }
+      })
+  }
+
+  const logInUser = async () => {
+    let loginData: AccountLoginInfo = {
+      email: formData.username,
+      password: formData.password
+    };
+
+    await axiosInstance.post('/auth/login', loginData)
+      .then(res => {
+        console.log(res.data);
+        router.push('/dashboard');
       })
       .catch(err => {
         console.error(err);
@@ -89,6 +119,13 @@ const Signup = () => {
                     value={formData.username}
                     onChange={handleFormChange}
                   />
+                  {errors.username.length > 0 && (
+                    <>
+                      {errors.username.map((error: string, key: number) => (
+                        <Text key={key} fontWeight={FontWeights.REGULAR} useCase={UseCases.LONGTEXT} textColor={TextColors.RED} textStyle={TextStyles.ITALIC} className="text-sm mt-1">{error}</Text>
+                      ))}
+                    </>
+                  )}
                 </div>
 
                 <div className="flex flex-col mt-4">
@@ -108,6 +145,13 @@ const Signup = () => {
                     value={formData.email}
                     onChange={handleFormChange}
                   />
+                  {errors.email.length > 0 && (
+                    <>
+                      {errors.email.map((error: string, key: number) => (
+                        <Text key={key} fontWeight={FontWeights.REGULAR} useCase={UseCases.LONGTEXT} textColor={TextColors.RED} textStyle={TextStyles.ITALIC} className="text-sm mt-1">{error}</Text>
+                      ))}
+                    </>
+                  )}
                 </div>
 
                 <div className="flex flex-col mt-4">
@@ -128,6 +172,13 @@ const Signup = () => {
                     value={formData.password}
                     onChange={handleFormChange}
                   />
+                  {errors.password.length > 0 && (
+                    <>
+                      {errors.password.map((error: string, key: number) => (
+                        <Text key={key} fontWeight={FontWeights.REGULAR} useCase={UseCases.LONGTEXT} textColor={TextColors.RED} textStyle={TextStyles.ITALIC} className="text-sm mt-1">{error}</Text>
+                      ))}
+                    </>
+                  )}
                 </div>
 
                 <div className="flex flex-col mt-4">

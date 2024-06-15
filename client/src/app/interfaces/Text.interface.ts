@@ -4,11 +4,13 @@ export interface TextProps {
   textColor: TextColors;
   useCase: UseCases;
   fontWeight: FontWeights;
+  textStyle?: TextStyles;
 }
 
 export enum TextColors {
   BLACK = "text-black",
-  WHITE = "text-white"
+  WHITE = "text-white",
+  RED = "text-red-700"
 }
 
 export enum UseCases {
@@ -23,4 +25,9 @@ export enum FontWeights {
   BOLD = "fnt-montserrat-bold",
   REGULAR = "fnt-montserrat-regular",
   LIGHT = "fnt-montserrat-light",
+}
+
+export enum TextStyles {
+  NORMAL = "not-italic",
+  ITALIC = "italic"
 }

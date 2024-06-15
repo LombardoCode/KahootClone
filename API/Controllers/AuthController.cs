@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using API.DTOs;
 using API.Models;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -16,12 +17,18 @@ namespace API.Controllers
     private readonly SignInManager<AppUser> _signInManager;
     private readonly UserManager<AppUser> _userManager;
     private readonly IConfiguration _configuration;
+    private readonly AuthService _authService;
 
-    public AuthController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IConfiguration configuration)
+    public AuthController(
+      SignInManager<AppUser> signInManager,
+      UserManager<AppUser> userManager,
+      IConfiguration configuration,
+      AuthService authService)
     {
       _signInManager = signInManager;
       _userManager = userManager;
       _configuration = configuration;
+      _authService = authService;
     }
 
     [HttpPost("register")]
@@ -40,11 +47,32 @@ namespace API.Controllers
         return Ok();
       }
 
-      var errorsList = result.Errors.Select(e => e.Description).ToList();
+      var errorsDict = new Dictionary<string, List<string>>()
+      {
+        { "username", new List<string>() },
+        { "email", new List<string>() },
+        { "password", new List<string>() },
+      };
+
+      foreach (var error in result.Errors)
+      {
+        if (error.Code.Contains("UserName"))
+        {
+          errorsDict["username"].Add(error.Description);
+        }
+        else if (error.Code.Contains("Email"))
+        {
+          errorsDict["email"].Add(error.Description);
+        }
+        else if (error.Code.Contains("Password"))
+        {
+          errorsDict["password"].Add(error.Description);
+        }
+      }
 
       var response = new
       {
-        errors = errorsList
+        errors = errorsDict
       };
 
       return BadRequest(response);
@@ -53,7 +81,7 @@ namespace API.Controllers
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDTO credentials)
     {
-      var user = await _userManager.FindByEmailAsync(credentials.Email);
+      var user = await _authService.FindUserByEmailOrUsernameAsync(credentials.Email);
 
       if (user == null)
       {
@@ -64,7 +92,6 @@ namespace API.Controllers
 
       if (result.Succeeded)
       {
-        var userFromDB = await _userManager.FindByEmailAsync(credentials.Email);
         var token = GenerateJwtToken(credentials.Email);
 
         return Ok(new
@@ -72,7 +99,7 @@ namespace API.Controllers
           token,
           user = new
           {
-            userFromDB.UserName
+            user.UserName
           }
         });
       }
