@@ -41,8 +41,6 @@ const Signup = () => {
 
   const createAccount = async (e: any) => {
     e.preventDefault();
-    console.log("Creating an account.")
-    console.log(formData);
 
     await axiosInstance.post('/auth/register', formData)
       .then(res => {

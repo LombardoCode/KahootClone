@@ -82,17 +82,19 @@ namespace API.Controllers
     public async Task<IActionResult> Login(LoginDTO credentials)
     {
       var user = await _authService.FindUserByEmailOrUsernameAsync(credentials.Email);
+      string genericError = "Email or password is wrong";
+      var errors = new { errors = new[] { genericError } };
 
       if (user == null)
       {
-        return BadRequest(new { errors = new[] { "Email or password is wrong" } });
+        return BadRequest(errors);
       }
 
       var result = await _signInManager.PasswordSignInAsync(user.UserName, credentials.Password, false, false);
 
       if (result.Succeeded)
       {
-        var token = GenerateJwtToken(credentials.Email);
+        var token = GenerateJwtToken(user.UserName);
 
         return Ok(new
         {
@@ -104,10 +106,10 @@ namespace API.Controllers
         });
       }
 
-      return Unauthorized();
+      return Unauthorized(errors);
     }
 
-    private string GenerateJwtToken(string email)
+    private string GenerateJwtToken(string username)
     {
       var issuer = _configuration["Jwt:Issuer"];
       var audience = _configuration["Jwt:Audience"];
@@ -117,7 +119,7 @@ namespace API.Controllers
       {
         Subject = new ClaimsIdentity(new[]
         {
-          new Claim(ClaimTypes.NameIdentifier, email)
+          new Claim(ClaimTypes.NameIdentifier, username)
         }),
         Expires = DateTime.Now.AddDays(7),
         Issuer = issuer,

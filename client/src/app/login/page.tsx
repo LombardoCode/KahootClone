@@ -10,11 +10,48 @@ import Navbar from "../components/utils/Navbar";
 import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
 import Card from "../components/UIComponents/Card";
 import MainContent from "../components/utils/MainContent";
+import axiosInstance from "../utils/axiosConfig";
+import { useState } from "react";
+import { AccountLoginInfo } from "../interfaces/Auth/AccountLoginInfo";
+import useStore from "../stores/globalStore";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
+  const router = useRouter();
+  const { user, setUser } = useStore();
+  const [formData, setFormData] = useState<AccountLoginInfo>({
+    email: '',
+    password: ''
+  });
+
+  const [errors, setErrors] = useState<string[]>([]);
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  }
+
   const logIn = (e: any) => {
     e.preventDefault();
-    console.log("Log-in with the user's account.")
+
+    axiosInstance.post('/auth/login', formData)
+      .then(res => {
+        console.log(res.data);
+        const user = res.data.user.userName;
+        const token = res.data.token;
+
+        setUser(token, user);
+
+        router.push('/dashboard');
+      })
+      .catch(err => {
+        console.error(err);
+        if (err.response.data.errors) {
+          setErrors(err.response.data.errors);
+        }
+      })
   }
 
   return (
@@ -22,7 +59,6 @@ const LoginPage = () => {
       <Navbar />
       <Container>
         <MainContent>
-
           <Text
             textColor={TextColors.BLACK}
             className="text-2xl text-center mt-8"
@@ -51,6 +87,8 @@ const LoginPage = () => {
                     fontWeight={FontWeights.LIGHT}
                     name="email"
                     id="email"
+                    value={formData.email}
+                    onChange={handleFormChange}
                   />
                 </div>
 
@@ -69,6 +107,8 @@ const LoginPage = () => {
                     name="password"
                     id="password"
                     className="tracking-widest"
+                    value={formData.password}
+                    onChange={handleFormChange}
                   />
                 </div>
 
@@ -79,6 +119,14 @@ const LoginPage = () => {
                     fontWeight={FontWeights.BOLD}
                   />
                 </div>
+
+                {errors.length > 0 && (
+                  <div id="login-form-errors">
+                    {errors.map((error: string, key: number) => (
+                      <Text key={key} fontWeight={FontWeights.REGULAR} textColor={TextColors.RED} useCase={UseCases.LONGTEXT} className="mt-1 text-sm">{error}</Text>
+                    ))}
+                  </div>
+                )}
               </form>
             </Card>
 
