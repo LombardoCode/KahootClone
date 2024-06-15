@@ -1,5 +1,10 @@
+using System.Text;
 using API.Data;
+using API.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Adding the controllers
-builder.Services.AddControllers();
 
 // Database
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
@@ -32,6 +34,44 @@ builder.Services.AddCors(opts =>
   });
 });
 
+// Adding Microsoft Identity
+builder.Services.AddIdentity<AppUser, IdentityRole>(opts =>
+{
+  opts.Password.RequireDigit = true;
+  opts.Password.RequiredLength = 4;
+  opts.Password.RequireNonAlphanumeric = false;
+  opts.Password.RequireLowercase = false;
+  opts.Password.RequireUppercase = false;
+})
+.AddEntityFrameworkStores<DataContext>()
+.AddDefaultTokenProviders();
+
+// Adding authentication
+builder.Services.AddAuthentication(opts =>
+{
+  opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+  opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(opts =>
+{
+  opts.TokenValidationParameters = new TokenValidationParameters
+  {
+    ValidateIssuer = true,
+    ValidateAudience = true,
+    ValidateLifetime = true,
+    ValidateIssuerSigningKey = true,
+    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+    ValidAudience = builder.Configuration["Jwt:Audience"],
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+  };
+});
+
+// Adding authorization
+builder.Services.AddAuthorization();
+
+// Adding the controllers
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,9 +84,13 @@ if (app.Environment.IsDevelopment())
 // Using the CORS policy to allow our dev environment (Next.js (with port 3000)) to make server calls
 app.UseCors("AllowSpecificOrigin");
 
+app.UseHttpsRedirection();
+
+// Using authentication and authorization
+app.UseAuthentication();
+app.UseAuthorization();
+
 // Using the controllers
 app.MapControllers();
-
-app.UseHttpsRedirection();
 
 app.Run();

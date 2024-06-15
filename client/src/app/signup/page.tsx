@@ -13,10 +13,11 @@ import BackgroundShapes from "../components/utils/BackgroundShapes";
 import MainContent from "../components/utils/MainContent";
 import { useState } from "react";
 import { CreateAccount } from "../interfaces/Auth/CreateAccount.interface";
-import axios from "axios";
+import axiosInstance from "../utils/axiosConfig";
 
 const Signup = () => {
   const [formData, setFormData] = useState<CreateAccount>({
+    username: '',
     email: '',
     password: ''
   });
@@ -28,12 +29,12 @@ const Signup = () => {
     });
   }
 
-  const createAccount = (e: any) => {
+  const createAccount = async (e: any) => {
     e.preventDefault();
     console.log("Creating an account.")
     console.log(formData);
 
-    axios.get('http://localhost:5000/api/user/test')
+    await axiosInstance.post('/auth/register', formData)
       .then(res => {
         console.log(res.data);
       })
@@ -72,6 +73,25 @@ const Signup = () => {
                 onSubmit={createAccount}
               >
                 <div className="flex flex-col">
+                  <Label
+                    fontWeight={FontWeights.BOLD}
+                    textColor={TextColors.BLACK}
+                    htmlFor="email"
+                  >
+                    Username
+                  </Label>
+                  <InputForm
+                    type={InputFormTypes.TEXT}
+                    textColor={TextColors.BLACK}
+                    fontWeight={FontWeights.LIGHT}
+                    name="username"
+                    id="username"
+                    value={formData.username}
+                    onChange={handleFormChange}
+                  />
+                </div>
+
+                <div className="flex flex-col mt-4">
                   <Label
                     fontWeight={FontWeights.BOLD}
                     textColor={TextColors.BLACK}
