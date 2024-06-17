@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import Button, { BackgroundColors } from "../components/UIComponents/Button";
+import Button from "../components/UIComponents/Button";
 import InputForm, { InputFormTypes } from "../components/UIComponents/InputForm";
 import Label from "../components/UIComponents/Label";
 import Text from "../components/UIComponents/Text";
@@ -15,6 +15,7 @@ import { useState } from "react";
 import { AccountLoginInfo } from "../interfaces/Auth/AccountLoginInfo";
 import useStore from "../stores/globalStore";
 import { useRouter } from "next/navigation";
+import { BackgroundColors } from "../interfaces/Colors.interface";
 
 const LoginPage = () => {
   const router = useRouter();

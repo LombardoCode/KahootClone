@@ -1,7 +1,8 @@
 'use client'
 
+import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { FontWeights } from "@/app/interfaces/Text.interface";
-import { Montserrat } from "next/font/google";
+import montserrat from "@/app/utils/fontsConfig";
 
 interface ButtonProps {
   textContent: string;
@@ -10,17 +11,6 @@ interface ButtonProps {
   fontWeight?: FontWeights;
   onClick?: (e?: any) => void;
 };
-
-const montserrat = Montserrat({
-  weight: ['300', '400', '700', '900'],
-  subsets: ['latin'],
-  style: 'normal'
-});
-
-export enum BackgroundColors {
-  GRAY = 'bg-gray-700 hover:bg-gray-800 border-gray-800',
-  GREEN = 'bg-green-600 hover:bg-green-700 border-green-700'
-}
 
 const Button = ({ textContent, backgroundColor, className, fontWeight = FontWeights.LIGHT, onClick }: ButtonProps) => {
   return (

@@ -1,26 +1,23 @@
 'use client';
 
 import Text from "../components/UIComponents/Text";
-import Container from "../components/utils/Container";
+import DashboardOutletContainer from "../components/utils/DashboardOutletContainer";
+import DashboardOutletNavbar from "../components/utils/DashboardOutletNavbar";
 import MainContent from "../components/utils/MainContent";
-import Navbar from "../components/utils/Navbar";
+import SidebarNav from "../components/utils/SidebarNav";
 import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
-import useStore from "../stores/globalStore";
 
 const Dashboard = () => {
-  const { user } = useStore();
-  
   return (
-    <>
-      <Navbar />
-      <Container>
-        <MainContent>
-          <Text fontWeight={FontWeights.BOLD} textColor={TextColors.BLACK} useCase={UseCases.HEADER}>
-            Welcome back, {user.userName}
-          </Text>
-        </MainContent>
-      </Container>
-    </>
+    <div className="flex h-screen bg-red-500 overflow-hidden">
+      <SidebarNav className="min-w-60 bg-white h-full" />
+      <MainContent topSpacing={false} className="flex-1 bg-white overflow-y-scroll">
+        <DashboardOutletNavbar />
+        <DashboardOutletContainer>
+          <Text fontWeight={FontWeights.BOLD} useCase={UseCases.HEADER} textColor={TextColors.BLACK} className="text-3xl">Let&apos;s get started!</Text>
+        </DashboardOutletContainer>
+      </MainContent>
+    </div>
   )
 }
 

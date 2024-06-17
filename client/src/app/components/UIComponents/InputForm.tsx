@@ -1,11 +1,6 @@
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
+import montserrat from "@/app/utils/fontsConfig";
 import { Montserrat } from "next/font/google";
-
-const montserrat = Montserrat({
-  weight: ['300', '400', '700', '900'],
-  subsets: ['latin'],
-  style: 'normal'
-});
 
 export interface InputForm {
   className?: string;

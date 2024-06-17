@@ -5,6 +5,7 @@ export interface TextProps {
   useCase: UseCases;
   fontWeight: FontWeights;
   textStyle?: TextStyles;
+  onClick?: (e?: any) => void;
 }
 
 export enum TextColors {

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import Button, { BackgroundColors } from "../components/UIComponents/Button";
+import Button from "../components/UIComponents/Button";
 import InputForm, { InputFormTypes } from "../components/UIComponents/InputForm";
 import Label from "../components/UIComponents/Label";
 import Text from "../components/UIComponents/Text";
@@ -17,6 +17,7 @@ import axiosInstance from "../utils/axiosConfig";
 import { AccountRegistrationFormErrors } from "../interfaces/Auth/AccountRegistrationFormErrors";
 import { AccountLoginInfo } from "../interfaces/Auth/AccountLoginInfo";
 import { useRouter } from "next/navigation";
+import { BackgroundColors } from "../interfaces/Colors.interface";
 
 const Signup = () => {
   const router = useRouter();

@@ -1,13 +1,14 @@
 'use client'
 
 import Input from "./components/UIComponents/Input";
-import Button, { BackgroundColors } from "./components/UIComponents/Button";
+import Button from "./components/UIComponents/Button";
 import Text from "./components/UIComponents/Text";
 import Link from "next/link";
 import Logo, { LogoSize } from "./components/utils/Logo";
 import { FontWeights, TextColors, UseCases } from "./interfaces/Text.interface";
 import BackgroundShapes, { ShapeColor } from "./components/utils/BackgroundShapes";
 import Card, { CardBackgroundColors } from "./components/UIComponents/Card";
+import { BackgroundColors } from "./interfaces/Colors.interface";
 
 const Home = () => {
   const tryEnterIntoTheGame = () => {
