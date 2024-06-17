@@ -1,10 +1,12 @@
 interface MainContentProps {
   children: React.ReactNode;
+  topSpacing?: boolean;
+  className?: string;
 }
 
-const MainContent = ({ children }: MainContentProps) => {
+const MainContent = ({ children, topSpacing = true, className }: MainContentProps) => {
   return (
-    <div className="pt-14">
+    <div className={`${topSpacing === true ? 'pt-14' : ''} ${className}`}>
       { children }
     </div>
   )
