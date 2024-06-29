@@ -13,13 +13,13 @@ import MainContent from "../components/utils/MainContent";
 import axiosInstance from "../utils/axiosConfig";
 import { useState } from "react";
 import { AccountLoginInfo } from "../interfaces/Auth/AccountLoginInfo";
-import useStore from "../stores/globalStore";
+import useUserStore from "../stores/useUserStore";
 import { useRouter } from "next/navigation";
 import { BackgroundColors } from "../interfaces/Colors.interface";
 
 const LoginPage = () => {
   const router = useRouter();
-  const { user, setUser } = useStore();
+  const { user, setUser } = useUserStore();
   const [formData, setFormData] = useState<AccountLoginInfo>({
     email: '',
     password: ''
@@ -39,7 +39,6 @@ const LoginPage = () => {
 
     axiosInstance.post('/auth/login', formData)
       .then(res => {
-        console.log(res.data);
         const user = res.data.user.userName;
         const token = res.data.token;
 
@@ -116,9 +115,10 @@ const LoginPage = () => {
                 <div className="flex flex-col mt-4">
                   <Button
                     backgroundColor={BackgroundColors.GREEN}
-                    textContent="Log in"
                     fontWeight={FontWeights.BOLD}
-                  />
+                  >
+                    Log in
+                  </Button>
                 </div>
 
                 {errors.length > 0 && (

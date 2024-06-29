@@ -31,3 +31,9 @@ a {
   color: rgb(19, 104, 206);
   text-decoration: underline;
 }
+
+.div-animation {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}

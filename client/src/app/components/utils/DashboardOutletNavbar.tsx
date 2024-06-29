@@ -1,6 +1,6 @@
 'use client'
 
-import useStore from "@/app/stores/globalStore";
+import useUserStore from "@/app/stores/useUserStore";
 import React, { useEffect, useRef, useState } from "react";
 import Text from "../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { DropDownContainer, DropDownItem } from "./Navbar";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
+import { useRouter } from "next/navigation";
 
 interface DashboardOutletNavbarProps {
   fixed?: boolean;
@@ -15,7 +16,8 @@ interface DashboardOutletNavbarProps {
 }
 
 const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutletNavbarProps) => {
-  const { user } = useStore();
+  const router = useRouter();
+  const { user, clearUser } = useUserStore();
   const [toggleAccountDropdown, setToggleAccountDropdown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,6 +28,11 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
       document.removeEventListener("mousedown", handleClickOutside);
     }
   }, []);
+
+  const signOut = () => {
+    clearUser();
+    router.push('/');
+  }
 
   const handleClickOutside = (event: any) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -62,6 +69,7 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
               icon={<FontAwesomeIcon icon={faRightFromBracket} />}
               backgroundColor={BackgroundColors.RED}
               textColors={TextColors.WHITE}
+              onClick={() => signOut()}
             >
               Sign out
             </DropDownItem>

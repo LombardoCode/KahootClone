@@ -12,7 +12,7 @@ import { BackgroundColors } from "./interfaces/Colors.interface";
 
 const Home = () => {
   const tryEnterIntoTheGame = () => {
-    console.log("Trying to enter into the game.");
+    //
   }
 
   return (
@@ -33,12 +33,13 @@ const Home = () => {
                 placeholder="Game PIN"
               />
               <Button
-                textContent="Enter"
                 backgroundColor={BackgroundColors.GRAY}
                 fontWeight={FontWeights.BOLD}
                 className="mt-3"
                 onClick={() => tryEnterIntoTheGame()}
-              />
+              >
+                Enter
+              </Button>
             </Card>
           </div>
           <footer className="text-center relative z-10 py-5">

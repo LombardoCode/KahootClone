@@ -45,7 +45,6 @@ const Signup = () => {
 
     await axiosInstance.post('/auth/register', formData)
       .then(res => {
-        console.log(res.data);
         logInUser();
       })
       .catch(err => {
@@ -64,7 +63,6 @@ const Signup = () => {
 
     await axiosInstance.post('/auth/login', loginData)
       .then(res => {
-        console.log(res.data);
         router.push('/dashboard');
       })
       .catch(err => {
@@ -183,9 +181,10 @@ const Signup = () => {
                 <div className="flex flex-col mt-4">
                   <Button
                     backgroundColor={BackgroundColors.GREEN}
-                    textContent="Sign up"
                     fontWeight={FontWeights.BOLD}
-                  />
+                  >
+                    Sign up
+                  </Button>
                 </div>
               </form>
             </Card>
