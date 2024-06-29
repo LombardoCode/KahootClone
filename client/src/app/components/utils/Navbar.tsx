@@ -1,6 +1,6 @@
 import Logo, { LogoSize } from "./Logo";
 import Container from "./Container";
-import useStore from "@/app/stores/globalStore";
+import useUserStore from "@/app/stores/useUserStore";
 import Text from "../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +16,7 @@ interface NavbarProps {
 }
 
 const Navbar = ({ hideLogo = false, fixed = true }: NavbarProps) => {
-  const { user } = useStore();
+  const { user } = useUserStore();
   const [toggleAccountDropdown, setToggleAccountDropdown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -104,15 +104,17 @@ interface DropDownItemProps {
   icon?: React.ReactNode;
   backgroundColor?: BackgroundColors;
   textColors?: TextColors;
+  onClick?: (i?: any) => void;
 }
 
-const DropDownItem = ({ children, icon = <></>, backgroundColor = BackgroundColors.WHITE, textColors = TextColors.BLACK }: DropDownItemProps) => {
+const DropDownItem = ({ children, icon = <></>, backgroundColor = BackgroundColors.WHITE, textColors = TextColors.BLACK, onClick }: DropDownItemProps) => {
   return (
     <Text
       fontWeight={FontWeights.BOLD}
       textColor={TextColors.BLACK}
       useCase={UseCases.LONGTEXT}
       className={`px-3 py-3 cursor-pointer ${montserrat.className} ${backgroundColor} ${textColors}`}
+      onClick={onClick}
     >
       <span className="mr-2">{icon}</span>
       <span>{children}</span>

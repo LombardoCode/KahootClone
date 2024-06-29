@@ -9,5 +9,17 @@ namespace API.Data
     public DataContext(DbContextOptions options) : base(options)
     {
     }
+
+    public DbSet<Kahoot> Kahoots { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+      base.OnModelCreating(builder);
+
+      builder.Entity<AppUser>()
+        .HasMany(u => u.Kahoots)
+        .WithOne(k => k.User)
+        .HasForeignKey(k => k.UserId);
+    }
   }
 }

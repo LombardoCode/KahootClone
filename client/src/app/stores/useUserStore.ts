@@ -1,5 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
-import create from 'zustand';
+import { create } from 'zustand';
 
 interface JwtBody {
   nameid: null | string;
@@ -7,10 +7,11 @@ interface JwtBody {
 
 type GlobalStore = {
   user: {
-    token: string;
-    userName: null | string;
+    token: string | null;
+    userName: string | null;
   },
   setUser: (token: string, userName: string | null) => void;
+  clearUser: () => void;
 };
 
 const getTokenFromLocalStorage = (): string => {
@@ -29,7 +30,7 @@ const decodeJwtToken = (token: string): string | null => {
   return null;
 }
 
-const useStore = create<GlobalStore>((set) => ({
+const useUserStore = create<GlobalStore>((set) => ({
   user: {
     token: getTokenFromLocalStorage(),
     userName: decodeJwtToken(getTokenFromLocalStorage())
@@ -38,9 +39,17 @@ const useStore = create<GlobalStore>((set) => ({
     localStorage.setItem('token', token);
 
     set({ user: { token, userName } })
+  },
+  clearUser: () => {
+    localStorage.removeItem('token');
+    
+    set({
+      user: {
+        token: null,
+        userName: null
+      }
+    })
   }
 }));
 
-
-
-export default useStore;
+export default useUserStore;

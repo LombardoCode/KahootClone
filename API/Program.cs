@@ -76,6 +76,7 @@ builder.Services.AddControllers();
 
 // Additional services
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 
