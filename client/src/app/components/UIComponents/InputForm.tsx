@@ -10,6 +10,7 @@ export interface InputFormProps {
   name: string;
   id: string;
   value?: string;
+  placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -26,6 +27,7 @@ const InputForm = ({
   name,
   id,
   value,
+  placeholder = '',
   onChange
 }: InputFormProps) => {
   return (
@@ -36,6 +38,7 @@ const InputForm = ({
       className={`${montserrat.className} ${className} ${textColor} ${fontWeight} px-2 py-1 border-1 border-gray-300 focus:border-blue-500 outline-none transition-all duration-300 rounded-md`}
       value={value}
       onChange={onChange}
+      placeholder={placeholder}
     />
   );
 };
