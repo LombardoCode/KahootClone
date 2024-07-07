@@ -32,7 +32,7 @@ const Dashboard = () => {
   const createKahoot = () => {
     axiosInstance.post('/kahoot/create', { NewKahootName: formData.newKahootName })
       .then(res => {
-        router.push(`/kahoot/${res.data.newKahootId}/edit`);
+        router.push(`/creator/${res.data.newKahootId}`);
       })
       .catch((err) => {
         console.error(err)

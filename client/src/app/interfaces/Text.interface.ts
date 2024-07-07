@@ -11,7 +11,8 @@ export interface TextProps {
 export enum TextColors {
   BLACK = "text-black",
   WHITE = "text-white",
-  RED = "text-red-700"
+  RED = "text-red-700",
+  GRAY = "text-slate-700"
 }
 
 export enum UseCases {
