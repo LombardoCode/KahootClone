@@ -4,14 +4,32 @@ import Text from "../../UIComponents/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import KahootAnswer from "../Quizes/KahootAnswer";
-import { KahootAnswerBackgroundColors } from "@/app/interfaces/Colors.interface";
 import KahootAnswerContainer from "../Quizes/KahootAnswerContainer";
+import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
+import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { useEffect, useState } from "react";
 
 interface CreatorQuestionModifierProps {
   className?: string;
 }
 
 const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) => {
+  // Store
+  const { kahoot, selectedQuestion, kahootIndex, updateQuestionTitle } = useKahootCreatorStore();
+
+  // Local component
+  const [title, setTitle] = useState<string>(kahoot?.questions[kahootIndex]?.title || "");
+
+  useEffect(() => {
+    setTitle(kahoot?.questions[kahootIndex]?.title || "");
+  }, [kahootIndex]);
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTitle = e.target.value;
+    setTitle(newTitle);
+    updateQuestionTitle(kahootIndex, newTitle);
+  }
+
   return (
     <div className={`px-6 py-8 ${className} bg-creator-classroom`}>
       <div id="question-title">
@@ -21,9 +39,10 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
           textColor={TextColors.GRAY}
           type={InputFormTypes.TEXT}
           fontWeight={FontWeights.BOLD}
-          value={``}
+          value={title}
           className="w-full text-center py-3"
           placeholder={`The question goes here`}
+          onChange={handleTitleChange}
         />
       </div>
 
@@ -51,21 +70,18 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
       <div id="answers">
         <KahootAnswerContainer>
-          <KahootAnswer backgroundColor={KahootAnswerBackgroundColors.RED}>
-            First answer
-          </KahootAnswer>
-
-          <KahootAnswer backgroundColor={KahootAnswerBackgroundColors.BLUE}>
-            Second answer
-          </KahootAnswer>
-
-          <KahootAnswer backgroundColor={KahootAnswerBackgroundColors.YELLOW}>
-            Third answer
-          </KahootAnswer>
-
-          <KahootAnswer backgroundColor={KahootAnswerBackgroundColors.GREEN}>
-            Fourth answer
-          </KahootAnswer>
+          {selectedQuestion() && selectedQuestion()?.answers.map((answer: Answer, index: number) => (
+            <KahootAnswer
+              key={index}
+              index={index}
+              selectable={false}
+            >
+              {answer.text === ""
+                ? `Add answer ${index + 1}`
+                : answer.text
+              }
+            </KahootAnswer>
+          ))}
         </KahootAnswerContainer>
       </div>
     </div>
