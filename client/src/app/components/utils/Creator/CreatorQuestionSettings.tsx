@@ -3,16 +3,71 @@ import Text from "../../UIComponents/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faComments, faMedal } from "@fortawesome/free-solid-svg-icons";
 import { ComboBox, ComboBoxOption, ComboBoxStateProps } from "../../UIComponents/ComboBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
+import { PointsMultiplier, QuizQuestionLayoutTypes, TimeLimits } from "@/app/interfaces/Kahoot/Kahoot.interface";
 
 interface CreatorQuestionSettingsProps {
   className?: string;
 }
 
 const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) => {
-  const [questionType, setQuestionType] = useState<ComboBoxStateProps>({ textContent: "Quiz", valueContent: "Quiz" });
-  const [timeLimit, setTimeLimit] = useState<ComboBoxStateProps>({ textContent: "10 seconds", valueContent: 10 });
-  const [points, setPoints] = useState<ComboBoxStateProps>({ textContent: "Standard", valueContent: "Standard" });
+  // Global store
+  const { kahoot, kahootIndex, updateQuestionLayout, updateQuestionTimeLimit, updateQuestionPoints } = useKahootCreatorStore();
+
+  // Local component
+  const [questionLayout, setQuestionLayout] = useState<ComboBoxStateProps>({ textContent: "Classic", valueContent: QuizQuestionLayoutTypes.CLASSIC });
+  const [timeLimit, setTimeLimit] = useState<ComboBoxStateProps>({ textContent: "10 seconds", valueContent: TimeLimits.TEN_S });
+  const [points, setPoints] = useState<ComboBoxStateProps>({ textContent: "Standard", valueContent: PointsMultiplier.STANDARD });
+
+  // Update local state when kahootIndex changes
+  useEffect(() => {
+    if (kahoot && kahoot.questions[kahootIndex]) {
+      const currentQuestion = kahoot.questions[kahootIndex];
+      setQuestionLayout({ textContent: getTextContentForLayout(currentQuestion.layout), valueContent: currentQuestion.layout })
+      setTimeLimit({ textContent: `${currentQuestion.timeLimit} seconds`, valueContent: currentQuestion.timeLimit });
+      setPoints({ textContent: getTextContentForPoints(currentQuestion.pointsMultiplier), valueContent: currentQuestion.pointsMultiplier });
+    }
+  }, [kahootIndex]);
+
+  const getTextContentForLayout = (layout: QuizQuestionLayoutTypes): string => {
+    switch (layout) {
+      case QuizQuestionLayoutTypes.CLASSIC:
+        return "Classic";
+      case QuizQuestionLayoutTypes.TRUE_OR_FALSE:
+        return "True or false";
+      default:
+        return "Classic";
+    }
+  }
+
+  const getTextContentForPoints = (points: PointsMultiplier): string => {
+    switch (points) {
+      case 0:
+        return "No points";
+      case 1:
+        return "Standard";
+      case 2:
+        return "Double points";
+      default:
+        return "Standard";
+    }
+  }
+
+  const handleQuestionLayoutChange = (questionLayout: ComboBoxStateProps) => {
+    setQuestionLayout(questionLayout);
+    updateQuestionLayout(kahootIndex, questionLayout.valueContent);
+  }
+
+  const handleQuestionTimeLimitChange = (questionTimeLimit: ComboBoxStateProps) => {
+    setTimeLimit(questionLayout);
+    updateQuestionTimeLimit(kahootIndex, questionTimeLimit.valueContent);
+  }
+
+  const handleQuestionPointsChange = (questionPoints: ComboBoxStateProps) => {
+    setPoints(questionPoints);
+    updateQuestionPoints(kahootIndex, questionPoints.valueContent);
+  }
 
   return (
     <div className={`px-4 py-3 ${className}`}>
@@ -35,19 +90,19 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
         <ComboBox
           textColor={TextColors.BLACK}
           fontWeight={FontWeights.REGULAR}
-          textContent={questionType.textContent}
-          setTextContent={setQuestionType}
+          textContent={questionLayout.textContent}
+          setTextContent={setQuestionLayout}
           className="w-full"
         >
           <ComboBoxOption
-            textContent={"Quiz"}
-            valueContent={"Quiz"}
-            onClick={() => setQuestionType({ textContent: "Quiz", valueContent: "Quiz" })}
+            textContent={"Classic"}
+            valueContent={QuizQuestionLayoutTypes.CLASSIC}
+            onClick={() => handleQuestionLayoutChange({ textContent: "Classic", valueContent: QuizQuestionLayoutTypes.CLASSIC })}
           ></ComboBoxOption>
           <ComboBoxOption
             textContent={"True or false"}
-            valueContent={"True or false"}
-            onClick={() => setQuestionType({ textContent: "True or false", valueContent: "True or false" })}
+            valueContent={QuizQuestionLayoutTypes.TRUE_OR_FALSE}
+            onClick={() => handleQuestionLayoutChange({ textContent: "True or false", valueContent: QuizQuestionLayoutTypes.TRUE_OR_FALSE })}
           ></ComboBoxOption>
         </ComboBox>
       </div>
@@ -77,18 +132,18 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
         >
           <ComboBoxOption
             textContent={"10 seconds"}
-            valueContent={10}
-            onClick={() => setTimeLimit({ textContent: "10 seconds", valueContent: 10 })}
+            valueContent={TimeLimits.TEN_S}
+            onClick={() => handleQuestionTimeLimitChange({ textContent: "10 seconds", valueContent: TimeLimits.TEN_S })}
           ></ComboBoxOption>
           <ComboBoxOption
             textContent={"20 seconds"}
-            valueContent={20}
-            onClick={() => setTimeLimit({ textContent: "20 seconds", valueContent: 20 })}
+            valueContent={TimeLimits.TWENTY_S}
+            onClick={() => handleQuestionTimeLimitChange({ textContent: "20 seconds", valueContent: TimeLimits.TWENTY_S })}
           ></ComboBoxOption>
           <ComboBoxOption
             textContent={"30 seconds"}
-            valueContent={30}
-            onClick={() => setTimeLimit({ textContent: "30 seconds", valueContent: 30 })}
+            valueContent={TimeLimits.THIRTY_S}
+            onClick={() => handleQuestionTimeLimitChange({ textContent: "30 seconds", valueContent: TimeLimits.THIRTY_S })}
           ></ComboBoxOption>
         </ComboBox>
       </div>
@@ -118,18 +173,18 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
         >
           <ComboBoxOption
             textContent={"Standard"}
-            valueContent={"Standard"}
-            onClick={() => setPoints({ textContent: "Standard", valueContent: "Standard" })}
+            valueContent={PointsMultiplier.STANDARD}
+            onClick={() => handleQuestionPointsChange({ textContent: "Standard", valueContent: PointsMultiplier.STANDARD })}
           ></ComboBoxOption>
           <ComboBoxOption
             textContent={"Double points"}
-            valueContent={"Double points"}
-            onClick={() => setPoints({ textContent: "Double points", valueContent: "Double points" })}
+            valueContent={PointsMultiplier.DOUBLE_POINTS}
+            onClick={() => handleQuestionPointsChange({ textContent: "Double points", valueContent: PointsMultiplier.DOUBLE_POINTS })}
           ></ComboBoxOption>
           <ComboBoxOption
             textContent={"No points"}
-            valueContent={"No points"}
-            onClick={() => setPoints({ textContent: "No points", valueContent: "No points" })}
+            valueContent={PointsMultiplier.NO_POINTS}
+            onClick={() => handleQuestionPointsChange({ textContent: "No points", valueContent: PointsMultiplier.NO_POINTS })}
           ></ComboBoxOption>
         </ComboBox>
       </div>

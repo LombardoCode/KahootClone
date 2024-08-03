@@ -4,6 +4,7 @@ import { create } from "zustand";
 interface KahootCreatorStore {
   kahoot: Kahoot | null;
   kahootIndex: number;
+  isKahootFormDirty: boolean;
   setKahootsQuestionIndex: (index: number) => void;
   selectedQuestion: () => Question | null;
   addQuestion: () => void;
@@ -12,6 +13,9 @@ interface KahootCreatorStore {
   updateQuestionTitle: (index: number, newQuestionTitle: string) => void;
   updateAnswerText: (questionIndex: number, answerIndex: number, text: string) => void;
   updateAnswerCorrectness: (questionIndex: number, answerIndex: number, isCorrect: boolean) => void;
+  updateQuestionLayout: (questionIndex: number, questionLayout: QuizQuestionLayoutTypes) => void;
+  updateQuestionTimeLimit: (questionIndex: number, questionTimeLimit: TimeLimits) => void;
+  updateQuestionPoints: (questionIndex: number, questionPoints: PointsMultiplier) => void;
 }
 
 const createInitialKahootCreatorState = (): Kahoot => {
@@ -55,6 +59,7 @@ const addNewAnswer = (): Answer => {
 const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
   kahoot: createInitialKahootCreatorState(),
   kahootIndex: 0,
+  isKahootFormDirty: false,
   setKahootsQuestionIndex: (index: number) => set(() => ({
     kahootIndex: index
   })),
@@ -73,7 +78,8 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
           ...state.kahoot,
           questions: updatedQuestions
         },
-        kahootIndex: newKahootIndex
+        kahootIndex: newKahootIndex,
+        isKahootFormDirty: true
       };
     }
     return state;
@@ -90,6 +96,7 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
     const kahoot = state.kahoot;
     if (kahoot) {
       kahoot.questions[index].title = newTitle;
+      state.isKahootFormDirty = true;
     }
     return { kahoot };
   }),
@@ -97,6 +104,7 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
     const kahoot = state.kahoot;
     if (kahoot) {
       kahoot.questions[questionIndex].answers[answerIndex].text = text;
+      state.isKahootFormDirty = true;
     }
     return { kahoot };
   }),
@@ -104,6 +112,31 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
     const kahoot = state.kahoot;
     if (kahoot) {
       kahoot.questions[questionIndex].answers[answerIndex].isCorrect = isCorrect;
+      state.isKahootFormDirty = true;
+    }
+    return { kahoot };
+  }),
+  updateQuestionLayout: (questionIndex: number, questionLayout: QuizQuestionLayoutTypes) => set((state) => {
+    const kahoot = state.kahoot;
+    if (kahoot?.questions[questionIndex]) {
+      kahoot.questions[questionIndex].layout = questionLayout;
+      state.isKahootFormDirty = true;
+    }
+    return { kahoot };
+  }),
+  updateQuestionTimeLimit: (questionIndex: number, questionTimeLimit: TimeLimits) => set((state) => {
+    const kahoot = state.kahoot;
+    if (kahoot) {
+      kahoot.questions[questionIndex].timeLimit = questionTimeLimit;
+      state.isKahootFormDirty = true;
+    }
+    return { kahoot };
+  }),
+  updateQuestionPoints: (questionIndex: number, questionPoints: PointsMultiplier) => set((state) => {
+    const kahoot = state.kahoot;
+    if (kahoot) {
+      kahoot.questions[questionIndex].pointsMultiplier = questionPoints;
+      state.isKahootFormDirty = true;
     }
     return { kahoot };
   })
