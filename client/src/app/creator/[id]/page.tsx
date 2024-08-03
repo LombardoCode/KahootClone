@@ -41,29 +41,7 @@ const EditKahoot = () => {
 
   return (
     <div className="h-screen flex flex-col">
-      <nav id="navigation-creator" className="flex items-center h-14">
-        <CreatorNavbar />
-        <div className="ml-4">
-          <Text
-            fontWeight={FontWeights.BOLD}
-            textColor={TextColors.BLACK}
-            useCase={UseCases.TITLE}
-            className="text-xl"
-          >
-            {kahoot.title}
-          </Text>
-
-          <Text
-            fontWeight={FontWeights.REGULAR}
-            textColor={TextColors.BLACK}
-            useCase={UseCases.TITLE}
-            textStyle={kahoot.description ? TextStyles.NORMAL : TextStyles.ITALIC}
-            className="text-base"
-          >
-            {kahoot.description ? kahoot.description : 'No description'}
-          </Text>
-        </div>
-      </nav>
+      <CreatorNavbar kahoot={kahoot} />
 
       <div id="creator-body" className="flex-1 flex">
         <CreatorSliderOfQuestions

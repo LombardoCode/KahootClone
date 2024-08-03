@@ -7,7 +7,7 @@ export interface Question {
   id: number | null;
   title: string;
   layout: QuizQuestionLayoutTypes;
-  timeLimit: number;
+  timeLimit: TimeLimits;
   pointsMultiplier: PointsMultiplier;
   mediaUrl?: string | null;
   answers: Answer[];
