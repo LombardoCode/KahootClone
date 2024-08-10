@@ -5,6 +5,8 @@ interface KahootCreatorStore {
   kahoot: Kahoot | null;
   kahootIndex: number;
   isKahootFormDirty: boolean;
+  overwriteKahoot: (newKahoot: Kahoot) => void;
+  setKahootTitleAndDescription: (kahootInfo: { title: string, description: string }) => void;
   setKahootsQuestionIndex: (index: number) => void;
   selectedQuestion: () => Question | null;
   addQuestion: () => void;
@@ -18,18 +20,6 @@ interface KahootCreatorStore {
   updateQuestionPoints: (questionIndex: number, questionPoints: PointsMultiplier) => void;
 }
 
-const createInitialKahootCreatorState = (): Kahoot => {
-  let kahoot: Kahoot | null = null;
-  let newQuestion: Question = createNewQuestion();
-
-  kahoot = {
-    id: null,
-    questions: [newQuestion]
-  }
-
-  return kahoot;
-}
-
 const createNewQuestion = (): Question => {
   let answers: Answer[] = [];
 
@@ -38,28 +28,51 @@ const createNewQuestion = (): Question => {
   }
 
   return {
-    id: null,
+    id: 0,
     title: "",
     layout: QuizQuestionLayoutTypes.CLASSIC,
     timeLimit: TimeLimits.THIRTY_S,
     pointsMultiplier: PointsMultiplier.STANDARD,
-    mediaUrl: null,
+    mediaUrl: "",
     answers
   }
 }
 
 const addNewAnswer = (): Answer => {
   return {
-    id: null,
+    id: 0,
     text: "",
     isCorrect: false
   }
 }
 
 const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
-  kahoot: createInitialKahootCreatorState(),
+  kahoot: null,
   kahootIndex: 0,
   isKahootFormDirty: false,
+  overwriteKahoot: (newKahoot: Kahoot) => set((state) => {
+    if (state.kahoot === null) {
+      return {
+        kahoot: newKahoot,
+        kahootIndex: 0
+      }
+    }
+
+    return state;
+  }),
+  setKahootTitleAndDescription: ({ title, description }: { title: string, description: string }) => set((state) => {
+    if (state.kahoot) {
+      return {
+        kahoot: {
+          ...state.kahoot,
+          title,
+          description
+        }
+      }
+    }
+
+    return state;
+  }),
   setKahootsQuestionIndex: (index: number) => set(() => ({
     kahootIndex: index
   })),

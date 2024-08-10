@@ -22,7 +22,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
   useEffect(() => {
     setTitle(kahoot?.questions[kahootIndex]?.title || "");
-  }, [kahootIndex]);
+  }, [kahoot, kahootIndex]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;

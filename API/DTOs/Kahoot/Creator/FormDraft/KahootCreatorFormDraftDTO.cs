@@ -1,18 +1,16 @@
-using API.Models.Creator;
+using API.DTOs.Kahoot.Creator.FormDraft;
 
-namespace API.Models
+namespace API.Models.Creator
 {
-  public class Kahoot
+  public class KahootCreatorFormDraftDTO
   {
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string? Description { get; set; }
-    public string UserId { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
     // Navigation properties
-    public AppUser User { get; set; }
-    public List<Question> Questions { get; set; }
+    public List<KahootCreatorFormQuestion> Questions { get; set; }
   }
 }
