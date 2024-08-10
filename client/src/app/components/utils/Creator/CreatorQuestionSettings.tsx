@@ -28,7 +28,7 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
       setTimeLimit({ textContent: `${currentQuestion.timeLimit} seconds`, valueContent: currentQuestion.timeLimit });
       setPoints({ textContent: getTextContentForPoints(currentQuestion.pointsMultiplier), valueContent: currentQuestion.pointsMultiplier });
     }
-  }, [kahootIndex]);
+  }, [kahoot, kahootIndex]);
 
   const getTextContentForLayout = (layout: QuizQuestionLayoutTypes): string => {
     switch (layout) {

@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240803230211_ChangeKahootModelIDToGUID")]
+    partial class ChangeKahootModelIDToGUID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,9 +122,6 @@ namespace API.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("KahootId")
-                        .HasColumnType("char(36)");
-
                     b.Property<int>("Layout")
                         .HasColumnType("int");
 
@@ -140,8 +140,6 @@ namespace API.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("KahootId");
 
                     b.ToTable("Questions");
                 });
@@ -319,17 +317,6 @@ namespace API.Migrations
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("API.Models.Creator.Question", b =>
-                {
-                    b.HasOne("API.Models.Kahoot", "Kahoot")
-                        .WithMany("Questions")
-                        .HasForeignKey("KahootId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Kahoot");
-                });
-
             modelBuilder.Entity("API.Models.Kahoot", b =>
                 {
                     b.HasOne("API.Models.AppUser", "User")
@@ -400,11 +387,6 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Creator.Question", b =>
                 {
                     b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("API.Models.Kahoot", b =>
-                {
-                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

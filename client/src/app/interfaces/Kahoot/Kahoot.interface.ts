@@ -1,5 +1,9 @@
 export interface Kahoot {
   id: number | null;
+  title: string;
+  description: string;
+  createdAt: Date;
+  updatedAt: Date;
   questions: Question[]
 }
 
@@ -35,6 +39,7 @@ export enum PointsMultiplier {
 
 export interface Answer {
   id: number | null;
+  // questionId: number | null;
   text: string;
   isCorrect: boolean;
 }

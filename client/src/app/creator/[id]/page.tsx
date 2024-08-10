@@ -5,12 +5,13 @@ import CreatorQuestionModifier from "@/app/components/utils/Creator/CreatorQuest
 import CreatorQuestionSettings from "@/app/components/utils/Creator/CreatorQuestionSettings";
 import CreatorSliderOfQuestions from "@/app/components/utils/Creator/CreatorSliderOfQuestions";
 import CreatorNavbar from "@/app/components/utils/Navbars/CreatorNavbar";
-import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/Text.interface";
+import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import axiosInstance from "@/app/utils/axiosConfig";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const EditKahoot = () => {
+  const { overwriteKahoot } = useKahootCreatorStore();
   const params = useParams();
   let { id } = params;
 
@@ -25,23 +26,41 @@ const EditKahoot = () => {
 
   useEffect(() => {
     if (id !== undefined) {
-      getKahootInformation(id);
+      verifyIfKahootExists(id);
     }
   }, []);
 
-  const getKahootInformation = (id: number | string) => {
+  const verifyIfKahootExists = (id: string) => {
+    axiosInstance.get(`/kahoot/kahootExists/${id}`)
+      .then(res => {
+        let kahootExists: boolean = res.data;
+
+        if (kahootExists) {
+          getKahootInformation(id);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  const getKahootInformation = (id: string) => {
     axiosInstance.get(`/kahoot/${id}`)
       .then(res => {
-        setKahoot(res.data);
+        overwriteKahoot(res.data);
       })
       .catch(err => {
         console.error(err);
       })
   }
 
+  const initializeKahootInformation = (kahootInfo: {title: string, description: string}) => {
+    setKahoot(kahootInfo);
+  }
+
   return (
     <div className="h-screen flex flex-col">
-      <CreatorNavbar kahoot={kahoot} />
+      <CreatorNavbar kahootProps={kahoot} />
 
       <div id="creator-body" className="flex-1 flex">
         <CreatorSliderOfQuestions

@@ -1,10 +1,11 @@
-using System.Security.Claims;
 using API.Data;
+using API.Data.Server.KahootCreator;
 using API.DTOs.Kahoot;
 using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -29,6 +30,7 @@ namespace API.Controllers
 
       Kahoot newKahootQuiz = new Kahoot
       {
+        Id = Guid.NewGuid(),
         UserId = userId,
         Title = data.NewKahootName,
         Description = null,
@@ -41,8 +43,9 @@ namespace API.Controllers
       try
       {
         await _dbContext.SaveChangesAsync();
-        
-        return Ok(new {
+
+        return Ok(new
+        {
           NewKahootId = newKahootQuiz.Id
         });
       }
@@ -52,20 +55,52 @@ namespace API.Controllers
       }
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult> GetKahootInformation(int id)
+    [HttpGet("KahootExists/{id}")]
+    public async Task<ActionResult> KahootExists(Guid id)
     {
-      var KahootInformation = _dbContext.Kahoots.Find(id);
+      bool kahootExists = _dbContext.Kahoots.Any(k => k.Id == id);
+      return Ok(kahootExists);
+    }
 
-      if (KahootInformation == null)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<KahootClient>> GetKahootInformation(Guid id)
+    {
+      var kahoot = await _dbContext.Kahoots
+                      .Where(k => k.Id == id)
+                      .Include(k => k.Questions)
+                        .ThenInclude(q => q.Answers)
+                      .FirstOrDefaultAsync();  
+      
+      if (kahoot == null)
       {
         return NotFound();
       }
 
-      return Ok(new {
-        Title = KahootInformation.Title,
-        Description = KahootInformation.Description
-      });
+      var kahootDTO = new KahootClient
+      {
+        Id = kahoot.Id,
+        Title = kahoot.Title,
+        Description = kahoot.Description,
+        CreatedAt = kahoot.CreatedAt,
+        UpdatedAt = kahoot.UpdatedAt,
+        Questions = kahoot.Questions.Select(q => new QuestionClient
+        {
+          Id = q.Id,
+          Title = q.Title,
+          Layout = q.Layout,
+          TimeLimit = q.TimeLimit,
+          PointsMultiplier = q.PointsMultiplier,
+          MediaUrl = q.MediaUrl,
+          Answers = q.Answers.Select(a => new AnswerClient
+          {
+            Id = a.Id,
+            Text = a.Text,
+            IsCorrect = a.IsCorrect
+          }).ToList()
+        }).ToList()
+      };
+
+      return Ok(kahootDTO);
     }
   }
 }
