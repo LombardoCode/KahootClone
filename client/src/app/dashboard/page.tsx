@@ -8,7 +8,7 @@ import MainContent from "../components/utils/MainContent";
 import SidebarNav from "../components/utils/SidebarNav";
 import { BackgroundColors } from "../interfaces/Colors.interface";
 import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
-import Modal from "../components/utils/Modal";
+import Modal, { ModalTypes } from "../components/utils/Modal/Modal";
 import useModalStore from "../stores/useModalStore";
 import InputForm, { InputFormTypes } from "../components/UIComponents/InputForm";
 import { useState } from "react";
@@ -54,6 +54,7 @@ const Dashboard = () => {
             Create a Kahoot!
           </Button>
           <Modal
+            modalType={ModalTypes.INPUT}
             isOpen={isOpen}
             title={`Create a Kahoot`}
             onClose={closeModal}

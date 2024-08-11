@@ -25,6 +25,7 @@ namespace API.Controllers
     [HttpPut("drafts")]
     public async Task<ActionResult> Drafts(KahootCreatorFormDraftDTO kahootDraft)
     {
+      // Retrieving the kahoot from database
       Kahoot kahootToUpd = await _dbContext.Kahoots
                             .Where(k => k.Id == kahootDraft.Id)
                             .Include(k => k.Questions)
@@ -41,11 +42,24 @@ namespace API.Controllers
       kahootToUpd.Description = kahootDraft.Description;
       kahootToUpd.UpdatedAt = new DateTime();
 
+      // We get the IDs from the questions that exists on the kahoot object (kahootDraft)
+      List<int> updatedQuestionIds = kahootDraft.Questions.Select(q => q.Id).ToList();
+
+      // We detect which question IDs (from database) are no longer present on the question IDs from the kahoot object (kahootDraft)
+      List<Question> questionsToDelete = kahootToUpd.Questions
+                                .Where(q => !updatedQuestionIds.Contains(q.Id))
+                                .ToList();
+      
+      // We delete the questions from client-side
+      _dbContext.Questions.RemoveRange(questionsToDelete);
+
       // Updating the kahoot's questions
       foreach (var updatedQuestion in kahootDraft.Questions)
       {
+        // If the questions is new (from client-side)
         if (updatedQuestion.Id == 0)
         {
+          // Create a new question and add it to the Questions collection
           var newQuestion = new Question
           {
             KahootId = kahootDraft.Id,
@@ -62,17 +76,17 @@ namespace API.Controllers
           };
 
           kahootToUpd.Questions.Add(newQuestion);
-          await _dbContext.SaveChangesAsync();
           continue;
         }
 
+        // Select the already existing question from database
         var existingQuestion = kahootToUpd.Questions
                                 .FirstOrDefault(q => q.Id == updatedQuestion.Id);
-        
         
         // If the questions exists
         if (existingQuestion != null)
         {
+          // Update the question data
           existingQuestion.Title = updatedQuestion.Title;
           existingQuestion.Layout = updatedQuestion.Layout;
           existingQuestion.TimeLimit = updatedQuestion.TimeLimit;
