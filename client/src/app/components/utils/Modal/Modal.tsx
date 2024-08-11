@@ -1,11 +1,12 @@
 import { motion } from "framer-motion"
-import Text from "../UIComponents/Text";
+import Text from "../../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
-import ModalBackdrop from "./Modal/ModalBackdrop";
-import Button from "../UIComponents/Button";
+import ModalBackdrop from "./ModalBackdrop";
+import Button from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 
 interface ModalProps {
+  modalType: ModalTypes;
   title: string;
   content: React.ReactNode;
   isOpen: boolean;
@@ -15,9 +16,27 @@ interface ModalProps {
   onConfirm?: (x?: any) => void;
 }
 
-const Modal = ({ title, isOpen, onClose, content, confirmText = null, onConfirm }: ModalProps) => {
+export enum ModalTypes {
+  INPUT,
+  DELETION
+}
+
+const Modal = ({ modalType, title, isOpen, onClose, content, confirmText = null, onConfirm }: ModalProps) => {
   if (!isOpen) {
     return null;
+  }
+
+  let btnBackgroundColor: BackgroundColors;
+  let textColor: TextColors;
+  switch (modalType) {
+    case ModalTypes.INPUT:
+      btnBackgroundColor = BackgroundColors.GREEN;
+      textColor = TextColors.WHITE;
+      break;
+    case ModalTypes.DELETION:
+      btnBackgroundColor = BackgroundColors.RED;
+      textColor = TextColors.WHITE;
+      break
   }
 
   return (
@@ -49,6 +68,7 @@ const Modal = ({ title, isOpen, onClose, content, confirmText = null, onConfirm 
           >
             <Button
               backgroundColor={BackgroundColors.GRAY}
+              textColor={TextColors.WHITE}
               fontWeight={FontWeights.BOLD}
               className="mr-2"
               onClick={onClose}
@@ -58,7 +78,8 @@ const Modal = ({ title, isOpen, onClose, content, confirmText = null, onConfirm 
 
             {confirmText !== null && (
               <Button
-                backgroundColor={BackgroundColors.GREEN}
+                backgroundColor={btnBackgroundColor}
+                textColor={textColor}
                 fontWeight={FontWeights.BOLD}
                 onClick={onConfirm}
               >

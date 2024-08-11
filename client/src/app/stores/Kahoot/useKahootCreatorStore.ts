@@ -18,6 +18,7 @@ interface KahootCreatorStore {
   updateQuestionLayout: (questionIndex: number, questionLayout: QuizQuestionLayoutTypes) => void;
   updateQuestionTimeLimit: (questionIndex: number, questionTimeLimit: TimeLimits) => void;
   updateQuestionPoints: (questionIndex: number, questionPoints: PointsMultiplier) => void;
+  deleteQuestion: (questionId: number | null) => void;
 }
 
 const createNewQuestion = (): Question => {
@@ -152,6 +153,31 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
       state.isKahootFormDirty = true;
     }
     return { kahoot };
+  }),
+  deleteQuestion: (questionId: number | null) => set((state) => {
+    const kahoot = state.kahoot;
+    if (kahoot) {
+      // We find the index of the question that we want to remove
+      let indexFromQuestionToRemove: number = kahoot.questions.findIndex(q => q.id === questionId);
+
+      // We remove the question
+      kahoot.questions = kahoot.questions.filter((_, index) => index !== indexFromQuestionToRemove);
+
+      // And then we reposition the kahootIndex back (eg. if the user is on the last question and then they decide to remove the last question, we will reposition the kahootIndex to the very last question available)
+      if (state.kahootIndex >= kahoot.questions.length) {
+        state.kahootIndex = kahoot.questions.length - 1;
+      }
+
+      return {
+        kahoot: {
+          ...kahoot,
+          questions: [...kahoot.questions]
+        },
+        kahootIndex: state.kahootIndex
+      };
+    }
+
+    return state;
   })
 }))
 
