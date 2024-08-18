@@ -51,15 +51,11 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
   kahoot: null,
   kahootIndex: 0,
   isKahootFormDirty: false,
-  overwriteKahoot: (newKahoot: Kahoot) => set((state) => {
-    if (state.kahoot === null) {
-      return {
-        kahoot: newKahoot,
-        kahootIndex: 0
-      }
+  overwriteKahoot: (newKahoot: Kahoot) => set(() => {
+    return {
+      kahoot: newKahoot,
+      kahootIndex: 0
     }
-
-    return state;
   }),
   setKahootTitleAndDescription: ({ title, description }: { title: string, description: string }) => set((state) => {
     if (state.kahoot) {

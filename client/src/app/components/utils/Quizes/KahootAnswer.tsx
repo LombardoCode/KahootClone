@@ -40,7 +40,7 @@ const KahootAnswer = ({ children = <></>, className, selectable = false, index }
   useEffect(() => {
     setAnswerText(kahoot?.questions[kahootIndex]?.answers[index]?.text || "");
     setIsAnswerCorrect(kahoot?.questions[kahootIndex]?.answers[index]?.isCorrect || false);
-  }, [kahootIndex]);
+  }, [kahoot, kahootIndex]);
 
   const handleAnswerTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newAnswer = e.target.value;

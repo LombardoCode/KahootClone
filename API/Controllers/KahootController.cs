@@ -1,4 +1,5 @@
 using API.Data;
+using API.Data.ForClient.Dashboard.Kahoot;
 using API.Data.Server.KahootCreator;
 using API.DTOs.Kahoot;
 using API.Models;
@@ -20,6 +21,27 @@ namespace API.Controllers
     {
       _dbContext = dbContext;
       _userService = userService;
+    }
+
+    [HttpGet("getBasicInfoFromUsersKahoots")]
+    [Authorize]
+    public async Task<ActionResult> GetBasicInfoFromUsersKahoots()
+    {
+      var userId = await _userService.GetUserId();
+
+      var kahoots = await _dbContext.Kahoots
+                      .Where(k => k.UserId == userId)
+                      .Select(k => new KahootDashboardList
+                      {
+                        Id = k.Id,
+                        Title = k.Title,
+                        Description = k.Description,
+                        CreatedAt = k.CreatedAt,
+                        UpdatedAt = k.UpdatedAt
+                      })
+                      .ToListAsync();
+      
+      return Ok(kahoots);
     }
 
     [HttpPost("create")]
