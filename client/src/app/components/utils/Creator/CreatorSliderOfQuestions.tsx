@@ -7,7 +7,6 @@ import { Question } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Modal, { ModalTypes } from "../Modal/Modal";
-import useModalStore from "@/app/stores/useModalStore";
 import { useState } from "react";
 
 interface CreatorSliderOfQuestionsProps {
@@ -18,20 +17,24 @@ const CreatorSliderOfQuestions = ({ className }: CreatorSliderOfQuestionsProps) 
   const { addQuestion, getKahootQuestions } = useKahootCreatorStore();
 
   return (
-    <div className={`relative px-3 py-4 ${className}`}>
-      {getKahootQuestions().map((question: Question, index: number) => (
-        <SliderItem
-          question={question}
-          key={index}
-          index={index}
-        />
-      ))}
+    <div className={`relative ${className} h-full flex flex-col`}>
+      <div className="flex-1 overflow-y-auto px-3 py-4">
+        {getKahootQuestions().map((question: Question, index: number) => (
+          <SliderItem
+            question={question}
+            key={index}
+            index={index}
+          />
+        ))}
+      </div>
 
-      <div id="add-question" className="absolute flex justify-center bottom-0 bg-red-300">
+      <div id="add-question" className="w-full flex justify-center px-2 py-1 ">
         <Button
           backgroundColor={BackgroundColors.BLUE}
           fontWeight={FontWeights.BOLD}
+          textColor={TextColors.WHITE}
           onClick={() => addQuestion()}
+          className="w-full max-w-sm"
         >
           Add question
         </Button>

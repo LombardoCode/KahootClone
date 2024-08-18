@@ -15,7 +15,7 @@ interface CreatorQuestionModifierProps {
 
 const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) => {
   // Store
-  const { kahoot, selectedQuestion, kahootIndex, updateQuestionTitle } = useKahootCreatorStore();
+  const { kahoot, kahootIndex, updateQuestionTitle } = useKahootCreatorStore();
 
   // Local component
   const [title, setTitle] = useState<string>(kahoot?.questions[kahootIndex]?.title || "");
@@ -73,7 +73,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
         <div id="answers">
           <KahootAnswerContainer>
-            {selectedQuestion() && selectedQuestion()?.answers.map((answer: Answer, index: number) => (
+            {kahoot?.questions[kahootIndex]?.answers.map((answer: Answer, index: number) => (
               <KahootAnswer
                 key={index}
                 index={index}

@@ -9,6 +9,11 @@ import { faCaretDown, faGear, faRightFromBracket } from "@fortawesome/free-solid
 import { DropDownContainer, DropDownItem } from "./Navbar";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { useRouter } from "next/navigation";
+import Button, { ButtonSize } from "../UIComponents/Button";
+import useModalStore from "@/app/stores/useModalStore";
+import Modal, { ModalTypes } from "./Modal/Modal";
+import InputForm, { InputFormTypes } from "../UIComponents/InputForm";
+import axiosInstance from "@/app/utils/axiosConfig";
 
 interface DashboardOutletNavbarProps {
   fixed?: boolean;
@@ -18,8 +23,12 @@ interface DashboardOutletNavbarProps {
 const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutletNavbarProps) => {
   const router = useRouter();
   const { user, clearUser } = useUserStore();
+  const { isOpen, setIsOpen, closeModal } = useModalStore();
   const [toggleAccountDropdown, setToggleAccountDropdown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [formData, setFormData] = useState({
+    newKahootName: ''
+  });
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -39,25 +48,55 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
       setToggleAccountDropdown(false);
     }
   };
-  
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const createKahoot = () => {
+    axiosInstance.post('/kahoot/create', { NewKahootName: formData.newKahootName })
+      .then(res => {
+        router.push(`/creator/${res.data.newKahootId}`);
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+
   return (
     <nav className={`bg-white py-3 px-4 w-full sticky top-0 shadow-sm shadow-zinc-300 ${className}`}>
       <div className="relative flex justify-end" ref={dropdownRef}>
         {user.userName && (
-          <Text
-            fontWeight={FontWeights.BOLD}
-            textColor={TextColors.BLACK}
-            useCase={UseCases.LONGTEXT}
-            className="hover:bg-gray-400 px-3 py-2 select-none cursor-pointer"
-            onClick={() => setToggleAccountDropdown(!toggleAccountDropdown)}
-          >
-            {user.userName}
-            <FontAwesomeIcon
-              className="ml-2"
-              icon={faCaretDown}
-            />
-          </Text>
+          <div className="flex items-center">
+            <Button
+              backgroundColor={BackgroundColors.GREEN}
+              fontWeight={FontWeights.BOLD}
+              size={ButtonSize.SMALL}
+              textColor={TextColors.WHITE}
+              className="mr-2"
+              onClick={() => setIsOpen(true)}
+            >
+              Create a Kahoot!
+            </Button>
+            <Text
+              fontWeight={FontWeights.BOLD}
+              textColor={TextColors.BLACK}
+              useCase={UseCases.LONGTEXT}
+              className="hover:bg-gray-400 px-3 py-2 select-none cursor-pointer"
+              onClick={() => setToggleAccountDropdown(!toggleAccountDropdown)}
+            >
+              {user.userName}
+              <FontAwesomeIcon
+                className="ml-2"
+                icon={faCaretDown}
+              />
+            </Text>
+          </div>
         )}
+
         {toggleAccountDropdown && (
           <DropDownContainer>
             <DropDownItem
@@ -76,6 +115,35 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
           </DropDownContainer>
         )}
       </div>
+      <Modal
+        modalType={ModalTypes.INPUT}
+        isOpen={isOpen}
+        title={`Create a Kahoot`}
+        onClose={closeModal}
+        content={(
+          <>
+            <Text
+              fontWeight={FontWeights.REGULAR}
+              textColor={TextColors.BLACK}
+              useCase={UseCases.LONGTEXT}
+              className="text-base"
+            >
+              Enter the name of your new Kahoot
+            </Text>
+            <InputForm
+              type={InputFormTypes.TEXT}
+              textColor={TextColors.BLACK}
+              fontWeight={FontWeights.LIGHT}
+              name="newKahootName"
+              id="newKahootName"
+              value={formData.newKahootName}
+              onChange={handleFormChange}
+            />
+          </>
+        )}
+        confirmText={`Create`}
+        onConfirm={() => createKahoot()}
+      />
     </nav>
   )
 }

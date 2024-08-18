@@ -1,6 +1,5 @@
 'use client'
 
-import Text from "@/app/components/UIComponents/Text";
 import CreatorQuestionModifier from "@/app/components/utils/Creator/CreatorQuestionModifier";
 import CreatorQuestionSettings from "@/app/components/utils/Creator/CreatorQuestionSettings";
 import CreatorSliderOfQuestions from "@/app/components/utils/Creator/CreatorSliderOfQuestions";
@@ -54,15 +53,11 @@ const EditKahoot = () => {
       })
   }
 
-  const initializeKahootInformation = (kahootInfo: {title: string, description: string}) => {
-    setKahoot(kahootInfo);
-  }
-
   return (
     <div className="h-screen flex flex-col">
       <CreatorNavbar kahootProps={kahoot} />
 
-      <div id="creator-body" className="flex-1 flex">
+      <div id="creator-body" className="flex-1 flex overflow-hidden">
         <CreatorSliderOfQuestions
           className="w-48 bg-white"
         />
