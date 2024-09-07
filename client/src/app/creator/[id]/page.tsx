@@ -18,11 +18,6 @@ const EditKahoot = () => {
     id = id[0];
   }
 
-  const [kahoot, setKahoot] = useState({
-    title: '',
-    description: ''
-  })
-
   useEffect(() => {
     if (id !== undefined) {
       verifyIfKahootExists(id);
@@ -55,7 +50,7 @@ const EditKahoot = () => {
 
   return (
     <div className="h-screen flex flex-col">
-      <CreatorNavbar kahootProps={kahoot} />
+      <CreatorNavbar />
 
       <div id="creator-body" className="flex-1 flex overflow-hidden">
         <CreatorSliderOfQuestions

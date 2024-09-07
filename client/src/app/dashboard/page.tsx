@@ -23,7 +23,6 @@ const Dashboard = () => {
   const getBasicInfoFromUsersKahoots = async () => {
     await axiosInstance.get('/kahoot/getBasicInfoFromUsersKahoots')
       .then((res) => {
-        console.log(res.data);
         setKahootsFromUser(res.data);
       })
       .catch(err => {

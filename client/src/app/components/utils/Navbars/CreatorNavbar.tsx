@@ -1,30 +1,34 @@
 import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/Text.interface";
 import Text from "../../UIComponents/Text";
 import Logo, { LogoColors, LogoSize } from "../Logo";
-import Button from "../../UIComponents/Button";
+import Button, { ButtonSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
-import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
+import useKahootCreatorStore, { KahootQuestionValidation } from "@/app/stores/Kahoot/useKahootCreatorStore";
 import axiosInstance from "@/app/utils/axiosConfig";
 import Modal, { ModalTypes } from "../Modal/Modal";
 import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { KahootHeaderInfo } from "@/app/interfaces/Creator/KahootHeaderInfo.interface";
 import { useRouter } from "next/navigation";
+import { Question } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
-interface CreatorNavbarProps {
-  kahootProps: {
-    title: string;
-    description: string
-  };
-}
 
-const CreatorNavbar = ({ kahootProps }: CreatorNavbarProps) => {
+const CreatorNavbar = () => {
   const router = useRouter();
-  const { kahoot, isKahootFormDirty } = useKahootCreatorStore();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  // Global store
+  const { kahoot, isKahootFormDirty, getKahootPlayabilityStatus, kahootValidationStatus, updateTitleAndDescription, selectQuestion } = useKahootCreatorStore();
+
+  // Modals states
+  const [isKahootHeaderModalOpen, setIsKahootHeaderModalOpen] = useState<boolean>(false);
+  const [isKahootSavedModalOpen, setIsKahootSavedModalOpen] = useState<boolean>(false);
+
+  // const [isKahootPlayable, setIsKahootPlayable] = useState<boolean>(false);
   const [kahootHeaderInfo, setKahootHeaderInfo] = useState<KahootHeaderInfo>({
-    title: kahootProps.title,
-    description: kahootProps.description
+    title: kahoot?.title || "",
+    description: kahoot?.description || ""
   });
 
   const handleKahootHeaderFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,20 +39,32 @@ const CreatorNavbar = ({ kahootProps }: CreatorNavbarProps) => {
   }
 
   const saveDraft = () => {
+    updateTitleAndDescription({
+      title: kahootHeaderInfo?.title || kahoot?.title || "",
+      description: kahootHeaderInfo?.description || kahoot?.description || ""
+    });
+
     axiosInstance.put('/kahootcreator/drafts', {
       id: kahoot?.id,
-      title: kahootHeaderInfo.title,
-      description: kahootHeaderInfo.description,
+      title: kahoot?.title,
+      description: kahoot?.description,
       createdAt: kahoot?.createdAt,
       updatedAt: kahoot?.updatedAt,
       questions: kahoot?.questions
     })
       .then(res => {
-        console.log(res.data);
+        getKahootPlayabilityStatus();
+        setIsKahootSavedModalOpen(true);
       })
       .catch(err => {
         console.error(err);
       })
+  }
+
+  const doesQuestionContainsAnError = (question: KahootQuestionValidation): boolean => {
+    return question.errors.questionTitle !== ""
+      || question.errors.missingAnswerTitles !== ""
+      || question.errors.answerCorrectness !== "";
   }
 
   return (
@@ -66,7 +82,7 @@ const CreatorNavbar = ({ kahootProps }: CreatorNavbarProps) => {
           </div>
           <div
             className="ml-4 hover:bg-zinc-300 cursor-pointer px-2 py-3"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsKahootHeaderModalOpen(true)}
           >
             <Text
               fontWeight={FontWeights.BOLD}
@@ -81,7 +97,7 @@ const CreatorNavbar = ({ kahootProps }: CreatorNavbarProps) => {
               fontWeight={FontWeights.REGULAR}
               textColor={TextColors.BLACK}
               useCase={UseCases.TITLE}
-              textStyle={kahootProps.description ? TextStyles.NORMAL : TextStyles.ITALIC}
+              textStyle={kahootHeaderInfo.description ? TextStyles.NORMAL : TextStyles.ITALIC}
               className="text-base"
             >
               {kahoot?.description ? kahoot?.description : 'No description'}
@@ -102,11 +118,13 @@ const CreatorNavbar = ({ kahootProps }: CreatorNavbarProps) => {
           )}
         </div>
       </nav>
+
+      {/* Modal to be displayed when user clicks on the title / description to modify the kahoot header information */}
       <Modal
         modalType={ModalTypes.INPUT}
-        isOpen={isModalOpen}
+        isOpen={isKahootHeaderModalOpen}
         title={`Kahoot information`}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => setIsKahootHeaderModalOpen(false)}
         content={(
           <>
             <Text
@@ -146,8 +164,148 @@ const CreatorNavbar = ({ kahootProps }: CreatorNavbarProps) => {
         confirmText={`Save`}
         onConfirm={() => {
           saveDraft();
-          setIsModalOpen(false);
+          setIsKahootHeaderModalOpen(false);
         }}
+      />
+
+      {/* Modal to be displayed after the user saves their Kahoot draft */}
+      <Modal
+        modalType={ModalTypes.INPUT}
+        isOpen={isKahootSavedModalOpen}
+        title={
+          kahootValidationStatus.isPlayable
+            ? `Your kahoot is ready`
+            : `This kahoot cannot be played`
+        }
+        content={(
+          kahootValidationStatus.isPlayable
+            ?
+            <>
+              <div>Text</div>
+            </>
+            :
+            <>
+              <Text
+                fontWeight={FontWeights.REGULAR}
+                textColor={TextColors.BLACK}
+                useCase={UseCases.LONGTEXT}
+                className="text-base mb-4"
+              >
+                All questions need to be completed before you can start playing.
+              </Text>
+
+              {kahootValidationStatus.questions
+                .filter((question) => doesQuestionContainsAnError(question))
+                .map((questionWithError: KahootQuestionValidation, index: number, array) => {
+                  const kahootIndex = questionWithError.kahootIndex;
+                  const isLastItem = index === array.length - 1;
+
+                  return (
+                    <div key={kahootIndex}>
+                      <div id="question-info-header" className="flex">
+                        <div id="question-image" className="w-20 mr-3 bg-gray-500 rounded-md"></div>
+                        <div id="question-layout-and-title" className="flex-1 flex flex-col py-2">
+                          <Text
+                            fontWeight={FontWeights.REGULAR}
+                            textColor={TextColors.BLACK}
+                            useCase={UseCases.LONGTEXT}
+                            className="text-sm"
+                          >
+                            {kahootIndex + 1} - {kahoot?.questions[kahootIndex].layout}
+                          </Text>
+
+                          {kahoot?.questions[kahootIndex].title && (
+                            <Text
+                              fontWeight={FontWeights.BOLD}
+                              textColor={TextColors.BLACK}
+                              useCase={UseCases.LONGTEXT}
+                              className="text-sm"
+                            >
+                              {kahoot?.questions[kahootIndex].title}
+                            </Text>
+                          )}
+                        </div>
+                        <div id="question-fix-button">
+                          <Button
+                            backgroundColor={BackgroundColors.BLUE}
+                            fontWeight={FontWeights.BOLD}
+                            textColor={TextColors.WHITE}
+                            className="text-sm"
+                            size={ButtonSize.SMALL}
+                            onClick={() => {
+                              selectQuestion(kahootIndex);
+                              setIsKahootSavedModalOpen(false);
+                            }}
+                          >
+                            Fix
+                          </Button>
+                        </div>
+                      </div>
+
+                      <div id="question-info-footer" className="mt-2">
+                        {questionWithError.errors.questionTitle && (
+                          <div className="flex items-center">
+                            <FontAwesomeIcon
+                              icon={faCircleExclamation}
+                              color="#46178F"
+                              className="mr-2"
+                            />
+                            <Text
+                              fontWeight={FontWeights.BOLD}
+                              textColor={TextColors.GRAY}
+                              useCase={UseCases.LONGTEXT}
+                              className="text-sm"
+                            >
+                              {questionWithError.errors.questionTitle}
+                            </Text>
+                          </div>
+                        )}
+
+                        {questionWithError.errors.missingAnswerTitles && (
+                          <div className="flex items-center">
+                            <FontAwesomeIcon
+                              icon={faCircleExclamation}
+                              color="#46178F"
+                              className="mr-2"
+                            />
+                            <Text
+                              fontWeight={FontWeights.BOLD}
+                              textColor={TextColors.GRAY}
+                              useCase={UseCases.LONGTEXT}
+                              className="text-sm"
+                            >
+                              {questionWithError.errors.missingAnswerTitles}
+                            </Text>
+                          </div>
+                        )}
+
+                        {questionWithError.errors.answerCorrectness && (
+                          <div className="flex items-center">
+                            <FontAwesomeIcon
+                              icon={faCircleExclamation}
+                              color="#46178F"
+                              className="mr-2"
+                            />
+                            <Text
+                              fontWeight={FontWeights.BOLD}
+                              textColor={TextColors.GRAY}
+                              useCase={UseCases.LONGTEXT}
+                              className="text-sm"
+                            >
+                              {questionWithError.errors.answerCorrectness}
+                            </Text>
+                          </div>
+                        )}
+                      </div>
+                      {!isLastItem && (
+                        <hr className="h-px my-4 border-0 bg-slate-400"></hr>
+                      )}
+                    </div>
+                  );
+                })}
+            </>
+        )}
+        onClose={() => setIsKahootSavedModalOpen(false)}
       />
     </>
   )

@@ -2,6 +2,7 @@ using API.Data;
 using API.Data.Server.KahootCreator;
 using API.Models;
 using API.Models.Creator;
+using API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +13,12 @@ namespace API.Controllers
   public class KahootCreatorController : ControllerBase
   {
     private readonly DataContext _dbContext;
+    private readonly KahootValidationService _kahootValidationService;
 
-    public KahootCreatorController(DataContext dbContext)
+    public KahootCreatorController(DataContext dbContext, KahootValidationService kahootValidationService)
     {
       _dbContext = dbContext;
+      _kahootValidationService = kahootValidationService;
     }
 
     /// <summary>
@@ -108,9 +111,7 @@ namespace API.Controllers
         }
       }
 
-      // Save changes into the database
-      await _dbContext.SaveChangesAsync();
-
+      // Create the Kahoot object for the client-side
       var kahootDTO = new KahootClient
       {
         Id = kahootToUpd.Id,
@@ -134,6 +135,11 @@ namespace API.Controllers
           }).ToList()
         }).ToList()
       };
+
+      bool isKahootPlayable = _kahootValidationService.ValidateKahoot(kahootDTO);
+
+      // Save changes into the database
+      await _dbContext.SaveChangesAsync();
 
       return Ok(kahootDTO);
     }

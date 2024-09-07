@@ -1,10 +1,26 @@
+import { KahootHeaderInfo } from "@/app/interfaces/Creator/KahootHeaderInfo.interface";
 import { Answer, Kahoot, PointsMultiplier, Question, QuizQuestionLayoutTypes, TimeLimits } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { create } from "zustand";
+
+interface KahootValidationStatus {
+  isPlayable: boolean;
+  questions: KahootQuestionValidation[]
+}
+
+export interface KahootQuestionValidation {
+  kahootIndex: number;
+  errors: {
+    questionTitle: string;
+    missingAnswerTitles: string;
+    answerCorrectness: string;
+  }
+}
 
 interface KahootCreatorStore {
   kahoot: Kahoot | null;
   kahootIndex: number;
   isKahootFormDirty: boolean;
+  kahootValidationStatus: KahootValidationStatus;
   overwriteKahoot: (newKahoot: Kahoot) => void;
   setKahootTitleAndDescription: (kahootInfo: { title: string, description: string }) => void;
   setKahootsQuestionIndex: (index: number) => void;
@@ -19,6 +35,9 @@ interface KahootCreatorStore {
   updateQuestionTimeLimit: (questionIndex: number, questionTimeLimit: TimeLimits) => void;
   updateQuestionPoints: (questionIndex: number, questionPoints: PointsMultiplier) => void;
   deleteQuestion: (questionId: number | null) => void;
+  getKahootPlayabilityStatus: () => void;
+  updateTitleAndDescription: (headerInfo: KahootHeaderInfo) => void;
+  selectQuestion: (kahootIndex: number) => void;
 }
 
 const createNewQuestion = (): Question => {
@@ -51,6 +70,10 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
   kahoot: null,
   kahootIndex: 0,
   isKahootFormDirty: false,
+  kahootValidationStatus: {
+    isPlayable: false,
+    questions: []
+  },
   overwriteKahoot: (newKahoot: Kahoot) => set(() => {
     return {
       kahoot: newKahoot,
@@ -174,6 +197,79 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
     }
 
     return state;
+  }),
+  getKahootPlayabilityStatus: () => set((state) => {
+    const kahoot = state.kahoot;
+
+    if (kahoot) {
+      let validationStatus: KahootValidationStatus = {
+        isPlayable: true,
+        questions: []
+      }
+
+      kahoot.questions.map((question: Question, index: number) => {
+        let questionValidationErrors = {
+          questionTitle: "",
+          missingAnswerTitles: "",
+          answerCorrectness: ""
+        }
+
+        // Validation question's title
+        if (question.title === "" || question.title.trim() === "") {
+          questionValidationErrors.questionTitle = `The question's title is missing`;
+          validationStatus.isPlayable = false;
+        }
+
+        // Validating how many answer titles are missing
+        let missingAnswerTitlesQty: number = 0;
+        question.answers.map((answer: Answer, index: number) => {
+          if (answer.text === "" || answer.text.trim() === "") {
+            missingAnswerTitlesQty++;
+            validationStatus.isPlayable = false;
+          }
+        })
+        questionValidationErrors.missingAnswerTitles = missingAnswerTitlesQty > 0
+          ? `${missingAnswerTitlesQty} answers missing`
+          : ``;
+
+        // Validating if there's at least one answer who has been checked (answer correctness)
+        let hasCorrectAnswer = question.answers.some((answer: Answer) => answer.isCorrect);
+
+        if (!hasCorrectAnswer) {
+          questionValidationErrors.answerCorrectness = `Correct answer not selected`;
+          validationStatus.isPlayable = false;
+        }
+
+        validationStatus.questions.push({
+          kahootIndex: index,
+          errors: questionValidationErrors
+        })
+      })
+
+      return {
+        kahootValidationStatus: validationStatus
+      }
+    }
+
+    return state;
+  }),
+  updateTitleAndDescription: (headerInfo: KahootHeaderInfo) => set((state) => {
+    const kahoot = state.kahoot;
+
+    if (kahoot) {
+      kahoot.title = headerInfo.title;
+      kahoot.description = headerInfo.description
+
+      return { kahoot }
+    }
+
+    return state;
+  }),
+  selectQuestion: (kahootIndex: number) => set((state) => {
+    return {
+      ...state,
+      kahootIndex
+    }
   })
 }))
 

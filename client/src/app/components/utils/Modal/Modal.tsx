@@ -49,8 +49,9 @@ const Modal = ({ modalType, title, isOpen, onClose, content, confirmText = null,
           initial={{ y: 20 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.3, ease: 'circOut' }}
-          className="bg-white p-6 rounded-lg shadow-lg"
+          className="bg-white p-6 rounded-lg shadow-lg max-h-[calc(100vh-100px)] overflow-hidden flex flex-col"
         >
+          {/* Title */}
           <Text
             fontWeight={FontWeights.BOLD}
             textColor={TextColors.BLACK}
@@ -59,9 +60,13 @@ const Modal = ({ modalType, title, isOpen, onClose, content, confirmText = null,
           >
             {title}
           </Text>
-          <div className="modal-content">
+
+          {/* Body */}
+          <div className="modal-content flex-1 overflow-y-auto max-h-[calc(100vh-220px)] ">
             {content}
           </div>
+
+          {/* Footer */}
           <div
             id="modal-buttons-footer"
             className="flex justify-end mt-3"
