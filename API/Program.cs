@@ -78,6 +78,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<KahootValidationService>();
+builder.Services.AddScoped<LobbyService>();
 
 var app = builder.Build();
 

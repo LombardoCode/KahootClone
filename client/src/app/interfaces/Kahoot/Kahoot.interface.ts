@@ -2,6 +2,7 @@ export interface Kahoot {
   id: number | null;
   title: string;
   description: string;
+  isPlayable: boolean;
   createdAt: Date;
   updatedAt: Date;
   questions: Question[]

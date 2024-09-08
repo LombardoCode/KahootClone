@@ -1,6 +1,6 @@
 import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/Text.interface";
 import Text from "../../UIComponents/Text";
-import Button from "../../UIComponents/Button";
+import Button, { ButtonSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Question } from "@/app/interfaces/Kahoot/Kahoot.interface";
@@ -100,7 +100,7 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
         isOpen={isModalOpen}
         title={`Delete quiz question`}
         onClose={() => setIsModalOpen(false)}
-        content={(
+        bodyContent={(
           <>
             <Text
               fontWeight={FontWeights.REGULAR}
@@ -112,11 +112,21 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
             </Text>
           </>
         )}
-        confirmText={`Delete`}
-        onConfirm={() => {
-          setIsModalOpen(false);
-          deleteQuestion(question.id)
-        }}
+        footerContent={(
+          <Button
+            backgroundColor={BackgroundColors.RED}
+            fontWeight={FontWeights.BOLD}
+            size={ButtonSize.MEDIUM}
+            textColor={TextColors.WHITE}
+            className="mr-2"
+            onClick={() => {
+              setIsModalOpen(false);
+              deleteQuestion(question.id)
+            }}
+          >
+            Delete
+          </Button>
+        )}
       />
     </div>
   )

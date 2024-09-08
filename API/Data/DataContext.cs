@@ -1,5 +1,6 @@
 using API.Models;
 using API.Models.Creator;
+using API.Models.Play;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ namespace API.Data
     public DbSet<Kahoot> Kahoots { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<Answer> Answers { get; set; }
+    public DbSet<Lobby> Lobbies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -26,6 +28,16 @@ namespace API.Data
         .HasMany(q => q.Answers)
         .WithOne(a => a.Question)
         .HasForeignKey(a => a.QuestionId);
+      
+      builder.Entity<Lobby>()
+        .HasIndex(l => l.GamePIN)
+        .IsUnique();
+      
+      builder.Entity<Lobby>()
+        .HasOne(l => l.Kahoot)
+        .WithMany(k => k.Lobbies)
+        .HasForeignKey(l => l.KahootId)
+        .OnDelete(DeleteBehavior.Cascade);
       
       base.OnModelCreating(builder);
     }
