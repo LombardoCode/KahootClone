@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240907224719_CreationOfTheLobbyModel")]
+    partial class CreationOfTheLobbyModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,12 +196,11 @@ namespace API.Migrations
                     b.Property<int>("GamePIN")
                         .HasColumnType("int");
 
+                    b.Property<bool>("HasStarted")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<Guid>("KahootId")
                         .HasColumnType("char(36)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -206,8 +208,6 @@ namespace API.Migrations
                         .IsUnique();
 
                     b.HasIndex("KahootId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Lobbies");
                 });
@@ -380,20 +380,12 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Play.Lobby", b =>
                 {
                     b.HasOne("API.Models.Kahoot", "Kahoot")
-                        .WithMany("Lobbies")
+                        .WithMany()
                         .HasForeignKey("KahootId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Models.AppUser", "User")
-                        .WithMany("Lobbies")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Kahoot");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -450,8 +442,6 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.AppUser", b =>
                 {
                     b.Navigation("Kahoots");
-
-                    b.Navigation("Lobbies");
                 });
 
             modelBuilder.Entity("API.Models.Creator.Question", b =>
@@ -461,8 +451,6 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Kahoot", b =>
                 {
-                    b.Navigation("Lobbies");
-
                     b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618

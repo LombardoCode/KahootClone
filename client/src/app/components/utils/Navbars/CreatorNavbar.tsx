@@ -67,6 +67,17 @@ const CreatorNavbar = () => {
       || question.errors.answerCorrectness !== "";
   }
 
+  const createLobby = () => {
+    axiosInstance.post('/lobby/create', { kahootId: kahoot?.id })
+      .then(res => {
+        const gamePIN: number = res.data.gamePIN;
+        router.push(`/lobby/${gamePIN}`)
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
   return (
     <>
       <nav id="navigation-creator" className="flex justify-between items-center px-3">
@@ -125,7 +136,7 @@ const CreatorNavbar = () => {
         isOpen={isKahootHeaderModalOpen}
         title={`Kahoot information`}
         onClose={() => setIsKahootHeaderModalOpen(false)}
-        content={(
+        bodyContent={(
           <>
             <Text
               fontWeight={FontWeights.REGULAR}
@@ -161,11 +172,36 @@ const CreatorNavbar = () => {
             </div>
           </>
         )}
-        confirmText={`Save`}
-        onConfirm={() => {
-          saveDraft();
-          setIsKahootHeaderModalOpen(false);
-        }}
+        footerContent={(
+          <>
+            <Button
+              backgroundColor={BackgroundColors.GRAY}
+              fontWeight={FontWeights.BOLD}
+              textColor={TextColors.WHITE}
+              className="text-sm"
+              size={ButtonSize.MEDIUM}
+              onClick={() => {
+                setIsKahootHeaderModalOpen(false);
+              }}
+            >
+              Close
+            </Button>
+
+            <Button
+              backgroundColor={BackgroundColors.BLUE}
+              fontWeight={FontWeights.BOLD}
+              textColor={TextColors.WHITE}
+              className="text-sm"
+              size={ButtonSize.MEDIUM}
+              onClick={() => {
+                saveDraft();
+                setIsKahootHeaderModalOpen(false);
+              }}
+            >
+              Save
+            </Button>
+          </>
+        )}
       />
 
       {/* Modal to be displayed after the user saves their Kahoot draft */}
@@ -177,11 +213,21 @@ const CreatorNavbar = () => {
             ? `Your kahoot is ready`
             : `This kahoot cannot be played`
         }
-        content={(
+        bodyContent={(
           kahootValidationStatus.isPlayable
             ?
             <>
-              <div>Text</div>
+              <div>You can host it and play it</div>
+              <Button
+                backgroundColor={BackgroundColors.BLUE}
+                fontWeight={FontWeights.BOLD}
+                textColor={TextColors.WHITE}
+                className="text-sm"
+                size={ButtonSize.MEDIUM}
+                onClick={() => createLobby()}
+              >
+                Host
+              </Button>
             </>
             :
             <>
@@ -304,6 +350,39 @@ const CreatorNavbar = () => {
                   );
                 })}
             </>
+        )}
+        footerContent={(
+          <>
+            {kahootValidationStatus.isPlayable && (
+              <>
+                <Button
+                  backgroundColor={BackgroundColors.GRAY}
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.WHITE}
+                  className="text-sm"
+                  size={ButtonSize.MEDIUM}
+                  onClick={() => {
+                    setIsKahootSavedModalOpen(false);
+                  }}
+                >
+                  Back to edit
+                </Button>
+
+                <Button
+                  backgroundColor={BackgroundColors.BLUE}
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.WHITE}
+                  className="text-sm"
+                  size={ButtonSize.MEDIUM}
+                  onClick={() => {
+                    router.push('/dashboard')
+                  }}
+                >
+                  Done
+                </Button>
+              </>
+            )}
+          </>
         )}
         onClose={() => setIsKahootSavedModalOpen(false)}
       />

@@ -8,12 +8,10 @@ import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 interface ModalProps {
   modalType: ModalTypes;
   title: string;
-  content: React.ReactNode;
+  bodyContent: React.ReactNode;
+  footerContent: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
-
-  confirmText?: string | null;
-  onConfirm?: (x?: any) => void;
 }
 
 export enum ModalTypes {
@@ -21,7 +19,7 @@ export enum ModalTypes {
   DELETION
 }
 
-const Modal = ({ modalType, title, isOpen, onClose, content, confirmText = null, onConfirm }: ModalProps) => {
+const Modal = ({ modalType, title, isOpen, onClose, bodyContent, footerContent }: ModalProps) => {
   if (!isOpen) {
     return null;
   }
@@ -63,7 +61,7 @@ const Modal = ({ modalType, title, isOpen, onClose, content, confirmText = null,
 
           {/* Body */}
           <div className="modal-content flex-1 overflow-y-auto max-h-[calc(100vh-220px)] ">
-            {content}
+            {bodyContent}
           </div>
 
           {/* Footer */}
@@ -71,26 +69,7 @@ const Modal = ({ modalType, title, isOpen, onClose, content, confirmText = null,
             id="modal-buttons-footer"
             className="flex justify-end mt-3"
           >
-            <Button
-              backgroundColor={BackgroundColors.GRAY}
-              textColor={TextColors.WHITE}
-              fontWeight={FontWeights.BOLD}
-              className="mr-2"
-              onClick={onClose}
-            >
-              Close
-            </Button>
-
-            {confirmText !== null && (
-              <Button
-                backgroundColor={btnBackgroundColor}
-                textColor={textColor}
-                fontWeight={FontWeights.BOLD}
-                onClick={onConfirm}
-              >
-                {confirmText}
-              </Button>
-            )}
+            {footerContent}
           </div>
         </motion.div>
       </div>

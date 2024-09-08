@@ -120,7 +120,7 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
         isOpen={isOpen}
         title={`Create a Kahoot`}
         onClose={closeModal}
-        content={(
+        bodyContent={(
           <>
             <Text
               fontWeight={FontWeights.REGULAR}
@@ -141,8 +141,20 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
             />
           </>
         )}
-        confirmText={`Create`}
-        onConfirm={() => createKahoot()}
+        footerContent={(
+          <>
+            <Button
+              backgroundColor={BackgroundColors.GREEN}
+              fontWeight={FontWeights.BOLD}
+              size={ButtonSize.MEDIUM}
+              textColor={TextColors.WHITE}
+              className="mr-2"
+              onClick={() => createKahoot()}
+            >
+              Create
+            </Button>
+          </>
+        )}
       />
     </nav>
   )

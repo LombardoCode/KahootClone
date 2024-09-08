@@ -57,7 +57,8 @@ namespace API.Controllers
         Title = data.NewKahootName,
         Description = null,
         CreatedAt = DateTime.Now,
-        UpdatedAt = DateTime.Now
+        UpdatedAt = DateTime.Now,
+        IsPlayable = false
       };
 
       _dbContext.Add(newKahootQuiz);
@@ -103,6 +104,7 @@ namespace API.Controllers
         Id = kahoot.Id,
         Title = kahoot.Title,
         Description = kahoot.Description,
+        IsPlayable = kahoot.IsPlayable,
         CreatedAt = kahoot.CreatedAt,
         UpdatedAt = kahoot.UpdatedAt,
         Questions = kahoot.Questions.Select(q => new QuestionClient

@@ -138,6 +138,9 @@ namespace API.Controllers
 
       bool isKahootPlayable = _kahootValidationService.ValidateKahoot(kahootDTO);
 
+      kahootToUpd.IsPlayable = isKahootPlayable;
+      kahootDTO.IsPlayable = isKahootPlayable;
+
       // Save changes into the database
       await _dbContext.SaveChangesAsync();
 
