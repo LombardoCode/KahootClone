@@ -2,6 +2,7 @@ using System.Text;
 using API.Data;
 using API.Models;
 using API.Services;
+using API.Sockets.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// SignalR
+builder.Services.AddSignalR();
 
 // Database
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
@@ -32,6 +36,7 @@ builder.Services.AddCors(opts =>
     builder.WithOrigins("http://localhost:3000");
     builder.AllowAnyHeader();
     builder.AllowAnyMethod();
+    builder.AllowCredentials();
   });
 });
 
@@ -97,6 +102,9 @@ app.UseHttpsRedirection();
 // Using authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
+
+// SignalR Hubs
+app.MapHub<LobbyHub>("/hubs/lobbyhub");
 
 // Using the controllers
 app.MapControllers();
