@@ -43,6 +43,9 @@ const config: Config = {
         'kahoot-green-200': "#66BF39",
         'kahoot-green-300': "#26890C",
         'kahoot-green-400': "#0F6B03",
+      },
+      textDecorationThickness: {
+        3: '3px'
       }
     },
   },

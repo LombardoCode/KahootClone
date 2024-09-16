@@ -9,10 +9,25 @@ import { FontWeights, TextColors, UseCases } from "./interfaces/Text.interface";
 import BackgroundShapes, { ShapeColor } from "./components/utils/BackgroundShapes";
 import Card, { CardBackgroundColors } from "./components/UIComponents/Card";
 import { BackgroundColors } from "./interfaces/Colors.interface";
+import InputForm, { InputFormTypes } from "./components/UIComponents/InputForm";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
-  const tryEnterIntoTheGame = () => {
-    //
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    gamePIN: ''
+  });
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const tryEnterIntoTheGame = (gamePIN: number | string) => {
+    router.push(`/lobby/${gamePIN}`);
   }
 
   return (
@@ -29,14 +44,20 @@ const Home = () => {
               backgroundColor={CardBackgroundColors.BLACK}
               className="flex flex-col justify-between"
             >
-              <Input
-                placeholder="Game PIN"
+              <InputForm
+                type={InputFormTypes.TEXT}
+                textColor={TextColors.BLACK}
+                fontWeight={FontWeights.REGULAR}
+                name="gamePIN"
+                id="gamePIN"
+                value={formData.gamePIN}
+                onChange={handleFormChange}
               />
               <Button
                 backgroundColor={BackgroundColors.GRAY}
                 fontWeight={FontWeights.BOLD}
                 className="mt-3"
-                onClick={() => tryEnterIntoTheGame()}
+                onClick={() => tryEnterIntoTheGame(formData.gamePIN)}
               >
                 Enter
               </Button>

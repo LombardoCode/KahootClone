@@ -4,6 +4,7 @@ using API.Models.Play;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers.Play
 {
@@ -43,6 +44,35 @@ namespace API.Controllers.Play
       return Ok(new {
         GamePIN = lobby.GamePIN
       });
+    }
+
+    [HttpGet("checkIfTheUserIsHostFromTheGame")]
+    public async Task<ActionResult> CheckIfUserIsHostFromTheGame(int lobbyId)
+    {
+      bool lobbyExists = await _dbContext.Lobbies.AnyAsync(l => l.GamePIN == lobbyId);
+
+      if (!lobbyExists)
+      {
+        return NotFound("Lobby was not found");
+      }
+
+      bool IsHost = false;
+      var userId = await _userService.GetUserId();
+
+      if (!String.IsNullOrEmpty(userId))
+      {
+        string hostIdFromTheGame = await _dbContext.Lobbies
+          .Where(l => l.GamePIN == lobbyId)
+          .Select(l => l.UserId)
+          .FirstOrDefaultAsync();
+        
+        if (!String.IsNullOrEmpty(hostIdFromTheGame) && userId == hostIdFromTheGame)
+        {
+          IsHost = true;
+        }
+      }
+
+      return Ok(new { IsHost });
     }
   }
 }
