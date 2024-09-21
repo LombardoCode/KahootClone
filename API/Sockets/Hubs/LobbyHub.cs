@@ -63,6 +63,11 @@ namespace API.Sockets.Hubs
         await Clients.Client(playerId).SendAsync("DisconnectPlayer");
       }
     }
+
+    public async Task StartingGame(string lobbyId)
+    {
+      await Clients.Group(lobbyId).SendAsync("GameHasStarted");
+    }
   }
 
   public class Player
