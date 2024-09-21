@@ -16,26 +16,44 @@ import LobbyUserCard from "@/app/components/utils/Lobby/LobbyUserCard";
 import Container from "@/app/components/utils/Container";
 
 const LobbyPage = () => {
-  // Route
+  // Routing
   const params = useParams();
-  let { lobbyId } = params;
   const router = useRouter();
+  
+  // Lobby
+  let lobbyIdFromParams = Array.isArray(params.lobbyId)
+    ? params.lobbyId[0]
+    : params.lobbyId;
 
   // SignalR
   const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
 
   // Global store state
-  const { isHost, setIsHost, currentPlayer, setCurrentPlayer, players, addPlayer, removePlayer } = useInGameStore();
+  const { setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, addPlayer, removePlayer } = useInGameStore();
 
   // Local component state
+  const [isValidLobby, setIsValidLobby] = useState<boolean>(false);
   const [isCustomNickNameModalOpen, setCustomNickNameModalOpen] = useState<boolean>(true);
   const [nickName, setNickName] = useState<string>('');
 
   useEffect(() => {
+    if (lobbyIdFromParams) {
+      setLobbyId(lobbyIdFromParams);
+    }
+
+    axiosInstance.post(`/lobby/checkIfValidLobby`, { lobbyId: lobbyIdFromParams })
+      .then(res => {
+        console.log(res.data);
+        setIsValidLobby(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+
     const connection = new signalR.HubConnectionBuilder()
-        .withUrl('http://localhost:5000/hubs/lobbyhub')
-        .configureLogging(signalR.LogLevel.Information)
-        .build();
+      .withUrl('http://localhost:5000/hubs/lobbyhub')
+      .configureLogging(signalR.LogLevel.Information)
+      .build();
 
     setConnection(connection)
   }, []);
@@ -53,7 +71,7 @@ const LobbyPage = () => {
                   name: newPlayer.name
                 });
               })
-  
+
               connection.on('PlayerHasLeft', (playerId) => {
                 removePlayer(playerId);
               })
@@ -70,6 +88,10 @@ const LobbyPage = () => {
               connection.on('DisconnectPlayer', () => {
                 connection.stop();
                 router.push('/');
+              })
+
+              connection.on('GameHasStarted', () => {
+                router.push('/play');
               })
             })
             .catch(err => {
@@ -94,7 +116,7 @@ const LobbyPage = () => {
   }, [connection]);
 
   const checkIfHost = async () => {
-    await axiosInstance.get(`/lobby/checkIfTheUserIsHostFromTheGame?lobbyId=${lobbyId}`)
+    await axiosInstance.get(`/lobby/checkIfTheUserIsHostFromTheGame?lobbyId=${lobbyIdFromParams}`)
       .then(res => {
         setIsHost(res.data.isHost);
       })
@@ -109,23 +131,49 @@ const LobbyPage = () => {
         id: connection.connectionId,
         name: nickName
       };
-  
+
       setCurrentPlayer(newPlayer)
-  
+
       await putTheUserInTheLobbyQueue(newPlayer);
     }
   }
 
   const putTheUserInTheLobbyQueue = async (newPlayer: Player) => {
     if (connection) {
-      await connection.invoke('PutUserInLobbyQueue', lobbyId, newPlayer);
+      await connection.invoke('PutUserInLobbyQueue', lobbyIdFromParams, newPlayer);
     }
   }
 
   const kickPlayerById = (playerId: string | null | undefined) => {
     if (connection) {
-      connection.invoke('KickPlayer', lobbyId, playerId);
+      connection.invoke('KickPlayer', lobbyIdFromParams, playerId);
     }
+  }
+
+  const startGame = () => {
+    axiosInstance.post(`/lobby/startTheGame`, { lobbyId: lobbyIdFromParams })
+      .then(res => {
+        const hasGameStarted: boolean = res.data;
+
+        if (hasGameStarted) {
+          gameHasStarted();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
+  const gameHasStarted = () => {
+    if (connection) {
+      connection.invoke('StartingGame', lobbyIdFromParams);
+    }
+  }
+
+  if (!isValidLobby) {
+    return (
+      <LobbyIsNotValidPage />
+    )
   }
 
   return (
@@ -145,9 +193,26 @@ const LobbyPage = () => {
           useCase={UseCases.HEADER}
           className="text-4xl mt-2"
         >
-          {lobbyId}
+          {lobbyIdFromParams}
         </Text>
       </div>
+
+      <Container>
+        <div id="play-button" className="flex justify-end">
+          {players.length > 1 && isHost && (
+            <Button
+              backgroundColor={BackgroundColors.GREEN}
+              fontWeight={FontWeights.BOLD}
+              textColor={TextColors.WHITE}
+              className="text-sm"
+              size={ButtonSize.MEDIUM}
+              onClick={() => startGame()}
+            >
+              Start game
+            </Button>
+          )}
+        </div>
+      </Container>
 
       <div id="who-are-you" className="text-green-600 mb-10">
         <p>You are:</p>
@@ -165,7 +230,7 @@ const LobbyPage = () => {
           ))}
         </div>
       </Container>
-      
+
       <div>
         {isHost
           ? (
@@ -228,5 +293,45 @@ const LobbyPage = () => {
     </div>
   )
 }
+
+const LobbyIsNotValidPage = () => {
+  const router = useRouter();
+
+  return (
+    <div className="bg-violet-950 h-screen flex justify-center items-center">
+      <div id="lobby-not-valid-dialog" className="bg-white px-5 py-6 rounded-md min-w-max">
+        <Text
+          fontWeight={FontWeights.BOLD}
+          textColor={TextColors.BLACK}
+          useCase={UseCases.LONGTEXT}
+          className="text-3xl mb-1"
+        >
+          Sorry!
+        </Text>
+        <Text
+          fontWeight={FontWeights.REGULAR}
+          textColor={TextColors.BLACK}
+          useCase={UseCases.LONGTEXT}
+          className="text-lg"
+        >
+          The lobby is not valid or does not exist.
+        </Text>
+
+        <div id="go-back-to-homepage-button" className="text-center mt-2">
+          <Button
+            backgroundColor={BackgroundColors.GREEN}
+            fontWeight={FontWeights.BOLD}
+            textColor={TextColors.WHITE}
+            className="text-sm"
+            size={ButtonSize.MEDIUM}
+            onClick={() => router.push('/')}
+          >
+            Go to homepage
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+};
 
 export default LobbyPage;

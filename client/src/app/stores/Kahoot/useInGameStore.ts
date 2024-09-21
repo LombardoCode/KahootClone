@@ -1,6 +1,10 @@
 import { create } from "zustand";
 
 interface InGameStore {
+  // Lobby
+  lobbyId: string | null;
+  setLobbyId: (lobbyId: string) => void;
+
   // Host variables
   isHost: boolean;
   setIsHost: (isHost: boolean) => void;
@@ -21,6 +25,10 @@ interface Player {
 }
 
 const useInGameStore = create<InGameStore>()((set, get) => ({
+  lobbyId: null,
+  setLobbyId: (lobbyId: string) => set(() => ({
+    lobbyId
+  })),
   isHost: false,
   setIsHost: (isHost: boolean) => set(() => ({
     isHost

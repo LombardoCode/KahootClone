@@ -46,6 +46,28 @@ namespace API.Controllers.Play
       });
     }
 
+    [HttpPost("checkIfValidLobby")]
+    public async Task<ActionResult<bool>> CheckIfValidLobby(ValidLobbyDTO lobbyData)
+    {
+      int lobbyId = lobbyData.LobbyId;
+
+      var lobby = await _dbContext.Lobbies
+        .Where(l => l.GamePIN == lobbyId)
+        .FirstOrDefaultAsync();
+      
+      if (lobby == null)
+      {
+        return Ok(false);
+      }
+
+      if (lobby.CurrentState != GameState.WaitingForPlayers)
+      {
+        return Ok(false);
+      }
+
+      return Ok(true);
+    }
+
     [HttpGet("checkIfTheUserIsHostFromTheGame")]
     public async Task<ActionResult> CheckIfUserIsHostFromTheGame(int lobbyId)
     {
@@ -73,6 +95,35 @@ namespace API.Controllers.Play
       }
 
       return Ok(new { IsHost });
+    }
+
+    [HttpPost("startTheGame")]
+    public async Task<ActionResult<bool>> StartTheGame(StartTheGameDTO gameData)
+    {
+      int lobbyId = gameData.LobbyId;
+      string hostUserId = await _userService.GetUserId();
+      bool gameStarted = false;
+
+      var hostIdFromTheGame = await _dbContext.Lobbies
+        .Where(l => l.GamePIN == lobbyId)
+        .Select(l => l.UserId)
+        .FirstOrDefaultAsync();
+      
+      if (!String.IsNullOrEmpty(hostUserId) && hostUserId == hostIdFromTheGame)
+      {
+        var lobby = await _dbContext.Lobbies
+          .Where(l => l.GamePIN == lobbyId)
+          .FirstOrDefaultAsync();
+        
+        if (lobby != null)
+        {
+          lobby.CurrentState = GameState.InProgress;
+          gameStarted = true;
+          await _dbContext.SaveChangesAsync();
+        }
+      }
+
+      return Ok(gameStarted);
     }
   }
 }
