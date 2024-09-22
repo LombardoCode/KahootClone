@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using API.Data.ForClient.Play;
 using Microsoft.AspNetCore.SignalR;
 
 namespace API.Sockets.Hubs
@@ -62,6 +63,11 @@ namespace API.Sockets.Hubs
         await Clients.Group(lobbyId).SendAsync("PlayerHasLeft", playerId);
         await Clients.Client(playerId).SendAsync("DisconnectPlayer");
       }
+    }
+
+    public async Task ShareQuestionsWithEveryone(List<QuestionPlayClient> newQuestions)
+    {
+      await Clients.Others.SendAsync("ReceiveAllQuestionsFromHost", newQuestions);
     }
 
     public async Task StartingGame(string lobbyId)

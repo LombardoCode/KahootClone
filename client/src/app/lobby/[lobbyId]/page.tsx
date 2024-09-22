@@ -14,6 +14,7 @@ import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import LobbyUserCard from "@/app/components/utils/Lobby/LobbyUserCard";
 import Container from "@/app/components/utils/Container";
+import { QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 
 const LobbyPage = () => {
   // Routing
@@ -29,7 +30,7 @@ const LobbyPage = () => {
   const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
 
   // Global store state
-  const { setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, addPlayer, removePlayer } = useInGameStore();
+  const { setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, addPlayer, removePlayer, questions, setQuestions } = useInGameStore();
 
   // Local component state
   const [isValidLobby, setIsValidLobby] = useState<boolean>(false);
@@ -93,6 +94,10 @@ const LobbyPage = () => {
               connection.on('GameHasStarted', () => {
                 router.push('/play');
               })
+
+              connection.on('ReceiveAllQuestionsFromHost', (newQuestions: QuestionPlay[]) => {
+                setQuestions(newQuestions)
+              })
             })
             .catch(err => {
               console.error(err)
@@ -115,10 +120,23 @@ const LobbyPage = () => {
     }
   }, [connection]);
 
+  const downloadAllKahootQuestions = async () => {
+    console.log("downloading questions")
+    await axiosInstance.get(`/lobby/getKahootQuestions?lobbyId=${lobbyIdFromParams}`)
+      .then(res => {
+        console.log(res.data);
+        setQuestions(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
   const checkIfHost = async () => {
     await axiosInstance.get(`/lobby/checkIfTheUserIsHostFromTheGame?lobbyId=${lobbyIdFromParams}`)
-      .then(res => {
+      .then(async (res) => {
         setIsHost(res.data.isHost);
+        await downloadAllKahootQuestions();
       })
       .catch(err => {
         console.error(err);
@@ -150,24 +168,32 @@ const LobbyPage = () => {
     }
   }
 
-  const startGame = () => {
-    axiosInstance.post(`/lobby/startTheGame`, { lobbyId: lobbyIdFromParams })
+  const startingTheGame = async () => {
+    await shareAllQuestionsFromHostToTheOtherClients();
+    await setTheGameInProgressMode();
+  }
+
+  const shareAllQuestionsFromHostToTheOtherClients = async () => {
+    if (connection) {
+      // Once the game has started, the host will share the questions to all the other clients
+      await connection.invoke('ShareQuestionsWithEveryone', questions);
+    }
+  }
+
+  const setTheGameInProgressMode = async () => {
+    await axiosInstance.post(`/lobby/startTheGame`, { lobbyId: lobbyIdFromParams })
       .then(res => {
         const hasGameStarted: boolean = res.data;
 
         if (hasGameStarted) {
-          gameHasStarted();
+          if (connection) {
+            connection.invoke('StartingGame', lobbyIdFromParams);
+          }
         }
       })
       .catch(err => {
         console.error(err);
       })
-  }
-
-  const gameHasStarted = () => {
-    if (connection) {
-      connection.invoke('StartingGame', lobbyIdFromParams);
-    }
   }
 
   if (!isValidLobby) {
@@ -206,13 +232,15 @@ const LobbyPage = () => {
               textColor={TextColors.WHITE}
               className="text-sm"
               size={ButtonSize.MEDIUM}
-              onClick={() => startGame()}
+              onClick={() => startingTheGame()}
             >
               Start game
             </Button>
           )}
         </div>
       </Container>
+
+      <p>{JSON.stringify(questions)}</p>
 
       <div id="who-are-you" className="text-green-600 mb-10">
         <p>You are:</p>
