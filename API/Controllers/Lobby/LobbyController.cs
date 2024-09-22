@@ -1,8 +1,10 @@
 using API.Data;
+using API.Data.ForClient.Play;
 using API.DTOs.Lobby;
 using API.Models.Play;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -101,7 +103,7 @@ namespace API.Controllers.Play
     public async Task<ActionResult<bool>> StartTheGame(StartTheGameDTO gameData)
     {
       int lobbyId = gameData.LobbyId;
-      string hostUserId = await _userService.GetUserId();
+      string userId = await _userService.GetUserId();
       bool gameStarted = false;
 
       var hostIdFromTheGame = await _dbContext.Lobbies
@@ -109,7 +111,7 @@ namespace API.Controllers.Play
         .Select(l => l.UserId)
         .FirstOrDefaultAsync();
       
-      if (!String.IsNullOrEmpty(hostUserId) && hostUserId == hostIdFromTheGame)
+      if (!String.IsNullOrEmpty(userId) && userId == hostIdFromTheGame)
       {
         var lobby = await _dbContext.Lobbies
           .Where(l => l.GamePIN == lobbyId)
@@ -124,6 +126,60 @@ namespace API.Controllers.Play
       }
 
       return Ok(gameStarted);
+    }
+
+    [HttpGet("getKahootQuestions")]
+    public async Task<ActionResult> GetKahootQuestions(int lobbyId)
+    {
+      string userId = await _userService.GetUserId();
+
+      var hostIdFromTheGame = await _dbContext.Lobbies
+        .Where(l => l.GamePIN == lobbyId)
+        .Select(l => l.UserId)
+        .FirstOrDefaultAsync();
+      
+      if (!String.IsNullOrEmpty(userId) && userId == hostIdFromTheGame)
+      {
+        var kahootId = await _dbContext.Lobbies
+          .Where(l => l.GamePIN == lobbyId)
+          .Select(l => l.KahootId)
+          .FirstOrDefaultAsync();
+        
+        if (!String.IsNullOrEmpty(kahootId.ToString()))
+        {
+          var kahoot = await _dbContext.Kahoots
+                      .Where(k => k.Id == kahootId)
+                      .Include(k => k.Questions)
+                        .ThenInclude(q => q.Answers)
+                      .FirstOrDefaultAsync();
+          
+          if (kahoot == null)
+          {
+            return NotFound();
+          }
+
+          var questionsToBePlayed = kahoot.Questions.Select(q => new QuestionPlayClient
+          {
+            Id = q.Id,
+            Title = q.Title,
+            Layout = q.Layout,
+            TimeLimit = q.TimeLimit,
+            PointsMultiplier = q.PointsMultiplier,
+            MediaUrl = q.MediaUrl,
+            Answers = q.Answers.Select(a => new AnswerPlayClient
+            {
+              Id = a.Id,
+              Text = a.Text,
+              IsCorrect = a.IsCorrect,
+              IsSelected = false
+            }).ToList()
+          }).ToList();
+
+          return Ok(questionsToBePlayed);
+        }
+      }
+
+      return NotFound("Lobby was not found");
     }
   }
 }

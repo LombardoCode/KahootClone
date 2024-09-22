@@ -1,3 +1,4 @@
+import { QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { create } from "zustand";
 
 interface InGameStore {
@@ -17,6 +18,10 @@ interface InGameStore {
   players: Player[];
   addPlayer: (newPlayer: Player) => void;
   removePlayer: (id: string | null | undefined) => void;
+
+  // Questions
+  questions: QuestionPlay[];
+  setQuestions: (newQuestions: QuestionPlay[]) => void;
 }
 
 interface Player {
@@ -59,6 +64,18 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   
       return {
         players: [...players]
+      }
+    }
+
+    return state;
+  }),
+  questions: [],
+  setQuestions: (newQuestions: QuestionPlay[]) => set((state) => {
+    let questions = state.questions;
+
+    if (questions) {
+      return {
+        questions: newQuestions
       }
     }
 

@@ -18,6 +18,30 @@ export interface Question {
   answers: Answer[];
 }
 
+export interface Answer {
+  id: number | null;
+  text: string;
+  isCorrect: boolean;
+}
+
+export interface QuestionPlay {
+  id: number | null;
+  title: string;
+  layout: QuizQuestionLayoutTypes;
+  timeLimit: TimeLimits;
+  pointsMultiplier: PointsMultiplier;
+  mediaUrl?: string | null;
+  answers: AnswerPlay[];
+}
+
+export interface AnswerPlay {
+  id: number | null;
+  text: string;
+  isCorrect: boolean;
+  isSelected: boolean;
+}
+
+
 export enum QuizQuestionLayoutTypes {
   CLASSIC = "CLASSIC",
   TRUE_OR_FALSE = "TRUE_OR_FALSE"
@@ -37,11 +61,3 @@ export enum PointsMultiplier {
   STANDARD = 1,
   DOUBLE_POINTS = 2
 }
-
-export interface Answer {
-  id: number | null;
-  // questionId: number | null;
-  text: string;
-  isCorrect: boolean;
-}
-
