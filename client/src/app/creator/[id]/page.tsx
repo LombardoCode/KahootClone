@@ -7,7 +7,7 @@ import CreatorNavbar from "@/app/components/utils/Navbars/CreatorNavbar";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import axiosInstance from "@/app/utils/axiosConfig";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const EditKahoot = () => {
   const { overwriteKahoot } = useKahootCreatorStore();

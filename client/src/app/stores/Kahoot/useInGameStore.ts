@@ -2,6 +2,10 @@ import { QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { create } from "zustand";
 
 interface InGameStore {
+  // SignalR connection
+  signalRConnection: signalR.HubConnection | null;
+  setSignalRConnection: (connection: signalR.HubConnection) => void;
+
   // Lobby
   lobbyId: string | null;
   setLobbyId: (lobbyId: string) => void;
@@ -30,18 +34,27 @@ interface Player {
 }
 
 const useInGameStore = create<InGameStore>()((set, get) => ({
+  // SignalR connection
+  signalRConnection: null,
+  setSignalRConnection: (connection: signalR.HubConnection) => set(() => ({
+    signalRConnection: connection
+  })),
+  // Lobby
   lobbyId: null,
   setLobbyId: (lobbyId: string) => set(() => ({
     lobbyId
   })),
+  // Host variables
   isHost: false,
   setIsHost: (isHost: boolean) => set(() => ({
     isHost
   })),
+  // Identity of the user
   currentPlayer: { id: '', name: '' },
   setCurrentPlayer: (newPlayerData: Player) => set(() => ({
     currentPlayer: newPlayerData
   })),
+  // Players
   players: [],
   addPlayer: (newPlayer: Player) => set((state) => {
     const existingPlayer = state.players.find(player => player.id === newPlayer.id);
@@ -69,6 +82,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
 
     return state;
   }),
+  // Questions
   questions: [],
   setQuestions: (newQuestions: QuestionPlay[]) => set((state) => {
     let questions = state.questions;

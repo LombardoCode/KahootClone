@@ -26,11 +26,8 @@ const LobbyPage = () => {
     ? params.lobbyId[0]
     : params.lobbyId;
 
-  // SignalR
-  const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
-
   // Global store state
-  const { setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, addPlayer, removePlayer, questions, setQuestions } = useInGameStore();
+  const { signalRConnection, setSignalRConnection, setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, addPlayer, removePlayer, questions, setQuestions } = useInGameStore();
 
   // Local component state
   const [isValidLobby, setIsValidLobby] = useState<boolean>(false);
@@ -56,28 +53,28 @@ const LobbyPage = () => {
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
-    setConnection(connection)
+    setSignalRConnection(connection)
   }, []);
 
   useEffect(() => {
     const startSignalRConnection = async () => {
-      if (connection) {
+      if (signalRConnection) {
         try {
-          connection
+          signalRConnection
             .start()
             .then(async () => {
-              connection.on('AddNewPlayer', (newPlayer) => {
+              signalRConnection.on('AddNewPlayer', (newPlayer) => {
                 addPlayer({
                   id: newPlayer.id,
                   name: newPlayer.name
                 });
               })
 
-              connection.on('PlayerHasLeft', (playerId) => {
+              signalRConnection.on('PlayerHasLeft', (playerId) => {
                 removePlayer(playerId);
               })
 
-              connection.on('ReceiveAllPlayers', (allPlayers: any[]) => {
+              signalRConnection.on('ReceiveAllPlayers', (allPlayers: any[]) => {
                 allPlayers.forEach((player: Player) => {
                   addPlayer({
                     id: player.id,
@@ -86,16 +83,16 @@ const LobbyPage = () => {
                 })
               })
 
-              connection.on('DisconnectPlayer', () => {
-                connection.stop();
+              signalRConnection.on('DisconnectPlayer', () => {
+                signalRConnection.stop();
                 router.push('/');
               })
 
-              connection.on('GameHasStarted', () => {
-                router.push('/play');
+              signalRConnection.on('GameHasStarted', () => {
+                router.push('/start');
               })
 
-              connection.on('ReceiveAllQuestionsFromHost', (newQuestions: QuestionPlay[]) => {
+              signalRConnection.on('ReceiveAllQuestionsFromHost', (newQuestions: QuestionPlay[]) => {
                 setQuestions(newQuestions)
               })
             })
@@ -112,13 +109,7 @@ const LobbyPage = () => {
     startSignalRConnection();
 
     checkIfHost();
-
-    return () => {
-      if (connection) {
-        connection.stop();
-      }
-    }
-  }, [connection]);
+  }, [signalRConnection]);
 
   const downloadAllKahootQuestions = async () => {
     console.log("downloading questions")
@@ -144,9 +135,9 @@ const LobbyPage = () => {
   }
 
   const createNewPlayer = async () => {
-    if (connection) {
+    if (signalRConnection) {
       let newPlayer: Player = {
-        id: connection.connectionId,
+        id: signalRConnection.connectionId,
         name: nickName
       };
 
@@ -157,14 +148,14 @@ const LobbyPage = () => {
   }
 
   const putTheUserInTheLobbyQueue = async (newPlayer: Player) => {
-    if (connection) {
-      await connection.invoke('PutUserInLobbyQueue', lobbyIdFromParams, newPlayer);
+    if (signalRConnection) {
+      await signalRConnection.invoke('PutUserInLobbyQueue', lobbyIdFromParams, newPlayer);
     }
   }
 
   const kickPlayerById = (playerId: string | null | undefined) => {
-    if (connection) {
-      connection.invoke('KickPlayer', lobbyIdFromParams, playerId);
+    if (signalRConnection) {
+      signalRConnection.invoke('KickPlayer', lobbyIdFromParams, playerId);
     }
   }
 
@@ -174,9 +165,9 @@ const LobbyPage = () => {
   }
 
   const shareAllQuestionsFromHostToTheOtherClients = async () => {
-    if (connection) {
+    if (signalRConnection) {
       // Once the game has started, the host will share the questions to all the other clients
-      await connection.invoke('ShareQuestionsWithEveryone', questions);
+      await signalRConnection.invoke('ShareQuestionsWithEveryone', questions);
     }
   }
 
@@ -186,8 +177,8 @@ const LobbyPage = () => {
         const hasGameStarted: boolean = res.data;
 
         if (hasGameStarted) {
-          if (connection) {
-            connection.invoke('StartingGame', lobbyIdFromParams);
+          if (signalRConnection) {
+            signalRConnection.invoke('StartingGame', lobbyIdFromParams);
           }
         }
       })

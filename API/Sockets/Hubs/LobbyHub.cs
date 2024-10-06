@@ -74,6 +74,11 @@ namespace API.Sockets.Hubs
     {
       await Clients.Group(lobbyId).SendAsync("GameHasStarted");
     }
+
+    public async Task StartingRoundOfQuestions(string lobbyId)
+    {
+      await Clients.Group(lobbyId).SendAsync("RoundOfQuestionsStarted");
+    }
   }
 
   public class Player
