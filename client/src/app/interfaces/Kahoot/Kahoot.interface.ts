@@ -24,6 +24,12 @@ export interface Answer {
   isCorrect: boolean;
 }
 
+export interface KahootPlay {
+  title: string;
+  description: string;
+  questions: QuestionPlay[];
+}
+
 export interface QuestionPlay {
   id: number | null;
   title: string;

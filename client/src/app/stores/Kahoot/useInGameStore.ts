@@ -1,4 +1,4 @@
-import { QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { KahootPlay, QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { create } from "zustand";
 
 interface InGameStore {
@@ -23,9 +23,11 @@ interface InGameStore {
   addPlayer: (newPlayer: Player) => void;
   removePlayer: (id: string | null | undefined) => void;
 
-  // Questions
-  questions: QuestionPlay[];
+  // Kahoot and questions
+  kahoot: KahootPlay | null;
   setQuestions: (newQuestions: QuestionPlay[]) => void;
+  questionIndex: number;
+  setQuestionIndex: (index: number) => void;
 }
 
 interface Player {
@@ -39,21 +41,25 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   setSignalRConnection: (connection: signalR.HubConnection) => set(() => ({
     signalRConnection: connection
   })),
+
   // Lobby
   lobbyId: null,
   setLobbyId: (lobbyId: string) => set(() => ({
     lobbyId
   })),
+
   // Host variables
   isHost: false,
   setIsHost: (isHost: boolean) => set(() => ({
     isHost
   })),
+
   // Identity of the user
   currentPlayer: { id: '', name: '' },
   setCurrentPlayer: (newPlayerData: Player) => set(() => ({
     currentPlayer: newPlayerData
   })),
+
   // Players
   players: [],
   addPlayer: (newPlayer: Player) => set((state) => {
@@ -82,19 +88,30 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
 
     return state;
   }),
-  // Questions
-  questions: [],
+  
+  // Kahoot and questions
+  kahoot: null,
   setQuestions: (newQuestions: QuestionPlay[]) => set((state) => {
-    let questions = state.questions;
-
-    if (questions) {
-      return {
-        questions: newQuestions
+    const kahoot = state.kahoot;
+    if (kahoot) {
+      let questions = kahoot.questions;
+  
+      if (questions) {
+        return {
+          kahoot: {
+            ...kahoot,
+            questions: newQuestions
+          }
+        }
       }
     }
 
     return state;
-  })
+  }),
+  questionIndex: 0,
+  setQuestionIndex: (index: number) => set(() => ({
+    questionIndex: index
+  }))
 }));
 
 export default useInGameStore;
