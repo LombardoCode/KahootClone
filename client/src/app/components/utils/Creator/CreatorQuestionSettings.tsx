@@ -6,6 +6,7 @@ import { ComboBox, ComboBoxOption, ComboBoxStateProps } from "../../UIComponents
 import { useEffect, useState } from "react";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { PointsMultiplier, QuizQuestionLayoutTypes, TimeLimits } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { getTextContentForLayout, getTextContentForPoints } from "../Quizes/KahootQuestion.utills";
 
 interface CreatorQuestionSettingsProps {
   className?: string;
@@ -29,30 +30,6 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
       setPoints({ textContent: getTextContentForPoints(currentQuestion.pointsMultiplier), valueContent: currentQuestion.pointsMultiplier });
     }
   }, [kahoot, kahootIndex]);
-
-  const getTextContentForLayout = (layout: QuizQuestionLayoutTypes): string => {
-    switch (layout) {
-      case QuizQuestionLayoutTypes.CLASSIC:
-        return "Classic";
-      case QuizQuestionLayoutTypes.TRUE_OR_FALSE:
-        return "True or false";
-      default:
-        return "Classic";
-    }
-  }
-
-  const getTextContentForPoints = (points: PointsMultiplier): string => {
-    switch (points) {
-      case 0:
-        return "No points";
-      case 1:
-        return "Standard";
-      case 2:
-        return "Double points";
-      default:
-        return "Standard";
-    }
-  }
 
   const handleQuestionLayoutChange = (questionLayout: ComboBoxStateProps) => {
     setQuestionLayout(questionLayout);

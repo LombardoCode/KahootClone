@@ -128,8 +128,8 @@ namespace API.Controllers.Play
       return Ok(gameStarted);
     }
 
-    [HttpGet("getKahootQuestions")]
-    public async Task<ActionResult> GetKahootQuestions(int lobbyId)
+    [HttpGet("getKahootTitleAndQuestions")]
+    public async Task<ActionResult> getKahootTitleAndQuestions(int lobbyId)
     {
       string userId = await _userService.GetUserId();
 
@@ -158,6 +158,7 @@ namespace API.Controllers.Play
             return NotFound();
           }
 
+          string kahootTitle = kahoot.Title;
           var questionsToBePlayed = kahoot.Questions.Select(q => new QuestionPlayClient
           {
             Id = q.Id,
@@ -175,7 +176,13 @@ namespace API.Controllers.Play
             }).ToList()
           }).ToList();
 
-          return Ok(questionsToBePlayed);
+          var kahootToBePlayed = new KahootPlayClient
+          {
+            Title = kahootTitle,
+            Questions = questionsToBePlayed
+          };
+
+          return Ok(kahootToBePlayed);
         }
       }
 

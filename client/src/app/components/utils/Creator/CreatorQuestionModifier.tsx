@@ -3,11 +3,11 @@ import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import Text from "../../UIComponents/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import KahootAnswer from "../Quizes/KahootAnswer";
 import KahootAnswerContainer from "../Quizes/KahootAnswerContainer";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { useEffect, useState } from "react";
+import KahootAnswerTextBox from "../Quizes/KahootAnswerTextBox";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -74,16 +74,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
         <div id="answers">
           <KahootAnswerContainer>
             {kahoot?.questions[kahootIndex]?.answers.map((answer: Answer, index: number) => (
-              <KahootAnswer
-                key={index}
-                index={index}
-                selectable={false}
-              >
-                {answer.text === ""
-                  ? `Add answer ${index + 1}`
-                  : answer.text
-                }
-              </KahootAnswer>
+              <KahootAnswerTextBox key={index} index={index} />
             ))}
           </KahootAnswerContainer>
         </div>

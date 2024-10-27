@@ -65,9 +65,9 @@ namespace API.Sockets.Hubs
       }
     }
 
-    public async Task ShareQuestionsWithEveryone(List<QuestionPlayClient> newQuestions)
+    public async Task ShareQuestionsWithEveryone(KahootPlayClient kahootInfo)
     {
-      await Clients.Others.SendAsync("ReceiveAllQuestionsFromHost", newQuestions);
+      await Clients.Others.SendAsync("ReceiveAllQuestionsFromHost", kahootInfo);
     }
 
     public async Task StartingGame(string lobbyId)
@@ -78,6 +78,11 @@ namespace API.Sockets.Hubs
     public async Task StartingRoundOfQuestions(string lobbyId)
     {
       await Clients.Group(lobbyId).SendAsync("RoundOfQuestionsStarted");
+    }
+
+    public async Task NotifyGuestsThatTheQuestionHasStarted(string lobbyId)
+    {
+      await Clients.Group(lobbyId).SendAsync("GuestsAreNotifiedThatQuestionHasStarted");
     }
   }
 

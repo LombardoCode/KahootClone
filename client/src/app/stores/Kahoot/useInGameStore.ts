@@ -1,4 +1,4 @@
-import { KahootPlay, QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { AnswerPlay, KahootPlay, QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { create } from "zustand";
 
 interface InGameStore {
@@ -25,9 +25,13 @@ interface InGameStore {
 
   // Kahoot and questions
   kahoot: KahootPlay | null;
-  setQuestions: (newQuestions: QuestionPlay[]) => void;
+  setKahootInfo: (kahootInfo: KahootPlay) => void;
   questionIndex: number;
   setQuestionIndex: (index: number) => void;
+
+  // Answers
+  selectAnswer: (answerId: number | null) => void;
+  didUserProvidedAnAnswerToTheQuestion: () => boolean;
 }
 
 interface Player {
@@ -91,27 +95,41 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   
   // Kahoot and questions
   kahoot: null,
-  setQuestions: (newQuestions: QuestionPlay[]) => set((state) => {
-    const kahoot = state.kahoot;
-    if (kahoot) {
-      let questions = kahoot.questions;
-  
-      if (questions) {
-        return {
-          kahoot: {
-            ...kahoot,
-            questions: newQuestions
-          }
-        }
+  setKahootInfo: (kahootInfo: KahootPlay) => set(() => {
+    return {
+      kahoot: {
+        title: kahootInfo.title,
+        questions: kahootInfo.questions
       }
     }
-
-    return state;
   }),
   questionIndex: 0,
   setQuestionIndex: (index: number) => set(() => ({
     questionIndex: index
-  }))
+  })),
+
+  // Answers
+  selectAnswer: (answerId: number | null) => set((state) => {
+    const kahoot = state.kahoot;
+    if (kahoot) {
+      kahoot.questions[state.questionIndex].answers = kahoot.questions[state.questionIndex].answers.map((answer: AnswerPlay) =>
+        answer.id === answerId ? { ...answer, isSelected: true } : answer
+      )
+
+      return {
+        kahoot: {
+          ...kahoot
+        }
+      }
+    }
+    return state;
+  }),
+  didUserProvidedAnAnswerToTheQuestion: (): boolean => {
+    const state = get();
+    const answersFromCurrentQuestion = state.kahoot?.questions[state.questionIndex].answers;
+    const theresAtLeastOneAnswerSelected: boolean = answersFromCurrentQuestion?.some((a: AnswerPlay) => a.isSelected === true) || false;
+    return theresAtLeastOneAnswerSelected;
+  }
 }));
 
 export default useInGameStore;

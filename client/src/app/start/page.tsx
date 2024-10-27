@@ -5,14 +5,13 @@ import useInGameStore from "../stores/Kahoot/useInGameStore";
 import Text from "../components/UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
 import Spinner from "../components/UIComponents/Spinner";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
 
 const PlayPage = () => {
   // Global store state
-  const { signalRConnection, isHost } = useInGameStore();
+  const { signalRConnection, isHost, kahoot } = useInGameStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -28,14 +27,15 @@ const PlayPage = () => {
       <div className={`absolute inset-0 bg-black ${!isHost ? 'opacity-50' : 'opacity-5'}`}></div>
       {!isHost
         ? <GettingReadyToPlay />
-        : <ShowQuestionTitleAndCountdownToHost />
+        : <ShowQuestionTitleAndCountdownToHost
+            kahootTitle={kahoot?.title}
+          />
       }
     </div>
   )
 }
 
 const GettingReadyToPlay = () => {
-  const { currentPlayer } = useInGameStore();
   return (
     <div className="relative z-10 h-full flex justify-center items-center">
       <div id="get-ready" className="w-96 flex flex-col items-center">
@@ -59,44 +59,13 @@ const GettingReadyToPlay = () => {
           Loading...
         </Text>
 
-        <div className="get-ready-footer absolute bottom-0 w-full bg-white">
-          {currentPlayer.id === "" && (
-            <div className="flex justify-between py-2 px-3">
-              <div className="flex items-center">
-                <FontAwesomeIcon
-                  icon={faUser}
-                  size={"2xl"}
-                  className="mr-2"
-                />
-                <Text
-                  fontWeight={FontWeights.BOLD}
-                  textColor={TextColors.BLACK}
-                  useCase={UseCases.LONGTEXT}
-                  className="text-xl"
-                >
-                  Testing
-                </Text>
-              </div>
-
-              <div className="get-ready-points-indicator bg-purple-800 px-2 py-1 rounded-md">
-                <Text
-                  fontWeight={FontWeights.BOLD}
-                  textColor={TextColors.WHITE}
-                  useCase={UseCases.LONGTEXT}
-                  className="text-xl"
-                >
-                  0 points
-                </Text>
-              </div>
-            </div>
-          )}
-        </div>
+        <PlayerInGameStatus />
       </div>
     </div>
   )
 }
 
-const ShowQuestionTitleAndCountdownToHost = () => {
+const ShowQuestionTitleAndCountdownToHost = ({ kahootTitle }: { kahootTitle: string | undefined }) => {
   const [showTitle, setShowTitle] = useState<boolean>(false);
   const [showCountdown, setShowCountdown] = useState<boolean>(false);
 
@@ -132,7 +101,7 @@ const ShowQuestionTitleAndCountdownToHost = () => {
             useCase={UseCases.LONGTEXT}
             className="text-4xl"
           >
-            Kahoot title
+            {kahootTitle}
           </Text>
         </motion.div>
       )}

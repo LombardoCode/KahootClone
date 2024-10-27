@@ -14,7 +14,7 @@ import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import LobbyUserCard from "@/app/components/utils/Lobby/LobbyUserCard";
 import Container from "@/app/components/utils/Container";
-import { QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { KahootPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 
 const LobbyPage = () => {
   // Routing
@@ -27,7 +27,7 @@ const LobbyPage = () => {
     : params.lobbyId;
 
   // Global store state
-  const { signalRConnection, setSignalRConnection, setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, addPlayer, removePlayer, questions, setQuestions } = useInGameStore();
+  const { signalRConnection, setSignalRConnection, setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, addPlayer, removePlayer, kahoot, setKahootInfo } = useInGameStore();
 
   // Local component state
   const [isValidLobby, setIsValidLobby] = useState<boolean>(false);
@@ -92,8 +92,8 @@ const LobbyPage = () => {
                 router.push('/start');
               })
 
-              signalRConnection.on('ReceiveAllQuestionsFromHost', (newQuestions: QuestionPlay[]) => {
-                setQuestions(newQuestions)
+              signalRConnection.on('ReceiveAllQuestionsFromHost', (kahootInfo: KahootPlay) => {
+                setKahootInfo(kahootInfo);
               })
             })
             .catch(err => {
@@ -113,10 +113,10 @@ const LobbyPage = () => {
 
   const downloadAllKahootQuestions = async () => {
     console.log("downloading questions")
-    await axiosInstance.get(`/lobby/getKahootQuestions?lobbyId=${lobbyIdFromParams}`)
+    await axiosInstance.get(`/lobby/getKahootTitleAndQuestions?lobbyId=${lobbyIdFromParams}`)
       .then(res => {
         console.log(res.data);
-        setQuestions(res.data);
+        setKahootInfo(res.data);
       })
       .catch(err => {
         console.error(err);
@@ -167,7 +167,7 @@ const LobbyPage = () => {
   const shareAllQuestionsFromHostToTheOtherClients = async () => {
     if (signalRConnection) {
       // Once the game has started, the host will share the questions to all the other clients
-      await signalRConnection.invoke('ShareQuestionsWithEveryone', questions);
+      await signalRConnection.invoke('ShareQuestionsWithEveryone', kahoot);
     }
   }
 
@@ -231,7 +231,7 @@ const LobbyPage = () => {
         </div>
       </Container>
 
-      <p>{JSON.stringify(questions)}</p>
+      <p>{JSON.stringify(kahoot)}</p>
 
       <div id="who-are-you" className="text-green-600 mb-10">
         <p>You are:</p>
