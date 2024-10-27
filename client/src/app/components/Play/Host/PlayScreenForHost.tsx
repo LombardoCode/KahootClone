@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import ShowingQuestionTypeAndTitle from "./ShowingQuestionTypeAndTitle";
 import ShowingQuestionTitleAndProgressBarCountdown from "./ShowingQuestionTitleAndProgressBarCountdown";
+import ShowingQuestionTitleAndAnswers from "./ShowingQuestionTitleAndAnswers";
+import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 
 const PlayScreenForHost = () => {
+  // Global store
+  const { isHost, signalRConnection, lobbyId } = useInGameStore();
+
+  // Local component state
   const [showQuestionHeader, setShowQuestionHeader] = useState<boolean>(true);
   const [showQuestionCountdown, setShowQuestionCountdown] = useState<boolean>(false);
   const [showQuestionAndAnswers, setShowQuestionAndAnswers] = useState<boolean>(false);
@@ -13,10 +19,23 @@ const PlayScreenForHost = () => {
       setShowQuestionCountdown(true);
     }, 2000);
 
+    const showQuestionAndAnswersTimer = setTimeout(() => {
+      setShowQuestionHeader(false);
+      setShowQuestionCountdown(false);
+
+      if (signalRConnection) {
+        signalRConnection.invoke('NotifyGuestsThatTheQuestionHasStarted', lobbyId)
+          .then(() => {
+            setShowQuestionAndAnswers(true);
+          });
+      }
+    }, 6000);
+
     return () => {
       clearInterval(questionHeaderTimer);
+      clearInterval(showQuestionAndAnswersTimer);
     }
-  }, [showQuestionHeader]);
+  }, []);
 
   return (
     <div className="w-full">
@@ -30,8 +49,8 @@ const PlayScreenForHost = () => {
         <ShowingQuestionTitleAndProgressBarCountdown />
       )}
 
-      {showQuestionAndAnswers && (
-        <div>Showing the question title and the answers</div>
+      {showQuestionAndAnswers && isHost && (
+        <ShowingQuestionTitleAndAnswers />
       )}
     </div>
   )

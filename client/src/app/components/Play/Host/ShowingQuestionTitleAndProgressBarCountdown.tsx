@@ -1,8 +1,21 @@
 import { motion } from "framer-motion";
 import Text from "../../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
+import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
+import { useEffect, useState } from "react";
+import { QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 
 const ShowingQuestionTitleAndProgressBarCountdown = () => {
+  // Global store state
+  const { kahoot, questionIndex } = useInGameStore();
+  const [question, setQuestion] = useState<QuestionPlay>();
+
+  useEffect(() => {
+    if (kahoot !== null && kahoot?.questions.length > 0) {
+      setQuestion(kahoot?.questions[questionIndex]);
+    }
+  }, [questionIndex]);
+
   return (
     <div className="absolute flex flex-col items-center top-0 h-full w-full">
       <motion.div
@@ -26,7 +39,7 @@ const ShowingQuestionTitleAndProgressBarCountdown = () => {
           fontWeight={FontWeights.BOLD}
           className="text-4xl"
         >
-          Question title goes here
+          {question?.title}
         </Text>
       </motion.div>
 
