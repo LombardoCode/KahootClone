@@ -8,24 +8,33 @@ import { AnswerPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import KahootAnswerDisplay from "../../utils/Quizes/KahootAnswerDisplay";
 import { getTextContentForLayout } from "../../utils/Quizes/KahootQuestion.utills";
 import PlayerInGameStatus from "../../utils/InGame/PlayerInGameStatus";
+import { Player } from "@/app/interfaces/Play/Player.interface";
 
 const PlayScreenForGuest = () => {
   // Global state
-  const { signalRConnection } = useInGameStore();
+  const { signalRConnection, setCurrentPlayer } = useInGameStore();
 
   // Local component state
   const [showQuestionPreparation, setShowQuestionPreparation] = useState<boolean>(false);
   const [showAnswers, setShowAnswers] = useState<boolean>(true);
 
   useEffect(() => {
-    initializeSignalREvents();
+    const setupConnection = async () => {
+      await initializeSignalREvents();
+    }
+
+    setupConnection();
   }, []);
 
-  const initializeSignalREvents = () => {
+  const initializeSignalREvents = async () => {
     if (signalRConnection) {
       signalRConnection.on('GuestsAreNotifiedThatQuestionHasStarted', () => {
         setShowQuestionPreparation(false);
         setShowAnswers(true);
+      })
+
+      signalRConnection.on('ReceiveMyUpdatedPlayerInfo', (myUpdatedPlayerInfo: Player) => {
+        setCurrentPlayer(myUpdatedPlayerInfo);
       })
     }
   }

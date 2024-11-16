@@ -40,7 +40,7 @@ export interface QuestionPlay {
 }
 
 export interface AnswerPlay {
-  id: number | null;
+  id: number;
   text: string;
   isCorrect: boolean;
   isSelected: boolean;

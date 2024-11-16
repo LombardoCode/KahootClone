@@ -66,7 +66,8 @@ const LobbyPage = () => {
               signalRConnection.on('AddNewPlayer', (newPlayer) => {
                 addPlayer({
                   id: newPlayer.id,
-                  name: newPlayer.name
+                  name: newPlayer.name,
+                  earnedPoints: newPlayer.earnedPoints
                 });
               })
 
@@ -78,7 +79,8 @@ const LobbyPage = () => {
                 allPlayers.forEach((player: Player) => {
                   addPlayer({
                     id: player.id,
-                    name: player.name
+                    name: player.name,
+                    earnedPoints: player.earnedPoints
                   })
                 })
               })
@@ -138,7 +140,8 @@ const LobbyPage = () => {
     if (signalRConnection) {
       let newPlayer: Player = {
         id: signalRConnection.connectionId,
-        name: nickName
+        name: nickName,
+        earnedPoints: 0
       };
 
       setCurrentPlayer(newPlayer)

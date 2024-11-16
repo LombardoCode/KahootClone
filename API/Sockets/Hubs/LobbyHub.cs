@@ -6,47 +6,71 @@ namespace API.Sockets.Hubs
 {
   public class LobbyHub : Hub
   {
-    private static ConcurrentDictionary<string, Player> connectedPlayers = new ConcurrentDictionary<string, Player>();
-    private static ConcurrentDictionary<string, List<Player>> lobbyPlayers = new ConcurrentDictionary<string, List<Player>>();
+    /// <summary>
+    /// Maps a lobby ID to a list of players currently in that lobby
+    /// </summary>
+    private static ConcurrentDictionary<string, List<Player>> playersInLobby = new ConcurrentDictionary<string, List<Player>>();
+    
+    /// <summary>
+    /// Maps a question ID to a list of player IDs that have responded to that specific question
+    /// </summary>
+    private static ConcurrentDictionary<int, HashSet<string>> playerResponsesPerQuestion = new ConcurrentDictionary<int, HashSet<string>>();
+    
+    /// <summary>
+    /// Maps a question ID to the total count of responses received for that question ID
+    /// </summary>
+    private static ConcurrentDictionary<int, int> responseCountPerQuestion = new ConcurrentDictionary<int, int>();
+    
+    /// <summary>
+    /// Maps a player ID to the lobby ID
+    /// </summary>
+    private static ConcurrentDictionary<string, string> playerLobbyMapping = new ConcurrentDictionary<string, string>();
 
-    public async Task PutUserInLobbyQueue(string lobbyId, Player newPlayerData)
-    {
-      var newPlayer = new Player
-      {
-        Id = Context.ConnectionId,
-        Name = newPlayerData.Name
-      };
+    /// <summary>
+    /// Maps a lobby ID to a set of question IDs for a specific lobbyId
+    /// </summary>
+    private static ConcurrentDictionary<string, HashSet<int>> questionIdsPerLobby = new ConcurrentDictionary<string, HashSet<int>>();
 
-      connectedPlayers.TryAdd(newPlayer.Id, newPlayer);
+    /// <summary>
+    /// Maps the current question ID by lobbyId
+    /// </summary>
+    private static ConcurrentDictionary<string, int> currentQuestionPerLobby = new ConcurrentDictionary<string, int>();
 
-      if (lobbyPlayers.ContainsKey(lobbyId))
-      {
-        lobbyPlayers[lobbyId].Add(newPlayer);
-      }
-      else
-      {
-        lobbyPlayers[lobbyId] = new List<Player> { newPlayer };
-      }
-
-      await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId);
-
-      await Clients.Caller.SendAsync("ReceiveAllPlayers", lobbyPlayers[lobbyId]);
-
-      await Clients.Group(lobbyId).SendAsync("AddNewPlayer", newPlayer);
-    }
-
+    /// <summary>
+    /// Code that gets executed when SignalR connection from client gets disconnected
+    /// </summary>
+    /// <param name="exception"></param>
+    /// <returns></returns>
     public override async Task OnDisconnectedAsync(Exception exception)
     {
-      string playerId = Context.ConnectionId;
+      string playerConnId = Context.ConnectionId;
 
-      if (connectedPlayers.TryRemove(playerId, out var removedPlayer))
+      // Try to remove the player that is trying to get disconnected and get the lobbyId
+      if (playerLobbyMapping.TryRemove(playerConnId, out var lobbyId))
       {
-        foreach (var lobby in lobbyPlayers)
+        // Get the list of the current players based on the lobbyId
+        if (playersInLobby.TryGetValue(lobbyId, out var players))
         {
-          if (lobby.Value.Remove(removedPlayer))
+          // Find the player that is going to be disocnnected based on their ConnectionId
+          var removedPlayer = players.FirstOrDefault(p => p.Id == playerConnId);
+
+          if (removedPlayer != null)
           {
-            await Clients.Group(lobby.Key).SendAsync("PlayerHasLeft", playerId);
-            break;
+            players.Remove(removedPlayer);
+
+            // Get the current questionId of the lobby
+            if (currentQuestionPerLobby.TryGetValue(lobbyId, out var currentQuestionId))
+            {
+              // Check if the player that is going to be disconnected has answered to the current question that is being played
+              if (playerResponsesPerQuestion.TryGetValue(currentQuestionId, out var playerSet) && playerSet.Remove(playerConnId))
+              {
+                // Refresh the answers count for the current question
+                responseCountPerQuestion[currentQuestionId] = playerSet.Count;
+                await Clients.Group(lobbyId).SendAsync("UpdateAnswerCount", responseCountPerQuestion[currentQuestionId]);
+              }
+            }
+
+            await Clients.Group(lobbyId).SendAsync("PlayerHasLeft", playerConnId);
           }
         }
       }
@@ -54,14 +78,65 @@ namespace API.Sockets.Hubs
       await base.OnDisconnectedAsync(exception);
     }
 
+    public async Task PutUserInLobbyQueue(string lobbyId, Player newPlayerData)
+    {
+      // First, we create our player
+      var newPlayer = new Player
+      {
+        Id = Context.ConnectionId,
+        Name = newPlayerData.Name,
+        EarnedPoints = 0
+      };
+
+      // Then add it into our dictionary, mapping the player's ConnectionId -> to the lobbyId they are connected to
+      playerLobbyMapping.TryAdd(newPlayer.Id, lobbyId);
+
+      // Then add that player's info into our lobby dictionary
+      if (playersInLobby.ContainsKey(lobbyId))
+      {
+        playersInLobby[lobbyId].Add(newPlayer);
+      }
+      else
+      {
+        playersInLobby[lobbyId] = new List<Player> { newPlayer };
+      }
+
+      // Make sure that the player's ConnectionId is added to the group (lobbyId), so players can receive data as a group
+      await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId);
+
+      await Clients.Caller.SendAsync("ReceiveAllPlayers", playersInLobby[lobbyId]);
+
+      await Clients.Group(lobbyId).SendAsync("AddNewPlayer", newPlayer);
+    }
+
+    public async Task SetCurrentQuestionIdForLobby(string lobbyId, int currentQuestionId)
+    {
+      if (currentQuestionPerLobby.ContainsKey(lobbyId))
+      {
+        currentQuestionPerLobby[lobbyId] = currentQuestionId;
+      }
+      else
+      {
+        currentQuestionPerLobby.TryAdd(lobbyId, currentQuestionId);
+      }
+    }
+
     public async Task KickPlayer(string lobbyId, string playerId)
     {
-      if (connectedPlayers.TryRemove(playerId, out var _))
+      string playerConnId = playerId;
+      
+      // Gets the lobbyId from the user that host is trying to kick out
+      if (playerLobbyMapping.TryRemove(playerConnId, out var existingLobbyId) && existingLobbyId == lobbyId)
       {
-        lobbyPlayers[lobbyId].RemoveAll(p => p.Id == playerId);
+        // Gets the list of players from the current lobby
+        if (playersInLobby.TryGetValue(lobbyId, out var players))
+        {
+          players.RemoveAll(p => p.Id == playerConnId);
 
-        await Clients.Group(lobbyId).SendAsync("PlayerHasLeft", playerId);
-        await Clients.Client(playerId).SendAsync("DisconnectPlayer");
+          await Clients.Group(lobbyId).SendAsync("PlayerHasLeft", playerConnId);
+        }
+
+        await Clients.Client(playerConnId).SendAsync("DisconnectPlayer");
       }
     }
 
@@ -72,6 +147,10 @@ namespace API.Sockets.Hubs
 
     public async Task StartingGame(string lobbyId)
     {
+      // Reset all game data from current lobby before playing
+      ResetAllGameDataFromLobby(lobbyId);
+
+      // Notify players that the game has started
       await Clients.Group(lobbyId).SendAsync("GameHasStarted");
     }
 
@@ -84,12 +163,77 @@ namespace API.Sockets.Hubs
     {
       await Clients.Group(lobbyId).SendAsync("GuestsAreNotifiedThatQuestionHasStarted");
     }
+
+    public async Task NotifyAnswerReceived(string lobbyId, int questionId, int answerId)
+    {
+      string playerConnId = Context.ConnectionId;
+
+      if (!playerResponsesPerQuestion.ContainsKey(questionId))
+      {
+        playerResponsesPerQuestion[questionId] = new HashSet<string>();
+      }
+
+      if (playerResponsesPerQuestion[questionId].Add(playerConnId))
+      {
+        responseCountPerQuestion[questionId] = playerResponsesPerQuestion[questionId].Count;
+
+        if (!questionIdsPerLobby.ContainsKey(lobbyId))
+        {
+          questionIdsPerLobby[lobbyId] = new HashSet<int>();
+        }
+        questionIdsPerLobby[lobbyId].Add(questionId);
+
+        await Clients.Group(lobbyId).SendAsync("UpdateAnswerStats", responseCountPerQuestion[questionId]);
+
+        await Clients.Group(lobbyId).SendAsync("UpdateSelectedAnswerCount", playerConnId, answerId);
+      }
+    }
+
+    public async Task UpdatePlayerInfo(Player updatedPlayerInfo)
+    {
+      await Clients.Client(updatedPlayerInfo.Id).SendAsync("ReceiveMyUpdatedPlayerInfo", updatedPlayerInfo);
+    }
+
+    private void ResetAllGameDataFromLobby(string lobbyId)
+    {
+      // Clear all players from the lobby
+      playersInLobby.TryRemove(lobbyId, out var _);
+
+      // Get all the question IDs from the lobby and remove them
+      questionIdsPerLobby.TryGetValue(lobbyId, out var questionIdsFromLobby);
+      questionIdsPerLobby.TryRemove(lobbyId, out var _);
+
+      // Remove all the counting for every question ID from the lobby
+      if (questionIdsFromLobby != null)
+      {
+        foreach (var questionId in questionIdsFromLobby)
+        {
+          responseCountPerQuestion.TryRemove(questionId, out var _);
+          playerResponsesPerQuestion.TryRemove(questionId, out var _);
+        }
+      }
+
+      // Remove any entries from the current question tracking based on the lobbyId
+      currentQuestionPerLobby.TryRemove(lobbyId, out var _);
+
+      // Remove all player connections mapped to the lobbyId
+      var playersToRemove = playerLobbyMapping
+                              .Where(m => m.Value == lobbyId)
+                              .Select(m => m.Key)
+                              .ToList();
+      
+      foreach (var playerConnId in playersToRemove)
+      {
+        playerLobbyMapping.TryRemove(playerConnId, out var _);
+      }
+    }
   }
 
   public class Player
   {
     public string Id { get; set; }
     public string Name { get; set; }
+    public int EarnedPoints { get; set; } = 0;
   }
 
   public class PlayerNickName {
