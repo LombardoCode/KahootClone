@@ -1,4 +1,4 @@
-import { AnswerPlay, KahootPlay, QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { AnswerPlay, KahootPlay, PointsMultiplier, QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { create } from "zustand";
 
 interface InGameStore {
@@ -22,6 +22,7 @@ interface InGameStore {
   players: Player[];
   addPlayer: (newPlayer: Player) => void;
   removePlayer: (id: string | null | undefined) => void;
+  addPointsToThePlayer: (playerConnId: string, selectedAnswerIdFromGuest: number, timeLeftInSecs: number | undefined) => void;
 
   // Kahoot and questions
   kahoot: KahootPlay | null;
@@ -32,12 +33,22 @@ interface InGameStore {
   // Answers
   selectAnswer: (answerId: number | null) => void;
   didUserProvidedAnAnswerToTheQuestion: () => boolean;
+  answerStatsForCurrentQuestion: AnswerStatsForCurrentQuestion[] | null;
+  setAnswerStatsForCurrentQuestion: (stats: AnswerStatsForCurrentQuestion[] | null) => void;
+  increaseAnswerCountForCurrentQuestion: (answerId: number) => void;
 }
 
 interface Player {
   id: string | null | undefined;
   name: string;
+  earnedPoints: number;
 }
+
+export interface AnswerStatsForCurrentQuestion {
+  answerId: number;
+  isCorrect: boolean;
+  quantityOfTimesSelected: number;
+};
 
 const useInGameStore = create<InGameStore>()((set, get) => ({
   // SignalR connection
@@ -59,7 +70,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   })),
 
   // Identity of the user
-  currentPlayer: { id: '', name: '' },
+  currentPlayer: { id: '', name: '', earnedPoints: 0 },
   setCurrentPlayer: (newPlayerData: Player) => set(() => ({
     currentPlayer: newPlayerData
   })),
@@ -79,12 +90,12 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   }),
   removePlayer: (id: string | null | undefined) => set((state) => {
     let players = state.players;
-    
+
     if (players) {
       let indexFromPlayerToRemove = players.findIndex(p => p.id === id);
-  
+
       players = players.filter((_, index) => index !== indexFromPlayerToRemove);
-  
+
       return {
         players: [...players]
       }
@@ -92,7 +103,44 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
 
     return state;
   }),
-  
+  addPointsToThePlayer: (playerConnId: string, selectedAnswerIdFromGuest: number, timeLeftInSecs: number | undefined) => set((state) => {
+    if (state.kahoot) {
+      // Determine the current question and check if the user answered correctly
+      const currentQuestion: QuestionPlay = state.kahoot.questions[state.questionIndex];
+      const correctAnswerIdFromCurrentQuestion: AnswerPlay | undefined = currentQuestion.answers.find(a => a.isCorrect);
+      const selectedAnswerIdFromCurrentQuestion: AnswerPlay | undefined = currentQuestion.answers.find(a => a.id === selectedAnswerIdFromGuest);
+
+      if (selectedAnswerIdFromCurrentQuestion?.id === correctAnswerIdFromCurrentQuestion?.id) {
+        // Calculate the total of points that we are going to give to the player
+        const pointsBase: number = 10;
+        const quantityOfSecondsLeftWhenPlayerAnswered: number = timeLeftInSecs != null ? timeLeftInSecs : 30;
+        const pointsMultiplier: PointsMultiplier = currentQuestion.pointsMultiplier;
+        const totalPointsToGive: number = pointsBase * quantityOfSecondsLeftWhenPlayerAnswered * pointsMultiplier;
+
+        // Then update the player's info (host-side)
+        let updatedPlayers: Player[] = state.players.map((player: Player) => {
+          if (player.id === playerConnId) {
+            return {
+              ...player,
+              earnedPoints: player.earnedPoints + totalPointsToGive
+            }
+          }
+          return player;
+        });
+
+        // Send the updated player info to the target player
+        const updatedPlayerInfo = updatedPlayers.find(p => p.id === playerConnId);
+        state.signalRConnection?.invoke('UpdatePlayerInfo', updatedPlayerInfo);
+
+        return {
+          players: updatedPlayers
+        };
+      }
+    }
+
+    return state;
+  }),
+
   // Kahoot and questions
   kahoot: null,
   setKahootInfo: (kahootInfo: KahootPlay) => set(() => {
@@ -111,10 +159,23 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   // Answers
   selectAnswer: (answerId: number | null) => set((state) => {
     const kahoot = state.kahoot;
+
     if (kahoot) {
-      kahoot.questions[state.questionIndex].answers = kahoot.questions[state.questionIndex].answers.map((answer: AnswerPlay) =>
-        answer.id === answerId ? { ...answer, isSelected: true } : answer
-      )
+      const currentQuestion: QuestionPlay = kahoot.questions[state.questionIndex];
+
+      // Update the answer's "isSelected" property
+      const updatedAnswers = currentQuestion.answers.map((answer: AnswerPlay) => answer.id === answerId
+        ? { ...answer, isSelected: true }
+        : { ...answer, isSelected: false }
+      );
+
+      const updatedQuestion: QuestionPlay = { ...currentQuestion, answers: updatedAnswers };
+
+      kahoot.questions[state.questionIndex] = updatedQuestion;
+
+      if (state.signalRConnection) {
+        state.signalRConnection.invoke('NotifyAnswerReceived', state.lobbyId, state.questionIndex, answerId);
+      }
 
       return {
         kahoot: {
@@ -122,6 +183,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
         }
       }
     }
+
     return state;
   }),
   didUserProvidedAnAnswerToTheQuestion: (): boolean => {
@@ -129,7 +191,27 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
     const answersFromCurrentQuestion = state.kahoot?.questions[state.questionIndex].answers;
     const theresAtLeastOneAnswerSelected: boolean = answersFromCurrentQuestion?.some((a: AnswerPlay) => a.isSelected === true) || false;
     return theresAtLeastOneAnswerSelected;
-  }
+  },
+  answerStatsForCurrentQuestion: null,
+  setAnswerStatsForCurrentQuestion: (stats: AnswerStatsForCurrentQuestion[] | null): void => {
+    set({
+      answerStatsForCurrentQuestion: stats
+    })
+  },
+  increaseAnswerCountForCurrentQuestion: (answerId: number) => set((state) => {
+    if (state.answerStatsForCurrentQuestion) {
+      // Find the answer that we can to increase its counter (number of times that was selected by the guests)
+      let answerToUpdate = state.answerStatsForCurrentQuestion.find(a => a.answerId === answerId);
+
+      if (answerToUpdate) {
+        answerToUpdate.quantityOfTimesSelected += 1;
+      }
+    }
+
+    return {
+      answerStatsForCurrentQuestion: state.answerStatsForCurrentQuestion
+    };
+  })
 }));
 
 export default useInGameStore;

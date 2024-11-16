@@ -34,7 +34,7 @@ const PlayerInGameStatus = () => {
               useCase={UseCases.LONGTEXT}
               className="text-xl"
             >
-              0 points
+              {currentPlayer.earnedPoints} points
             </Text>
           </div>
         </div>
