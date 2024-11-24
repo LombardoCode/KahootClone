@@ -33,9 +33,6 @@ const EditKahoot = () => {
           getKahootInformation(id);
         }
       })
-      .catch(err => {
-        console.log(err);
-      })
   }
 
   const getKahootInformation = (id: string) => {

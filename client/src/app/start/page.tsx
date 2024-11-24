@@ -4,23 +4,35 @@ import { useRouter } from "next/navigation";
 import useInGameStore from "../stores/Kahoot/useInGameStore";
 import Text from "../components/UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
-import Spinner from "../components/UIComponents/Spinner";
+import Spinner from "../components/UIComponents/Spinners/Spinner";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
 
 const PlayPage = () => {
   // Global store state
-  const { signalRConnection, isHost, kahoot } = useInGameStore();
+  const { signalRConnection, isHost, kahoot, setQuestionIndex } = useInGameStore();
   const router = useRouter();
 
   useEffect(() => {
-    if (signalRConnection) {
-      signalRConnection.on('RoundOfQuestionsStarted', () => {
-        router.push('/gameblock');
-      })
+    const setupConnection = async() => {
+      await initializeSignalREvents();
     }
+
+    setupConnection();
   }, []);
+
+  const initializeSignalREvents = async() => {
+    if (signalRConnection) {
+      // Send the guest to the '/getready' page
+      if (!isHost) {
+        await signalRConnection.on('OnRedirectToTheGetReadyPage', (questionIndex: number) => {
+          setQuestionIndex(questionIndex);
+          router.push('/getready');
+        })
+      }
+    }
+  }
 
   return (
     <div className={`relative bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>
@@ -115,11 +127,12 @@ const ShowQuestionTitleAndCountdownToHost = ({ kahootTitle }: { kahootTitle: str
 
 const SquareCountdownTimer = () => {
   // Global store state
-  const { signalRConnection, lobbyId } = useInGameStore();
+  const { signalRConnection, lobbyId, isHost, questionIndex } = useInGameStore();
 
   // Local component state
   const [countDisplay, setCountDisplay] = useState<number>(3);
   const [hasStarted, setHasStarted] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (!hasStarted) {
@@ -143,8 +156,12 @@ const SquareCountdownTimer = () => {
         }
       } else {
         const countTimer = setTimeout(() => {
-          if (signalRConnection) {
-            signalRConnection.invoke('StartingRoundOfQuestions', lobbyId);
+          if (isHost) {
+            if (signalRConnection) {
+              signalRConnection.invoke('SendGuestsToTheGetReadyPage', lobbyId, questionIndex);
+            }
+
+            router.push('/gameblock');
           }
         }, 500);
 

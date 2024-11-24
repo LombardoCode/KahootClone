@@ -3,10 +3,9 @@ import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import { useState } from "react";
 import DisplayAnswerStatisticsInBarsMode from "./DisplayAnswerStatisticsInBarsMode";
 import DisplayAnswerStatisticsInBoardMode from "./DisplayAnswerStatisticsInBoardMode";
-import Button, { BorderColors, ButtonSize } from "@/app/components/UIComponents/Button";
+import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
-import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
-import Text from "@/app/components/UIComponents/Text";
+import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
 import DisplayScoreboard from "./DisplayScoreboard";
 import ShowingQuestionTitle from "../ShowingQuestionTitle";
 
@@ -20,7 +19,7 @@ interface ShowCurrentQuestionStatisticsProps {
 }
 
 const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionStatisticsProps) => {
-  const { kahoot, questionIndex } = useInGameStore();
+  const { kahoot, questionIndex, goToTheNextQuestion } = useInGameStore();
   const [answers, setAnswers] = useState<AnswerPlay[] | undefined>(kahoot?.questions[questionIndex].answers);
   const [screen, setScreen] = useState<ScreenForFinalAnswerStatistics>(ScreenForFinalAnswerStatistics.STATISTICS);
 
@@ -30,8 +29,8 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
         setScreen(ScreenForFinalAnswerStatistics.SCOREBOARD);
         break;
       case ScreenForFinalAnswerStatistics.SCOREBOARD:
-        // Logic to go to the next question
-        // ...
+        // Go to the next question
+        goToTheNextQuestion();
         break;
     }
   }

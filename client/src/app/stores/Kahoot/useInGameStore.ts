@@ -23,12 +23,15 @@ interface InGameStore {
   addPlayer: (newPlayer: Player) => void;
   removePlayer: (id: string | null | undefined) => void;
   addPointsToThePlayer: (playerConnId: string, selectedAnswerIdFromGuest: number, timeLeftInSecs: number | undefined) => void;
+  earnedPointsFromCurrentQuestion: number;
+  setEarnedPointsFromCurrentQuestion: (earnedPointsFromCurrentQuestion: number) => void;
 
   // Kahoot and questions
   kahoot: KahootPlay | null;
   setKahootInfo: (kahootInfo: KahootPlay) => void;
   questionIndex: number;
   setQuestionIndex: (index: number) => void;
+  goToTheNextQuestion: () => void;
 
   // Answers
   selectAnswer: (answerId: number | null) => void;
@@ -107,10 +110,10 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
     if (state.kahoot) {
       // Determine the current question and check if the user answered correctly
       const currentQuestion: QuestionPlay = state.kahoot.questions[state.questionIndex];
-      const correctAnswerIdFromCurrentQuestion: AnswerPlay | undefined = currentQuestion.answers.find(a => a.isCorrect);
+      const correctAnswerIdFromCurrentQuestion: AnswerPlay[] | undefined = currentQuestion.answers.filter(a => a.isCorrect);
       const selectedAnswerIdFromCurrentQuestion: AnswerPlay | undefined = currentQuestion.answers.find(a => a.id === selectedAnswerIdFromGuest);
 
-      if (selectedAnswerIdFromCurrentQuestion?.id === correctAnswerIdFromCurrentQuestion?.id) {
+      if (correctAnswerIdFromCurrentQuestion.some(correctAnswer => correctAnswer.id === selectedAnswerIdFromCurrentQuestion?.id)) {
         // Calculate the total of points that we are going to give to the player
         const pointsBase: number = 10;
         const quantityOfSecondsLeftWhenPlayerAnswered: number = timeLeftInSecs != null ? timeLeftInSecs : 30;
@@ -131,6 +134,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
         // Send the updated player info to the target player
         const updatedPlayerInfo = updatedPlayers.find(p => p.id === playerConnId);
         state.signalRConnection?.invoke('UpdatePlayerInfo', updatedPlayerInfo);
+        state.signalRConnection?.invoke('NotifyPlayerHowManyPointsTheyGotFromCurrentQuestion', playerConnId, totalPointsToGive);
 
         return {
           players: updatedPlayers
@@ -140,6 +144,8 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
 
     return state;
   }),
+  earnedPointsFromCurrentQuestion: 0,
+  setEarnedPointsFromCurrentQuestion: (earnedPointsFromCurrentQuestion: number) => set(() => ({ earnedPointsFromCurrentQuestion })),
 
   // Kahoot and questions
   kahoot: null,
@@ -155,6 +161,28 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   setQuestionIndex: (index: number) => set(() => ({
     questionIndex: index
   })),
+  goToTheNextQuestion: () => set((state) => {
+    if (state.kahoot) {
+      const totalNumberOfQuestionsFromKahoot = state.kahoot.questions.length;
+      const newQuestionIndex: number = state.questionIndex + 1;
+
+      // If we still have pending questions to play...
+      if (newQuestionIndex <= (totalNumberOfQuestionsFromKahoot - 1)) {
+        // Send the guests to the '/getready' page
+        if (state.signalRConnection) {
+          state.signalRConnection.invoke('SendGuestsToTheGetReadyPage', state.lobbyId, newQuestionIndex);
+        }
+        
+        return {
+          questionIndex: newQuestionIndex
+        }
+      } else {
+        // If we run out of questions to play, send the guests to the '/ranking' page
+        state.signalRConnection?.invoke('RedirectGuestsFromLobbyToSpecificPage', state.lobbyId, '/ranking');
+      }
+    }
+    return state;
+  }),
 
   // Answers
   selectAnswer: (answerId: number | null) => set((state) => {
@@ -188,7 +216,8 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   }),
   didUserProvidedAnAnswerToTheQuestion: (): boolean => {
     const state = get();
-    const answersFromCurrentQuestion = state.kahoot?.questions[state.questionIndex].answers;
+    const currentQuestion: QuestionPlay | undefined = state.kahoot?.questions[state.questionIndex];
+    const answersFromCurrentQuestion = currentQuestion?.answers;
     const theresAtLeastOneAnswerSelected: boolean = answersFromCurrentQuestion?.some((a: AnswerPlay) => a.isSelected === true) || false;
     return theresAtLeastOneAnswerSelected;
   },
