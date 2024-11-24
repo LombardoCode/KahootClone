@@ -41,7 +41,6 @@ const LobbyPage = () => {
 
     axiosInstance.post(`/lobby/checkIfValidLobby`, { lobbyId: lobbyIdFromParams })
       .then(res => {
-        console.log(res.data);
         setIsValidLobby(res.data);
       })
       .catch(err => {
@@ -114,10 +113,8 @@ const LobbyPage = () => {
   }, [signalRConnection]);
 
   const downloadAllKahootQuestions = async () => {
-    console.log("downloading questions")
     await axiosInstance.get(`/lobby/getKahootTitleAndQuestions?lobbyId=${lobbyIdFromParams}`)
       .then(res => {
-        console.log(res.data);
         setKahootInfo(res.data);
       })
       .catch(err => {

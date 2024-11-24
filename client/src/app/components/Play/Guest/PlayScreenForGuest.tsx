@@ -1,6 +1,6 @@
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import Text from "../../UIComponents/Text";
-import Spinner from "../../UIComponents/Spinner";
+import Spinner from "../../UIComponents/Spinners/Spinner";
 import { useEffect, useState } from "react";
 import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import KahootAnswerContainer from "../../utils/Quizes/KahootAnswerContainer";
@@ -9,14 +9,16 @@ import KahootAnswerDisplay from "../../utils/Quizes/KahootAnswerDisplay";
 import { getTextContentForLayout } from "../../utils/Quizes/KahootQuestion.utills";
 import PlayerInGameStatus from "../../utils/InGame/PlayerInGameStatus";
 import { Player } from "@/app/interfaces/Play/Player.interface";
+import { useRouter } from "next/navigation";
 
 const PlayScreenForGuest = () => {
   // Global state
-  const { signalRConnection, setCurrentPlayer } = useInGameStore();
+  const { signalRConnection, setCurrentPlayer, setEarnedPointsFromCurrentQuestion } = useInGameStore();
 
   // Local component state
   const [showQuestionPreparation, setShowQuestionPreparation] = useState<boolean>(false);
   const [showAnswers, setShowAnswers] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     const setupConnection = async () => {
@@ -28,13 +30,16 @@ const PlayScreenForGuest = () => {
 
   const initializeSignalREvents = async () => {
     if (signalRConnection) {
-      signalRConnection.on('GuestsAreNotifiedThatQuestionHasStarted', () => {
-        setShowQuestionPreparation(false);
-        setShowAnswers(true);
-      })
-
       signalRConnection.on('ReceiveMyUpdatedPlayerInfo', (myUpdatedPlayerInfo: Player) => {
         setCurrentPlayer(myUpdatedPlayerInfo);
+      })
+
+      signalRConnection.on('OnReceiveHowManyPointsPlayerEarnedFromCurrentQuestion', (pointsEarnedFromCurrentQuestion: number) => {
+        setEarnedPointsFromCurrentQuestion(pointsEarnedFromCurrentQuestion);
+      })
+
+      signalRConnection.on('OnRedirectToSpecificPage', (clientPath: string) => {
+        router.push(clientPath);
       })
     }
   }

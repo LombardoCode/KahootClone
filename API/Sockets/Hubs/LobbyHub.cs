@@ -154,14 +154,14 @@ namespace API.Sockets.Hubs
       await Clients.Group(lobbyId).SendAsync("GameHasStarted");
     }
 
-    public async Task StartingRoundOfQuestions(string lobbyId)
+    public async Task SendGuestsToTheGetReadyPage(string lobbyId, int questionIndex)
     {
-      await Clients.Group(lobbyId).SendAsync("RoundOfQuestionsStarted");
+      await Clients.OthersInGroup(lobbyId).SendAsync("OnRedirectToTheGetReadyPage", questionIndex);
     }
 
     public async Task NotifyGuestsThatTheQuestionHasStarted(string lobbyId)
     {
-      await Clients.Group(lobbyId).SendAsync("GuestsAreNotifiedThatQuestionHasStarted");
+      await Clients.OthersInGroup(lobbyId).SendAsync("GuestsAreNotifiedThatQuestionHasStarted");
     }
 
     public async Task NotifyAnswerReceived(string lobbyId, int questionId, int answerId)
@@ -192,6 +192,16 @@ namespace API.Sockets.Hubs
     public async Task UpdatePlayerInfo(Player updatedPlayerInfo)
     {
       await Clients.Client(updatedPlayerInfo.Id).SendAsync("ReceiveMyUpdatedPlayerInfo", updatedPlayerInfo);
+    }
+
+    public async Task NotifyPlayerHowManyPointsTheyGotFromCurrentQuestion(string playerConnId, int pointsEarnedFromCurrentQuestion)
+    {
+      await Clients.Client(playerConnId).SendAsync("OnReceiveHowManyPointsPlayerEarnedFromCurrentQuestion", pointsEarnedFromCurrentQuestion);
+    }
+
+    public async Task RedirectGuestsFromLobbyToSpecificPage(string lobbyId, string clientPath)
+    {
+      await Clients.OthersInGroup(lobbyId).SendAsync("OnRedirectToSpecificPage", clientPath);
     }
 
     private void ResetAllGameDataFromLobby(string lobbyId)

@@ -8,7 +8,7 @@ interface ShowingSecondsLeftAndQuantityOfAnswersProvidenProps {
 }
 
 const ShowingSecondsLeftAndQuantityOfAnswersProviden = ({ setEveryoneHasAnsweredTheCurrentQuestion }: ShowingSecondsLeftAndQuantityOfAnswersProvidenProps) => {
-  const { kahoot, questionIndex, signalRConnection, players, increaseAnswerCountForCurrentQuestion, addPointsToThePlayer } = useInGameStore();
+  const { kahoot, questionIndex, signalRConnection, players, lobbyId, increaseAnswerCountForCurrentQuestion, addPointsToThePlayer } = useInGameStore();
   const [timer, setTimer] = useState<number | undefined>(kahoot?.questions[questionIndex].timeLimit);
   const timerRef = useRef<number | undefined>(timer);
   const [countOfAnswersProvidenByGuests, setCountOfAnswersProvidenByGuests] = useState<number>(0);
@@ -53,6 +53,9 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = ({ setEveryoneHasAnswered
         if (totalOfCurrentProvidedAnswers === totalOfGuestPlayers) {
           // Everyone has answered the current question
           setEveryoneHasAnsweredTheCurrentQuestion(true);
+
+          // Redirect the guests to the '/result' page
+          signalRConnection.invoke('RedirectGuestsFromLobbyToSpecificPage', lobbyId, '/result');
         }
       })
 
