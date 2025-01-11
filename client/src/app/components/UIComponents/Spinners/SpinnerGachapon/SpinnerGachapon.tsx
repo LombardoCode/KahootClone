@@ -1,11 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SpinnerSizes } from "../Spinner.interface";
 
-const SpinnerGachapon = () => {
+interface SpinnerGachaponProps {
+  size: SpinnerSizes;
+}
+
+const SpinnerGachapon = ({ size = SpinnerSizes.MEDIUM }: SpinnerGachaponProps) => {
   return (
     <motion.div
-      className="flex w-16 h-16 rounded-full overflow-hidden"
+      className="flex rounded-full overflow-hidden"
+      style={{
+        width: `${size}px`,
+        height: `${size}px`
+      }}
       initial={{
         rotate: 0
       }}

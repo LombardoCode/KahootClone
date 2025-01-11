@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import SpinnerGachapon from "../components/UIComponents/Spinners/SpinnerGachapon";
+import SpinnerGachapon from "../components/UIComponents/Spinners/SpinnerGachapon/SpinnerGachapon";
 import Text from "../components/UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
 import useInGameStore from "../stores/Kahoot/useInGameStore";
 import { useRouter } from "next/navigation";
+import { SpinnerSizes } from "../components/UIComponents/Spinners/Spinner.interface";
 
 const GetReady = () => {
   const { signalRConnection, isHost, questionIndex } = useInGameStore();
@@ -68,7 +69,7 @@ const GetReady = () => {
             >
               {timer}
             </Text>
-            <SpinnerGachapon />
+            <SpinnerGachapon size={SpinnerSizes.MEDIUM} />
           </div>
 
           <Text

@@ -32,6 +32,7 @@ interface InGameStore {
   questionIndex: number;
   setQuestionIndex: (index: number) => void;
   goToTheNextQuestion: () => void;
+  isThisTheLastQuestion: () => boolean;
 
   // Answers
   selectAnswer: (answerId: number | null) => void;
@@ -163,11 +164,9 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   })),
   goToTheNextQuestion: () => set((state) => {
     if (state.kahoot) {
-      const totalNumberOfQuestionsFromKahoot = state.kahoot.questions.length;
-      const newQuestionIndex: number = state.questionIndex + 1;
-
       // If we still have pending questions to play...
-      if (newQuestionIndex <= (totalNumberOfQuestionsFromKahoot - 1)) {
+      if (!state.isThisTheLastQuestion()) {
+        const newQuestionIndex: number = state.questionIndex + 1;
         // Send the guests to the '/getready' page
         if (state.signalRConnection) {
           state.signalRConnection.invoke('SendGuestsToTheGetReadyPage', state.lobbyId, newQuestionIndex);
@@ -183,6 +182,17 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
     }
     return state;
   }),
+  isThisTheLastQuestion: (): boolean => {
+    const state = get();
+
+    if (!state.kahoot) {
+      return false;
+    }
+
+    const totalNumberOfQuestionsFromKahoot = state.kahoot.questions.length;
+
+    return (state.questionIndex) === (totalNumberOfQuestionsFromKahoot - 1);
+  },
 
   // Answers
   selectAnswer: (answerId: number | null) => set((state) => {
