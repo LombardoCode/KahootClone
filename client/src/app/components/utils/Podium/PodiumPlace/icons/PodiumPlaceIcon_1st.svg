@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="162" height="162" viewBox="0 0 162 162">
+  <defs>
+    <filter id="aueye5x2ua" width="117.6%" height="119.3%" x="-8.8%" y="-9.6%"
+      filterUnits="objectBoundingBox">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1" />
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2.5" />
+      <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1"
+        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0" />
+      <feMerge>
+        <feMergeNode in="shadowMatrixOuter1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g fill-rule="nonzero">
+      <g>
+        <g filter="url(#aueye5x2ua)"
+          transform="translate(-86 -1195) translate(86 1195) translate(4.5 11.25)">
+          <path fill="#FFC00A" d="M35.977 0L0 85.885 76.669 139.743 152.756 94.244 120.698 0z" />
+          <path fill="#FFC92E"
+            d="M5.573 89.804L37.63 112.309 136.926 47.306 124.618 12.002zM41.702 115.187L57.838 126.516 145.316 72.168 138.549 52.511z" />
+          <path fill="#FFA602"
+            d="M41.396 9.186L9.767 83.65 76.699 130.343 142.652 90.876 114.85 9.186z" />
+          <path fill="#FFB52D"
+            d="M131.21 57.26l6.65 19.538-72.947 45.322-16.325-11.389 82.623-53.47zm-13.799-40.547l12.07 35.465-85.032 55.667-32.156-22.433 105.118-68.7z" />
+        </g>
+        <path fill="#000"
+          d="M94.5 105.75L94.5 49.5 67.5 49.5 67.5 61.795 78.201 61.795 78.201 105.75z"
+          opacity=".15" transform="translate(-86 -1195) translate(86 1195)" />
+        <path fill="#FFF"
+          d="M92.25 103.5L92.25 47.25 65.25 47.25 65.25 59.545 75.951 59.545 75.951 103.5z"
+          transform="translate(-86 -1195) translate(86 1195)" />
+      </g>
+    </g>
+  </g>
+</svg>
