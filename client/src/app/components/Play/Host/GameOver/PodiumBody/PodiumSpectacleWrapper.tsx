@@ -9,6 +9,7 @@ interface PodiumSpectacleWrapperProps {
 const PodiumSpectacleWrapper = ({ timeToWaitForPodiumPlayersToShowUp, isConfettiSpawning }: PodiumSpectacleWrapperProps) => {
   const [vanishCircle, setVanishCircle] = useState<boolean>(false);
   const circleMaxScale: number = 10;
+  const [vanishBackdrop, setVanishBackdrop] = useState<boolean>(false);
 
   // Circle positions
   const backgroundPositions = [
@@ -27,6 +28,12 @@ const PodiumSpectacleWrapper = ({ timeToWaitForPodiumPlayersToShowUp, isConfetti
   const startVanishingTheCircle = () => {
     setVanishCircle(true);
     isConfettiSpawning(true);
+    const vanishBackdropTimer = setTimeout(() => {
+      setVanishBackdrop(true);
+    }, 400);
+    return () => {
+      clearInterval(vanishBackdropTimer);
+    }
   };
 
   return (
@@ -40,7 +47,7 @@ const PodiumSpectacleWrapper = ({ timeToWaitForPodiumPlayersToShowUp, isConfetti
       animate={{
         backgroundPosition: backgroundPositions,
         scale: !vanishCircle ? circleScales : circleMaxScale,
-        opacity: 0.8,
+        opacity: !vanishBackdrop ? 0.8 : 0,
       }}
       transition={{
         duration: !vanishCircle ? timeToWaitForPodiumPlayersToShowUp - 0.2 : 1,

@@ -10,17 +10,17 @@ namespace API.Sockets.Hubs
     /// Maps a lobby ID to a list of players currently in that lobby
     /// </summary>
     private static ConcurrentDictionary<string, List<Player>> playersInLobby = new ConcurrentDictionary<string, List<Player>>();
-    
+
     /// <summary>
     /// Maps a question ID to a list of player IDs that have responded to that specific question
     /// </summary>
     private static ConcurrentDictionary<int, HashSet<string>> playerResponsesPerQuestion = new ConcurrentDictionary<int, HashSet<string>>();
-    
+
     /// <summary>
     /// Maps a question ID to the total count of responses received for that question ID
     /// </summary>
     private static ConcurrentDictionary<int, int> responseCountPerQuestion = new ConcurrentDictionary<int, int>();
-    
+
     /// <summary>
     /// Maps a player ID to the lobby ID
     /// </summary>
@@ -124,7 +124,7 @@ namespace API.Sockets.Hubs
     public async Task KickPlayer(string lobbyId, string playerId)
     {
       string playerConnId = playerId;
-      
+
       // Gets the lobbyId from the user that host is trying to kick out
       if (playerLobbyMapping.TryRemove(playerConnId, out var existingLobbyId) && existingLobbyId == lobbyId)
       {
@@ -231,7 +231,7 @@ namespace API.Sockets.Hubs
                               .Where(m => m.Value == lobbyId)
                               .Select(m => m.Key)
                               .ToList();
-      
+
       foreach (var playerConnId in playersToRemove)
       {
         playerLobbyMapping.TryRemove(playerConnId, out var _);

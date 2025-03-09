@@ -9,9 +9,9 @@ interface PodiumKahootLogoAndKahootTitleProps {
 
 const PodiumKahootLogoAndKahootTitle = ({ moveToTheTop, podiumHeaderDisappeared }: PodiumKahootLogoAndKahootTitleProps) => {
   return (
-    <div className={`relative ${!podiumHeaderDisappeared ? 'h-1/2' : ''} bg-purple-500/40`}>
+    <div className={`relative ${!podiumHeaderDisappeared ? 'h-1/2' : ''}`}>
       <motion.div
-        className={`${!podiumHeaderDisappeared ? 'absolute' : 'relative'} w-full flex flex-col items-center bg-cyan-600/40 max-h-min`}
+        className={`${!podiumHeaderDisappeared ? 'absolute' : 'relative'} w-full flex flex-col items-center max-h-min`}
         initial={{
           bottom: 0,
         }}

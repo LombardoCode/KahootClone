@@ -45,6 +45,11 @@ const config: Config = {
         'kahoot-green-200': "#66BF39",
         'kahoot-green-300': "#26890C",
         'kahoot-green-400': "#0F6B03",
+
+        'kahoot-purple-variant-1': "#C2A5DF",
+        'kahoot-purple-variant-2': "#864CBF",
+        'kahoot-purple-variant-3': "#25076B",
+        'kahoot-purple-variant-4': "#46178f",
       },
       textDecorationThickness: {
         3: '3px'
