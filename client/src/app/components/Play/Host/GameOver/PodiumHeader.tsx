@@ -8,7 +8,7 @@ interface PodiumHeaderProps {
 
 const PodiumHeader = ({ hide }: PodiumHeaderProps) => {
   return (
-    <div className="bg-green-400/40 w-full h-1/2">
+    <div className="w-full h-1/2">
       <div className="w-full px-3">
         <motion.div
           className="text-center bg-purple-900 py-1"

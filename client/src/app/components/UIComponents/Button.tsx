@@ -6,7 +6,7 @@ import montserrat from "@/app/utils/fontsConfig";
 
 interface ButtonProps {
   children: React.ReactNode;
-  backgroundColor: BackgroundColors;
+  backgroundColor: BackgroundColors | string;
   className?: string;
   fontWeight?: FontWeights;
   textColor?: TextColors;
