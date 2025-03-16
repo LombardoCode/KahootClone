@@ -78,6 +78,21 @@ namespace API.Sockets.Hubs
       await base.OnDisconnectedAsync(exception);
     }
 
+    public async Task IntegrateGuestToTheLobbyGroup(string lobbyId)
+    {
+      await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId);
+    }
+
+    public async Task GetAllPlayersFromLobby(string lobbyId)
+    {
+      if (!playersInLobby.ContainsKey(lobbyId))
+      {
+        playersInLobby[lobbyId] = new List<Player>();
+      }
+
+      await Clients.Caller.SendAsync("ReceiveAllPlayers", playersInLobby[lobbyId]);
+    }
+
     public async Task PutUserInLobbyQueue(string lobbyId, Player newPlayerData)
     {
       // First, we create our player
@@ -102,8 +117,6 @@ namespace API.Sockets.Hubs
       }
 
       // Make sure that the player's ConnectionId is added to the group (lobbyId), so players can receive data as a group
-      await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId);
-
       await Clients.Caller.SendAsync("ReceiveAllPlayers", playersInLobby[lobbyId]);
 
       await Clients.Group(lobbyId).SendAsync("AddNewPlayer", newPlayer);
@@ -176,6 +189,7 @@ namespace API.Sockets.Hubs
       if (playerResponsesPerQuestion[questionId].Add(playerConnId))
       {
         responseCountPerQuestion[questionId] = playerResponsesPerQuestion[questionId].Count;
+        int numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow = responseCountPerQuestion[questionId];
 
         if (!questionIdsPerLobby.ContainsKey(lobbyId))
         {
@@ -183,10 +197,15 @@ namespace API.Sockets.Hubs
         }
         questionIdsPerLobby[lobbyId].Add(questionId);
 
-        await Clients.Group(lobbyId).SendAsync("UpdateAnswerStats", responseCountPerQuestion[questionId]);
+        await Clients.Group(lobbyId).SendAsync("VerifyIfEveryoneHasAnsweredTheCurrentQuestion", numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
 
-        await Clients.Group(lobbyId).SendAsync("UpdateSelectedAnswerCount", playerConnId, answerId);
+        await Clients.Group(lobbyId).SendAsync("UpdateTotalOfProvidedAnswersCounter", playerConnId, answerId);
       }
+    }
+
+    public async Task SendPlayerFinalStatsToAllPlayers(string lobbyId, List<FinalPlayerStats> playersFinalStats)
+    {
+      await Clients.OthersInGroup(lobbyId).SendAsync("OnReceivePlayersFinalStats", playersFinalStats);
     }
 
     public async Task UpdatePlayerInfo(Player updatedPlayerInfo)
@@ -197,6 +216,11 @@ namespace API.Sockets.Hubs
     public async Task NotifyPlayerHowManyPointsTheyGotFromCurrentQuestion(string playerConnId, int pointsEarnedFromCurrentQuestion)
     {
       await Clients.Client(playerConnId).SendAsync("OnReceiveHowManyPointsPlayerEarnedFromCurrentQuestion", pointsEarnedFromCurrentQuestion);
+    }
+
+    public async Task NotifyOtherPlayersToShowTheirStats(string lobbyId)
+    {
+      await Clients.OthersInGroup(lobbyId).SendAsync("OnNotifyOtherPlayersToShowTheirStats", true);
     }
 
     public async Task RedirectGuestsFromLobbyToSpecificPage(string lobbyId, string clientPath)
@@ -244,6 +268,10 @@ namespace API.Sockets.Hubs
     public string Id { get; set; }
     public string Name { get; set; }
     public int EarnedPoints { get; set; } = 0;
+  }
+
+  public class FinalPlayerStats : Player {
+    public int place { get; set; }
   }
 
   public class PlayerNickName {

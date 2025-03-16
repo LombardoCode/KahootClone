@@ -25,6 +25,8 @@ interface InGameStore {
   addPointsToThePlayer: (playerConnId: string, selectedAnswerIdFromGuest: number, timeLeftInSecs: number | undefined) => void;
   earnedPointsFromCurrentQuestion: number;
   setEarnedPointsFromCurrentQuestion: (earnedPointsFromCurrentQuestion: number) => void;
+  finalPlayerStats: FinalPlayerStats[];
+  setFinalPlayerStats: (finalPlayerStats: Player[]) => void;
 
   // Kahoot and questions
   kahoot: KahootPlay | null;
@@ -46,6 +48,10 @@ interface Player {
   id: string | null | undefined;
   name: string;
   earnedPoints: number;
+}
+
+export interface FinalPlayerStats extends Player {
+  place: number;
 }
 
 export interface AnswerStatsForCurrentQuestion {
@@ -147,6 +153,24 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   }),
   earnedPointsFromCurrentQuestion: 0,
   setEarnedPointsFromCurrentQuestion: (earnedPointsFromCurrentQuestion: number) => set(() => ({ earnedPointsFromCurrentQuestion })),
+  setFinalPlayerStats: (playerStats: Player[]) => set((state) => {
+    let playersStatsOrganizedByEarnedPoints = playerStats.sort((a, b) => b.earnedPoints - a.earnedPoints);
+    let finalPlayerStats: FinalPlayerStats[] = playersStatsOrganizedByEarnedPoints.map((player: Player, index: number) => {
+      let finalPlayerStat: FinalPlayerStats = {
+        id: player.id,
+        name: player.name,
+        earnedPoints: player.earnedPoints,
+        place: index + 1
+      }
+
+      return finalPlayerStat;
+    });
+
+    return {
+      finalPlayerStats
+    }
+  }),
+  finalPlayerStats: [],
 
   // Kahoot and questions
   kahoot: null,
