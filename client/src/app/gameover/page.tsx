@@ -8,6 +8,7 @@ import BackgroundAudioPlayer from "../components/utils/Audio/BackgroundAudioPlay
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import GameOptionsCard from "../components/Play/Host/GameOver/GameOptionsCard";
+import useInGameStore from "../stores/Kahoot/useInGameStore";
 
 const GameOverScreen = () => {
   // Local component state
@@ -17,15 +18,17 @@ const GameOverScreen = () => {
   const [isConfettiRunning, setIsConfettiRunning] = useState<boolean>(false);
   const [isConfettiSpawning, setIsConfettiSpawning] = useState<boolean>(false);
   const [showGameOptions, setShowGameOptions] = useState<boolean>(false);
+  const [hidePodiumHeader, setHidePodiumHeader] = useState<boolean>(false);
+  const [disappearPodiumElementsFromDOM, setDisappearPodiumElementsFromDOM] = useState<boolean>(false);
+  const timeToWaitForPodiumPlayersToShowUp: number = 6.8;
+
+  // Store state
+  const { players, setFinalPlayerStats, finalPlayerStats, lobbyId, signalRConnection } = useInGameStore();
 
   useEffect(() => {
     setWidth(windowWidth);
     setHeight(windowHeight);
   }, [windowWidth, windowHeight]);
-
-  const [hidePodiumHeader, setHidePodiumHeader] = useState<boolean>(false);
-  const [disappearPodiumElementsFromDOM, setDisappearPodiumElementsFromDOM] = useState<boolean>(false);
-  const timeToWaitForPodiumPlayersToShowUp: number = 6.8;
 
   useEffect(() => {
     let disappearPodiumElementsFromDOMTimer: any;
@@ -52,15 +55,39 @@ const GameOverScreen = () => {
     }
   }, [isConfettiSpawning]);
 
-  const initializeConfetti = (val: boolean) => {
+  const startShowUpTime = (val: boolean) => {
+    // Start spawning confetti
     setIsConfettiRunning(val);
     setIsConfettiSpawning(val);
+    
+    const timeInSecsToWaitForTheGameOptionsToShowUp: number = 14;
     const showGameOptionsTimer = setTimeout(() => {
       setShowGameOptions(true);
-    }, 1000);
+    }, timeInSecsToWaitForTheGameOptionsToShowUp * 1000);
 
+    notifyOtherPlayersToShowTheirStats();
+    
     return () => {
       clearInterval(showGameOptionsTimer);
+    }
+  }
+
+  useEffect(() => {
+    if (players.length > 0) {
+      setFinalPlayerStats(players);
+    }
+  }, [players, setFinalPlayerStats]);
+
+  useEffect(() => {
+    // Send to all players the final player statistics
+    if (finalPlayerStats.length > 0 && signalRConnection) {
+      signalRConnection.invoke('SendPlayerFinalStatsToAllPlayers', lobbyId, finalPlayerStats);
+    }
+  }, [finalPlayerStats]);
+
+  const notifyOtherPlayersToShowTheirStats = () => {
+    if (signalRConnection) {
+      signalRConnection.invoke('NotifyOtherPlayersToShowTheirStats', lobbyId);
     }
   }
 
@@ -108,8 +135,9 @@ const GameOverScreen = () => {
               <PodiumBody
                 timeToWaitForPodiumPlayersToShowUp={timeToWaitForPodiumPlayersToShowUp}
                 isConfettiSpawning={(val: boolean) => {
-                  initializeConfetti(val);
+                  startShowUpTime(val);
                 }}
+                players={players}
               />
             )}
           </div>

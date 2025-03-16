@@ -37,80 +37,109 @@ const LobbyPage = () => {
   useEffect(() => {
     if (lobbyIdFromParams) {
       setLobbyId(lobbyIdFromParams);
+      checkIfWeAreInAValidLobby();
     }
 
-    axiosInstance.post(`/lobby/checkIfValidLobby`, { lobbyId: lobbyIdFromParams })
-      .then(res => {
-        setIsValidLobby(res.data);
-      })
-      .catch(err => {
-        console.error(err);
-      })
+    checkIfHost();
+  }, []);
 
+  const checkIfWeAreInAValidLobby = () => {
+    axiosInstance.post(`/lobby/checkIfValidLobby`, { lobbyId: lobbyIdFromParams })
+    .then(res => {
+      setIsValidLobby(res.data);
+      ConnectingToTheSignalRLobbyHub();
+    })
+    .catch(err => {
+      console.error(err);
+    })
+  }
+
+  const ConnectingToTheSignalRLobbyHub = () => {
     const connection = new signalR.HubConnectionBuilder()
       .withUrl('http://localhost:5000/hubs/lobbyhub')
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
-    setSignalRConnection(connection)
-  }, []);
+    // Save the connection details to our store
+    setSignalRConnection(connection);
+  }
 
   useEffect(() => {
-    const startSignalRConnection = async () => {
-      if (signalRConnection) {
-        try {
-          signalRConnection
-            .start()
-            .then(async () => {
-              signalRConnection.on('AddNewPlayer', (newPlayer) => {
-                addPlayer({
-                  id: newPlayer.id,
-                  name: newPlayer.name,
-                  earnedPoints: newPlayer.earnedPoints
-                });
-              })
+    startSignalRConnection();
+  }, [signalRConnection]);
 
-              signalRConnection.on('PlayerHasLeft', (playerId) => {
-                removePlayer(playerId);
-              })
-
-              signalRConnection.on('ReceiveAllPlayers', (allPlayers: any[]) => {
-                allPlayers.forEach((player: Player) => {
-                  addPlayer({
-                    id: player.id,
-                    name: player.name,
-                    earnedPoints: player.earnedPoints
-                  })
-                })
-              })
-
-              signalRConnection.on('DisconnectPlayer', () => {
-                signalRConnection.stop();
-                router.push('/');
-              })
-
-              signalRConnection.on('GameHasStarted', () => {
-                router.push('/start');
-              })
-
-              signalRConnection.on('ReceiveAllQuestionsFromHost', (kahootInfo: KahootPlay) => {
-                setKahootInfo(kahootInfo);
-              })
-            })
-            .catch(err => {
-              console.error(err)
-            });
-        }
-        catch (err) {
-          console.error("Error establishing the connection: ", err);
-        }
+  const startSignalRConnection = async () => {
+    if (signalRConnection) {
+      try {
+        signalRConnection
+          .start()
+          .then(async () => {
+            setLobbyHubListenerEvents(signalRConnection);
+          })
+          .then(() => {
+            integrateThisGuestConnectionIdToTheLobbyHub();
+          })
+          .then(() => {
+            getAllPlayersFromLobby(signalRConnection);
+          })
+          .catch(err => {
+            console.error(err)
+          });
+      }
+      catch (err) {
+        console.error("Error establishing the connection: ", err);
       }
     }
+  }
 
-    startSignalRConnection();
+  const integrateThisGuestConnectionIdToTheLobbyHub = () => {
+    if (signalRConnection) {
+      signalRConnection.invoke("IntegrateGuestToTheLobbyGroup", lobbyIdFromParams);
+    }
+  }
 
-    checkIfHost();
-  }, [signalRConnection]);
+  const setLobbyHubListenerEvents = (conn: signalR.HubConnection) => {
+    conn.on('AddNewPlayer', (newPlayer) => {
+      addPlayer({
+        id: newPlayer.id,
+        name: newPlayer.name,
+        earnedPoints: newPlayer.earnedPoints
+      });
+    })
+
+    conn.on('PlayerHasLeft', (playerId) => {
+      removePlayer(playerId);
+    })
+
+    conn.on('ReceiveAllPlayers', (allPlayers: any[]) => {
+      allPlayers.forEach((player: Player) => {
+        addPlayer({
+          id: player.id,
+          name: player.name,
+          earnedPoints: player.earnedPoints
+        })
+      })
+    })
+
+    conn.on('DisconnectPlayer', () => {
+      conn.stop();
+      router.push('/');
+    })
+
+    conn.on('GameHasStarted', () => {
+      router.push('/start');
+    })
+
+    conn.on('ReceiveAllQuestionsFromHost', (kahootInfo: KahootPlay) => {
+      setKahootInfo(kahootInfo);
+    })
+  }
+
+  const getAllPlayersFromLobby = (signalRConnection: signalR.HubConnection) => {
+    if (signalRConnection) {
+      signalRConnection.invoke('GetAllPlayersFromLobby', lobbyIdFromParams);
+    }
+  }
 
   const downloadAllKahootQuestions = async () => {
     await axiosInstance.get(`/lobby/getKahootTitleAndQuestions?lobbyId=${lobbyIdFromParams}`)
@@ -126,7 +155,9 @@ const LobbyPage = () => {
     await axiosInstance.get(`/lobby/checkIfTheUserIsHostFromTheGame?lobbyId=${lobbyIdFromParams}`)
       .then(async (res) => {
         setIsHost(res.data.isHost);
-        await downloadAllKahootQuestions();
+        if (res.data.isHost) {
+          await downloadAllKahootQuestions();
+        }
       })
       .catch(err => {
         console.error(err);
@@ -261,54 +292,56 @@ const LobbyPage = () => {
       </div>
 
       {/* Modal to be displayed for the user to enter their nickname, so it can be displayed to other users */}
-      <Modal
-        modalType={ModalTypes.INPUT}
-        isOpen={isCustomNickNameModalOpen}
-        title={`Welcome!`}
-        onClose={() => setCustomNickNameModalOpen(false)}
-        bodyContent={(
-          <>
-            <Text
-              fontWeight={FontWeights.REGULAR}
-              textColor={TextColors.BLACK}
-              useCase={UseCases.LONGTEXT}
-              className="text-base"
-            >
-              Set a custom nickname to join the game!
-            </Text>
-            <div className="flex flex-col">
-              <InputForm
-                type={InputFormTypes.TEXT}
+      {!isHost && (
+        <Modal
+          modalType={ModalTypes.INPUT}
+          isOpen={isCustomNickNameModalOpen}
+          title={`Welcome!`}
+          onClose={() => setCustomNickNameModalOpen(false)}
+          bodyContent={(
+            <>
+              <Text
+                fontWeight={FontWeights.REGULAR}
                 textColor={TextColors.BLACK}
-                fontWeight={FontWeights.LIGHT}
-                name="nickName"
-                id="nickName"
-                placeholder="Your new nickname"
-                className="mt-2"
-                value={nickName}
-                onChange={(e: any) => setNickName(e.target.value)}
-              />
-            </div>
-          </>
-        )}
-        footerContent={(
-          <>
-            <Button
-              backgroundColor={BackgroundColors.BLUE}
-              fontWeight={FontWeights.BOLD}
-              textColor={TextColors.WHITE}
-              className="text-sm"
-              size={ButtonSize.MEDIUM}
-              onClick={() => {
-                createNewPlayer();
-                setCustomNickNameModalOpen(false);
-              }}
-            >
-              Save nickname
-            </Button>
-          </>
-        )}
-      />
+                useCase={UseCases.LONGTEXT}
+                className="text-base"
+              >
+                Set a custom nickname to join the game!
+              </Text>
+              <div className="flex flex-col">
+                <InputForm
+                  type={InputFormTypes.TEXT}
+                  textColor={TextColors.BLACK}
+                  fontWeight={FontWeights.LIGHT}
+                  name="nickName"
+                  id="nickName"
+                  placeholder="Your new nickname"
+                  className="mt-2"
+                  value={nickName}
+                  onChange={(e: any) => setNickName(e.target.value)}
+                />
+              </div>
+            </>
+          )}
+          footerContent={(
+            <>
+              <Button
+                backgroundColor={BackgroundColors.BLUE}
+                fontWeight={FontWeights.BOLD}
+                textColor={TextColors.WHITE}
+                className="text-sm"
+                size={ButtonSize.MEDIUM}
+                onClick={() => {
+                  createNewPlayer();
+                  setCustomNickNameModalOpen(false);
+                }}
+              >
+                Save nickname
+              </Button>
+            </>
+          )}
+        />
+      )}
     </div>
   )
 }

@@ -43,14 +43,13 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = ({ setEveryoneHasAnswered
 
   const initializeSignalREvents = async () => {
     if (signalRConnection) {
-      signalRConnection.on('UpdateAnswerStats', (updatedAnswerCount: number) => {
-        const totalOfCurrentProvidedAnswers: number = updatedAnswerCount;
-        setCountOfAnswersProvidenByGuests(totalOfCurrentProvidedAnswers);
+      signalRConnection.on('VerifyIfEveryoneHasAnsweredTheCurrentQuestion', (numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow: number) => {
+        setCountOfAnswersProvidenByGuests(numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
 
-        const totalOfGuestPlayers: number = players.length - 1; // We set it as "-1" because we are excluding the host
+        const totalOfCurrentGuestPlayers: number = players.length;
 
         // Check if everyone has answered the current question
-        if (totalOfCurrentProvidedAnswers === totalOfGuestPlayers) {
+        if (numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow === totalOfCurrentGuestPlayers) {
           // Everyone has answered the current question
           setEveryoneHasAnsweredTheCurrentQuestion(true);
 
@@ -59,7 +58,7 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = ({ setEveryoneHasAnswered
         }
       })
 
-      signalRConnection.on('UpdateSelectedAnswerCount', (playerConnId: string, selectedAnswerIdFromGuest: number) => {
+      signalRConnection.on('UpdateTotalOfProvidedAnswersCounter', (playerConnId: string, selectedAnswerIdFromGuest: number) => {
         // Update the answer statistics for the current question
         increaseAnswerCountForCurrentQuestion(selectedAnswerIdFromGuest);
 

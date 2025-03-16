@@ -1,22 +1,24 @@
 import Text from "@/app/components/UIComponents/Text";
-import PodiumPlaceIcon from "@/app/components/utils/Podium/PodiumPlace/PodiumPlaceIcon";
+import PodiumPlaceIcon, { PodiumPlaceIconSize } from "@/app/components/utils/Podium/PodiumPlace/PodiumPlaceIcon";
+import { Player } from "@/app/interfaces/Play/Player.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface PodiumPlaceProps {
   place: number;
+  playerInfo: Player | undefined;
   className?: string;
 }
 
-const PodiumPlace = ({ place, className = '' }: PodiumPlaceProps) => {
+const PodiumPlace = ({ place, playerInfo, className = '' }: PodiumPlaceProps) => {
   return (
     <div className={`${className}`}>
       {place === 1 && (
         <PodiumPlaceIndividual
           place={place}
-          playerName="Player 1"
-          playerPoints={3000}
+          playerName={playerInfo?.name}
+          playerPoints={playerInfo?.earnedPoints}
           className="z-20"
         />
       )}
@@ -24,8 +26,8 @@ const PodiumPlace = ({ place, className = '' }: PodiumPlaceProps) => {
       {place === 2 && (
         <PodiumPlaceIndividual
           place={place}
-          playerName="Player 2"
-          playerPoints={2000}
+          playerName={playerInfo?.name}
+          playerPoints={playerInfo?.earnedPoints}
           className="z-10 translate-x-3"
         />
       )}
@@ -33,8 +35,8 @@ const PodiumPlace = ({ place, className = '' }: PodiumPlaceProps) => {
       {place === 3 && (
         <PodiumPlaceIndividual
           place={place}
-          playerName="Player 3"
-          playerPoints={1000}
+          playerName={playerInfo?.name}
+          playerPoints={playerInfo?.earnedPoints}
           className="z-0 -translate-x-3"
         />
       )}
@@ -44,8 +46,8 @@ const PodiumPlace = ({ place, className = '' }: PodiumPlaceProps) => {
 
 interface PodiumPlaceIndividualProps {
   place: number;
-  playerName: string;
-  playerPoints: number;
+  playerName: string | null | undefined;
+  playerPoints: number | undefined;
   className?: string;
 }
 
@@ -87,9 +89,12 @@ const PodiumPlaceIndividual = ({ place = 0, playerName = "Unknown", playerPoints
         >
           <div
             id="podium-place-individual-number-of-placement-content"
-            className="w-28 h-28 rounded-full"
+            className="rounded-full"
           >
-            <PodiumPlaceIcon place={place} />
+            <PodiumPlaceIcon
+              place={place}
+              size={PodiumPlaceIconSize.REGULAR}
+            />
           </div>
 
           <Text

@@ -25,7 +25,7 @@ const GameOptionsCard = ({ className }: GameOptionsCardProps) => {
       transition={{
         width: {
           duration: 1.4,
-          delay: 12,
+          delay: 0,
           ease: "easeInOut"
         }
       }}
