@@ -27,6 +27,9 @@ interface InGameStore {
   setEarnedPointsFromCurrentQuestion: (earnedPointsFromCurrentQuestion: number) => void;
   finalPlayerStats: FinalPlayerStats[];
   setFinalPlayerStats: (finalPlayerStats: Player[]) => void;
+  everyoneHasAnsweredTheCurrentQuestion: boolean,
+  setEveryoneHasAnsweredTheCurrentQuestion: (status: boolean) => void;
+
 
   // Kahoot and questions
   kahoot: KahootPlay | null;
@@ -35,6 +38,8 @@ interface InGameStore {
   setQuestionIndex: (index: number) => void;
   goToTheNextQuestion: () => void;
   isThisTheLastQuestion: () => boolean;
+  countOfAnswersProvidenByGuests: number;
+  setCountOfAnswersProvidenByGuests: (count: number) => void;
 
   // Answers
   selectAnswer: (answerId: number | null) => void;
@@ -171,6 +176,10 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
     }
   }),
   finalPlayerStats: [],
+  everyoneHasAnsweredTheCurrentQuestion: false,
+  setEveryoneHasAnsweredTheCurrentQuestion: (status: boolean) => set(() => ({
+    everyoneHasAnsweredTheCurrentQuestion: status
+  })),
 
   // Kahoot and questions
   kahoot: null,
@@ -217,6 +226,10 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
 
     return (state.questionIndex) === (totalNumberOfQuestionsFromKahoot - 1);
   },
+  countOfAnswersProvidenByGuests: 0,
+  setCountOfAnswersProvidenByGuests: (count: number) => set(() => ({
+    countOfAnswersProvidenByGuests: count
+  })),
 
   // Answers
   selectAnswer: (answerId: number | null) => set((state) => {
@@ -236,7 +249,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
       kahoot.questions[state.questionIndex] = updatedQuestion;
 
       if (state.signalRConnection) {
-        state.signalRConnection.invoke('NotifyAnswerReceived', state.lobbyId, state.questionIndex, answerId);
+        state.signalRConnection.invoke('NotifyAnswerReceived', state.lobbyId, currentQuestion.id, answerId);
       }
 
       return {

@@ -19,7 +19,8 @@ export enum UseCases {
   TITLE = "TITLE",
   HEADER = "HEADER",
   BODY = "BODY",
-  LONGTEXT = "LONGTEXT"
+  LONGTEXT = "LONGTEXT",
+  INLINE = "INLINE"
 }
 
 export enum FontWeights {

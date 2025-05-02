@@ -20,7 +20,7 @@ interface ShowCurrentQuestionStatisticsProps {
 }
 
 const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionStatisticsProps) => {
-  const { kahoot, questionIndex, isHost, isThisTheLastQuestion, goToTheNextQuestion, signalRConnection, lobbyId } = useInGameStore();
+  const { kahoot, questionIndex, isHost, isThisTheLastQuestion, goToTheNextQuestion, signalRConnection, lobbyId, setEveryoneHasAnsweredTheCurrentQuestion, setCountOfAnswersProvidenByGuests } = useInGameStore();
   const [answers, setAnswers] = useState<AnswerPlay[] | undefined>(kahoot?.questions[questionIndex].answers);
   const [screen, setScreen] = useState<ScreenForFinalAnswerStatistics>(ScreenForFinalAnswerStatistics.STATISTICS);
   const router = useRouter();
@@ -32,20 +32,33 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
         
         break;
       case ScreenForFinalAnswerStatistics.SCOREBOARD:
-        // Go to the next question
-        if (!isThisTheLastQuestion()) {
-          goToTheNextQuestion();
-        } else {
-          if (isHost) {
-            // Redirect the guests to the '/ranking' page
-            signalRConnection?.invoke('RedirectGuestsFromLobbyToSpecificPage', lobbyId, '/ranking');
-            
-            // Redirect the host to the '/gameover' screen
-            router.push('/gameover');
-          }
-        }
+        // Go to the next question or end the game
+        isThisTheLastQuestion()
+          ? endTheGame()
+          : continueTheGame()
 
         break;
+    }
+  }
+
+  const continueTheGame = () => {
+    goToTheNextQuestion();
+    setEveryoneHasAnsweredTheCurrentQuestion(false);
+    setCountOfAnswersProvidenByGuests(0);
+  }
+  
+  const endTheGame = () => {
+    if (isHost) {
+      // Destroy all the data from current lobby
+      signalRConnection?.invoke('DestroyLobbyData', lobbyId)
+      .then(() => {
+        // Redirect the guests to the '/ranking' page
+        signalRConnection?.invoke('RedirectGuestsFromLobbyToSpecificPage', lobbyId, '/ranking')
+        .then(() => {
+          // Redirect the host to the '/gameover' screen
+          router.push('/gameover');
+        })
+      });
     }
   }
 
