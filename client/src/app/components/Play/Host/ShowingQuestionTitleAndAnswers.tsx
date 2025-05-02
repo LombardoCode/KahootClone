@@ -6,8 +6,7 @@ import ShowTheAnswersToTheGuests from "./ShowTheAnswersToTheGuests";
 import ShowCurrentQuestionStatistics from "./Statistics/ShowCurrentQuestionStatistics";
 
 const ShowingQuestionTitleAndAnswers = () => {
-  const { kahoot, questionIndex } = useInGameStore();
-  const [everyoneHasAnsweredTheCurrentQuestion, setEveryoneHasAnsweredTheCurrentQuestion] = useState<boolean>(false);
+  const { kahoot, questionIndex, everyoneHasAnsweredTheCurrentQuestion } = useInGameStore();
 
   return (
     <div id="showing-question-title-and-answers" className="flex flex-col h-screen mx-10">
@@ -16,9 +15,7 @@ const ShowingQuestionTitleAndAnswers = () => {
           <>
             <ShowingQuestionTitle questionTitle={kahoot?.questions[questionIndex].title} />
             
-            <ShowingSecondsLeftAndQuantityOfAnswersProviden
-              setEveryoneHasAnsweredTheCurrentQuestion={setEveryoneHasAnsweredTheCurrentQuestion}
-            />
+            <ShowingSecondsLeftAndQuantityOfAnswersProviden />
 
             <ShowTheAnswersToTheGuests kahoot={kahoot} questionIndex={questionIndex} />
           </>

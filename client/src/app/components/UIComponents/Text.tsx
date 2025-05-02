@@ -47,6 +47,15 @@ const Text = ({
           {children}
         </p>
       )}
+
+      {useCase === "INLINE" && (
+        <span
+          className={`${montserrat.className} ${className} ${textColor} ${fontWeight} ${textStyle}`}
+          onClick={onClick}
+        >
+          {children}
+        </span>
+      )}
     </>
   )
 }

@@ -14,12 +14,12 @@ namespace API.Sockets.Hubs
     /// <summary>
     /// Maps a question ID to a list of player IDs that have responded to that specific question
     /// </summary>
-    private static ConcurrentDictionary<int, HashSet<string>> playerResponsesPerQuestion = new ConcurrentDictionary<int, HashSet<string>>();
+    private static ConcurrentDictionary<(string lobbyId, int questionId), HashSet<string>> playerResponses = new ConcurrentDictionary<(string, int), HashSet<string>>();
 
     /// <summary>
     /// Maps a question ID to the total count of responses received for that question ID
     /// </summary>
-    private static ConcurrentDictionary<int, int> responseCountPerQuestion = new ConcurrentDictionary<int, int>();
+    private static ConcurrentDictionary<(string lobbyId, int questionId), int> responseCount = new ConcurrentDictionary<(string, int), int>();
 
     /// <summary>
     /// Maps a player ID to the lobby ID
@@ -61,12 +61,16 @@ namespace API.Sockets.Hubs
             // Get the current questionId of the lobby
             if (currentQuestionPerLobby.TryGetValue(lobbyId, out var currentQuestionId))
             {
+              var key = (lobbyId, currentQuestionId);
+
               // Check if the player that is going to be disconnected has answered to the current question that is being played
-              if (playerResponsesPerQuestion.TryGetValue(currentQuestionId, out var playerSet) && playerSet.Remove(playerConnId))
+              if (playerResponses.TryGetValue(key, out var playerSet) && playerSet.Remove(playerConnId))
               {
                 // Refresh the answers count for the current question
-                responseCountPerQuestion[currentQuestionId] = playerSet.Count;
-                await Clients.Group(lobbyId).SendAsync("UpdateAnswerCount", responseCountPerQuestion[currentQuestionId]);
+                responseCount[key] = playerSet.Count;
+                int numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow = responseCount[key];
+                
+                await Clients.Group(lobbyId).SendAsync("OnUpdateTotalOfProvidedAnswersForCurrentQuestion", numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
               }
             }
 
@@ -160,9 +164,6 @@ namespace API.Sockets.Hubs
 
     public async Task StartingGame(string lobbyId)
     {
-      // Reset all game data from current lobby before playing
-      ResetAllGameDataFromLobby(lobbyId);
-
       // Notify players that the game has started
       await Clients.Group(lobbyId).SendAsync("GameHasStarted");
     }
@@ -180,16 +181,17 @@ namespace API.Sockets.Hubs
     public async Task NotifyAnswerReceived(string lobbyId, int questionId, int answerId)
     {
       string playerConnId = Context.ConnectionId;
+      var key = (lobbyId, questionId);
 
-      if (!playerResponsesPerQuestion.ContainsKey(questionId))
+      if (!playerResponses.ContainsKey(key))
       {
-        playerResponsesPerQuestion[questionId] = new HashSet<string>();
+        playerResponses[key] = new HashSet<string>();
       }
 
-      if (playerResponsesPerQuestion[questionId].Add(playerConnId))
+      if (playerResponses[key].Add(playerConnId))
       {
-        responseCountPerQuestion[questionId] = playerResponsesPerQuestion[questionId].Count;
-        int numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow = responseCountPerQuestion[questionId];
+        responseCount[key] = playerResponses[key].Count;
+        int numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow = responseCount[key];
 
         if (!questionIdsPerLobby.ContainsKey(lobbyId))
         {
@@ -197,9 +199,9 @@ namespace API.Sockets.Hubs
         }
         questionIdsPerLobby[lobbyId].Add(questionId);
 
-        await Clients.Group(lobbyId).SendAsync("VerifyIfEveryoneHasAnsweredTheCurrentQuestion", numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
+        await Clients.Group(lobbyId).SendAsync("OnUpdateTotalOfProvidedAnswersForCurrentQuestion", numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
 
-        await Clients.Group(lobbyId).SendAsync("UpdateTotalOfProvidedAnswersCounter", playerConnId, answerId);
+        await Clients.Group(lobbyId).SendAsync("UpdateAnswerBoard", playerConnId, answerId);
       }
     }
 
@@ -228,38 +230,67 @@ namespace API.Sockets.Hubs
       await Clients.OthersInGroup(lobbyId).SendAsync("OnRedirectToSpecificPage", clientPath);
     }
 
-    private void ResetAllGameDataFromLobby(string lobbyId)
+    public async Task DestroyLobbyData(string lobbyId)
     {
-      // Clear all players from the lobby
-      playersInLobby.TryRemove(lobbyId, out var _);
+      RemoveAllPlayersFromSpecificLobby(lobbyId);
+      RemoveAllPlayerReponsesFromSpecificLobby(lobbyId);
+      RemoveAllResponsesCountFromSpecificLobby(lobbyId);
+      RemoveAllPlayerToLobbyMappingFromSpecificLobby(lobbyId);
+      RemoveAllQuestionIdsToLobbyMappingFromSpecificLobby(lobbyId);
+      RemoveTheCurrentQuestionIdFromSpecificLobby(lobbyId);
+    }
 
-      // Get all the question IDs from the lobby and remove them
-      questionIdsPerLobby.TryGetValue(lobbyId, out var questionIdsFromLobby);
-      questionIdsPerLobby.TryRemove(lobbyId, out var _);
+    private void RemoveAllPlayersFromSpecificLobby(string lobbyId)
+    {
+      // Remove all players from our local lobby <-> player tracking variable "playersInLobby"
+      playersInLobby.TryRemove(lobbyId, out _);
+    }
 
-      // Remove all the counting for every question ID from the lobby
-      if (questionIdsFromLobby != null)
+    private void RemoveAllPlayerReponsesFromSpecificLobby(string lobbyId)
+    {
+      var keysToRemove = playerResponses.Keys
+                          .Where(key => key.lobbyId == lobbyId)
+                          .ToList();
+      
+      foreach (var key in keysToRemove)
       {
-        foreach (var questionId in questionIdsFromLobby)
-        {
-          responseCountPerQuestion.TryRemove(questionId, out var _);
-          playerResponsesPerQuestion.TryRemove(questionId, out var _);
-        }
+        playerResponses.TryRemove(key, out var _);
       }
+    }
 
-      // Remove any entries from the current question tracking based on the lobbyId
-      currentQuestionPerLobby.TryRemove(lobbyId, out var _);
+    private void RemoveAllResponsesCountFromSpecificLobby(string lobbyId)
+    {
+      var keysToRemove = responseCount.Keys
+                          .Where(key => key.lobbyId == lobbyId)
+                          .ToList();
+      
+      foreach (var key in keysToRemove)
+      {
+        responseCount.TryRemove(key, out var _);
+      }
+    }
 
-      // Remove all player connections mapped to the lobbyId
+    private void RemoveAllPlayerToLobbyMappingFromSpecificLobby(string lobbyId)
+    {
       var playersToRemove = playerLobbyMapping
-                              .Where(m => m.Value == lobbyId)
-                              .Select(m => m.Key)
-                              .ToList();
-
+                            .Where(entry => entry.Value == lobbyId)
+                            .Select(entry => entry.Key)
+                            .ToList();
+      
       foreach (var playerConnId in playersToRemove)
       {
-        playerLobbyMapping.TryRemove(playerConnId, out var _);
+        playerLobbyMapping.TryRemove(playerConnId, out _);
       }
+    }
+
+    private void RemoveAllQuestionIdsToLobbyMappingFromSpecificLobby(string lobbyId)
+    {
+      questionIdsPerLobby.TryRemove(lobbyId, out _);
+    }
+
+    private void RemoveTheCurrentQuestionIdFromSpecificLobby(string lobbyId)
+    {
+      currentQuestionPerLobby.TryRemove(lobbyId, out _);
     }
   }
 

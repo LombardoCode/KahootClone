@@ -24,13 +24,13 @@ const LobbyUserCard = ({ player, kickPlayer }: LobbyUserCardProps) => {
       className={`flex rounded-md overflow-hidden cursor-pointer select-none ${isHost && 'hover:line-through hover:decoration-white hover:decoration-3'}`}
       onClick={() => tryKickThePlayer(player.id)}
     >
-      <div className="lobby-user-card-icon bg-purple-800 text-white px-2 py-3">
+      <div className="lobby-user-card-icon bg-purple-950 text-white px-4 py-5">
         <FontAwesomeIcon
           icon={faUser}
           size={"3x"}
         />
       </div>
-      <div className="lobby-user-card-username bg-purple-600 flex-1 flex items-center px-2">
+      <div className="lobby-user-card-username bg-purple-800 flex-1 flex items-center px-4">
         <Text
           fontWeight={FontWeights.BOLD}
           textColor={TextColors.WHITE}

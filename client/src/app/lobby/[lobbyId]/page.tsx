@@ -15,12 +15,16 @@ import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import LobbyUserCard from "@/app/components/utils/Lobby/LobbyUserCard";
 import Container from "@/app/components/utils/Container";
 import { KahootPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
+import { getDomainName } from "@/app/utils/domainUtils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const LobbyPage = () => {
   // Routing
   const params = useParams();
   const router = useRouter();
-  
+
   // Lobby
   let lobbyIdFromParams = Array.isArray(params.lobbyId)
     ? params.lobbyId[0]
@@ -45,13 +49,13 @@ const LobbyPage = () => {
 
   const checkIfWeAreInAValidLobby = () => {
     axiosInstance.post(`/lobby/checkIfValidLobby`, { lobbyId: lobbyIdFromParams })
-    .then(res => {
-      setIsValidLobby(res.data);
-      ConnectingToTheSignalRLobbyHub();
-    })
-    .catch(err => {
-      console.error(err);
-    })
+      .then(res => {
+        setIsValidLobby(res.data);
+        ConnectingToTheSignalRLobbyHub();
+      })
+      .catch(err => {
+        console.error(err);
+      })
   }
 
   const ConnectingToTheSignalRLobbyHub = () => {
@@ -224,71 +228,140 @@ const LobbyPage = () => {
     )
   }
 
-  return (
-    <div>
-      <div id="header" className="flex flex-col items-center py-8">
-        <Text
-          fontWeight={FontWeights.REGULAR}
-          textColor={TextColors.BLACK}
-          useCase={UseCases.HEADER}
-          className="text-4xl"
-        >
-          Join at <span className="fnt-montserrat-bold">KahootClone</span> with Game PIN:
-        </Text>
-        <Text
-          fontWeight={FontWeights.BOLD}
-          textColor={TextColors.BLACK}
-          useCase={UseCases.HEADER}
-          className="text-4xl mt-2"
-        >
-          {lobbyIdFromParams}
-        </Text>
-      </div>
+  const ScreenForHost = () => {
+    return (
+      <>
+        <div className="flex justify-center">
+          <div id="invitation-and-game-pin-header" className="grid grid-cols-5 gap-2 py-8">
+            <div id="invitation-header" className="col-span-3 flex flex-col justify-center items-center bg-white rounded-md px-8 py-3 shadow-lg shadow-black/20">
+              <Text
+                fontWeight={FontWeights.REGULAR}
+                textColor={TextColors.GRAY}
+                useCase={UseCases.HEADER}
+                className="text-2xl text-center w-8/12"
+              >
+                Join at{" "}
+                <Text
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.GRAY}
+                  useCase={UseCases.INLINE}
+                >
+                  {getDomainName()}
+                </Text>
+                {" "}to play
+              </Text>
+            </div>
 
-      <Container>
-        <div id="play-button" className="flex justify-end">
-          {players.length > 1 && isHost && (
-            <Button
-              backgroundColor={BackgroundColors.GREEN}
-              fontWeight={FontWeights.BOLD}
-              textColor={TextColors.WHITE}
-              className="text-sm"
-              size={ButtonSize.MEDIUM}
-              onClick={() => startingTheGame()}
-            >
-              Start game
-            </Button>
-          )}
+            <div id="game-pin-header" className="col-span-2 flex flex-col justify-center bg-white rounded-md px-8 pt-2 pb-6 shadow-lg shadow-black/20">
+              <Text
+                fontWeight={FontWeights.BOLD}
+                textColor={TextColors.GRAY}
+                useCase={UseCases.HEADER}
+                className="text-2xl mt-2 text-left"
+              >
+                Game PIN
+              </Text>
+
+              <Text
+                fontWeight={FontWeights.BLACK}
+                textColor={TextColors.GRAY}
+                useCase={UseCases.HEADER}
+                className="text-7xl text-center"
+              >
+                {lobbyIdFromParams}
+              </Text>
+            </div>
+          </div>
         </div>
-      </Container>
 
-      <p>{JSON.stringify(kahoot)}</p>
+        <Container>
+          <div id="lobby-kahoot-logo-and-host-buttons" className="relative flex justify-center items-center">
+            <div id="lobby-kahoot-logo">
+              <Logo
+                size={LogoSize.SMALL}
+                color={LogoColors.WHITE}
+              />
+            </div>
 
-      <div id="who-are-you" className="text-green-600 mb-10">
-        <p>You are:</p>
-        <p>{currentPlayer.name}</p>
-      </div>
+            <div id="lobby-host-buttons" className="absolute right-0">
+              {players.length > 1 && isHost && (
+                <Button
+                  backgroundColor={BackgroundColors.WHITE}
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.GRAY}
+                  className="text-md"
+                  size={ButtonSize.MEDIUM}
+                  perspective={false}
+                  animateOnHover={false}
+                  onClick={() => startingTheGame()}
+                >
+                  Start game
+                </Button>
+              )}
+            </div>
+          </div>
+        </Container>
 
-      <Container>
-        <div id="list-for-players" className="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-10">
-          {players.map((p: Player) => (
-            <LobbyUserCard
-              key={p.id}
-              player={p}
-              kickPlayer={kickPlayerById}
+        <Container>
+          <div id="list-for-players" className="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-10">
+            {players.map((p: Player) => (
+              <LobbyUserCard
+                key={p.id}
+                player={p}
+                kickPlayer={kickPlayerById}
+              />
+            ))}
+          </div>
+        </Container>
+      </>
+    )
+  }
+
+  const ScreenForGuest = () => {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <div id="guest-player-card-information" className="flex flex-col items-center">
+          <div id="guest-player-card-information-icon" className="flex justify-center items-center w-24 h-24 bg-purple-900 rounded-full mb-2">
+            <FontAwesomeIcon
+              icon={faUser}
+              size={"3x"}
+              color="#FFFFFF"
             />
-          ))}
-        </div>
-      </Container>
+          </div>
 
-      <div>
+          <div id="guest-player-card-information-name" className="mb-3">
+            <Text
+              textColor={TextColors.WHITE}
+              useCase={UseCases.LONGTEXT}
+              fontWeight={FontWeights.BOLD}
+              className="text-2xl text-shadow shadow-black/80"
+            >
+              {currentPlayer.name}
+            </Text>
+          </div>
+
+          <div id="guest-player-card-information-join-info">
+            <Text
+              textColor={TextColors.WHITE}
+              useCase={UseCases.LONGTEXT}
+              fontWeight={FontWeights.BOLD}
+              className="text-sm text-shadow shadow-black/80"
+            >
+              You have joined! Can you see your name in the screen?
+            </Text>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={`relative bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>
+      <div className="absolute inset-0 bg-black opacity-10"></div>
+      <div className="relative z-10 h-full">
         {isHost
-          ? (
-            <div>Is the host</div>
-          )
-          : (
-            <div>Guest</div>
-          )}
+          ? <ScreenForHost />
+          : (currentPlayer.id !== null ? <ScreenForGuest /> : null)}
       </div>
 
       {/* Modal to be displayed for the user to enter their nickname, so it can be displayed to other users */}

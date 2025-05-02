@@ -2,28 +2,16 @@ import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import { useEffect, useRef, useState } from "react";
 import Text from "../../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
+import { Player } from "@/app/interfaces/Play/Player.interface";
 
-interface ShowingSecondsLeftAndQuantityOfAnswersProvidenProps {
-  setEveryoneHasAnsweredTheCurrentQuestion: (status: boolean) => void;
-}
-
-const ShowingSecondsLeftAndQuantityOfAnswersProviden = ({ setEveryoneHasAnsweredTheCurrentQuestion }: ShowingSecondsLeftAndQuantityOfAnswersProvidenProps) => {
-  const { kahoot, questionIndex, signalRConnection, players, lobbyId, increaseAnswerCountForCurrentQuestion, addPointsToThePlayer } = useInGameStore();
+const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
+  const { kahoot, questionIndex, signalRConnection, countOfAnswersProvidenByGuests, players, lobbyId, increaseAnswerCountForCurrentQuestion, addPointsToThePlayer } = useInGameStore();
   const [timer, setTimer] = useState<number | undefined>(kahoot?.questions[questionIndex].timeLimit);
   const timerRef = useRef<number | undefined>(timer);
-  const [countOfAnswersProvidenByGuests, setCountOfAnswersProvidenByGuests] = useState<number>(0);
 
   useEffect(() => {
     timerRef.current = timer;
   }, [timer]);
-
-  useEffect(() => {
-    const setupConnection = async () => {
-      await initializeSignalREvents();
-    }
-
-    setupConnection();
-  }, []);
 
   useEffect(() => {
     const timerTimeout = setTimeout(() => {
@@ -41,33 +29,18 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = ({ setEveryoneHasAnswered
     }
   }, [timer]);
 
-  const initializeSignalREvents = async () => {
+  const disconnectSignalREvents = () => {
     if (signalRConnection) {
-      signalRConnection.on('VerifyIfEveryoneHasAnsweredTheCurrentQuestion', (numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow: number) => {
-        setCountOfAnswersProvidenByGuests(numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
-
-        const totalOfCurrentGuestPlayers: number = players.length;
-
-        // Check if everyone has answered the current question
-        if (numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow === totalOfCurrentGuestPlayers) {
-          // Everyone has answered the current question
-          setEveryoneHasAnsweredTheCurrentQuestion(true);
-
-          // Redirect the guests to the '/result' page
-          signalRConnection.invoke('RedirectGuestsFromLobbyToSpecificPage', lobbyId, '/result');
-        }
-      })
-
-      signalRConnection.on('UpdateTotalOfProvidedAnswersCounter', (playerConnId: string, selectedAnswerIdFromGuest: number) => {
-        // Update the answer statistics for the current question
-        increaseAnswerCountForCurrentQuestion(selectedAnswerIdFromGuest);
-
-        // We give the correspondent points to the player who answered the question
-        const currentTime = timerRef.current;
-        addPointsToThePlayer(playerConnId, selectedAnswerIdFromGuest, currentTime);
-      })
+      signalRConnection.off("OnUpdateTotalOfProvidedAnswersForCurrentQuestion");
+      signalRConnection.off("updateAnswerBoard");
     }
   }
+
+  useEffect(() => {
+    return () => {
+      disconnectSignalREvents();
+    }
+  }, [signalRConnection]);
 
   return (
     <div id="play-container" className="flex-1">
