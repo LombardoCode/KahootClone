@@ -19,8 +19,12 @@ import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
 import { getDomainName } from "@/app/utils/domainUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import useLobbySocketEvents from "@/app/hooks/useLobbySocketEvents";
 
 const LobbyPage = () => {
+  // Hooks
+  useLobbySocketEvents();
+  
   // Routing
   const params = useParams();
   const router = useRouter();
@@ -43,8 +47,6 @@ const LobbyPage = () => {
       setLobbyId(lobbyIdFromParams);
       checkIfWeAreInAValidLobby();
     }
-
-    checkIfHost();
   }, []);
 
   const checkIfWeAreInAValidLobby = () => {
@@ -81,7 +83,7 @@ const LobbyPage = () => {
             setLobbyHubListenerEvents(signalRConnection);
           })
           .then(() => {
-            integrateThisGuestConnectionIdToTheLobbyHub();
+            integrateThisConnectionIdToTheLobbyHub();
           })
           .then(() => {
             getAllPlayersFromLobby(signalRConnection);
@@ -96,10 +98,14 @@ const LobbyPage = () => {
     }
   }
 
-  const integrateThisGuestConnectionIdToTheLobbyHub = () => {
-    if (signalRConnection) {
-      signalRConnection.invoke("IntegrateGuestToTheLobbyGroup", lobbyIdFromParams);
+  const integrateThisConnectionIdToTheLobbyHub = async () => {
+    if (!signalRConnection) {
+      return;
     }
+
+    const isCurrentUserHost: boolean = await checkIfHost();
+
+    signalRConnection.invoke('IntegrateConnectionIdToTheLobbyGroup', lobbyIdFromParams, isCurrentUserHost);
   }
 
   const setLobbyHubListenerEvents = (conn: signalR.HubConnection) => {
@@ -109,10 +115,6 @@ const LobbyPage = () => {
         name: newPlayer.name,
         earnedPoints: newPlayer.earnedPoints
       });
-    })
-
-    conn.on('PlayerHasLeft', (playerId) => {
-      removePlayer(playerId);
     })
 
     conn.on('ReceiveAllPlayers', (allPlayers: any[]) => {
@@ -155,17 +157,23 @@ const LobbyPage = () => {
       })
   }
 
-  const checkIfHost = async () => {
-    await axiosInstance.get(`/lobby/checkIfTheUserIsHostFromTheGame?lobbyId=${lobbyIdFromParams}`)
-      .then(async (res) => {
-        setIsHost(res.data.isHost);
-        if (res.data.isHost) {
-          await downloadAllKahootQuestions();
-        }
-      })
-      .catch(err => {
-        console.error(err);
-      })
+  const checkIfHost = async (): Promise<boolean> => {
+    try {
+      const res = await axiosInstance.get(`/lobby/checkIfTheUserIsHostFromTheGame?lobbyId=${lobbyIdFromParams}`);
+      const isHost: boolean = res.data.isHost;
+
+      setIsHost(isHost);
+
+      if (isHost) {
+        await downloadAllKahootQuestions();
+      }
+
+      return isHost;
+    }
+    catch (err) {
+      console.error(err);
+      return false;
+    }
   }
 
   const createNewPlayer = async () => {

@@ -8,8 +8,12 @@ import Spinner from "../components/UIComponents/Spinners/Spinner";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
+import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 
 const PlayPage = () => {
+  // Hooks
+  useLobbySocketEvents();
+  
   // Global store state
   const { signalRConnection, isHost, kahoot, setQuestionIndex } = useInGameStore();
   const router = useRouter();

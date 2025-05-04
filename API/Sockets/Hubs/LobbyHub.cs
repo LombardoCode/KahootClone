@@ -35,6 +35,11 @@ namespace API.Sockets.Hubs
     /// Maps the current question ID by lobbyId
     /// </summary>
     private static ConcurrentDictionary<string, int> currentQuestionPerLobby = new ConcurrentDictionary<string, int>();
+    
+    /// <summary>
+    /// Maps the current question ID by lobbyId
+    /// </summary>
+    private static ConcurrentDictionary<string, string> hostConnectionPerLobby = new ConcurrentDictionary<string, string>();
 
     /// <summary>
     /// Code that gets executed when SignalR connection from client gets disconnected
@@ -44,9 +49,23 @@ namespace API.Sockets.Hubs
     public override async Task OnDisconnectedAsync(Exception exception)
     {
       string playerConnId = Context.ConnectionId;
+      string? lobbyId;
+
+      // Detect if the host is leaving the game
+      if (hostConnectionPerLobby.Any(l => l.Value == playerConnId))
+      {
+        lobbyId = hostConnectionPerLobby.FirstOrDefault(l => l.Value == playerConnId).Key;
+
+        if (lobbyId != null)
+        {
+          await Clients.Group(lobbyId).SendAsync("OnHostAbandonedTheGame");
+
+          hostConnectionPerLobby.TryRemove(lobbyId, out _);
+        }
+      }
 
       // Try to remove the player that is trying to get disconnected and get the lobbyId
-      if (playerLobbyMapping.TryRemove(playerConnId, out var lobbyId))
+      if (playerLobbyMapping.TryRemove(playerConnId, out lobbyId))
       {
         // Get the list of the current players based on the lobbyId
         if (playersInLobby.TryGetValue(lobbyId, out var players))
@@ -82,8 +101,13 @@ namespace API.Sockets.Hubs
       await base.OnDisconnectedAsync(exception);
     }
 
-    public async Task IntegrateGuestToTheLobbyGroup(string lobbyId)
+    public async Task IntegrateConnectionIdToTheLobbyGroup(string lobbyId, bool isHost)
     {
+      if (isHost)
+      {
+        hostConnectionPerLobby[lobbyId] = Context.ConnectionId;
+      }
+
       await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId);
     }
 

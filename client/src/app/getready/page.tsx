@@ -7,9 +7,16 @@ import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface"
 import useInGameStore from "../stores/Kahoot/useInGameStore";
 import { useRouter } from "next/navigation";
 import { SpinnerSizes } from "../components/UIComponents/Spinners/Spinner.interface";
+import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 
 const GetReady = () => {
+  // Hooks
+  useLobbySocketEvents();
+
+  // Global store state
   const { signalRConnection, isHost, questionIndex } = useInGameStore();
+  
+  // Local component state
   const [timer, setTimer] = useState<number>(5);
   const router = useRouter();
 

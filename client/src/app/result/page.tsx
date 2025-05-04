@@ -8,9 +8,16 @@ import { AnswerPlay, QuestionPlay } from "../interfaces/Kahoot/Kahoot.interface"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
+import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 
 const ResultPage = () => {
+  // Hooks
+  useLobbySocketEvents();
+  
+  // Global store state
   const { kahoot, questionIndex, earnedPointsFromCurrentQuestion, signalRConnection } = useInGameStore();
+  
+  // Local component state
   const [wasSelectedAnswerCorrect, setWasSelectedAnswerCorrect] = useState<boolean>(false);
   const router = useRouter();
 
