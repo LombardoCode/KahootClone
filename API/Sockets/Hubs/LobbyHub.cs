@@ -52,15 +52,25 @@ namespace API.Sockets.Hubs
       string? lobbyId;
 
       // Detect if the host is leaving the game
-      if (hostConnectionPerLobby.Any(l => l.Value == playerConnId))
+      bool isHostLeavingTheGame = hostConnectionPerLobby.Any(l => l.Value == playerConnId);
+
+      if (isHostLeavingTheGame)
       {
         lobbyId = hostConnectionPerLobby.FirstOrDefault(l => l.Value == playerConnId).Key;
 
         if (lobbyId != null)
         {
-          await Clients.Group(lobbyId).SendAsync("OnHostAbandonedTheGame");
+          bool lobbyStillHasPlayers = playersInLobby.TryGetValue(lobbyId, out var players) && players.Count > 0;
+
+          if (lobbyStillHasPlayers)
+          {
+            await Clients.Group(lobbyId).SendAsync("OnHostAbandonedTheGame");
+          }
 
           hostConnectionPerLobby.TryRemove(lobbyId, out _);
+
+          // Since the host is leaving the lobby, we will start destroying the lobby data. The connected guests will be notified and redirected via "OnHostAbandonedTheGame".
+          await DestroyLobbyData(lobbyId);
         }
       }
 
@@ -98,6 +108,18 @@ namespace API.Sockets.Hubs
         }
       }
 
+      // Destroy the lobby data when there are no more active players
+      if (!string.IsNullOrEmpty(lobbyId))
+      {
+        bool lobbyHasNoPlayers = !playersInLobby.ContainsKey(lobbyId) || playersInLobby[lobbyId].Count == 0;
+        bool hostIsGone = !hostConnectionPerLobby.ContainsKey(lobbyId);
+
+        if (lobbyHasNoPlayers && hostIsGone)
+        {
+          await DestroyLobbyData(lobbyId);
+        }
+      }
+
       await base.OnDisconnectedAsync(exception);
     }
 
@@ -109,16 +131,6 @@ namespace API.Sockets.Hubs
       }
 
       await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId);
-    }
-
-    public async Task GetAllPlayersFromLobby(string lobbyId)
-    {
-      if (!playersInLobby.ContainsKey(lobbyId))
-      {
-        playersInLobby[lobbyId] = new List<Player>();
-      }
-
-      await Clients.Caller.SendAsync("ReceiveAllPlayers", playersInLobby[lobbyId]);
     }
 
     public async Task PutUserInLobbyQueue(string lobbyId, Player newPlayerData)
@@ -143,9 +155,6 @@ namespace API.Sockets.Hubs
       {
         playersInLobby[lobbyId] = new List<Player> { newPlayer };
       }
-
-      // Make sure that the player's ConnectionId is added to the group (lobbyId), so players can receive data as a group
-      await Clients.Caller.SendAsync("ReceiveAllPlayers", playersInLobby[lobbyId]);
 
       await Clients.Group(lobbyId).SendAsync("AddNewPlayer", newPlayer);
     }
@@ -223,9 +232,11 @@ namespace API.Sockets.Hubs
         }
         questionIdsPerLobby[lobbyId].Add(questionId);
 
-        await Clients.Group(lobbyId).SendAsync("OnUpdateTotalOfProvidedAnswersForCurrentQuestion", numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
+        string hostConnIdFromLobby = hostConnectionPerLobby[lobbyId];
 
-        await Clients.Group(lobbyId).SendAsync("UpdateAnswerBoard", playerConnId, answerId);
+        await Clients.Client(hostConnIdFromLobby).SendAsync("OnUpdateTotalOfProvidedAnswersForCurrentQuestion", numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
+
+        await Clients.Client(hostConnIdFromLobby).SendAsync("UpdateAnswerBoard", playerConnId, answerId);
       }
     }
 
@@ -251,7 +262,7 @@ namespace API.Sockets.Hubs
 
     public async Task RedirectGuestsFromLobbyToSpecificPage(string lobbyId, string clientPath)
     {
-      await Clients.OthersInGroup(lobbyId).SendAsync("OnRedirectToSpecificPage", clientPath);
+      await Clients.OthersInGroup(lobbyId).SendAsync("OnRedirectGuestsToSpecificPage", clientPath);
     }
 
     public async Task DestroyLobbyData(string lobbyId)
