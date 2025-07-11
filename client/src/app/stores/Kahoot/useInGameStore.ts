@@ -11,7 +11,7 @@ interface InGameStore {
   setLobbyId: (lobbyId: string) => void;
 
   // Host variables
-  isHost: boolean;
+  isHost: boolean | null;
   setIsHost: (isHost: boolean) => void;
 
   // Identity of the user
@@ -79,7 +79,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   })),
 
   // Host variables
-  isHost: false,
+  isHost: null,
   setIsHost: (isHost: boolean) => set(() => ({
     isHost
   })),

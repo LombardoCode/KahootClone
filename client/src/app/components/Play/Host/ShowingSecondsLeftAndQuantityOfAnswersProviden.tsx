@@ -2,10 +2,9 @@ import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import { useEffect, useRef, useState } from "react";
 import Text from "../../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
-import { Player } from "@/app/interfaces/Play/Player.interface";
 
 const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
-  const { kahoot, questionIndex, signalRConnection, countOfAnswersProvidenByGuests, players, lobbyId, increaseAnswerCountForCurrentQuestion, addPointsToThePlayer } = useInGameStore();
+  const { kahoot, questionIndex, countOfAnswersProvidenByGuests } = useInGameStore();
   const [timer, setTimer] = useState<number | undefined>(kahoot?.questions[questionIndex].timeLimit);
   const timerRef = useRef<number | undefined>(timer);
 
@@ -28,19 +27,6 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
       clearInterval(timerTimeout);
     }
   }, [timer]);
-
-  const disconnectSignalREvents = () => {
-    if (signalRConnection) {
-      signalRConnection.off("OnUpdateTotalOfProvidedAnswersForCurrentQuestion");
-      signalRConnection.off("updateAnswerBoard");
-    }
-  }
-
-  useEffect(() => {
-    return () => {
-      disconnectSignalREvents();
-    }
-  }, [signalRConnection]);
 
   return (
     <div id="play-container" className="flex-1">

@@ -14,7 +14,6 @@ import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import LobbyUserCard from "@/app/components/utils/Lobby/LobbyUserCard";
 import Container from "@/app/components/utils/Container";
-import { KahootPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
 import { getDomainName } from "@/app/utils/domainUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,7 +26,6 @@ const LobbyPage = () => {
   
   // Routing
   const params = useParams();
-  const router = useRouter();
 
   // Lobby
   let lobbyIdFromParams = Array.isArray(params.lobbyId)
@@ -35,7 +33,7 @@ const LobbyPage = () => {
     : params.lobbyId;
 
   // Global store state
-  const { signalRConnection, setSignalRConnection, setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, addPlayer, removePlayer, kahoot, setKahootInfo } = useInGameStore();
+  const { signalRConnection, setSignalRConnection, setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, kahoot, setKahootInfo } = useInGameStore();
 
   // Local component state
   const [isValidLobby, setIsValidLobby] = useState<boolean>(false);
@@ -71,79 +69,32 @@ const LobbyPage = () => {
   }
 
   useEffect(() => {
-    startSignalRConnection();
+    if (signalRConnection) {
+      startSignalRConnection();
+    }
   }, [signalRConnection]);
 
   const startSignalRConnection = async () => {
-    if (signalRConnection) {
-      try {
-        signalRConnection
-          .start()
-          .then(async () => {
-            setLobbyHubListenerEvents(signalRConnection);
-          })
-          .then(() => {
-            integrateThisConnectionIdToTheLobbyHub();
-          })
-          .then(() => {
-            getAllPlayersFromLobby(signalRConnection);
-          })
-          .catch(err => {
-            console.error(err)
-          });
-      }
-      catch (err) {
-        console.error("Error establishing the connection: ", err);
-      }
-    }
-  }
-
-  const integrateThisConnectionIdToTheLobbyHub = async () => {
     if (!signalRConnection) {
       return;
     }
 
-    const isCurrentUserHost: boolean = await checkIfHost();
+    try {
+      await signalRConnection.start();
 
-    signalRConnection.invoke('IntegrateConnectionIdToTheLobbyGroup', lobbyIdFromParams, isCurrentUserHost);
-  }
+      const res = await axiosInstance.get(`/lobby/checkIfTheUserIsHostFromTheGame?lobbyId=${lobbyIdFromParams}`);
+      const isUserHost: boolean = res.data.isHost;
 
-  const setLobbyHubListenerEvents = (conn: signalR.HubConnection) => {
-    conn.on('AddNewPlayer', (newPlayer) => {
-      addPlayer({
-        id: newPlayer.id,
-        name: newPlayer.name,
-        earnedPoints: newPlayer.earnedPoints
-      });
-    })
+      setIsHost(isUserHost);
 
-    conn.on('ReceiveAllPlayers', (allPlayers: any[]) => {
-      allPlayers.forEach((player: Player) => {
-        addPlayer({
-          id: player.id,
-          name: player.name,
-          earnedPoints: player.earnedPoints
-        })
-      })
-    })
+      if (isUserHost) {
+        await downloadAllKahootQuestions();
+      }
 
-    conn.on('DisconnectPlayer', () => {
-      conn.stop();
-      router.push('/');
-    })
-
-    conn.on('GameHasStarted', () => {
-      router.push('/start');
-    })
-
-    conn.on('ReceiveAllQuestionsFromHost', (kahootInfo: KahootPlay) => {
-      setKahootInfo(kahootInfo);
-    })
-  }
-
-  const getAllPlayersFromLobby = (signalRConnection: signalR.HubConnection) => {
-    if (signalRConnection) {
-      signalRConnection.invoke('GetAllPlayersFromLobby', lobbyIdFromParams);
+      signalRConnection.invoke('IntegrateConnectionIdToTheLobbyGroup', lobbyIdFromParams, isUserHost);
+    }
+    catch (err) {
+      console.error("Error establishing the connection: ", err);
     }
   }
 
@@ -155,25 +106,6 @@ const LobbyPage = () => {
       .catch(err => {
         console.error(err);
       })
-  }
-
-  const checkIfHost = async (): Promise<boolean> => {
-    try {
-      const res = await axiosInstance.get(`/lobby/checkIfTheUserIsHostFromTheGame?lobbyId=${lobbyIdFromParams}`);
-      const isHost: boolean = res.data.isHost;
-
-      setIsHost(isHost);
-
-      if (isHost) {
-        await downloadAllKahootQuestions();
-      }
-
-      return isHost;
-    }
-    catch (err) {
-      console.error(err);
-      return false;
-    }
   }
 
   const createNewPlayer = async () => {

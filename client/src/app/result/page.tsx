@@ -38,7 +38,7 @@ const ResultPage = () => {
 
   const initializeSignalREvents = async () => {
     if (signalRConnection) {
-      await signalRConnection.on('OnRedirectToSpecificPage', (clientPath: string) => {
+      await signalRConnection.on('OnRedirectGuestsToSpecificPage', (clientPath: string) => {
         router.push(clientPath);
       });
     }

@@ -8,7 +8,7 @@ import { Player } from "@/app/interfaces/Play/Player.interface";
 
 const PlayScreenForHost = () => {
   // Global store
-  const { isHost, signalRConnection, lobbyId, kahoot, questionIndex, setAnswerStatsForCurrentQuestion, players, setEveryoneHasAnsweredTheCurrentQuestion, increaseAnswerCountForCurrentQuestion, addPointsToThePlayer, setCountOfAnswersProvidenByGuests } = useInGameStore();
+  const { isHost, signalRConnection, lobbyId, kahoot, questionIndex, setAnswerStatsForCurrentQuestion, players } = useInGameStore();
 
   // Local component state
   const [showQuestionHeader, setShowQuestionHeader] = useState<boolean>(true);
@@ -52,46 +52,6 @@ const PlayScreenForHost = () => {
   useEffect(() => {
     playersRef.current = players;
   }, [players]);
-
-  useEffect(() => {
-    const setupConnection = async () => {
-      await initializeSignalREvents();
-    }
-
-    setupConnection();
-  }, []);
-
-  const OnUpdateTotalOfProvidedAnswersForCurrentQuestionHandler = (numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow: number) => {
-    setCountOfAnswersProvidenByGuests(numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
-
-    const totalOfCurrentGuestPlayers: number = playersRef.current.length;
-
-    // Check if everyone has answered the current question
-    if (numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow === totalOfCurrentGuestPlayers) {
-      // Everyone has answered the current question
-      setEveryoneHasAnsweredTheCurrentQuestion(true);
-
-      // Redirect the guests to the '/result' page
-      signalRConnection?.invoke('RedirectGuestsFromLobbyToSpecificPage', lobbyId, '/result');
-    }
-  }
-
-  const updateAnswerBoardHandler = (playerConnId: string, selectedAnswerIdFromGuest: number) => {
-    // Update the answer statistics for the current question
-    increaseAnswerCountForCurrentQuestion(selectedAnswerIdFromGuest);
-
-    // We give the correspondent points to the player who answered the question
-    // const currentTime = timerRef.current;
-    const currentTime = 30;
-    addPointsToThePlayer(playerConnId, selectedAnswerIdFromGuest, currentTime);
-  }
-
-  const initializeSignalREvents = async () => {
-    if (signalRConnection) {
-      signalRConnection.on("OnUpdateTotalOfProvidedAnswersForCurrentQuestion", OnUpdateTotalOfProvidedAnswersForCurrentQuestionHandler);
-      signalRConnection.on("updateAnswerBoard", updateAnswerBoardHandler);
-    }
-  }
 
   const initializeAnswerStatsForCurrentQuestion = () => {
     const answersOfCurrentQuestion: AnswerPlay[] | undefined = kahoot?.questions[questionIndex].answers;
