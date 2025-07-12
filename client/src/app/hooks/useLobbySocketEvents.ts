@@ -87,9 +87,8 @@ const useLobbySocketEvents = () => {
       state.increaseAnswerCountForCurrentQuestion(selectedAnswerIdFromGuest);
 
       // We give the correspondent points to the player who answered the question
-      // const currentTime = timerRef.current;
-      const currentTime = 30;
-      state.addPointsToThePlayer(playerConnId, selectedAnswerIdFromGuest, currentTime);
+      const remainingTime = state.remainingTime;
+      state.addPointsToThePlayer(playerConnId, selectedAnswerIdFromGuest, remainingTime);
     });
 
     signalRConnection.on('PlayerHasLeft', (playerId: string) => {

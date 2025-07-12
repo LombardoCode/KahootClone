@@ -4,29 +4,29 @@ import Text from "../../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 
 const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
-  const { kahoot, questionIndex, countOfAnswersProvidenByGuests } = useInGameStore();
-  const [timer, setTimer] = useState<number | undefined>(kahoot?.questions[questionIndex].timeLimit);
-  const timerRef = useRef<number | undefined>(timer);
+  const { kahoot, questionIndex, countOfAnswersProvidenByGuests, remainingTime, setRemainingTime } = useInGameStore();
 
   useEffect(() => {
-    timerRef.current = timer;
-  }, [timer]);
+    const timeLimitSetForCurrentQuestion: number | undefined = kahoot?.questions[questionIndex].timeLimit;
+    
+    if (timeLimitSetForCurrentQuestion !== undefined) {
+      setRemainingTime(timeLimitSetForCurrentQuestion);
+    }
+  }, []);
 
   useEffect(() => {
     const timerTimeout = setTimeout(() => {
-      if (timer !== undefined) {
-        if (timer > 0) {
-          setTimer(timer - 1);
-        } else {
-          // Time's up
-        }
+      if (remainingTime > 0) {
+        setRemainingTime(remainingTime - 1);
+      } else {
+        // Time's up
       }
     }, 1000);
 
     return () => {
       clearInterval(timerTimeout);
     }
-  }, [timer]);
+  }, [remainingTime]);
 
   return (
     <div id="play-container" className="flex-1">
@@ -48,7 +48,7 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
               fontWeight={FontWeights.BOLD}
               className="text-6xl"
             >
-              {timer}
+              {remainingTime}
             </Text>
           </div>
         </div>
