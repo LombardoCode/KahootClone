@@ -2,9 +2,10 @@ import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import { useEffect, useRef, useState } from "react";
 import Text from "../../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
+import { debugLog } from "@/app/utils/debugLog";
 
 const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
-  const { kahoot, questionIndex, countOfAnswersProvidenByGuests, remainingTime, setRemainingTime } = useInGameStore();
+  const { kahoot, questionIndex, countOfAnswersProvidenByGuests, remainingTime, setRemainingTime, signalRConnection, lobbyId, setEveryoneHasAnsweredTheCurrentQuestion } = useInGameStore();
 
   useEffect(() => {
     const timeLimitSetForCurrentQuestion: number | undefined = kahoot?.questions[questionIndex].timeLimit;
@@ -20,6 +21,9 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
         setRemainingTime(remainingTime - 1);
       } else {
         // Time's up
+        // Redirect the guests to the '/result' page
+        signalRConnection?.invoke('RedirectGuestsFromLobbyToSpecificPage', lobbyId, '/result')
+          .then(() => setEveryoneHasAnsweredTheCurrentQuestion(true));
       }
     }, 1000);
 
