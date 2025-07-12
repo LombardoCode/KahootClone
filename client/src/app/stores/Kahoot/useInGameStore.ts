@@ -40,6 +40,8 @@ interface InGameStore {
   isThisTheLastQuestion: () => boolean;
   countOfAnswersProvidenByGuests: number;
   setCountOfAnswersProvidenByGuests: (count: number) => void;
+  remainingTime: number;
+  setRemainingTime: (remainingTime: number) => void;
 
   // Answers
   selectAnswer: (answerId: number | null) => void;
@@ -229,6 +231,10 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   countOfAnswersProvidenByGuests: 0,
   setCountOfAnswersProvidenByGuests: (count: number) => set(() => ({
     countOfAnswersProvidenByGuests: count
+  })),
+  remainingTime: 0,
+  setRemainingTime: (remainingTime: number) => set(() => ({
+    remainingTime
   })),
 
   // Answers
