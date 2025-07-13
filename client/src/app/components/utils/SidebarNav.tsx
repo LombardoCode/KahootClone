@@ -3,8 +3,9 @@ import Text from "../UIComponents/Text";
 import Logo, { LogoColors, LogoSize } from "./Logo";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faCompass, faList } from "@fortawesome/free-solid-svg-icons";
 import { usePathname, useRouter } from "next/navigation";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 interface SidebarNavProps {
   className?: string;
@@ -13,15 +14,16 @@ interface SidebarNavProps {
 interface SidebarMenuItemProps {
   name: string;
   pathname: string;
+  icon: IconProp;
 }
 
 const SidebarNav = ({ className }: SidebarNavProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const sidebarMenuItems = [
-    { name: "Home", pathname: "/dashboard" },
-    { name: "Settings", pathname: "/dashboard/settings" }
+  const sidebarMenuItems: SidebarMenuItemProps[] = [
+    { name: "Discovery", pathname: "/menu/discovery", icon: faCompass },
+    { name: "Library", pathname: "/menu/library", icon: faList }
   ];
 
   return (
@@ -35,7 +37,7 @@ const SidebarNav = ({ className }: SidebarNavProps) => {
             key={key}
             name={item.name}
             selected={item.pathname === pathname}
-            icon={<FontAwesomeIcon icon={faHome} />}
+            icon={<FontAwesomeIcon icon={item.icon} />}
             onClick={() => router.push(item.pathname)}
           >
             {item.name}
