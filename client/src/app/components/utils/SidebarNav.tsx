@@ -1,23 +1,28 @@
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import Text from "../UIComponents/Text";
 import Logo, { LogoColors, LogoSize } from "./Logo";
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { usePathname, useRouter } from "next/navigation";
 
 interface SidebarNavProps {
   className?: string;
 }
 
-const SidebarNav = ({ className }: SidebarNavProps) => {
-  const [sidebarItemName, setSidebarItemName] = useState<string[]>([
-    "Home", "Settings", "More options"
-  ]);
-  const [selectedMenuName, setSelectedMenuName] = useState<string>(sidebarItemName[0]);
+interface SidebarMenuItemProps {
+  name: string;
+  pathname: string;
+}
 
-  const setMenuName = (itemName: string) => {
-    setSelectedMenuName(itemName);
-  }
+const SidebarNav = ({ className }: SidebarNavProps) => {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const sidebarMenuItems = [
+    { name: "Home", pathname: "/dashboard" },
+    { name: "Settings", pathname: "/dashboard/settings" }
+  ];
 
   return (
     <div className={`${className} px-2 shadow-[inset_0_0px_4px_rgba(0,0,0,0.25)]`}>
@@ -25,15 +30,15 @@ const SidebarNav = ({ className }: SidebarNavProps) => {
         <Logo size={LogoSize.REGULAR} color={LogoColors.VIOLET} />
       </div>
       <div id="sidebar-nav-items" className="px-1">
-        {sidebarItemName.map((item: string, key: number) => (
+        {sidebarMenuItems.map((item: SidebarMenuItemProps, key: number) => (
           <SidebarNavItem
             key={key}
-            name={item}
-            selected={selectedMenuName === item}
+            name={item.name}
+            selected={item.pathname === pathname}
             icon={<FontAwesomeIcon icon={faHome} />}
-            onClick={() => setMenuName(item)}
+            onClick={() => router.push(item.pathname)}
           >
-            {item}
+            {item.name}
           </SidebarNavItem>
         ))}
       </div>
