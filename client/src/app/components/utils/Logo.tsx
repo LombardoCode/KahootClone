@@ -5,6 +5,7 @@ interface LogoProps {
 }
 
 export enum LogoSize {
+  EXTRA_SMALL = "extra_small",
   SMALL = "small",
   REGULAR = "regular",
   LARGE = "large",
@@ -16,6 +17,7 @@ export enum LogoColors {
 }
 
 const sizeMap = {
+  [LogoSize.EXTRA_SMALL]: { width: 40, height: 40 },
   [LogoSize.SMALL]: { width: 80, height: 100 },
   [LogoSize.REGULAR]: { width: 120, height: 68 },
   [LogoSize.LARGE]: { width: 250, height: 100 },

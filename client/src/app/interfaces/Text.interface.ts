@@ -12,7 +12,8 @@ export enum TextColors {
   BLACK = "text-black",
   WHITE = "text-white",
   RED = "text-red-700",
-  GRAY = "text-slate-700"
+  GRAY = "text-slate-700",
+  LIGHT_GRAY = "text-slate-500"
 }
 
 export enum UseCases {
