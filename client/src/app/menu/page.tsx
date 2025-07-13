@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { KahootDashboardList } from "../interfaces/Kahoot/Dashboard/KahootDashboardList.interface";
 import Card from "../components/UIComponents/Card";
 
-const Dashboard = () => {
+const DiscoveryMenuPage = () => {
   const router = useRouter();
   const [kahootsFromUser, setKahootsFromUser] = useState<KahootDashboardList[]>([]);
 
@@ -82,4 +82,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard;
+export default DiscoveryMenuPage;
