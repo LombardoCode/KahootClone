@@ -1,6 +1,7 @@
 using API.Models;
 using API.Models.Creator;
 using API.Models.Play;
+using API.Models.Statistics;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ namespace API.Data
     public DbSet<Question> Questions { get; set; }
     public DbSet<Answer> Answers { get; set; }
     public DbSet<Lobby> Lobbies { get; set; }
+    public DbSet<PlayedKahoots> PlayedKahoots { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
