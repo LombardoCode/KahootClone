@@ -81,6 +81,31 @@ namespace API.Controllers
       }
     }
 
+    [HttpDelete("delete/{kahootId}")]
+    public async Task<ActionResult> DeleteKahoot(Guid kahootId)
+    {
+      var kahoot = await _dbContext.Kahoots.FirstOrDefaultAsync(k => k.Id == kahootId);
+
+      if (kahoot != null)
+      {
+        try
+        {
+          _dbContext.Kahoots.Remove(kahoot);
+          await _dbContext.SaveChangesAsync();
+
+          return Ok();
+        }
+        catch (Exception)
+        {
+          return StatusCode(500);
+        }
+      }
+      else
+      {
+        return StatusCode(404);
+      }
+    }
+
     [HttpGet("KahootExists/{id}")]
     public async Task<ActionResult> KahootExists(Guid id)
     {
