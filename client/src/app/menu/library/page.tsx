@@ -10,7 +10,9 @@ import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
 import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
+import Modal, { ModalTypes } from "@/app/components/utils/Modal/Modal";
 
 const LibraryMenuPage = () => {
   const [kahootsFromUser, setKahootsFromUser] = useState<KahootDashboardList[]>([]);
@@ -54,6 +56,7 @@ const LibraryMenuPage = () => {
           <DisplayTableOfKahootsCreated
             kahoots={kahootsFromUser}
             className="mt-4"
+            onRefreshKahoots={getBasicInfoFromUsersKahoots}
           />
         )}
     </>
@@ -63,10 +66,24 @@ const LibraryMenuPage = () => {
 interface DisplayTableOfKahootsCreatedProps {
   kahoots: KahootDashboardList[];
   className?: string;
+  onRefreshKahoots: () => void;
 }
 
-const DisplayTableOfKahootsCreated = ({ kahoots, className }: DisplayTableOfKahootsCreatedProps) => {
+const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: DisplayTableOfKahootsCreatedProps) => {
   const router = useRouter();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [selectedKahootId, setSelectedKahootId] = useState<string | null>(null);
+
+  const deleteKahoot = async (kahootIdToDelete: string | null) => {
+    await axiosInstance.delete(`/kahoot/delete/${kahootIdToDelete}`)
+      .then(res => {
+        console.log(res.data);
+        onRefreshKahoots();
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
 
   return (
     <>
@@ -157,18 +174,81 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className }: DisplayTableOfKaho
                   Host
                 </Button>
               </td>
-              <td className="py-2 px-3">
-                <div
-                  className="py-2 px-3 cursor-pointer"
-                  onClick={() => {}}
+              <td className="px-3">
+                <Menu
+                  align="end"
+                  direction="bottom"
+                  menuButton={
+                    <MenuButton className="cursor-pointer h-full px-6 py-3">
+                      <FontAwesomeIcon
+                        icon={faEllipsisVertical}
+                        size="lg"
+                        className={TextColors.LIGHT_GRAY}
+                      />
+                    </MenuButton>
+                  }
                 >
-                  <FontAwesomeIcon icon={faEllipsisVertical} />
-                </div>
+                  <MenuItem
+                    className="bg-white hover:bg-slate-300 px-4 py-3 cursor-pointer w-36 shadow-md shadow-slate-400/60"
+                    onClick={() => {
+                      setSelectedKahootId(kahoot.id)
+                      setIsDeleteModalOpen(true)
+                    }}
+                  >
+                    <div className="flex items-center">
+                      <FontAwesomeIcon icon={faTrash} className="mr-2" />
+                      <Text
+                        fontWeight={FontWeights.BOLD}
+                        textColor={TextColors.GRAY}
+                        useCase={UseCases.LONGTEXT}
+                        className="text-sm"
+                      >
+                        Delete
+                      </Text>
+                    </div>
+                  </MenuItem>
+                </Menu>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <Modal
+        modalType={ModalTypes.INPUT}
+        isOpen={isDeleteModalOpen}
+        title={`Delete Kahoot`}
+        onClose={() => setIsDeleteModalOpen(false)}
+        bodyContent={(
+          <>
+            <Text
+              fontWeight={FontWeights.REGULAR}
+              textColor={TextColors.BLACK}
+              useCase={UseCases.LONGTEXT}
+              className="text-base"
+            >
+              Are you sure you want to delete this kahoot?
+            </Text>
+          </>
+        )}
+        footerContent={(
+          <>
+            <Button
+              backgroundColor={BackgroundColors.RED}
+              fontWeight={FontWeights.BOLD}
+              size={ButtonSize.MEDIUM}
+              textColor={TextColors.WHITE}
+              className="mr-2"
+              onClick={() => {
+                setIsDeleteModalOpen(false);
+                deleteKahoot(selectedKahootId);
+              }}
+            >
+              Delete
+            </Button>
+          </>
+        )}
+      />
     </>
   )
 }
