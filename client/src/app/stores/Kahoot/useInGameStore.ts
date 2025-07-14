@@ -188,6 +188,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   setKahootInfo: (kahootInfo: KahootPlay) => set(() => {
     return {
       kahoot: {
+        kahootId: kahootInfo.kahootId,
         title: kahootInfo.title,
         questions: kahootInfo.questions
       }

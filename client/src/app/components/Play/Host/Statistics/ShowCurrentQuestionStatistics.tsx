@@ -9,6 +9,7 @@ import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
 import DisplayScoreboard from "./DisplayScoreboard";
 import ShowingQuestionTitle from "../ShowingQuestionTitle";
 import { useRouter } from "next/navigation";
+import axiosInstance from "@/app/utils/axiosConfig";
 
 enum ScreenForFinalAnswerStatistics {
   STATISTICS,
@@ -48,6 +49,8 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
   }
   
   const endTheGame = () => {
+    registerPlayCountOnCurrentKahoot();
+
     if (isHost) {
       // Destroy all the data from current lobby
       signalRConnection?.invoke('DestroyLobbyData', lobbyId)
@@ -60,6 +63,10 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
         })
       });
     }
+  }
+
+  const registerPlayCountOnCurrentKahoot = async () => {
+    await axiosInstance.post('/kahoot/RegisterPlayCount', { KahootId: kahoot?.kahootId })
   }
 
   return (
