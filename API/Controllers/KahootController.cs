@@ -82,23 +82,34 @@ namespace API.Controllers
     }
 
     [HttpDelete("delete/{kahootId}")]
+    [Authorize]
     public async Task<ActionResult> DeleteKahoot(Guid kahootId)
     {
+      var userId = await _userService.GetUserId();
+
       var kahoot = await _dbContext.Kahoots.FirstOrDefaultAsync(k => k.Id == kahootId);
+
 
       if (kahoot != null)
       {
-        try
-        {
-          _dbContext.Kahoots.Remove(kahoot);
-          await _dbContext.SaveChangesAsync();
+        bool isUserTheOwnerOfTheKahoot = userId == kahoot.UserId;
 
-          return Ok();
-        }
-        catch (Exception)
+        if (!isUserTheOwnerOfTheKahoot)
         {
-          return StatusCode(500);
+          return StatusCode(403);
         }
+
+        try
+          {
+            _dbContext.Kahoots.Remove(kahoot);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+          }
+          catch (Exception)
+          {
+            return StatusCode(500);
+          }
       }
       else
       {
