@@ -130,7 +130,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className }: DisplayTableOfKaho
                   useCase={UseCases.LONGTEXT}
                   className="mt-1 text-xs"
                 >
-                  0 plays
+                  {kahoot.timesPlayed} {kahoot.timesPlayed === 1 ? 'play' : 'plays'}
                 </Text>
               </td>
 

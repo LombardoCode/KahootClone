@@ -25,6 +25,7 @@ export interface Answer {
 }
 
 export interface KahootPlay {
+  kahootId: string;
   title: string;
   questions: QuestionPlay[];
 }

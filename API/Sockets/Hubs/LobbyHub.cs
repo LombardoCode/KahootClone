@@ -1,6 +1,8 @@
 using System.Collections.Concurrent;
 using API.Data.ForClient.Play;
 using Microsoft.AspNetCore.SignalR;
+using API.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Sockets.Hubs
 {
@@ -35,11 +37,21 @@ namespace API.Sockets.Hubs
     /// Maps the current question ID by lobbyId
     /// </summary>
     private static ConcurrentDictionary<string, int> currentQuestionPerLobby = new ConcurrentDictionary<string, int>();
-    
+
     /// <summary>
     /// Maps the current question ID by lobbyId
     /// </summary>
     private static ConcurrentDictionary<string, string> hostConnectionPerLobby = new ConcurrentDictionary<string, string>();
+
+    /// <summary>
+    /// Provides access to the database
+    /// </summary>
+    private readonly DataContext _dbContext;
+
+    public LobbyHub(DataContext dbContext)
+    {
+      _dbContext = dbContext;
+    }
 
     /// <summary>
     /// Code that gets executed when SignalR connection from client gets disconnected
@@ -98,7 +110,7 @@ namespace API.Sockets.Hubs
                 // Refresh the answers count for the current question
                 responseCount[key] = playerSet.Count;
                 int numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow = responseCount[key];
-                
+
                 await Clients.Group(lobbyId).SendAsync("OnUpdateTotalOfProvidedAnswersForCurrentQuestion", numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
               }
             }
@@ -273,6 +285,7 @@ namespace API.Sockets.Hubs
       RemoveAllPlayerToLobbyMappingFromSpecificLobby(lobbyId);
       RemoveAllQuestionIdsToLobbyMappingFromSpecificLobby(lobbyId);
       RemoveTheCurrentQuestionIdFromSpecificLobby(lobbyId);
+      await RemoveLobbyRecordFromDatabase(lobbyId);
     }
 
     private void RemoveAllPlayersFromSpecificLobby(string lobbyId)
@@ -286,7 +299,7 @@ namespace API.Sockets.Hubs
       var keysToRemove = playerResponses.Keys
                           .Where(key => key.lobbyId == lobbyId)
                           .ToList();
-      
+
       foreach (var key in keysToRemove)
       {
         playerResponses.TryRemove(key, out var _);
@@ -298,7 +311,7 @@ namespace API.Sockets.Hubs
       var keysToRemove = responseCount.Keys
                           .Where(key => key.lobbyId == lobbyId)
                           .ToList();
-      
+
       foreach (var key in keysToRemove)
       {
         responseCount.TryRemove(key, out var _);
@@ -311,7 +324,7 @@ namespace API.Sockets.Hubs
                             .Where(entry => entry.Value == lobbyId)
                             .Select(entry => entry.Key)
                             .ToList();
-      
+
       foreach (var playerConnId in playersToRemove)
       {
         playerLobbyMapping.TryRemove(playerConnId, out _);
@@ -327,6 +340,20 @@ namespace API.Sockets.Hubs
     {
       currentQuestionPerLobby.TryRemove(lobbyId, out _);
     }
+
+    private async Task RemoveLobbyRecordFromDatabase(string lobbyId)
+    {
+      if (int.TryParse(lobbyId, out var lobbyIdAsInt))
+      {
+        var lobby = await _dbContext.Lobbies.FirstOrDefaultAsync(l => l.GamePIN == lobbyIdAsInt);
+
+        if (lobby != null)
+        {
+          _dbContext.Lobbies.Remove(lobby);
+          await _dbContext.SaveChangesAsync();
+        }
+      }
+    }
   }
 
   public class Player
@@ -336,11 +363,13 @@ namespace API.Sockets.Hubs
     public int EarnedPoints { get; set; } = 0;
   }
 
-  public class FinalPlayerStats : Player {
+  public class FinalPlayerStats : Player
+  {
     public int place { get; set; }
   }
 
-  public class PlayerNickName {
+  public class PlayerNickName
+  {
     public string Name { get; set; }
   }
 }

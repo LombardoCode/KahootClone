@@ -2,7 +2,9 @@ using API.Data;
 using API.Data.ForClient.Dashboard.Kahoot;
 using API.Data.Server.KahootCreator;
 using API.DTOs.Kahoot;
+using API.DTOs.Statistics;
 using API.Models;
+using API.Models.Statistics;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,11 +38,12 @@ namespace API.Controllers
                         Id = k.Id,
                         Title = k.Title,
                         Description = k.Description,
+                        TimesPlayed = _dbContext.PlayedKahoots.Count(a => a.KahootId == k.Id),
                         CreatedAt = k.CreatedAt,
-                        UpdatedAt = k.UpdatedAt
+                        UpdatedAt = k.UpdatedAt,
                       })
                       .ToListAsync();
-      
+
       return Ok(kahoots);
     }
 
@@ -92,8 +95,8 @@ namespace API.Controllers
                       .Where(k => k.Id == id)
                       .Include(k => k.Questions)
                         .ThenInclude(q => q.Answers)
-                      .FirstOrDefaultAsync();  
-      
+                      .FirstOrDefaultAsync();
+
       if (kahoot == null)
       {
         return NotFound();
@@ -125,6 +128,28 @@ namespace API.Controllers
       };
 
       return Ok(kahootDTO);
+    }
+
+    [HttpPost("RegisterPlayCount")]
+    public async Task<ActionResult> RegisterPlayCount(PlayedKahootDTO playedKahootData)
+    {
+      var newPlayedKahoot = new PlayedKahoots
+      {
+        KahootId = playedKahootData.KahootId
+      };
+
+      _dbContext.PlayedKahoots.Add(newPlayedKahoot);
+
+      try
+      {
+        await _dbContext.SaveChangesAsync();
+
+        return Ok();
+      }
+      catch (Exception ex)
+      {
+        return StatusCode(500);
+      }
     }
   }
 }

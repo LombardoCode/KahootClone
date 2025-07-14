@@ -178,6 +178,7 @@ namespace API.Controllers.Play
 
           var kahootToBePlayed = new KahootPlayClient
           {
+            KahootId = kahootId,
             Title = kahootTitle,
             Questions = questionsToBePlayed
           };
