@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { Question } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
 
 
 const CreatorNavbar = () => {
@@ -65,17 +66,6 @@ const CreatorNavbar = () => {
     return question.errors.questionTitle !== ""
       || question.errors.missingAnswerTitles !== ""
       || question.errors.answerCorrectness !== "";
-  }
-
-  const createLobby = () => {
-    axiosInstance.post('/lobby/create', { kahootId: kahoot?.id })
-      .then(res => {
-        const gamePIN: number = res.data.gamePIN;
-        router.push(`/lobby/${gamePIN}`)
-      })
-      .catch(err => {
-        console.error(err);
-      })
   }
 
   return (
@@ -224,7 +214,11 @@ const CreatorNavbar = () => {
                 textColor={TextColors.WHITE}
                 className="text-sm"
                 size={ButtonSize.MEDIUM}
-                onClick={() => createLobby()}
+                onClick={() => {
+                  if (kahoot?.id) {
+                    createLobby(kahoot.id, router)
+                  }
+                }}
               >
                 Host
               </Button>
