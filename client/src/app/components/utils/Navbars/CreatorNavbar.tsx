@@ -14,6 +14,7 @@ import { Question } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
+import { ROUTES } from "@/app/utils/Routes/routesUtils";
 
 
 const CreatorNavbar = () => {
@@ -73,7 +74,7 @@ const CreatorNavbar = () => {
       <nav id="navigation-creator" className="flex justify-between items-center px-3">
         <div id="creator-page-logo-and-kahoots-title-and-description" className="flex items-center h-14">
           <div
-            onClick={() => router.push(`/dashboard`)}
+            onClick={() => router.push(ROUTES.MENU.DISCOVERY)}
             className="cursor-pointer"
           >
             <Logo
@@ -368,9 +369,7 @@ const CreatorNavbar = () => {
                   textColor={TextColors.WHITE}
                   className="text-sm"
                   size={ButtonSize.MEDIUM}
-                  onClick={() => {
-                    router.push('/dashboard')
-                  }}
+                  onClick={() => router.push(ROUTES.MENU.LIBRARY)}
                 >
                   Done
                 </Button>

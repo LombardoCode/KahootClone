@@ -18,6 +18,7 @@ import { AccountRegistrationFormErrors } from "../interfaces/Auth/AccountRegistr
 import { AccountLoginInfo } from "../interfaces/Auth/AccountLoginInfo";
 import { useRouter } from "next/navigation";
 import { BackgroundColors } from "../interfaces/Colors.interface";
+import { ROUTES } from "../utils/Routes/routesUtils";
 
 const Signup = () => {
   const router = useRouter();
@@ -63,7 +64,7 @@ const Signup = () => {
 
     await axiosInstance.post('/auth/login', loginData)
       .then(res => {
-        router.push('/dashboard');
+        router.push(ROUTES.MENU.DISCOVERY);
       })
       .catch(err => {
         console.error(err);
