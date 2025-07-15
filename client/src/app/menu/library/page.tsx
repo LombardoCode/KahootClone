@@ -10,7 +10,7 @@ import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
 import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical, faServer, faTrash, faWarning } from "@fortawesome/free-solid-svg-icons";
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import Modal, { ModalTypes } from "@/app/components/utils/Modal/Modal";
 import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
@@ -102,7 +102,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                 Title
               </Text>
             </th>
-            <th className="py-2 px-3 whitespace-nowrap">
+            <th className="py-2 px-10 whitespace-nowrap">
               <Text
                 fontWeight={FontWeights.BOLD}
                 textColor={TextColors.GRAY}
@@ -162,18 +162,37 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                   Date
                 </Text>
 
-                <Button
-                  backgroundColor={BackgroundColors.BLUE}
-                  fontWeight={FontWeights.BOLD}
-                  textColor={TextColors.WHITE}
-                  className="hidden group-hover:inline-block text-sm"
-                  size={ButtonSize.SMALL}
-                  onClick={() => createLobby(kahoot.id, router)}
-                  perspective={false}
-                  animateOnHover={false}
-                >
-                  Host
-                </Button>
+                {kahoot.isPlayable
+                  ? (
+                    <Button
+                      backgroundColor={BackgroundColors.BLUE}
+                      fontWeight={FontWeights.BOLD}
+                      textColor={TextColors.WHITE}
+                      className="hidden group-hover:inline-block text-sm"
+                      size={ButtonSize.SMALL}
+                      onClick={() => createLobby(kahoot.id, router)}
+                      perspective={false}
+                      animateOnHover={false}
+                    >
+                      Host
+                    </Button>
+                  )
+                  : (
+                    <div className="hidden group-hover:flex group-hover:items-center group-hover:justify-center select-none">
+                      <FontAwesomeIcon
+                        icon={faWarning}
+                        className={`${TextColors.RED} mr-2`}
+                      />
+                      <Text
+                        fontWeight={FontWeights.REGULAR}
+                        textColor={TextColors.RED}
+                        useCase={UseCases.LONGTEXT}
+                        className="mt-1 text-sm whitespace-nowrap"
+                      >
+                        Not playable
+                      </Text>
+                    </div>
+                  )}
               </td>
               <td className="px-3">
                 <Menu
@@ -189,6 +208,26 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                     </MenuButton>
                   }
                 >
+                  <MenuItem
+                    className="bg-white hover:bg-slate-300 px-4 py-3 cursor-pointer w-36 shadow-md shadow-slate-400/60"
+                    onClick={() => {
+                      if (kahoot.isPlayable) {
+                        createLobby(kahoot.id, router)
+                      }
+                    }}
+                  >
+                    <div className={`flex items-center ${kahoot.isPlayable ? 'opacity-100' : 'opacity-45'}`}>
+                      <FontAwesomeIcon icon={faServer} className="mr-2" />
+                      <Text
+                        fontWeight={FontWeights.BOLD}
+                        textColor={TextColors.GRAY}
+                        useCase={UseCases.LONGTEXT}
+                        className="text-sm"
+                      >
+                        Host
+                      </Text>
+                    </div>
+                  </MenuItem>
                   <MenuItem
                     className="bg-white hover:bg-slate-300 px-4 py-3 cursor-pointer w-36 shadow-md shadow-slate-400/60"
                     onClick={() => {

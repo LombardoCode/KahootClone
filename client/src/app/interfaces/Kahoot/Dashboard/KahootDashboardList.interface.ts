@@ -3,6 +3,7 @@ export interface KahootDashboardList {
   title: string;
   description: string;
   timesPlayed: number;
+  isPlayable: boolean;
   createdAt: string;
   updatedAt: string;
 };
