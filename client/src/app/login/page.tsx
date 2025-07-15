@@ -16,6 +16,7 @@ import { AccountLoginInfo } from "../interfaces/Auth/AccountLoginInfo";
 import useUserStore from "../stores/useUserStore";
 import { useRouter } from "next/navigation";
 import { BackgroundColors } from "../interfaces/Colors.interface";
+import { ROUTES } from "../utils/Routes/routesUtils";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const LoginPage = () => {
 
         setUser(token, user);
 
-        router.push('/dashboard');
+        router.push(ROUTES.MENU.DISCOVERY);
       })
       .catch(err => {
         console.error(err);

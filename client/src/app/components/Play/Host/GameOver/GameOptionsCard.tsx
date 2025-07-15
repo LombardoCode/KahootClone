@@ -1,6 +1,7 @@
 import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
 import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
+import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -40,7 +41,7 @@ const GameOptionsCard = ({ className }: GameOptionsCardProps) => {
           id="clickable-options-wrapper"
           className="mt-4 w-full"
         >
-          <ClickableOption actions={() => router.push('/dashboard')}>Go to homepage</ClickableOption>
+          <ClickableOption actions={() => router.push(ROUTES.MENU.DISCOVERY)}>Go to homepage</ClickableOption>
         </div>
       </div>
     </motion.div>
