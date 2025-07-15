@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import Modal, { ModalTypes } from "@/app/components/utils/Modal/Modal";
+import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
 
 const LibraryMenuPage = () => {
   const [kahootsFromUser, setKahootsFromUser] = useState<KahootDashboardList[]>([]);
@@ -167,7 +168,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                   textColor={TextColors.WHITE}
                   className="hidden group-hover:inline-block text-sm"
                   size={ButtonSize.SMALL}
-                  onClick={() => { }}
+                  onClick={() => createLobby(kahoot.id, router)}
                   perspective={false}
                   animateOnHover={false}
                 >

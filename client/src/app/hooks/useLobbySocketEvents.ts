@@ -3,7 +3,7 @@ import useInGameStore from "../stores/Kahoot/useInGameStore";
 import { useEffect } from "react";
 import { Player } from "../interfaces/Play/Player.interface";
 import { KahootPlay } from "../interfaces/Kahoot/Kahoot.interface";
-import { isInLobbyRoute } from "../utils/Lobby/isInLobbyRoute";
+import { isInLobbyRoute } from "../utils/Lobby/lobbyUtils";
 import { debugLog } from "../utils/debugLog";
 
 const useLobbySocketEvents = () => {

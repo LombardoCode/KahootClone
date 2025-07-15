@@ -1,5 +1,5 @@
 export interface Kahoot {
-  id: number | null;
+  id: string | null;
   title: string;
   description: string;
   isPlayable: boolean;
