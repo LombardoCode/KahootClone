@@ -15,13 +15,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
+import { saveKahootDraft } from "@/app/utils/KahootCreator/kahootCreatorUtils";
 
 
 const CreatorNavbar = () => {
   const router = useRouter();
 
   // Global store
-  const { kahoot, isKahootFormDirty, getKahootPlayabilityStatus, kahootValidationStatus, updateTitleAndDescription, selectQuestion } = useKahootCreatorStore();
+  const { kahoot, isKahootFormDirty, resetIsKahootFormDirty, getKahootPlayabilityStatus, kahootValidationStatus, updateTitleAndDescription, selectQuestion } = useKahootCreatorStore();
 
   // Modals states
   const [isKahootHeaderModalOpen, setIsKahootHeaderModalOpen] = useState<boolean>(false);
@@ -46,21 +47,13 @@ const CreatorNavbar = () => {
       description: kahootHeaderInfo?.description || kahoot?.description || ""
     });
 
-    axiosInstance.put('/kahootcreator/drafts', {
-      id: kahoot?.id,
-      title: kahoot?.title,
-      description: kahoot?.description,
-      createdAt: kahoot?.createdAt,
-      updatedAt: kahoot?.updatedAt,
-      questions: kahoot?.questions
-    })
-      .then(res => {
-        getKahootPlayabilityStatus();
-        setIsKahootSavedModalOpen(true);
-      })
-      .catch(err => {
-        console.error(err);
-      })
+    if (kahoot) {
+      saveKahootDraft(kahoot, resetIsKahootFormDirty)
+        .then(() => {
+          getKahootPlayabilityStatus();
+          setIsKahootSavedModalOpen(true);
+        })
+    }
   }
 
   const doesQuestionContainsAnError = (question: KahootQuestionValidation): boolean => {
@@ -108,16 +101,17 @@ const CreatorNavbar = () => {
         </div>
 
         <div id="creator-page-save-changes-button">
-          {isKahootFormDirty && (
-            <Button
-              backgroundColor={BackgroundColors.GREEN}
-              fontWeight={FontWeights.BOLD}
-              textColor={TextColors.WHITE}
-              onClick={() => saveDraft()}
-            >
-              Save changes
-            </Button>
-          )}
+          <Button
+            backgroundColor={BackgroundColors.GREEN}
+            fontWeight={FontWeights.BOLD}
+            textColor={TextColors.WHITE}
+            size={ButtonSize.SMALL}
+            animateOnHover={false}
+            perspective={false}
+            onClick={() => saveDraft()}
+          >
+            Save
+          </Button>
         </div>
       </nav>
 

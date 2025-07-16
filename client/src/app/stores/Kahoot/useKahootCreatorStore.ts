@@ -20,6 +20,7 @@ interface KahootCreatorStore {
   kahoot: Kahoot | null;
   kahootIndex: number;
   isKahootFormDirty: boolean;
+  resetIsKahootFormDirty: () => void;
   kahootValidationStatus: KahootValidationStatus;
   overwriteKahoot: (newKahoot: Kahoot) => void;
   setKahootTitleAndDescription: (kahootInfo: { title: string, description: string }) => void;
@@ -38,6 +39,9 @@ interface KahootCreatorStore {
   getKahootPlayabilityStatus: () => void;
   updateTitleAndDescription: (headerInfo: KahootHeaderInfo) => void;
   selectQuestion: (kahootIndex: number) => void;
+
+  // Media files
+  updateQuestionMediaUrl: (index: number, mediaUrl: string) => void;
 }
 
 const createNewQuestion = (): Question => {
@@ -70,6 +74,9 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
   kahoot: null,
   kahootIndex: 0,
   isKahootFormDirty: false,
+  resetIsKahootFormDirty: () => set(() => ({
+    isKahootFormDirty: false
+  })),
   kahootValidationStatus: {
     isPlayable: false,
     questions: []
@@ -181,6 +188,7 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
 
       // We remove the question
       kahoot.questions = kahoot.questions.filter((_, index) => index !== indexFromQuestionToRemove);
+      state.isKahootFormDirty = true;
 
       // And then we reposition the kahootIndex back (eg. if the user is on the last question and then they decide to remove the last question, we will reposition the kahootIndex to the very last question available)
       if (state.kahootIndex >= kahoot.questions.length) {
@@ -270,7 +278,27 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
       ...state,
       kahootIndex
     }
-  })
+  }),
+
+  // Media files
+  updateQuestionMediaUrl: (index: number, mediaUrl: string) => {
+    set(state => {
+      if (!state.kahoot) {
+        return state;
+      }
+
+      const questions: Question[] = [...state.kahoot.questions];
+
+        questions[index].mediaUrl = mediaUrl;
+
+        return {
+          kahoot: {
+            ...state.kahoot,
+            questions
+          }
+        }
+    })
+  }
 }))
 
 export default useKahootCreatorStore;

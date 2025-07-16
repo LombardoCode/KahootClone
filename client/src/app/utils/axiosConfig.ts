@@ -2,10 +2,7 @@ import axios from 'axios';
 import useUserStore from '../stores/useUserStore';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api',
-  headers: {
-    'Content-Type': 'application/json'
-  }
+  baseURL: 'http://localhost:5000/api'
 });
 
 axiosInstance.interceptors.request.use(

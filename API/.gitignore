@@ -482,3 +482,14 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+
+##########
+# Custom #
+##########
+
+# Ignore all question media files
+/Uploads/Questions/*
+
+# But don't ignore the .gitkeep file
+!/Uploads/Questions/.gitkeep

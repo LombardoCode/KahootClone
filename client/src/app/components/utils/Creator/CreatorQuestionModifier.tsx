@@ -6,8 +6,11 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import KahootAnswerContainer from "../Quizes/KahootAnswerContainer";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import KahootAnswerTextBox from "../Quizes/KahootAnswerTextBox";
+import { debugLog } from "@/app/utils/debugLog";
+import axiosInstance from "@/app/utils/axiosConfig";
+import { saveKahootDraft } from "@/app/utils/KahootCreator/kahootCreatorUtils";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -15,10 +18,11 @@ interface CreatorQuestionModifierProps {
 
 const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) => {
   // Store
-  const { kahoot, kahootIndex, updateQuestionTitle } = useKahootCreatorStore();
+  const { kahoot, kahootIndex, updateQuestionTitle, updateQuestionMediaUrl, resetIsKahootFormDirty } = useKahootCreatorStore();
 
   // Local component
   const [title, setTitle] = useState<string>(kahoot?.questions[kahootIndex]?.title || "");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setTitle(kahoot?.questions[kahootIndex]?.title || "");
@@ -28,6 +32,38 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
     const newTitle = e.target.value;
     setTitle(newTitle);
     updateQuestionTitle(kahootIndex, newTitle);
+  }
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (kahoot) {
+      const file: File | undefined = e.target.files?.[0];
+      
+      if (!file) {
+        return;
+      }
+  
+      debugLog("Image has been selected");
+  
+      const formData: FormData = new FormData();
+      formData.append("file", file);
+  
+      try {
+        await axiosInstance.post('/kahootcreator/upload-question-media', formData)
+          .then(res => {
+            const relativeUrl = res.data.relativeUrl;
+            updateQuestionMediaUrl(kahootIndex, relativeUrl);
+  
+            debugLog(`Image has been uploaded successfully: ${res.data.relativeUrl}`)
+            saveKahootDraft(kahoot, resetIsKahootFormDirty);
+          })
+      } catch (err) {
+        console.error("There was an error");
+      }
+    }
+  }
+
+  const handleImageClick = () => {
+    fileInputRef.current?.click();
   }
 
   return (
@@ -49,9 +85,30 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
           />
         </div>
 
-        <div id="question-file-media" className="relative my-6 mx-auto w-96 py-4">
+        {kahoot?.questions[kahootIndex]?.mediaUrl && (
+          <div className="relative my-6 mx-auto w-96">
+            <img
+              src={`http://localhost:5000${kahoot.questions[kahootIndex].mediaUrl}`}
+              alt="Question media"
+              className="rounded-md shadow-md max-h-64 object-contain mx-auto"
+            />
+          </div>
+        )}
+        
+        <div
+          id="question-file-media"
+          className="relative my-6 mx-auto w-96 py-4"
+          onClick={handleImageClick}
+        >
           <div className="absolute bg-white/50 inset-0 backdrop-blur-md rounded-md"></div>
           <div className="relative">
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              className="hidden"
+            />
             <div id="icon-plus" className="flex justify-center px-3 py-3">
               <FontAwesomeIcon
                 icon={faPlus}
