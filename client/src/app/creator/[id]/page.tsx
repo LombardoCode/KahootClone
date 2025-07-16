@@ -1,5 +1,6 @@
 'use client'
 
+import AutoSaveDraft from "@/app/components/utils/Creator/AutoSaveDraft";
 import CreatorQuestionModifier from "@/app/components/utils/Creator/CreatorQuestionModifier";
 import CreatorQuestionSettings from "@/app/components/utils/Creator/CreatorQuestionSettings";
 import CreatorSliderOfQuestions from "@/app/components/utils/Creator/CreatorSliderOfQuestions";
@@ -46,21 +47,24 @@ const EditKahoot = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col">
-      <CreatorNavbar />
+    <>
+      <AutoSaveDraft />
+      <div className="h-screen flex flex-col">
+        <CreatorNavbar />
 
-      <div id="creator-body" className="flex-1 flex overflow-hidden">
-        <CreatorSliderOfQuestions
-          className="w-48 bg-white"
-        />
-        <CreatorQuestionModifier
-          className="flex-1 bg-slate-300"
-        />
-        <CreatorQuestionSettings
-          className="w-72 bg-white"
-        />
+        <div id="creator-body" className="flex-1 flex overflow-hidden">
+          <CreatorSliderOfQuestions
+            className="w-48 bg-white"
+          />
+          <CreatorQuestionModifier
+            className="flex-1 bg-slate-300"
+          />
+          <CreatorQuestionSettings
+            className="w-72 bg-white"
+          />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

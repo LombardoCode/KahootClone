@@ -52,7 +52,21 @@ namespace API.Controllers
       List<Question> questionsToDelete = kahootToUpd.Questions
                                 .Where(q => !updatedQuestionIds.Contains(q.Id))
                                 .ToList();
-      
+
+      // Iterate each question that we are going to delete to validate if they contain a media resource (picture), and, if so, delete the picture froms server
+      foreach (Question question in questionsToDelete)
+      {
+        if (!string.IsNullOrEmpty(question.MediaUrl))
+        {
+          var mediaPath = Path.Combine(Directory.GetCurrentDirectory(), question.MediaUrl.TrimStart('/'));
+
+          if (System.IO.File.Exists(mediaPath))
+          {
+            System.IO.File.Delete(mediaPath);
+          }
+        }
+      }
+
       // We delete the questions from client-side
       _dbContext.Questions.RemoveRange(questionsToDelete);
 
@@ -85,7 +99,7 @@ namespace API.Controllers
         // Select the already existing question from database
         var existingQuestion = kahootToUpd.Questions
                                 .FirstOrDefault(q => q.Id == updatedQuestion.Id);
-        
+
         // If the questions exists
         if (existingQuestion != null)
         {
@@ -101,7 +115,7 @@ namespace API.Controllers
           {
             var existingAnswer = existingQuestion.Answers
                                   .FirstOrDefault(a => a.Id == updatedAnswer.Id);
-            
+
             if (existingAnswer != null)
             {
               existingAnswer.Text = updatedAnswer.Text;
@@ -145,6 +159,41 @@ namespace API.Controllers
       await _dbContext.SaveChangesAsync();
 
       return Ok(kahootDTO);
+    }
+
+    /// <summary>
+    /// Uploads an image in the following server path: "/Uploads/Questions".
+    /// The use of the "/Uploads/Questions" directory is for the Kahoot questions that has media attached to them.
+    /// </summary>
+    /// <param name="file"></param>
+    /// <returns></returns>
+    [HttpPost("upload-question-media")]
+    [RequestSizeLimit(10 * 1024 * 1024)] // 10 MB
+    public async Task<ActionResult> UploadQuestionMedia(IFormFile file)
+    {
+      if (file == null || file.Length == 0)
+      {
+        return BadRequest("No file uploaded");
+      }
+
+      var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", "Questions");
+
+      if (!Directory.Exists(uploadsFolder))
+      {
+        Directory.CreateDirectory(uploadsFolder);
+      }
+
+      var uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+      var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+      using (var stream = new FileStream(filePath, FileMode.Create))
+      {
+        await file.CopyToAsync(stream);
+      }
+
+      var relativeUrl = $"/Uploads/Questions/{uniqueFileName}";
+
+      return Ok(new { relativeUrl });
     }
   }
 }
