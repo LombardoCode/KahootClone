@@ -12,7 +12,6 @@ const AutoSaveDraft = () => {
     if (!kahoot || !isKahootFormDirty) return;
 
     const debounced = debounce((kahoot: Kahoot) => {
-      debugLog(Date.now());
       saveKahootDraft(kahoot, resetIsKahootFormDirty);
     }, 1000);
 

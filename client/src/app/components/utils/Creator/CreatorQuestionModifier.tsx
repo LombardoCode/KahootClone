@@ -2,7 +2,7 @@ import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/
 import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import Text from "../../UIComponents/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import KahootAnswerContainer from "../Quizes/KahootAnswerContainer";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
@@ -11,6 +11,8 @@ import KahootAnswerTextBox from "../Quizes/KahootAnswerTextBox";
 import { debugLog } from "@/app/utils/debugLog";
 import axiosInstance from "@/app/utils/axiosConfig";
 import { saveKahootDraft } from "@/app/utils/KahootCreator/kahootCreatorUtils";
+import Button, { ButtonSize } from "../../UIComponents/Button";
+import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -18,7 +20,7 @@ interface CreatorQuestionModifierProps {
 
 const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) => {
   // Store
-  const { kahoot, kahootIndex, updateQuestionTitle, updateQuestionMediaUrl, resetIsKahootFormDirty } = useKahootCreatorStore();
+  const { kahoot, kahootIndex, updateQuestionTitle, updateQuestionMediaUrl, resetIsKahootFormDirty, removeMediaUrl } = useKahootCreatorStore();
 
   // Local component
   const [title, setTitle] = useState<string>(kahoot?.questions[kahootIndex]?.title || "");
@@ -37,22 +39,22 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (kahoot) {
       const file: File | undefined = e.target.files?.[0];
-      
+
       if (!file) {
         return;
       }
-  
+
       debugLog("Image has been selected");
-  
+
       const formData: FormData = new FormData();
       formData.append("file", file);
-  
+
       try {
         await axiosInstance.post('/kahootcreator/upload-question-media', formData)
           .then(res => {
             const relativeUrl = res.data.relativeUrl;
             updateQuestionMediaUrl(kahootIndex, relativeUrl);
-  
+
             debugLog(`Image has been uploaded successfully: ${res.data.relativeUrl}`)
             saveKahootDraft(kahoot, resetIsKahootFormDirty);
           })
@@ -66,10 +68,20 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
     fileInputRef.current?.click();
   }
 
+  const doesThisQuestionHasAnImage = (): boolean => {
+    const mediaUrl = kahoot?.questions[kahootIndex].mediaUrl;
+    const doesThisQuestionHasAnImage: boolean = mediaUrl !== null && mediaUrl !== undefined && mediaUrl !== "";
+    return doesThisQuestionHasAnImage;
+  }
+
+  const deleteImageFromCurrentQuestion = () => {
+    removeMediaUrl(kahootIndex);
+  }
+
   return (
     <div className={`relative px-6 py-8 ${className} bg-creator-classroom bg-center bg-cover bg-no-repeat`}>
       <div className="absolute inset-0 bg-black opacity-5"></div>
-      
+
       <div className="relative z-10">
         <div id="question-title">
           <InputForm
@@ -85,22 +97,10 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
           />
         </div>
 
-        {kahoot?.questions[kahootIndex]?.mediaUrl && (
-          <div className="relative my-6 mx-auto w-96">
-            <img
-              src={`http://localhost:5000${kahoot.questions[kahootIndex].mediaUrl}`}
-              alt="Question media"
-              className="rounded-md shadow-md max-h-64 object-contain mx-auto"
-            />
-          </div>
-        )}
-        
         <div
           id="question-file-media"
-          className="relative my-6 mx-auto w-96 py-4"
-          onClick={handleImageClick}
+          className="my-6 mx-auto w-96 bg-white/50 hover:bg-white/35 transition inset-0 backdrop-blur-md rounded-md"
         >
-          <div className="absolute bg-white/50 inset-0 backdrop-blur-md rounded-md"></div>
           <div className="relative">
             <input
               type="file"
@@ -109,22 +109,61 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
               onChange={handleFileChange}
               className="hidden"
             />
-            <div id="icon-plus" className="flex justify-center px-3 py-3">
-              <FontAwesomeIcon
-                icon={faPlus}
-                className="bg-white px-3 py-3 shadow-md"
-                fontSize="24"
-              />
-            </div>
-            <Text
-              fontWeight={FontWeights.REGULAR}
-              textColor={TextColors.GRAY}
-              useCase={UseCases.LONGTEXT}
-              textStyle={TextStyles.NORMAL}
-              className="text-xl text-center"
-            >
-              Find and insert media
-            </Text>
+
+            {doesThisQuestionHasAnImage()
+              ? (
+                <div
+                  id="question-media-preview-and-media-options-wrapper"
+                  className="mx-auto w-96"
+                >
+                  <div id="question-media-preview" className="pt-4 pb-1">
+                    <img
+                      src={`http://localhost:5000${kahoot?.questions[kahootIndex].mediaUrl}`}
+                      alt="Question media"
+                      className="rounded-md shadow-md max-h-64 object-contain mx-auto"
+                    />
+                  </div>
+
+                  <div id="media-options" className="flex justify-end px-3">
+                    <Button
+                      backgroundColor={BackgroundColors.WHITE}
+                      animateOnHover={false}
+                      perspective={false}
+                      size={ButtonSize.SMALL}
+                      className="shadow-md"
+                      onClick={() => deleteImageFromCurrentQuestion()}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className={`${TextColors.GRAY}`}
+                      />
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  id="icon-plus-and-insert-media-caption-wrapper"
+                  className="py-4 cursor-pointer"
+                  onClick={handleImageClick}
+                >
+                  <div id="icon-plus" className="flex justify-center px-3 py-3">
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      className="bg-white px-3 py-3 shadow-md"
+                      fontSize="24"
+                    />
+                  </div>
+                  <Text
+                    fontWeight={FontWeights.REGULAR}
+                    textColor={TextColors.GRAY}
+                    useCase={UseCases.LONGTEXT}
+                    textStyle={TextStyles.NORMAL}
+                    className="text-xl text-center"
+                  >
+                    Find and insert media
+                  </Text>
+                </div>
+              )}
           </div>
         </div>
 

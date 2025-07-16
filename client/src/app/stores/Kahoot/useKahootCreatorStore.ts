@@ -42,6 +42,7 @@ interface KahootCreatorStore {
 
   // Media files
   updateQuestionMediaUrl: (index: number, mediaUrl: string) => void;
+  removeMediaUrl: (questionIndex: number) => void;
 }
 
 const createNewQuestion = (): Question => {
@@ -289,14 +290,32 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
 
       const questions: Question[] = [...state.kahoot.questions];
 
-        questions[index].mediaUrl = mediaUrl;
+      questions[index].mediaUrl = mediaUrl;
 
-        return {
-          kahoot: {
-            ...state.kahoot,
-            questions
-          }
+      return {
+        kahoot: {
+          ...state.kahoot,
+          questions
         }
+      }
+    })
+  },
+  removeMediaUrl: (questionIndex: number) => {
+    set(state => {
+      if (!state.kahoot) {
+        return state;
+      }
+
+      const updatedQuestions: Question[] = [...state.kahoot.questions];
+      updatedQuestions[questionIndex].mediaUrl = "";
+
+      return {
+        kahoot: {
+          ...state.kahoot,
+          questions: updatedQuestions
+        },
+        isKahootFormDirty: true
+      }
     })
   }
 }))
