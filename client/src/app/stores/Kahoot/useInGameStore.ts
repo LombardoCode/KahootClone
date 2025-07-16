@@ -38,8 +38,8 @@ interface InGameStore {
   setQuestionIndex: (index: number) => void;
   goToTheNextQuestion: () => void;
   isThisTheLastQuestion: () => boolean;
-  countOfAnswersProvidenByGuests: number;
-  setCountOfAnswersProvidenByGuests: (count: number) => void;
+  countOfAnswersProvidedByGuests: number;
+  setCountOfAnswersProvidedByGuests: (count: number) => void;
   remainingTime: number;
   setRemainingTime: (remainingTime: number) => void;
 
@@ -229,9 +229,9 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
 
     return (state.questionIndex) === (totalNumberOfQuestionsFromKahoot - 1);
   },
-  countOfAnswersProvidenByGuests: 0,
-  setCountOfAnswersProvidenByGuests: (count: number) => set(() => ({
-    countOfAnswersProvidenByGuests: count
+  countOfAnswersProvidedByGuests: 0,
+  setCountOfAnswersProvidedByGuests: (count: number) => set(() => ({
+    countOfAnswersProvidedByGuests: count
   })),
   remainingTime: 0,
   setRemainingTime: (remainingTime: number) => set(() => ({
