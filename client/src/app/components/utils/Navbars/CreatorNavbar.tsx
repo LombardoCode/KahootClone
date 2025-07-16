@@ -163,8 +163,10 @@ const CreatorNavbar = () => {
               backgroundColor={BackgroundColors.GRAY}
               fontWeight={FontWeights.BOLD}
               textColor={TextColors.WHITE}
-              className="text-sm"
+              className="text-sm mr-2"
               size={ButtonSize.MEDIUM}
+              perspective={false}
+              animateOnHover={false}
               onClick={() => {
                 setIsKahootHeaderModalOpen(false);
               }}
@@ -178,6 +180,8 @@ const CreatorNavbar = () => {
               textColor={TextColors.WHITE}
               className="text-sm"
               size={ButtonSize.MEDIUM}
+              perspective={false}
+              animateOnHover={false}
               onClick={() => {
                 saveDraft();
                 setIsKahootHeaderModalOpen(false);
@@ -209,6 +213,8 @@ const CreatorNavbar = () => {
                 textColor={TextColors.WHITE}
                 className="text-sm"
                 size={ButtonSize.MEDIUM}
+                perspective={false}
+                animateOnHover={false}
                 onClick={() => {
                   if (kahoot?.id) {
                     createLobby(kahoot.id, router)
@@ -348,8 +354,10 @@ const CreatorNavbar = () => {
                   backgroundColor={BackgroundColors.GRAY}
                   fontWeight={FontWeights.BOLD}
                   textColor={TextColors.WHITE}
-                  className="text-sm"
+                  className="text-sm mr-2"
                   size={ButtonSize.MEDIUM}
+                  perspective={false}
+                  animateOnHover={false}
                   onClick={() => {
                     setIsKahootSavedModalOpen(false);
                   }}
@@ -363,9 +371,11 @@ const CreatorNavbar = () => {
                   textColor={TextColors.WHITE}
                   className="text-sm"
                   size={ButtonSize.MEDIUM}
+                  perspective={false}
+                  animateOnHover={false}
                   onClick={() => router.push(ROUTES.MENU.LIBRARY)}
                 >
-                  Done
+                  Go to library
                 </Button>
               </>
             )}
