@@ -5,6 +5,7 @@ using API.Models.Creator;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers
 {
@@ -58,12 +59,7 @@ namespace API.Controllers
       {
         if (!string.IsNullOrEmpty(question.MediaUrl))
         {
-          var mediaPath = Path.Combine(Directory.GetCurrentDirectory(), question.MediaUrl.TrimStart('/'));
-
-          if (System.IO.File.Exists(mediaPath))
-          {
-            System.IO.File.Delete(mediaPath);
-          }
+          deleteQuestionMediasImage(question.MediaUrl);
         }
       }
 
@@ -108,6 +104,11 @@ namespace API.Controllers
           existingQuestion.Layout = updatedQuestion.Layout;
           existingQuestion.TimeLimit = updatedQuestion.TimeLimit;
           existingQuestion.PointsMultiplier = updatedQuestion.PointsMultiplier;
+
+          if (!existingQuestion.MediaUrl.IsNullOrEmpty() && updatedQuestion.MediaUrl.IsNullOrEmpty())
+          {
+            deleteQuestionMediasImage(existingQuestion.MediaUrl);
+          }
           existingQuestion.MediaUrl = updatedQuestion.MediaUrl;
 
           // Updating the kahoot's answers information
@@ -195,5 +196,19 @@ namespace API.Controllers
 
       return Ok(new { relativeUrl });
     }
+
+    #region Private functions
+
+    private void deleteQuestionMediasImage(string resource)
+    {
+      var mediaPath = Path.Combine(Directory.GetCurrentDirectory(), resource.TrimStart('/'));
+
+      if (System.IO.File.Exists(mediaPath))
+      {
+        System.IO.File.Delete(mediaPath);
+      }
+    }
+    
+    #endregion
   }
 }

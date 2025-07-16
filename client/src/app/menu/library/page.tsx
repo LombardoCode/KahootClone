@@ -78,7 +78,6 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
   const deleteKahoot = async (kahootIdToDelete: string | null) => {
     await axiosInstance.delete(`/kahoot/delete/${kahootIdToDelete}`)
       .then(res => {
-        console.log(res.data);
         onRefreshKahoots();
       })
       .catch(err => {
