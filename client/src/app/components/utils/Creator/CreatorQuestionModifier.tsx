@@ -13,6 +13,7 @@ import axiosInstance from "@/app/utils/axiosConfig";
 import { saveKahootDraft } from "@/app/utils/KahootCreator/kahootCreatorUtils";
 import Button, { ButtonSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
+import { doesThisQuestionHasAnImage } from "@/app/utils/kahootUtils";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -68,12 +69,6 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
     fileInputRef.current?.click();
   }
 
-  const doesThisQuestionHasAnImage = (): boolean => {
-    const mediaUrl = kahoot?.questions[kahootIndex].mediaUrl;
-    const doesThisQuestionHasAnImage: boolean = mediaUrl !== null && mediaUrl !== undefined && mediaUrl !== "";
-    return doesThisQuestionHasAnImage;
-  }
-
   const deleteImageFromCurrentQuestion = () => {
     removeMediaUrl(kahootIndex);
   }
@@ -110,7 +105,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
               className="hidden"
             />
 
-            {doesThisQuestionHasAnImage()
+            {doesThisQuestionHasAnImage(kahootIndex)
               ? (
                 <div
                   id="question-media-preview-and-media-options-wrapper"

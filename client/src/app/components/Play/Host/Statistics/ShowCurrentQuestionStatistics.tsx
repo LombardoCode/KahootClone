@@ -21,7 +21,7 @@ interface ShowCurrentQuestionStatisticsProps {
 }
 
 const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionStatisticsProps) => {
-  const { kahoot, questionIndex, isHost, isThisTheLastQuestion, goToTheNextQuestion, signalRConnection, lobbyId, setEveryoneHasAnsweredTheCurrentQuestion, setCountOfAnswersProvidenByGuests } = useInGameStore();
+  const { kahoot, questionIndex, isHost, isThisTheLastQuestion, goToTheNextQuestion, signalRConnection, lobbyId, setEveryoneHasAnsweredTheCurrentQuestion, setCountOfAnswersProvidedByGuests } = useInGameStore();
   const [answers, setAnswers] = useState<AnswerPlay[] | undefined>(kahoot?.questions[questionIndex].answers);
   const [screen, setScreen] = useState<ScreenForFinalAnswerStatistics>(ScreenForFinalAnswerStatistics.STATISTICS);
   const router = useRouter();
@@ -45,7 +45,7 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
   const continueTheGame = () => {
     goToTheNextQuestion();
     setEveryoneHasAnsweredTheCurrentQuestion(false);
-    setCountOfAnswersProvidenByGuests(0);
+    setCountOfAnswersProvidedByGuests(0);
   }
   
   const endTheGame = () => {

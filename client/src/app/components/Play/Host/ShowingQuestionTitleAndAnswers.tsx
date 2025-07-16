@@ -1,7 +1,6 @@
 import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
-import { useState } from "react";
 import ShowingQuestionTitle from "./ShowingQuestionTitle";
-import ShowingSecondsLeftAndQuantityOfAnswersProviden from "./ShowingSecondsLeftAndQuantityOfAnswersProviden";
+import QuestionMetaInfo from "./QuestionMetaInfo";
 import ShowTheAnswersToTheGuests from "./ShowTheAnswersToTheGuests";
 import ShowCurrentQuestionStatistics from "./Statistics/ShowCurrentQuestionStatistics";
 
@@ -14,15 +13,15 @@ const ShowingQuestionTitleAndAnswers = () => {
         ? (
           <>
             <ShowingQuestionTitle questionTitle={kahoot?.questions[questionIndex].title} />
-            
-            <ShowingSecondsLeftAndQuantityOfAnswersProviden />
+
+            <QuestionMetaInfo />
 
             <ShowTheAnswersToTheGuests kahoot={kahoot} questionIndex={questionIndex} />
           </>
         )
         : (<ShowCurrentQuestionStatistics
-            questionTitle={kahoot?.questions[questionIndex].title}
-          />)
+          questionTitle={kahoot?.questions[questionIndex].title}
+        />)
       }
     </div>
   )

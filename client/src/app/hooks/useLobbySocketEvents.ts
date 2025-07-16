@@ -66,7 +66,7 @@ const useLobbySocketEvents = () => {
 
     signalRConnection.on("OnUpdateTotalOfProvidedAnswersForCurrentQuestion", (numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow: number) => {
       const state = useInGameStore.getState();
-      state.setCountOfAnswersProvidenByGuests(numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
+      state.setCountOfAnswersProvidedByGuests(numberOfPeopleWhoHaveAnsweredTheCurrentQuestionRightNow);
 
       const totalOfCurrentGuestPlayers: number = state.players.length;
 

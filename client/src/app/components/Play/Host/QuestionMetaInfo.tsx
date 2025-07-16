@@ -3,13 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import Text from "../../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import { debugLog } from "@/app/utils/debugLog";
+import { doesThisQuestionHasAnImage } from "@/app/utils/kahootUtils";
 
-const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
-  const { kahoot, questionIndex, countOfAnswersProvidenByGuests, remainingTime, setRemainingTime, signalRConnection, lobbyId, setEveryoneHasAnsweredTheCurrentQuestion } = useInGameStore();
+const QuestionMetaInfo = () => {
+  const { kahoot, questionIndex, countOfAnswersProvidedByGuests, remainingTime, setRemainingTime, signalRConnection, lobbyId, setEveryoneHasAnsweredTheCurrentQuestion } = useInGameStore();
 
   useEffect(() => {
     const timeLimitSetForCurrentQuestion: number | undefined = kahoot?.questions[questionIndex].timeLimit;
-    
+
     if (timeLimitSetForCurrentQuestion !== undefined) {
       setRemainingTime(timeLimitSetForCurrentQuestion);
     }
@@ -35,7 +36,7 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
   return (
     <div id="play-container" className="flex-1">
       <div
-        id="play-seconds-left-and-quantity-of-answers-providen"
+        id="play-seconds-left-show-question-media-and-quantity-of-answers-provided"
         className="w-full mt-10 h-full flex justify-between"
       >
         <div
@@ -57,8 +58,20 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
           </div>
         </div>
 
+        {doesThisQuestionHasAnImage(questionIndex)
+          ? (
+            <div id="show-question-media">
+              <img
+                src={`http://localhost:5000${kahoot?.questions[questionIndex].mediaUrl}`}
+                alt="Question media"
+                className="rounded-md shadow-md max-h-64 object-contain mx-auto"
+              />
+            </div>
+          )
+          : null}
+
         <div
-          id="play-answers-providen"
+          id="play-answers-provided"
           className="h-full flex flex-1 justify-end items-center"
         >
           <div
@@ -66,7 +79,7 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
             className="flex flex-col items-center"
           >
             <div
-              id="play-answers-providen-quantity-circle"
+              id="play-answers-provided-quantity-circle"
               className="flex items-center bg-purple-900 px-5 py-3 rounded-full mb-2"
             >
               <Text
@@ -75,12 +88,12 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
                 fontWeight={FontWeights.BOLD}
                 className="text-4xl"
               >
-                {countOfAnswersProvidenByGuests}
+                {countOfAnswersProvidedByGuests}
               </Text>
             </div>
 
             <div
-              id="play-answers-providen-answers-text-circle"
+              id="play-answers-provided-answers-text-circle"
               className="flex items-center bg-purple-900 px-4 py-1 rounded-full"
             >
               <Text
@@ -99,4 +112,4 @@ const ShowingSecondsLeftAndQuantityOfAnswersProviden = () => {
   )
 }
 
-export default ShowingSecondsLeftAndQuantityOfAnswersProviden;
+export default QuestionMetaInfo;
