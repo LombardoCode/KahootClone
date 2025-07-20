@@ -57,7 +57,7 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
   }
 
   const createKahoot = () => {
-    axiosInstance.post('/kahoot/create', { NewKahootName: formData.newKahootName })
+    axiosInstance.post('/kahootcreator/create', { NewKahootName: formData.newKahootName })
       .then(res => {
         router.push(`/creator/${res.data.newKahootId}`);
       })
