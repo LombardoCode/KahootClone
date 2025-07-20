@@ -1,9 +1,7 @@
 using API.Data;
 using API.Data.ForClient.Dashboard.Kahoot;
 using API.Data.Server.KahootCreator;
-using API.DTOs.Kahoot;
 using API.DTOs.Statistics;
-using API.Models;
 using API.Models.Statistics;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -48,40 +46,6 @@ namespace API.Controllers
       return Ok(kahoots);
     }
 
-    [HttpPost("create")]
-    [Authorize]
-    public async Task<ActionResult> CreateKahoot(CreateKahootQuizDTO data)
-    {
-      var userId = await _userService.GetUserId();
-
-      Kahoot newKahootQuiz = new Kahoot
-      {
-        Id = Guid.NewGuid(),
-        UserId = userId,
-        Title = data.NewKahootName,
-        Description = null,
-        CreatedAt = DateTime.Now,
-        UpdatedAt = DateTime.Now,
-        IsPlayable = false
-      };
-
-      _dbContext.Add(newKahootQuiz);
-
-      try
-      {
-        await _dbContext.SaveChangesAsync();
-
-        return Ok(new
-        {
-          NewKahootId = newKahootQuiz.Id
-        });
-      }
-      catch (Exception ex)
-      {
-        return StatusCode(500);
-      }
-    }
-
     [HttpDelete("delete/{kahootId}")]
     [Authorize]
     public async Task<ActionResult> DeleteKahoot(Guid kahootId)
@@ -101,16 +65,16 @@ namespace API.Controllers
         }
 
         try
-          {
-            _dbContext.Kahoots.Remove(kahoot);
-            await _dbContext.SaveChangesAsync();
+        {
+          _dbContext.Kahoots.Remove(kahoot);
+          await _dbContext.SaveChangesAsync();
 
-            return Ok();
-          }
-          catch (Exception)
-          {
-            return StatusCode(500);
-          }
+          return Ok();
+        }
+        catch (Exception)
+        {
+          return StatusCode(500);
+        }
       }
       else
       {

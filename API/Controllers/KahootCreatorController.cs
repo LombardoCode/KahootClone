@@ -1,8 +1,11 @@
 using API.Data;
 using API.Data.Server.KahootCreator;
+using API.DTOs.Kahoot;
+using API.Interfaces;
 using API.Models;
 using API.Models.Creator;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -15,11 +18,51 @@ namespace API.Controllers
   {
     private readonly DataContext _dbContext;
     private readonly KahootValidationService _kahootValidationService;
+    private readonly UserService _userService;
 
-    public KahootCreatorController(DataContext dbContext, KahootValidationService kahootValidationService)
+    public KahootCreatorController(DataContext dbContext, KahootValidationService kahootValidationService, UserService userService)
     {
       _dbContext = dbContext;
       _kahootValidationService = kahootValidationService;
+      _userService = userService;
+    }
+
+    [HttpPost("create")]
+    [Authorize]
+    public async Task<ActionResult> CreateKahoot(CreateKahootQuizDTO data)
+    {
+      var userId = await _userService.GetUserId();
+
+      Kahoot newKahootQuiz = new Kahoot
+      {
+        Id = Guid.NewGuid(),
+        UserId = userId,
+        Title = data.NewKahootName,
+        Description = null,
+        CreatedAt = DateTime.Now,
+        UpdatedAt = DateTime.Now,
+        IsPlayable = false
+      };
+
+      // Create a Kahoot and a new empty question
+      Question newQuestion = createQuestion(newKahootQuiz.Id);
+      newKahootQuiz.Questions = new List<Question>() { newQuestion };
+
+      _dbContext.Add(newKahootQuiz);
+
+      try
+      {
+        await _dbContext.SaveChangesAsync();
+
+        return Ok(new
+        {
+          NewKahootId = newKahootQuiz.Id
+        });
+      }
+      catch (Exception ex)
+      {
+        return StatusCode(500);
+      }
     }
 
     /// <summary>
@@ -225,6 +268,33 @@ namespace API.Controllers
       {
         System.IO.File.Delete(mediaPath);
       }
+    }
+
+    private Question createQuestion(Guid kahootId)
+    {
+      List<Answer> newAnswers = new List<Answer>();
+
+      for (int i = 0; i < 4; i++)
+      {
+        newAnswers.Add(new Answer
+        {
+          Text = "",
+          IsCorrect = false
+        });
+      }
+
+      Question newQuestion = new Question
+      {
+        KahootId = kahootId,
+        Title = "",
+        Layout = QuizQuestionLayoutTypes.CLASSIC,
+        TimeLimit = TimeLimits.THIRTY_S,
+        PointsMultiplier = PointsMultiplier.STANDARD,
+        MediaUrl = "",
+        Answers = newAnswers
+      };
+
+      return newQuestion;
     }
     
     #endregion
