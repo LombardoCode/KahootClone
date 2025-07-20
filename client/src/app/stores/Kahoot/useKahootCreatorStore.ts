@@ -8,7 +8,7 @@ interface KahootValidationStatus {
 }
 
 export interface KahootQuestionValidation {
-  kahootIndex: number;
+  questionIndex: number;
   errors: {
     questionTitle: string;
     missingAnswerTitles: string;
@@ -18,7 +18,7 @@ export interface KahootQuestionValidation {
 
 interface KahootCreatorStore {
   kahoot: Kahoot | null;
-  kahootIndex: number;
+  questionIndex: number;
   isKahootFormDirty: boolean;
   resetIsKahootFormDirty: () => void;
   kahootValidationStatus: KahootValidationStatus;
@@ -38,7 +38,7 @@ interface KahootCreatorStore {
   deleteQuestion: (questionId: number | null) => void;
   getKahootPlayabilityStatus: () => void;
   updateTitleAndDescription: (headerInfo: KahootHeaderInfo) => void;
-  selectQuestion: (kahootIndex: number) => void;
+  selectQuestion: (questionIndex: number) => void;
 
   // Media files
   updateQuestionMediaUrl: (index: number, mediaUrl: string) => void;
@@ -85,7 +85,7 @@ const addNewAnswer = (text: string): Answer => {
 
 const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
   kahoot: null,
-  kahootIndex: 0,
+  questionIndex: 0,
   isKahootFormDirty: false,
   resetIsKahootFormDirty: () => set(() => ({
     isKahootFormDirty: false
@@ -97,7 +97,7 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
   overwriteKahoot: (newKahoot: Kahoot) => set(() => {
     return {
       kahoot: newKahoot,
-      kahootIndex: 0
+      questionIndex: 0
     }
   }),
   setKahootTitleAndDescription: ({ title, description }: { title: string, description: string }) => set((state) => {
@@ -114,7 +114,7 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
     return state;
   }),
   setKahootsQuestionIndex: (index: number) => set(() => ({
-    kahootIndex: index
+    questionIndex: index
   })),
   selectedQuestion: () => {
     const state = get();
@@ -124,14 +124,14 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
     if (state.kahoot) {
       const newQuestion = createNewQuestion(quizQuestionLayoutType);
       const updatedQuestions = [...state.kahoot.questions, newQuestion];
-      const newKahootIndex = updatedQuestions.length - 1;
+      const newQuestionIndex = updatedQuestions.length - 1;
 
       return {
         kahoot: {
           ...state.kahoot,
           questions: updatedQuestions
         },
-        kahootIndex: newKahootIndex,
+        questionIndex: newQuestionIndex,
         isKahootFormDirty: true
       };
     }
@@ -215,9 +215,9 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
       kahoot.questions = kahoot.questions.filter((_, index) => index !== indexFromQuestionToRemove);
       state.isKahootFormDirty = true;
 
-      // And then we reposition the kahootIndex back (eg. if the user is on the last question and then they decide to remove the last question, we will reposition the kahootIndex to the very last question available)
-      if (state.kahootIndex >= kahoot.questions.length) {
-        state.kahootIndex = kahoot.questions.length - 1;
+      // And then we reposition the questionIndex back (eg. if the user is on the last question and then they decide to remove the last question, we will reposition the questionIndex to the very last question available)
+      if (state.questionIndex >= kahoot.questions.length) {
+        state.questionIndex = kahoot.questions.length - 1;
       }
 
       return {
@@ -225,7 +225,7 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
           ...kahoot,
           questions: [...kahoot.questions]
         },
-        kahootIndex: state.kahootIndex
+        questionIndex: state.questionIndex
       };
     }
 
@@ -274,7 +274,7 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
         }
 
         validationStatus.questions.push({
-          kahootIndex: index,
+          questionIndex: index,
           errors: questionValidationErrors
         })
       })
@@ -298,10 +298,10 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
 
     return state;
   }),
-  selectQuestion: (kahootIndex: number) => set((state) => {
+  selectQuestion: (questionIndex: number) => set((state) => {
     return {
       ...state,
-      kahootIndex
+      questionIndex
     }
   }),
 

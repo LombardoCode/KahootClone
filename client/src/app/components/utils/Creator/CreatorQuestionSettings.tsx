@@ -14,36 +14,36 @@ interface CreatorQuestionSettingsProps {
 
 const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) => {
   // Global store
-  const { kahoot, kahootIndex, updateQuestionLayout, updateQuestionTimeLimit, updateQuestionPoints } = useKahootCreatorStore();
+  const { kahoot, questionIndex, updateQuestionLayout, updateQuestionTimeLimit, updateQuestionPoints } = useKahootCreatorStore();
 
   // Local component
   const [questionLayout, setQuestionLayout] = useState<ComboBoxStateProps>({ textContent: "Classic", valueContent: QuizQuestionLayoutTypes.CLASSIC });
   const [timeLimit, setTimeLimit] = useState<ComboBoxStateProps>({ textContent: "10 seconds", valueContent: TimeLimits.TEN_S });
   const [points, setPoints] = useState<ComboBoxStateProps>({ textContent: "Standard", valueContent: PointsMultiplier.STANDARD });
 
-  // Update local state when kahootIndex changes
+  // Update local state when questionIndex changes
   useEffect(() => {
-    if (kahoot && kahoot.questions[kahootIndex]) {
-      const currentQuestion = kahoot.questions[kahootIndex];
+    if (kahoot && kahoot.questions[questionIndex]) {
+      const currentQuestion = kahoot.questions[questionIndex];
       setQuestionLayout({ textContent: getTextContentForLayout(currentQuestion.layout), valueContent: currentQuestion.layout })
       setTimeLimit({ textContent: `${currentQuestion.timeLimit} seconds`, valueContent: currentQuestion.timeLimit });
       setPoints({ textContent: getTextContentForPoints(currentQuestion.pointsMultiplier), valueContent: currentQuestion.pointsMultiplier });
     }
-  }, [kahoot, kahootIndex]);
+  }, [kahoot, questionIndex]);
 
   const handleQuestionLayoutChange = (questionLayout: ComboBoxStateProps) => {
     setQuestionLayout(questionLayout);
-    updateQuestionLayout(kahootIndex, questionLayout.valueContent);
+    updateQuestionLayout(questionIndex, questionLayout.valueContent);
   }
 
   const handleQuestionTimeLimitChange = (questionTimeLimit: ComboBoxStateProps) => {
     setTimeLimit(questionLayout);
-    updateQuestionTimeLimit(kahootIndex, questionTimeLimit.valueContent);
+    updateQuestionTimeLimit(questionIndex, questionTimeLimit.valueContent);
   }
 
   const handleQuestionPointsChange = (questionPoints: ComboBoxStateProps) => {
     setPoints(questionPoints);
-    updateQuestionPoints(kahootIndex, questionPoints.valueContent);
+    updateQuestionPoints(questionIndex, questionPoints.valueContent);
   }
 
   return (

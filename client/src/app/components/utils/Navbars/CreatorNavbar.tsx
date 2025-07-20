@@ -238,11 +238,11 @@ const CreatorNavbar = () => {
               {kahootValidationStatus.questions
                 .filter((question) => doesQuestionContainsAnError(question))
                 .map((questionWithError: KahootQuestionValidation, index: number, array) => {
-                  const kahootIndex = questionWithError.kahootIndex;
+                  const questionIndex = questionWithError.questionIndex;
                   const isLastItem = index === array.length - 1;
 
                   return (
-                    <div key={kahootIndex}>
+                    <div key={questionIndex}>
                       <div id="question-info-header" className="flex">
                         <div id="question-image" className="w-20 mr-3 bg-gray-500 rounded-md"></div>
                         <div id="question-layout-and-title" className="flex-1 flex flex-col py-2">
@@ -252,17 +252,17 @@ const CreatorNavbar = () => {
                             useCase={UseCases.LONGTEXT}
                             className="text-sm"
                           >
-                            {kahootIndex + 1} - {kahoot?.questions[kahootIndex].layout}
+                            {questionIndex + 1} - {kahoot?.questions[questionIndex].layout}
                           </Text>
 
-                          {kahoot?.questions[kahootIndex].title && (
+                          {kahoot?.questions[questionIndex].title && (
                             <Text
                               fontWeight={FontWeights.BOLD}
                               textColor={TextColors.BLACK}
                               useCase={UseCases.LONGTEXT}
                               className="text-sm"
                             >
-                              {kahoot?.questions[kahootIndex].title}
+                              {kahoot?.questions[questionIndex].title}
                             </Text>
                           )}
                         </div>
@@ -274,7 +274,7 @@ const CreatorNavbar = () => {
                             className="text-sm"
                             size={ButtonSize.SMALL}
                             onClick={() => {
-                              selectQuestion(kahootIndex);
+                              selectQuestion(questionIndex);
                               setIsKahootSavedModalOpen(false);
                             }}
                           >

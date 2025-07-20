@@ -196,7 +196,7 @@ interface SliderItemsProps {
 }
 
 const SliderItem = ({ question, index }: SliderItemsProps) => {
-  const { setKahootsQuestionIndex, kahootIndex, deleteQuestion } = useKahootCreatorStore();
+  const { setKahootsQuestionIndex, questionIndex, deleteQuestion } = useKahootCreatorStore();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
@@ -226,7 +226,7 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
 
         <div
           id="slider-item-box"
-          className={`ring-3 rounded-sm h-24 cursor-pointer ${index === kahootIndex ? 'ring-blue-500' : 'ring-slate-300 hover:ring-slate-400'}`}
+          className={`ring-3 rounded-sm h-24 cursor-pointer ${index === questionIndex ? 'ring-blue-500' : 'ring-slate-300 hover:ring-slate-400'}`}
           onClick={() => setKahootsQuestionIndex(index)}
         >
         </div>
