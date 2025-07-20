@@ -30,27 +30,27 @@ namespace API.Controllers
     public async Task<ActionResult> Drafts(KahootCreatorFormDraftDTO kahootDraft)
     {
       // Retrieving the kahoot from database
-      Kahoot kahootToUpd = await _dbContext.Kahoots
+      Kahoot kahootFromDB = await _dbContext.Kahoots
                             .Where(k => k.Id == kahootDraft.Id)
                             .Include(k => k.Questions)
                               .ThenInclude(q => q.Answers)
                             .FirstOrDefaultAsync();
 
-      if (kahootToUpd == null)
+      if (kahootFromDB == null)
       {
         return NotFound();
       }
 
       // Updating the kahoot header information
-      kahootToUpd.Title = kahootDraft.Title;
-      kahootToUpd.Description = kahootDraft.Description;
-      kahootToUpd.UpdatedAt = new DateTime();
+      kahootFromDB.Title = kahootDraft.Title;
+      kahootFromDB.Description = kahootDraft.Description;
+      kahootFromDB.UpdatedAt = new DateTime();
 
       // We get the IDs from the questions that exists on the kahoot object (kahootDraft)
       List<int> updatedQuestionIds = kahootDraft.Questions.Select(q => q.Id).ToList();
 
       // We detect which question IDs (from database) are no longer present on the question IDs from the kahoot object (kahootDraft)
-      List<Question> questionsToDelete = kahootToUpd.Questions
+      List<Question> questionsToDelete = kahootFromDB.Questions
                                 .Where(q => !updatedQuestionIds.Contains(q.Id))
                                 .ToList();
 
@@ -88,12 +88,12 @@ namespace API.Controllers
             }).ToList()
           };
 
-          kahootToUpd.Questions.Add(newQuestion);
+          kahootFromDB.Questions.Add(newQuestion);
           continue;
         }
 
         // Select the already existing question from database
-        var existingQuestion = kahootToUpd.Questions
+        var existingQuestion = kahootFromDB.Questions
                                 .FirstOrDefault(q => q.Id == updatedQuestion.Id);
 
         // If the questions exists
@@ -111,16 +111,34 @@ namespace API.Controllers
           }
           existingQuestion.MediaUrl = updatedQuestion.MediaUrl;
 
-          // Updating the kahoot's answers information
-          foreach (var updatedAnswer in updatedQuestion.Answers)
-          {
-            var existingAnswer = existingQuestion.Answers
-                                  .FirstOrDefault(a => a.Id == updatedAnswer.Id);
+          bool allTheAnswersAreNew = updatedQuestion.Answers.All(a => a.Id == 0);
 
-            if (existingAnswer != null)
+          if (allTheAnswersAreNew)
+          {
+            existingQuestion.Answers.Clear();
+
+            foreach (var newAnswer in updatedQuestion.Answers)
             {
-              existingAnswer.Text = updatedAnswer.Text;
-              existingAnswer.IsCorrect = updatedAnswer.IsCorrect;
+              existingQuestion.Answers.Add(new Answer
+              {
+                Text = newAnswer.Text,
+                IsCorrect = newAnswer.IsCorrect
+              });
+            }
+          }
+          else
+          {
+            // Updating the kahoot's answers information
+            foreach (var updatedAnswer in updatedQuestion.Answers)
+            {
+              var existingAnswer = existingQuestion.Answers
+                                    .FirstOrDefault(a => a.Id == updatedAnswer.Id);
+
+              if (existingAnswer != null)
+              {
+                existingAnswer.Text = updatedAnswer.Text;
+                existingAnswer.IsCorrect = updatedAnswer.IsCorrect;
+              }
             }
           }
         }
@@ -129,12 +147,12 @@ namespace API.Controllers
       // Create the Kahoot object for the client-side
       var kahootDTO = new KahootClient
       {
-        Id = kahootToUpd.Id,
-        Title = kahootToUpd.Title,
-        Description = kahootToUpd.Description,
-        CreatedAt = kahootToUpd.CreatedAt,
-        UpdatedAt = kahootToUpd.UpdatedAt,
-        Questions = kahootToUpd.Questions.Select(q => new QuestionClient
+        Id = kahootFromDB.Id,
+        Title = kahootFromDB.Title,
+        Description = kahootFromDB.Description,
+        CreatedAt = kahootFromDB.CreatedAt,
+        UpdatedAt = kahootFromDB.UpdatedAt,
+        Questions = kahootFromDB.Questions.Select(q => new QuestionClient
         {
           Id = q.Id,
           Title = q.Title,
@@ -153,7 +171,7 @@ namespace API.Controllers
 
       bool isKahootPlayable = _kahootValidationService.ValidateKahoot(kahootDTO);
 
-      kahootToUpd.IsPlayable = isKahootPlayable;
+      kahootFromDB.IsPlayable = isKahootPlayable;
       kahootDTO.IsPlayable = isKahootPlayable;
 
       // Save changes into the database

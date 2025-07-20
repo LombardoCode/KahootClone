@@ -26,7 +26,7 @@ interface KahootCreatorStore {
   setKahootTitleAndDescription: (kahootInfo: { title: string, description: string }) => void;
   setKahootsQuestionIndex: (index: number) => void;
   selectedQuestion: () => Question | null;
-  addQuestion: () => void;
+  addQuestion: (quizQuestionLayoutType: QuizQuestionLayoutTypes) => void;
   getKahootQuestions: () => Question[];
   getQuestionCount: () => number;
   updateQuestionTitle: (index: number, newQuestionTitle: string) => void;
@@ -45,17 +45,14 @@ interface KahootCreatorStore {
   removeMediaUrl: (questionIndex: number) => void;
 }
 
-const createNewQuestion = (): Question => {
-  let answers: Answer[] = [];
-
-  for (let i = 0; i < 4; i++) {
-    answers.push(addNewAnswer());
-  }
+const createNewQuestion = (quizQuestionLayoutType: QuizQuestionLayoutTypes): Question => {
+  // Create answers
+  let answers: Answer[] = createAnswersForSpecificLayout(quizQuestionLayoutType);
 
   return {
     id: 0,
     title: "",
-    layout: QuizQuestionLayoutTypes.CLASSIC,
+    layout: quizQuestionLayoutType,
     timeLimit: TimeLimits.THIRTY_S,
     pointsMultiplier: PointsMultiplier.STANDARD,
     mediaUrl: "",
@@ -63,10 +60,25 @@ const createNewQuestion = (): Question => {
   }
 }
 
-const addNewAnswer = (): Answer => {
+const createAnswersForSpecificLayout = (quizQuestionLayoutType: QuizQuestionLayoutTypes): Answer[] => {
+  let answers: Answer[] = [];
+
+  if (quizQuestionLayoutType === QuizQuestionLayoutTypes.CLASSIC) {
+    for (let i = 0; i < 4; i++) {
+      answers.push(addNewAnswer(""));
+    }
+  } else if (quizQuestionLayoutType === QuizQuestionLayoutTypes.TRUE_OR_FALSE) {
+    answers.push(addNewAnswer("True"));
+    answers.push(addNewAnswer("False"));
+  }
+
+  return answers;
+}
+
+const addNewAnswer = (text: string): Answer => {
   return {
     id: 0,
-    text: "",
+    text,
     isCorrect: false
   }
 }
@@ -108,9 +120,9 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
     const state = get();
     return state.kahoot ? state.kahoot.questions[0] : null;
   },
-  addQuestion: () => set((state) => {
+  addQuestion: (quizQuestionLayoutType: QuizQuestionLayoutTypes) => set((state) => {
     if (state.kahoot) {
-      const newQuestion = createNewQuestion();
+      const newQuestion = createNewQuestion(quizQuestionLayoutType);
       const updatedQuestions = [...state.kahoot.questions, newQuestion];
       const newKahootIndex = updatedQuestions.length - 1;
 
@@ -151,7 +163,14 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
   }),
   updateAnswerCorrectness: (questionIndex: number, answerIndex: number, isCorrect: boolean) => set((state) => {
     const kahoot = state.kahoot;
+    
     if (kahoot) {
+      if (kahoot.questions[questionIndex].layout === QuizQuestionLayoutTypes.TRUE_OR_FALSE) {
+        for (let i = 0; i < kahoot.questions[questionIndex].answers.length; i++) {
+          kahoot.questions[questionIndex].answers[i].isCorrect = false;
+        }
+      }
+
       kahoot.questions[questionIndex].answers[answerIndex].isCorrect = isCorrect;
       state.isKahootFormDirty = true;
     }
@@ -160,8 +179,13 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
   updateQuestionLayout: (questionIndex: number, questionLayout: QuizQuestionLayoutTypes) => set((state) => {
     const kahoot = state.kahoot;
     if (kahoot?.questions[questionIndex]) {
-      kahoot.questions[questionIndex].layout = questionLayout;
-      state.isKahootFormDirty = true;
+      // Remove all the existing answers and create new empty answers when the question layout changes to a different one
+      if (kahoot.questions[questionIndex].layout !== questionLayout) {
+        kahoot.questions[questionIndex].layout = questionLayout;
+        kahoot.questions[questionIndex].answers = [];
+        kahoot.questions[questionIndex].answers = createAnswersForSpecificLayout(kahoot.questions[questionIndex].layout);
+        state.isKahootFormDirty = true;
+      }
     }
     return { kahoot };
   }),
