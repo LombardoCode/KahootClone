@@ -12,6 +12,7 @@ export interface InputFormProps {
   value?: string;
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 }
 
 export enum InputFormTypes {
@@ -28,7 +29,8 @@ const InputForm = ({
   id,
   value,
   placeholder = '',
-  onChange
+  onChange,
+  disabled = false
 }: InputFormProps) => {
   return (
     <input
@@ -39,6 +41,7 @@ const InputForm = ({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      disabled={disabled}
     />
   );
 };

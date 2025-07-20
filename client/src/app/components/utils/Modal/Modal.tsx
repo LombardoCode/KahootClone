@@ -12,6 +12,7 @@ interface ModalProps {
   footerContent: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
+  className?: string;
 }
 
 export enum ModalTypes {
@@ -19,7 +20,7 @@ export enum ModalTypes {
   DELETION
 }
 
-const Modal = ({ modalType, title, isOpen, onClose, bodyContent, footerContent }: ModalProps) => {
+const Modal = ({ modalType, title, isOpen, onClose, bodyContent, footerContent, className = "" }: ModalProps) => {
   if (!isOpen) {
     return null;
   }
@@ -47,7 +48,7 @@ const Modal = ({ modalType, title, isOpen, onClose, bodyContent, footerContent }
           initial={{ y: 20 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.3, ease: 'circOut' }}
-          className="bg-white p-6 rounded-lg shadow-lg max-h-[calc(100vh-100px)] overflow-hidden flex flex-col"
+          className={`bg-white p-6 rounded-lg shadow-lg max-h-[calc(100vh-100px)] overflow-hidden flex flex-col ${className}`}
         >
           {/* Title */}
           <Text

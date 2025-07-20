@@ -3,11 +3,12 @@ import Text from "../../UIComponents/Text";
 import Button, { ButtonSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
-import { Question } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { Question, QuizQuestionLayoutTypes } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faGamepad, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Modal, { ModalTypes } from "../Modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getTextContentForLayout } from "../Quizes/KahootQuestion.utills";
 
 interface CreatorSliderOfQuestionsProps {
   className?: string;
@@ -15,30 +16,176 @@ interface CreatorSliderOfQuestionsProps {
 
 const CreatorSliderOfQuestions = ({ className }: CreatorSliderOfQuestionsProps) => {
   const { addQuestion, getKahootQuestions } = useKahootCreatorStore();
+  const [isKahootLayoutSelectorModalOpen, setIsKahootLayoutSelectorModalOpen] = useState<boolean>(false);
+  const [hoveredLayout, setHoveredLayout] = useState<QuizQuestionLayoutTypes | null>(QuizQuestionLayoutTypes.CLASSIC);
+  const [layoutDescriptor, setLayoutDescriptor] = useState<any>({
+    title: "",
+    description: "",
+    image: ""
+  });
+
+  useEffect(() => {
+    if (hoveredLayout !== null) {
+      generateLayoutDescription(hoveredLayout)
+    }
+  }, [hoveredLayout])
+
+  const generateLayoutDescription = (hoveredLayout: string): void => {
+    switch (hoveredLayout) {
+      case QuizQuestionLayoutTypes.CLASSIC:
+        setLayoutDescriptor({
+          title: "Quiz",
+          description: "Give participants several answer alternatives to choose from.",
+          image: ""
+        })
+        break;
+      case QuizQuestionLayoutTypes.TRUE_OR_FALSE:
+        setLayoutDescriptor({
+          title: "True or False",
+          description: "Let participants decide if the statement is true or false.",
+          image: ""
+        })
+        break;
+      default:
+        break;
+    }
+  }
+
+  const createNewQuestion = (quizQuestionLayoutType: QuizQuestionLayoutTypes) => {
+    addQuestion(quizQuestionLayoutType);
+    setIsKahootLayoutSelectorModalOpen(false);
+  }
 
   return (
-    <div className={`relative ${className} h-full flex flex-col`}>
-      <div className="flex-1 overflow-y-auto px-3 py-4">
-        {getKahootQuestions().map((question: Question, index: number) => (
-          <SliderItem
-            question={question}
-            key={index}
-            index={index}
-          />
-        ))}
+    <>
+      <div className={`relative ${className} h-full flex flex-col`}>
+        <div className="flex-1 overflow-y-auto px-3 py-4">
+          {getKahootQuestions().map((question: Question, index: number) => (
+            <SliderItem
+              question={question}
+              key={index}
+              index={index}
+            />
+          ))}
+        </div>
+
+        <div id="add-question" className="w-full flex justify-center px-2 py-1 ">
+          <Button
+            backgroundColor={BackgroundColors.BLUE}
+            fontWeight={FontWeights.BOLD}
+            textColor={TextColors.WHITE}
+            onClick={() => setIsKahootLayoutSelectorModalOpen(true)}
+            className="w-full max-w-sm"
+          >
+            Add question
+          </Button>
+        </div>
       </div>
 
-      <div id="add-question" className="w-full flex justify-center px-2 py-1 ">
-        <Button
-          backgroundColor={BackgroundColors.BLUE}
-          fontWeight={FontWeights.BOLD}
-          textColor={TextColors.WHITE}
-          onClick={() => addQuestion()}
-          className="w-full max-w-sm"
-        >
-          Add question
-        </Button>
-      </div>
+      {/* Layout selector modal */}
+      <Modal
+        modalType={ModalTypes.INPUT}
+        isOpen={isKahootLayoutSelectorModalOpen}
+        title={`Select the type of question you want to create`}
+        onClose={() => setIsKahootLayoutSelectorModalOpen(false)}
+        className="w-[700px] max-w-[90vw]"
+        bodyContent={(
+          <>
+            <div
+              id="show-layout-modes-and-their-description"
+              className="grid grid-cols-12"
+            >
+              <div
+                id="show-layout-modes"
+                className="col-span-4"
+              >
+                <LayoutOption
+                  text={'Classic'}
+                  onHover={() => setHoveredLayout(QuizQuestionLayoutTypes.CLASSIC)}
+                  onClick={() => createNewQuestion(QuizQuestionLayoutTypes.CLASSIC)}
+                />
+                <LayoutOption
+                  text={'True or false'}
+                  onHover={() => setHoveredLayout(QuizQuestionLayoutTypes.TRUE_OR_FALSE)}
+                  onClick={() => createNewQuestion(QuizQuestionLayoutTypes.TRUE_OR_FALSE)}
+                />
+              </div>
+              <div
+                id="layout-description"
+                className="col-span-8 px-3"
+              >
+                <Text
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-base"
+                >
+                  {layoutDescriptor.title}
+                </Text>
+
+                <Text
+                  fontWeight={FontWeights.REGULAR}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-base"
+                >
+                  {layoutDescriptor.description}
+                </Text>
+
+                <Text
+                  fontWeight={FontWeights.REGULAR}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-base"
+                >
+                  {layoutDescriptor.image}
+                </Text>
+              </div>
+            </div>
+          </>
+        )}
+        footerContent={(
+          <Button
+            backgroundColor={BackgroundColors.GRAY}
+            fontWeight={FontWeights.BOLD}
+            size={ButtonSize.MEDIUM}
+            textColor={TextColors.WHITE}
+            className="mr-2"
+            animateOnHover={false}
+            onClick={() => {
+              setIsKahootLayoutSelectorModalOpen(false);
+            }}
+          >
+            Cancel
+          </Button>
+        )}
+      />
+    </>
+  )
+}
+
+interface LayoutOptionProps {
+  text: string;
+  onHover: () => void;
+  onClick: (e: any) => void;
+}
+
+const LayoutOption = ({ text, onHover, onClick }: LayoutOptionProps) => {
+  return (
+    <div
+      className="layout-option flex items-center px-3 py-3 hover:bg-slate-400/60 cursor-pointer"
+      onMouseEnter={onHover}
+      onClick={onClick}
+    >
+      <FontAwesomeIcon icon={faGamepad} className={`${TextColors.GRAY} mr-2`} />
+      <Text
+        fontWeight={FontWeights.BOLD}
+        textColor={TextColors.BLACK}
+        useCase={UseCases.LONGTEXT}
+        className="text-base"
+      >
+        {text}
+      </Text>
     </div>
   )
 }
@@ -51,17 +198,6 @@ interface SliderItemsProps {
 const SliderItem = ({ question, index }: SliderItemsProps) => {
   const { setKahootsQuestionIndex, kahootIndex, deleteQuestion } = useKahootCreatorStore();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const getLayoutName = (): string => {
-    switch (question.layout) {
-      case "CLASSIC":
-        return "Classic";
-      case "TRUE_OR_FALSE":
-        return "True or false";
-      default:
-        return "Unknown";
-    }
-  }
 
   return (
     <div className="flex mb-3">
@@ -84,7 +220,7 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
             className="text-sm"
           >
             <span className="mr-2">{index + 1}</span>
-            <span>{getLayoutName()}</span>
+            <span>{getTextContentForLayout(question.layout)}</span>
           </Text>
         </div>
 
@@ -95,6 +231,7 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
         >
         </div>
       </div>
+
       <Modal
         modalType={ModalTypes.DELETION}
         isOpen={isModalOpen}

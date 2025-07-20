@@ -165,7 +165,11 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
         <div id="answers">
           <KahootAnswerContainer>
             {kahoot?.questions[kahootIndex]?.answers.map((answer: Answer, index: number) => (
-              <KahootAnswerTextBox key={index} index={index} />
+              <KahootAnswerTextBox
+                key={index}
+                answerIndex={index}
+                answer={answer}
+              />
             ))}
           </KahootAnswerContainer>
         </div>
