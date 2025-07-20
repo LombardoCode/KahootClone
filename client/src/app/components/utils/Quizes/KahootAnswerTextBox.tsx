@@ -15,19 +15,19 @@ interface KahootAnswerTextboxProps {
 
 const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTextboxProps) => {
   // Store
-  const { kahoot, kahootIndex, updateAnswerText, updateAnswerCorrectness } = useKahootCreatorStore();
+  const { kahoot, questionIndex, updateAnswerText, updateAnswerCorrectness } = useKahootCreatorStore();
   
   // Local component
-  const answerText = kahoot?.questions[kahootIndex].answers[answerIndex].text || "";
-  const isTheQuestionTrueOrFalse: boolean = kahoot?.questions[kahootIndex].layout === QuizQuestionLayoutTypes.TRUE_OR_FALSE;
+  const answerText = kahoot?.questions[questionIndex].answers[answerIndex].text || "";
+  const isTheQuestionTrueOrFalse: boolean = kahoot?.questions[questionIndex].layout === QuizQuestionLayoutTypes.TRUE_OR_FALSE;
 
   const handleAnswerTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newAnswer = e.target.value;
-    updateAnswerText(kahootIndex, answerIndex, newAnswer);
+    updateAnswerText(questionIndex, answerIndex, newAnswer);
   }
 
   const handleAnwserCorrectnessChange = (isCorrect: boolean) => {
-    updateAnswerCorrectness(kahootIndex, answerIndex, isCorrect);
+    updateAnswerCorrectness(questionIndex, answerIndex, isCorrect);
   }
 
   return (

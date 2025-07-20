@@ -21,20 +21,20 @@ interface CreatorQuestionModifierProps {
 
 const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) => {
   // Store
-  const { kahoot, kahootIndex, updateQuestionTitle, updateQuestionMediaUrl, resetIsKahootFormDirty, removeMediaUrl } = useKahootCreatorStore();
+  const { kahoot, questionIndex, updateQuestionTitle, updateQuestionMediaUrl, resetIsKahootFormDirty, removeMediaUrl } = useKahootCreatorStore();
 
   // Local component
-  const [title, setTitle] = useState<string>(kahoot?.questions[kahootIndex]?.title || "");
+  const [title, setTitle] = useState<string>(kahoot?.questions[questionIndex]?.title || "");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setTitle(kahoot?.questions[kahootIndex]?.title || "");
-  }, [kahoot, kahootIndex]);
+    setTitle(kahoot?.questions[questionIndex]?.title || "");
+  }, [kahoot, questionIndex]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
     setTitle(newTitle);
-    updateQuestionTitle(kahootIndex, newTitle);
+    updateQuestionTitle(questionIndex, newTitle);
   }
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +54,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
         await axiosInstance.post('/kahootcreator/upload-question-media', formData)
           .then(res => {
             const relativeUrl = res.data.relativeUrl;
-            updateQuestionMediaUrl(kahootIndex, relativeUrl);
+            updateQuestionMediaUrl(questionIndex, relativeUrl);
 
             debugLog(`Image has been uploaded successfully: ${res.data.relativeUrl}`)
             saveKahootDraft(kahoot, resetIsKahootFormDirty);
@@ -70,7 +70,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
   }
 
   const deleteImageFromCurrentQuestion = () => {
-    removeMediaUrl(kahootIndex);
+    removeMediaUrl(questionIndex);
   }
 
   return (
@@ -105,7 +105,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
               className="hidden"
             />
 
-            {doesThisQuestionHasAnImage(kahootIndex)
+            {doesThisQuestionHasAnImage(questionIndex)
               ? (
                 <div
                   id="question-media-preview-and-media-options-wrapper"
@@ -113,7 +113,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                 >
                   <div id="question-media-preview" className="pt-4 pb-1">
                     <img
-                      src={`http://localhost:5000${kahoot?.questions[kahootIndex].mediaUrl}`}
+                      src={`http://localhost:5000${kahoot?.questions[questionIndex].mediaUrl}`}
                       alt="Question media"
                       className="rounded-md shadow-md max-h-64 object-contain mx-auto"
                     />
@@ -164,7 +164,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
         <div id="answers">
           <KahootAnswerContainer>
-            {kahoot?.questions[kahootIndex]?.answers.map((answer: Answer, index: number) => (
+            {kahoot?.questions[questionIndex]?.answers.map((answer: Answer, index: number) => (
               <KahootAnswerTextBox
                 key={index}
                 answerIndex={index}
