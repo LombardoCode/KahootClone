@@ -192,16 +192,20 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
   updateQuestionTimeLimit: (questionIndex: number, questionTimeLimit: TimeLimits) => set((state) => {
     const kahoot = state.kahoot;
     if (kahoot) {
-      kahoot.questions[questionIndex].timeLimit = questionTimeLimit;
-      state.isKahootFormDirty = true;
+      if (kahoot.questions[questionIndex].timeLimit !== questionTimeLimit) {
+        kahoot.questions[questionIndex].timeLimit = questionTimeLimit;
+        state.isKahootFormDirty = true;
+      }
     }
     return { kahoot };
   }),
   updateQuestionPoints: (questionIndex: number, questionPoints: PointsMultiplier) => set((state) => {
     const kahoot = state.kahoot;
     if (kahoot) {
-      kahoot.questions[questionIndex].pointsMultiplier = questionPoints;
-      state.isKahootFormDirty = true;
+      if (kahoot.questions[questionIndex].pointsMultiplier !== questionPoints) {
+        kahoot.questions[questionIndex].pointsMultiplier = questionPoints;
+        state.isKahootFormDirty = true;
+      }
     }
     return { kahoot };
   }),
