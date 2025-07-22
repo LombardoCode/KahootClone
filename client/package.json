@@ -15,6 +15,7 @@
     "@microsoft/signalr": "^8.0.7",
     "@szhsin/react-menu": "^4.4.1",
     "axios": "^1.7.2",
+    "fast-average-color": "^9.5.0",
     "framer-motion": "^11.2.11",
     "jwt-decode": "^4.0.0",
     "lodash.debounce": "^4.0.8",
