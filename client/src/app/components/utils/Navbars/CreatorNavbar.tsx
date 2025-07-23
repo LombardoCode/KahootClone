@@ -4,31 +4,39 @@ import Logo, { LogoColors, LogoSize } from "../Logo";
 import Button, { ButtonSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import useKahootCreatorStore, { KahootQuestionValidation } from "@/app/stores/Kahoot/useKahootCreatorStore";
-import axiosInstance from "@/app/utils/axiosConfig";
 import Modal, { ModalTypes } from "../Modal/Modal";
 import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import { useEffect, useState } from "react";
 import { KahootHeaderInfo } from "@/app/interfaces/Creator/KahootHeaderInfo.interface";
 import { useRouter } from "next/navigation";
-import { Question } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faCircleExclamation, faImage } from "@fortawesome/free-solid-svg-icons";
 import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import { saveKahootDraft } from "@/app/utils/KahootCreator/kahootCreatorUtils";
+import TextAreaForm from "../../UIComponents/TextAreaForm";
+import ImageSelectorModal from "../Modal/reusable/ImageSelectorModal";
+import usePexelsSearch from "@/app/hooks/usePexelsSearch";
 
 
 const CreatorNavbar = () => {
   const router = useRouter();
 
   // Global store
-  const { kahoot, isKahootFormDirty, resetIsKahootFormDirty, getKahootPlayabilityStatus, kahootValidationStatus, updateTitleAndDescription, selectQuestion } = useKahootCreatorStore();
+  const { kahoot, resetIsKahootFormDirty, getKahootPlayabilityStatus, kahootValidationStatus, updateTitleAndDescription, selectQuestion, updateKahootMediaUrl, removeKahootMediaUrl } = useKahootCreatorStore();
 
   // Modals states
+  // Modal: Kahoot Header Information
   const [isKahootHeaderModalOpen, setIsKahootHeaderModalOpen] = useState<boolean>(false);
   const [isKahootSavedModalOpen, setIsKahootSavedModalOpen] = useState<boolean>(false);
+  const doesThisKahootHasAnImage: boolean = kahoot?.mediaUrl !== null;
 
-  // const [isKahootPlayable, setIsKahootPlayable] = useState<boolean>(false);
+  // Modal: ImageSelectorModal
+  const [isMediaSelectorModalOpen, setIsMediaSelectorModalOpen] = useState<boolean>(false);
+  const [imageQueryText, setImageQueryText] = useState<string>("");
+  const { results: pexelsResults, loading: pexelsLoading } = usePexelsSearch(imageQueryText, 1000, 30);
+
+  // Local component state
   const [kahootHeaderInfo, setKahootHeaderInfo] = useState<KahootHeaderInfo>({
     title: kahoot?.title || "",
     description: kahoot?.description || ""
@@ -43,7 +51,7 @@ const CreatorNavbar = () => {
     }
   }, [kahoot]);
 
-  const handleKahootHeaderFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleKahootHeaderFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setKahootHeaderInfo({
       ...kahootHeaderInfo,
       [e.target.name]: e.target.value
@@ -132,37 +140,131 @@ const CreatorNavbar = () => {
         onClose={() => setIsKahootHeaderModalOpen(false)}
         bodyContent={(
           <>
-            <Text
-              fontWeight={FontWeights.REGULAR}
-              textColor={TextColors.BLACK}
-              useCase={UseCases.LONGTEXT}
-              className="text-base"
-            >
-              Rename your kahoot&apos;s s title and description
-            </Text>
-            <div className="flex flex-col">
-              <InputForm
-                type={InputFormTypes.TEXT}
-                textColor={TextColors.BLACK}
-                fontWeight={FontWeights.LIGHT}
-                name="title"
-                id="title"
-                placeholder="Your new title"
-                className="mt-2"
-                value={kahootHeaderInfo.title}
-                onChange={handleKahootHeaderFormChange}
-              />
-              <InputForm
-                type={InputFormTypes.TEXT}
-                textColor={TextColors.BLACK}
-                fontWeight={FontWeights.LIGHT}
-                name="description"
-                id="description"
-                placeholder="Your new description"
-                className="mt-2"
-                value={kahootHeaderInfo.description}
-                onChange={handleKahootHeaderFormChange}
-              />
+            <div id="modal-to-display-basic-information-about-kahoot">
+              <div id="basic-info-title" className="mb-4">
+                <Text
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-sm mb-1"
+                >
+                  Title
+                </Text>
+
+                <Text
+                  fontWeight={FontWeights.REGULAR}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-sm mb-1"
+                >
+                  Enter a title for your kahoot.
+                </Text>
+
+                <InputForm
+                  type={InputFormTypes.TEXT}
+                  textColor={TextColors.BLACK}
+                  fontWeight={FontWeights.LIGHT}
+                  name="title"
+                  id="title"
+                  placeholder="Your new title"
+                  className="w-full py-2 mt-2"
+                  value={kahootHeaderInfo.title}
+                  onChange={handleKahootHeaderFormChange}
+                />
+              </div>
+
+              <div id="basic-info-description" className="mb-4">
+                <Text
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-sm mb-1"
+                >
+                  Description
+                </Text>
+
+                <Text
+                  fontWeight={FontWeights.REGULAR}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-sm mb-1"
+                >
+                  Provide a short description for your kahoot to increase visibility.
+                </Text>
+
+                <TextAreaForm
+                  rows={4}
+                  textColor={TextColors.BLACK}
+                  fontWeight={FontWeights.LIGHT}
+                  name="description"
+                  id="description"
+                  placeholder="Your new description"
+                  className="w-full py-2 mt-2"
+                  value={kahootHeaderInfo.description}
+                  onChange={handleKahootHeaderFormChange}
+                />
+              </div>
+
+              <div id="basic-info-cover-image" className="mb-4">
+                <Text
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-sm mb-1"
+                >
+                  Cover image
+                </Text>
+
+                <Text
+                  fontWeight={FontWeights.REGULAR}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-sm mb-1"
+                >
+                  Add a cover image to make your kahoot stand out.
+                </Text>
+
+                <div
+                  id="image-preview-wrapper"
+                  className="mt-3"
+                >
+                  {doesThisKahootHasAnImage ? (
+                    <div className="flex flex-col items-center">
+                      <img
+                        src={kahoot?.mediaUrl ?? ""}
+                        alt="Kahoot cover"
+                        className="w-64 h-auto object-cover rounded-md"
+                      />
+                      <Button
+                        backgroundColor={BackgroundColors.GRAY}
+                        fontWeight={FontWeights.BOLD}
+                        textColor={TextColors.WHITE}
+                        className="text-sm mr-2"
+                        size={ButtonSize.MEDIUM}
+                        perspective={false}
+                        animateOnHover={false}
+                        onClick={() => {
+                          removeKahootMediaUrl();
+                        }}
+                      >
+                        Remove image
+                      </Button>
+                    </div>
+                  ) : (
+                    <div
+                      id="image-preview-content"
+                      className="flex justify-center items-center w-40 h-24 rounded-md bg-slate-400/50 hover:bg-slate-400/80 cursor-pointer transition duration-300"
+                      onClick={() => setIsMediaSelectorModalOpen(true)}
+                    >
+                      <FontAwesomeIcon
+                        icon={faImage}
+                        className={`${TextColors.GRAY}`}
+                        size="2x"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </>
         )}
@@ -391,6 +493,20 @@ const CreatorNavbar = () => {
           </>
         )}
         onClose={() => setIsKahootSavedModalOpen(false)}
+      />
+
+      {/* Media selector modal */}
+      <ImageSelectorModal
+        isOpen={isMediaSelectorModalOpen}
+        onClose={() => setIsMediaSelectorModalOpen(false)}
+        imageQueryText={imageQueryText}
+        onQueryChange={setImageQueryText}
+        pexelsResults={pexelsResults}
+        pexelsLoading={pexelsLoading}
+        onImageSelect={(url: string) => {
+          updateKahootMediaUrl(url);
+          setIsMediaSelectorModalOpen(false);
+        }}
       />
     </>
   )

@@ -5,6 +5,7 @@ namespace API.Data.Server.KahootCreator
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string? Description { get; set; }
+    public string? MediaUrl { get; set; }
     public bool IsPlayable { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }

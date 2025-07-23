@@ -108,6 +108,7 @@ namespace API.Controllers
         Id = kahoot.Id,
         Title = kahoot.Title,
         Description = kahoot.Description,
+        MediaUrl = kahoot.MediaUrl,
         IsPlayable = kahoot.IsPlayable,
         CreatedAt = kahoot.CreatedAt,
         UpdatedAt = kahoot.UpdatedAt,

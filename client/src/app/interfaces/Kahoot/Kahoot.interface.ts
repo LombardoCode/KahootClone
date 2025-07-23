@@ -2,6 +2,7 @@ export interface Kahoot {
   id: string | null;
   title: string;
   description: string;
+  mediaUrl?: string | null;
   isPlayable: boolean;
   createdAt: Date;
   updatedAt: Date;

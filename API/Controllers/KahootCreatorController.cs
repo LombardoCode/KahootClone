@@ -88,6 +88,7 @@ namespace API.Controllers
       kahootFromDB.Title = kahootDraft.Title;
       kahootFromDB.Description = kahootDraft.Description;
       kahootFromDB.UpdatedAt = new DateTime();
+      kahootFromDB.MediaUrl = kahootDraft.MediaUrl;
 
       // We get the IDs from the questions that exists on the kahoot object (kahootDraft)
       List<int> updatedQuestionIds = kahootDraft.Questions.Select(q => q.Id).ToList();
