@@ -43,7 +43,9 @@ interface KahootCreatorStore {
 
   // Media files
   updateQuestionMediaUrl: (index: number, mediaUrl: string) => void;
-  removeMediaUrl: (questionIndex: number) => void;
+  removeQuestionMediaUrl: (questionIndex: number) => void;
+  updateKahootMediaUrl: (url: string) => void;
+  removeKahootMediaUrl: () => void;
 }
 
 const createNewQuestion = (quizQuestionLayoutType: QuizQuestionLayoutTypes): Question => {
@@ -330,7 +332,7 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
       }
     })
   },
-  removeMediaUrl: (questionIndex: number) => {
+  removeQuestionMediaUrl: (questionIndex: number) => {
     set(state => {
       if (!state.kahoot) {
         return state;
@@ -345,6 +347,36 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
           questions: updatedQuestions
         },
         isKahootFormDirty: true
+      }
+    })
+  },
+  updateKahootMediaUrl: (url: string) => {
+    set(state => {
+      if (!state.kahoot) {
+        return state;
+      }
+
+      state.kahoot.mediaUrl = url;
+
+      return {
+        kahoot: {
+          ...state.kahoot
+        }
+      }
+    })
+  },
+  removeKahootMediaUrl: () => {
+    set(state => {
+      if (!state.kahoot) {
+        return state;
+      }
+
+      state.kahoot.mediaUrl = null;
+
+      return {
+        kahoot: {
+          ...state.kahoot
+        }
       }
     })
   }

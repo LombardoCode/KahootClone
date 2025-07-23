@@ -11,8 +11,8 @@ import KahootAnswerTextBox from "../Quizes/KahootAnswerTextBox";
 import Button, { ButtonSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { doesThisQuestionHasAnImage } from "@/app/utils/kahootUtils";
-import Modal, { ModalTypes } from "../Modal/Modal";
 import usePexelsSearch from "@/app/hooks/usePexelsSearch";
+import ImageSelectorModal from "../Modal/reusable/ImageSelectorModal";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -20,7 +20,7 @@ interface CreatorQuestionModifierProps {
 
 const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) => {
   // Store
-  const { kahoot, questionIndex, updateQuestionTitle, updateQuestionMediaUrl, removeMediaUrl } = useKahootCreatorStore();
+  const { kahoot, questionIndex, updateQuestionTitle, updateQuestionMediaUrl, removeQuestionMediaUrl } = useKahootCreatorStore();
 
   // Local component
   const [title, setTitle] = useState<string>(kahoot?.questions[questionIndex]?.title || "");
@@ -43,7 +43,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
   }
 
   const deleteImageFromCurrentQuestion = () => {
-    removeMediaUrl(questionIndex);
+    removeQuestionMediaUrl(questionIndex);
   }
 
   return (
@@ -143,100 +143,17 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
       </div>
 
       {/* Media selector modal */}
-      <Modal
-        modalType={ModalTypes.INPUT}
+      <ImageSelectorModal
         isOpen={isMediaSelectorModalOpen}
         onClose={() => setIsMediaSelectorModalOpen(false)}
-        className="w-[1000px] max-w-[90vw] min-h-[80vh]"
-        bodyContent={(
-          <>
-            <div
-              id="image-search-text-box"
-              className="sticky top-0 z-10 bg-white pb-2 pt-4 px-4"
-            >
-              <InputForm
-                type={InputFormTypes.TEXT}
-                textColor={TextColors.BLACK}
-                fontWeight={FontWeights.LIGHT}
-                name="image-query"
-                id="image-query"
-                value={imageQueryText}
-                className="w-full py-3"
-                placeholder="Search images (eg. tech, gaming, music...)"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setImageQueryText(e.target.value)}
-              />
-            </div>
-            <div
-              id="popular-images-and-images-provided-by-pexels-wrapper"
-              className="flex justify-between"
-            >
-              <Text
-                fontWeight={FontWeights.BOLD}
-                textColor={TextColors.GRAY}
-                useCase={UseCases.LONGTEXT}
-                className="text-sm"
-              >
-                Popular images
-              </Text>
-              <Text
-                fontWeight={FontWeights.REGULAR}
-                textColor={TextColors.GRAY}
-                useCase={UseCases.LONGTEXT}
-                className="text-sm"
-              >
-                Images provided by Pexels
-              </Text>
-            </div>
-            <div
-              id="pexels-images"
-              className="grid grid-cols-3 gap-3 mt-4 h-full overflow-y-auto px-10 py-6"
-            >
-              {pexelsLoading ? (
-                <Text
-                  fontWeight={FontWeights.REGULAR}
-                  textColor={TextColors.GRAY}
-                  useCase={UseCases.LONGTEXT}
-                  className="text-sm col-span-3 text-center"
-                >
-                  Loading...
-                </Text>
-              ) : (
-                pexelsResults.map((photo: any) => (
-                  <div
-                    key={photo.id}
-                    className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-105 hover:shadow-lg hover:shadow-black/30"
-                    onClick={() => {
-                      updateQuestionMediaUrl(questionIndex, photo.src.large);
-                      setIsMediaSelectorModalOpen(false);
-                    }}
-                  >
-                    <img
-                      src={photo.src.medium}
-                      alt={photo.alt || "pexels image"}
-                      className="w-full aspect-[4/3] object-cover"
-                    />
-                  </div>
-                ))
-              )}
-            </div>
-
-          </>
-        )}
-        footerContent={(
-          <Button
-            backgroundColor={BackgroundColors.GRAY}
-            fontWeight={FontWeights.BOLD}
-            size={ButtonSize.MEDIUM}
-            textColor={TextColors.WHITE}
-            className="mr-2"
-            animateOnHover={false}
-            onClick={() => {
-              setIsMediaSelectorModalOpen(false);
-            }}
-          >
-            Cancel
-          </Button>
-        )}
+        imageQueryText={imageQueryText}
+        onQueryChange={setImageQueryText}
+        pexelsResults={pexelsResults}
+        pexelsLoading={pexelsLoading}
+        onImageSelect={(url: string) => {
+          updateQuestionMediaUrl(questionIndex, url);
+          setIsMediaSelectorModalOpen(false);
+        }}
       />
     </>
   )

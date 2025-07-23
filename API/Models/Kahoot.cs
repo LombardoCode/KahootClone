@@ -8,6 +8,7 @@ namespace API.Models
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string? Description { get; set; }
+    public string? MediaUrl { get; set; }
     public string UserId { get; set; }
     public bool IsPlayable { get; set; } = false;
     public DateTime CreatedAt { get; set; }
