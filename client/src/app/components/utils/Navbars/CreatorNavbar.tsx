@@ -34,6 +34,15 @@ const CreatorNavbar = () => {
     description: kahoot?.description || ""
   });
 
+  useEffect(() => {
+    if (kahoot) {
+      setKahootHeaderInfo({
+        title: kahoot.title,
+        description: kahoot.description
+      })
+    }
+  }, [kahoot]);
+
   const handleKahootHeaderFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKahootHeaderInfo({
       ...kahootHeaderInfo,
