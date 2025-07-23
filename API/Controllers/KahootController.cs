@@ -36,6 +36,7 @@ namespace API.Controllers
                         Id = k.Id,
                         Title = k.Title,
                         Description = k.Description,
+                        MediaUrl = k.MediaUrl,
                         TimesPlayed = _dbContext.PlayedKahoots.Count(a => a.KahootId == k.Id),
                         IsPlayable = k.IsPlayable,
                         CreatedAt = k.CreatedAt,

@@ -5,6 +5,7 @@ namespace API.Data.ForClient.Dashboard.Kahoot
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string? Description { get; set; }
+    public string? MediaUrl { get; set; }
     public int TimesPlayed { get; set; }
     public bool IsPlayable { get; set; }
     public DateTime CreatedAt { get; set; }
