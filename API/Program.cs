@@ -100,15 +100,6 @@ app.UseCors("AllowSpecificOrigin");
 
 app.UseHttpsRedirection();
 
-// Serve static files
-app.UseStaticFiles();
-app.UseStaticFiles(new StaticFileOptions
-{
-  FileProvider = new PhysicalFileProvider(
-    Path.Combine(Directory.GetCurrentDirectory(), "Uploads", "Questions")),
-  RequestPath = "/Uploads/Questions"
-});
-
 // Using authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();

@@ -62,7 +62,7 @@ const QuestionMetaInfo = () => {
           ? (
             <div id="show-question-media">
               <img
-                src={`http://localhost:5000${kahoot?.questions[questionIndex].mediaUrl}`}
+                src={`${kahoot?.questions[questionIndex].mediaUrl}`}
                 alt="Question media"
                 className="rounded-md shadow-md max-h-64 object-contain mx-auto"
               />

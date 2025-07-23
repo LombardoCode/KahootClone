@@ -488,8 +488,4 @@ $RECYCLE.BIN/
 # Custom #
 ##########
 
-# Ignore all question media files
-/Uploads/Questions/*
 
-# But don't ignore the .gitkeep file
-!/Uploads/Questions/.gitkeep
