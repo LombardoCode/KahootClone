@@ -90,7 +90,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
       <table className={`${className} w-full`}>
         <thead className="text-left">
           <tr>
-            <th className="py-2 px-3 w-0 whitespace-nowrap"></th>
+            <th className="py-2 px-3 min-w-28 w-0"></th>
             <th className="py-2 px-3 w-full">
               <Text
                 fontWeight={FontWeights.BOLD}
@@ -122,12 +122,20 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                 className="py-2 px-3 w-0 cursor-pointer"
                 onClick={() => router.push(`/creator/${kahoot.id}`)}
               >
-                <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-24 h-14 rounded-md">
-                  <Logo
-                    size={LogoSize.EXTRA_SMALL}
-                    color={LogoColors.WHITE}
+                {kahoot.mediaUrl === null ? (
+                  <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-24 h-14 rounded-md">
+                    <Logo
+                      size={LogoSize.EXTRA_SMALL}
+                      color={LogoColors.WHITE}
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={kahoot.mediaUrl}
+                    className="w-24 h-14 rounded-md object-cover"
                   />
-                </div>
+                )}
+
               </td>
               <td
                 className="py-2 px-3 cursor-pointer"
