@@ -52,7 +52,8 @@ interface InGameStore {
 }
 
 interface Player {
-  id: string | null | undefined;
+  connectionId: string | null | undefined;
+  userId: string | null;
   name: string;
   earnedPoints: number;
 }
@@ -87,7 +88,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   })),
 
   // Identity of the user
-  currentPlayer: { id: '', name: '', earnedPoints: 0 },
+  currentPlayer: { connectionId: '', userId: null, name: '', earnedPoints: 0 },
   setCurrentPlayer: (newPlayerData: Player) => set(() => ({
     currentPlayer: newPlayerData
   })),
@@ -95,7 +96,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   // Players
   players: [],
   addPlayer: (newPlayer: Player) => set((state) => {
-    const existingPlayer = state.players.find(player => player.id === newPlayer.id);
+    const existingPlayer = state.players.find(player => player.connectionId === newPlayer.connectionId);
 
     if (!existingPlayer) {
       return {
@@ -109,7 +110,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
     let players = state.players;
 
     if (players) {
-      let indexFromPlayerToRemove = players.findIndex(p => p.id === id);
+      let indexFromPlayerToRemove = players.findIndex(p => p.connectionId === id);
 
       players = players.filter((_, index) => index !== indexFromPlayerToRemove);
 
@@ -136,7 +137,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
 
         // Then update the player's info (host-side)
         let updatedPlayers: Player[] = state.players.map((player: Player) => {
-          if (player.id === playerConnId) {
+          if (player.connectionId === playerConnId) {
             return {
               ...player,
               earnedPoints: player.earnedPoints + totalPointsToGive
@@ -146,7 +147,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
         });
 
         // Send the updated player info to the target player
-        const updatedPlayerInfo = updatedPlayers.find(p => p.id === playerConnId);
+        const updatedPlayerInfo = updatedPlayers.find(p => p.connectionId === playerConnId);
         state.signalRConnection?.invoke('UpdatePlayerInfo', updatedPlayerInfo);
         state.signalRConnection?.invoke('NotifyPlayerHowManyPointsTheyGotFromCurrentQuestion', playerConnId, totalPointsToGive);
 
@@ -164,7 +165,8 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
     let playersStatsOrganizedByEarnedPoints = playerStats.sort((a, b) => b.earnedPoints - a.earnedPoints);
     let finalPlayerStats: FinalPlayerStats[] = playersStatsOrganizedByEarnedPoints.map((player: Player, index: number) => {
       let finalPlayerStat: FinalPlayerStats = {
-        id: player.id,
+        connectionId: player.connectionId,
+        userId: null,
         name: player.name,
         earnedPoints: player.earnedPoints,
         place: index + 1

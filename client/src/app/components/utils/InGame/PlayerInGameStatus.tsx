@@ -9,7 +9,7 @@ const PlayerInGameStatus = () => {
 
   return (
     <div className="get-ready-footer absolute bottom-0 w-full bg-white">
-      {currentPlayer.id !== "" && (
+      {currentPlayer.connectionId !== "" && (
         <div className="flex justify-between py-2 px-3">
           <div className="flex items-center">
             <FontAwesomeIcon

@@ -22,7 +22,7 @@ const LobbyUserCard = ({ player, kickPlayer }: LobbyUserCardProps) => {
   return (
     <div
       className={`flex rounded-md overflow-hidden cursor-pointer select-none ${isHost && 'hover:line-through hover:decoration-white hover:decoration-3'}`}
-      onClick={() => tryKickThePlayer(player.id)}
+      onClick={() => tryKickThePlayer(player.connectionId)}
     >
       <div className="lobby-user-card-icon bg-purple-950 text-white px-4 py-5">
         <FontAwesomeIcon

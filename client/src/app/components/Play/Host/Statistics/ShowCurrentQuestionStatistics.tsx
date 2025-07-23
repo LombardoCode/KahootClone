@@ -21,7 +21,7 @@ interface ShowCurrentQuestionStatisticsProps {
 }
 
 const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionStatisticsProps) => {
-  const { kahoot, questionIndex, isHost, isThisTheLastQuestion, goToTheNextQuestion, signalRConnection, lobbyId, setEveryoneHasAnsweredTheCurrentQuestion, setCountOfAnswersProvidedByGuests } = useInGameStore();
+  const { kahoot, questionIndex, isHost, isThisTheLastQuestion, goToTheNextQuestion, signalRConnection, lobbyId, setEveryoneHasAnsweredTheCurrentQuestion, setCountOfAnswersProvidedByGuests, players } = useInGameStore();
   const [answers, setAnswers] = useState<AnswerPlay[] | undefined>(kahoot?.questions[questionIndex].answers);
   const [screen, setScreen] = useState<ScreenForFinalAnswerStatistics>(ScreenForFinalAnswerStatistics.STATISTICS);
   const router = useRouter();
@@ -66,7 +66,10 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
   }
 
   const registerPlayCountOnCurrentKahoot = async () => {
-    await axiosInstance.post('/kahoot/RegisterPlayCount', { KahootId: kahoot?.kahootId })
+    await axiosInstance.post('/kahoot/RegisterPlayCount', {
+      KahootId: kahoot?.kahootId,
+      Players: players
+    })
   }
 
   return (
