@@ -97,15 +97,6 @@ namespace API.Controllers
                                 .Where(q => !updatedQuestionIds.Contains(q.Id))
                                 .ToList();
 
-      // Iterate each question that we are going to delete to validate if they contain a media resource (picture), and, if so, delete the picture froms server
-      foreach (Question question in questionsToDelete)
-      {
-        if (!string.IsNullOrEmpty(question.MediaUrl))
-        {
-          deleteQuestionMediasImage(question.MediaUrl);
-        }
-      }
-
       // We delete the questions from client-side
       _dbContext.Questions.RemoveRange(questionsToDelete);
 
@@ -147,11 +138,6 @@ namespace API.Controllers
           existingQuestion.Layout = updatedQuestion.Layout;
           existingQuestion.TimeLimit = updatedQuestion.TimeLimit;
           existingQuestion.PointsMultiplier = updatedQuestion.PointsMultiplier;
-
-          if (!existingQuestion.MediaUrl.IsNullOrEmpty() && updatedQuestion.MediaUrl.IsNullOrEmpty())
-          {
-            deleteQuestionMediasImage(existingQuestion.MediaUrl);
-          }
           existingQuestion.MediaUrl = updatedQuestion.MediaUrl;
 
           bool allTheAnswersAreNew = updatedQuestion.Answers.All(a => a.Id == 0);
@@ -223,52 +209,7 @@ namespace API.Controllers
       return Ok(kahootDTO);
     }
 
-    /// <summary>
-    /// Uploads an image in the following server path: "/Uploads/Questions".
-    /// The use of the "/Uploads/Questions" directory is for the Kahoot questions that has media attached to them.
-    /// </summary>
-    /// <param name="file"></param>
-    /// <returns></returns>
-    [HttpPost("upload-question-media")]
-    [RequestSizeLimit(10 * 1024 * 1024)] // 10 MB
-    public async Task<ActionResult> UploadQuestionMedia(IFormFile file)
-    {
-      if (file == null || file.Length == 0)
-      {
-        return BadRequest("No file uploaded");
-      }
-
-      var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", "Questions");
-
-      if (!Directory.Exists(uploadsFolder))
-      {
-        Directory.CreateDirectory(uploadsFolder);
-      }
-
-      var uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-      var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-      using (var stream = new FileStream(filePath, FileMode.Create))
-      {
-        await file.CopyToAsync(stream);
-      }
-
-      var relativeUrl = $"/Uploads/Questions/{uniqueFileName}";
-
-      return Ok(new { relativeUrl });
-    }
-
     #region Private functions
-
-    private void deleteQuestionMediasImage(string resource)
-    {
-      var mediaPath = Path.Combine(Directory.GetCurrentDirectory(), resource.TrimStart('/'));
-
-      if (System.IO.File.Exists(mediaPath))
-      {
-        System.IO.File.Delete(mediaPath);
-      }
-    }
 
     private Question createQuestion(Guid kahootId)
     {

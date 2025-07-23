@@ -7,7 +7,7 @@ import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 
 interface ModalProps {
   modalType: ModalTypes;
-  title: string;
+  title?: string;
   bodyContent: React.ReactNode;
   footerContent: React.ReactNode;
   isOpen: boolean;
@@ -20,7 +20,7 @@ export enum ModalTypes {
   DELETION
 }
 
-const Modal = ({ modalType, title, isOpen, onClose, bodyContent, footerContent, className = "" }: ModalProps) => {
+const Modal = ({ modalType, title = "", isOpen, onClose, bodyContent, footerContent, className = "" }: ModalProps) => {
   if (!isOpen) {
     return null;
   }
@@ -51,14 +51,17 @@ const Modal = ({ modalType, title, isOpen, onClose, bodyContent, footerContent, 
           className={`bg-white p-6 rounded-lg shadow-lg max-h-[calc(100vh-100px)] overflow-hidden flex flex-col ${className}`}
         >
           {/* Title */}
-          <Text
-            fontWeight={FontWeights.BOLD}
-            textColor={TextColors.BLACK}
-            useCase={UseCases.HEADER}
-            className="text-2xl mb-4"
-          >
-            {title}
-          </Text>
+          {title !== null && title !== undefined && title !== ''
+            ? (
+              <Text
+                fontWeight={FontWeights.BOLD}
+                textColor={TextColors.BLACK}
+                useCase={UseCases.HEADER}
+                className="text-2xl mb-4"
+              >
+                {title}
+              </Text>
+            ) : null}
 
           {/* Body */}
           <div className="modal-content flex-1 overflow-y-auto max-h-[calc(100vh-220px)] ">

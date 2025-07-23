@@ -1,5 +1,6 @@
 import { KahootHeaderInfo } from "@/app/interfaces/Creator/KahootHeaderInfo.interface";
 import { Answer, Kahoot, PointsMultiplier, Question, QuizQuestionLayoutTypes, TimeLimits } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { debugLog } from "@/app/utils/debugLog";
 import { create } from "zustand";
 
 interface KahootValidationStatus {
@@ -324,7 +325,8 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
         kahoot: {
           ...state.kahoot,
           questions
-        }
+        },
+        isKahootFormDirty: true
       }
     })
   },
