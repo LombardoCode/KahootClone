@@ -3,6 +3,7 @@ using API.Data.ForClient.Play;
 using Microsoft.AspNetCore.SignalR;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
+using API.Services;
 
 namespace API.Sockets.Hubs
 {
@@ -48,9 +49,15 @@ namespace API.Sockets.Hubs
     /// </summary>
     private readonly DataContext _dbContext;
 
-    public LobbyHub(DataContext dbContext)
+    /// <summary>
+    /// User service helper class
+    /// </summary>
+    private readonly UserService _userService;
+
+    public LobbyHub(DataContext dbContext, UserService userService)
     {
       _dbContext = dbContext;
+      _userService = userService;
     }
 
     /// <summary>
@@ -93,7 +100,7 @@ namespace API.Sockets.Hubs
         if (playersInLobby.TryGetValue(lobbyId, out var players))
         {
           // Find the player that is going to be disocnnected based on their ConnectionId
-          var removedPlayer = players.FirstOrDefault(p => p.Id == playerConnId);
+          var removedPlayer = players.FirstOrDefault(p => p.ConnectionId == playerConnId);
 
           if (removedPlayer != null)
           {
@@ -147,16 +154,19 @@ namespace API.Sockets.Hubs
 
     public async Task PutUserInLobbyQueue(string lobbyId, Player newPlayerData)
     {
+      var userId = await _userService.GetUserId();
+
       // First, we create our player
       var newPlayer = new Player
       {
-        Id = Context.ConnectionId,
+        ConnectionId = Context.ConnectionId,
+        UserId = string.IsNullOrEmpty(userId) ? null : userId,
         Name = newPlayerData.Name,
         EarnedPoints = 0
       };
 
       // Then add it into our dictionary, mapping the player's ConnectionId -> to the lobbyId they are connected to
-      playerLobbyMapping.TryAdd(newPlayer.Id, lobbyId);
+      playerLobbyMapping.TryAdd(newPlayer.ConnectionId, lobbyId);
 
       // Then add that player's info into our lobby dictionary
       if (playersInLobby.ContainsKey(lobbyId))
@@ -193,7 +203,7 @@ namespace API.Sockets.Hubs
         // Gets the list of players from the current lobby
         if (playersInLobby.TryGetValue(lobbyId, out var players))
         {
-          players.RemoveAll(p => p.Id == playerConnId);
+          players.RemoveAll(p => p.ConnectionId == playerConnId);
 
           await Clients.Group(lobbyId).SendAsync("PlayerHasLeft", playerConnId);
         }
@@ -259,7 +269,7 @@ namespace API.Sockets.Hubs
 
     public async Task UpdatePlayerInfo(Player updatedPlayerInfo)
     {
-      await Clients.Client(updatedPlayerInfo.Id).SendAsync("ReceiveMyUpdatedPlayerInfo", updatedPlayerInfo);
+      await Clients.Client(updatedPlayerInfo.ConnectionId).SendAsync("ReceiveMyUpdatedPlayerInfo", updatedPlayerInfo);
     }
 
     public async Task NotifyPlayerHowManyPointsTheyGotFromCurrentQuestion(string playerConnId, int pointsEarnedFromCurrentQuestion)
@@ -358,7 +368,8 @@ namespace API.Sockets.Hubs
 
   public class Player
   {
-    public string Id { get; set; }
+    public string ConnectionId { get; set; }
+    public string? UserId { get; set; }
     public string Name { get; set; }
     public int EarnedPoints { get; set; } = 0;
   }

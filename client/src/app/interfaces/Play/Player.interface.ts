@@ -1,5 +1,6 @@
 export interface Player {
-  id: string | null | undefined;
+  connectionId: string | null | undefined;
+  userId: string | null;
   name: string;
   earnedPoints: number;
 };

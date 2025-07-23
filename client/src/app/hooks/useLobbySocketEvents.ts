@@ -58,7 +58,8 @@ const useLobbySocketEvents = () => {
 
     signalRConnection.on('AddNewPlayer', (newPlayer) => {
       addPlayer({
-        id: newPlayer.id,
+        connectionId: newPlayer.connectionId,
+        userId: newPlayer.userId,
         name: newPlayer.name,
         earnedPoints: newPlayer.earnedPoints
       });

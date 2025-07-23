@@ -4,6 +4,7 @@ using API.Data.Server.KahootCreator;
 using API.DTOs.Statistics;
 using API.Models.Statistics;
 using API.Services;
+using API.Sockets.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -141,7 +142,25 @@ namespace API.Controllers
         KahootId = playedKahootData.KahootId
       };
 
+      var loggedUsersThatPlayedTheKahoot = new List<KahootsPlayedByUser>();
+
+      foreach (Player player in playedKahootData.Players)
+      {
+        if (string.IsNullOrEmpty(player.UserId))
+        {
+          continue;
+        }
+
+        loggedUsersThatPlayedTheKahoot.Add(new KahootsPlayedByUser
+        {
+          KahootId = playedKahootData.KahootId,
+          UserId = player.UserId,
+          PlayedAt = DateTime.UtcNow
+        });
+      }
+      
       _dbContext.PlayedKahoots.Add(newPlayedKahoot);
+      _dbContext.KahootsPlayedByUser.AddRange(loggedUsersThatPlayedTheKahoot);
 
       try
       {

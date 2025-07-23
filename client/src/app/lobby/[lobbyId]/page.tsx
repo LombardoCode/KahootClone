@@ -19,6 +19,7 @@ import { getDomainName } from "@/app/utils/domainUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import useLobbySocketEvents from "@/app/hooks/useLobbySocketEvents";
+import useUserStore from "@/app/stores/useUserStore";
 
 const LobbyPage = () => {
   // Hooks
@@ -34,6 +35,7 @@ const LobbyPage = () => {
 
   // Global store state
   const { signalRConnection, setSignalRConnection, setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, kahoot, setKahootInfo } = useInGameStore();
+  const { user } = useUserStore();
 
   // Local component state
   const [isValidLobby, setIsValidLobby] = useState<boolean>(false);
@@ -59,9 +61,14 @@ const LobbyPage = () => {
   }
 
   const ConnectingToTheSignalRLobbyHub = () => {
+    const token = user.token;
+
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5000/hubs/lobbyhub')
+      .withUrl('http://localhost:5000/hubs/lobbyhub', {
+        accessTokenFactory: () => token || ""
+      })
       .configureLogging(signalR.LogLevel.Information)
+      .withAutomaticReconnect()
       .build();
 
     // Save the connection details to our store
@@ -111,7 +118,8 @@ const LobbyPage = () => {
   const createNewPlayer = async () => {
     if (signalRConnection) {
       let newPlayer: Player = {
-        id: signalRConnection.connectionId,
+        connectionId: signalRConnection.connectionId,
+        userId: null,
         name: nickName,
         earnedPoints: 0
       };
@@ -246,7 +254,7 @@ const LobbyPage = () => {
           <div id="list-for-players" className="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-10">
             {players.map((p: Player) => (
               <LobbyUserCard
-                key={p.id}
+                key={p.connectionId}
                 player={p}
                 kickPlayer={kickPlayerById}
               />
@@ -301,7 +309,7 @@ const LobbyPage = () => {
       <div className="relative z-10 h-full">
         {isHost
           ? <ScreenForHost />
-          : (currentPlayer.id !== null ? <ScreenForGuest /> : null)}
+          : (currentPlayer.connectionId !== null ? <ScreenForGuest /> : null)}
       </div>
 
       {/* Modal to be displayed for the user to enter their nickname, so it can be displayed to other users */}

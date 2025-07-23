@@ -28,7 +28,7 @@ const RankingPage = () => {
   const initializeSignalREvents = async () => {
     if (signalRConnection) {
       signalRConnection.on('OnReceivePlayersFinalStats', (playersFinalStats: FinalPlayerStats[]) => {
-        const individualPlayerFinalStats: FinalPlayerStats | undefined = playersFinalStats.find(p => p.id === currentPlayer.id);
+        const individualPlayerFinalStats: FinalPlayerStats | undefined = playersFinalStats.find(p => p.connectionId === currentPlayer.connectionId);
 
         if (individualPlayerFinalStats !== undefined) {
           setFinalPlayerData(individualPlayerFinalStats);

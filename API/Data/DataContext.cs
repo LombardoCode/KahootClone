@@ -18,6 +18,7 @@ namespace API.Data
     public DbSet<Answer> Answers { get; set; }
     public DbSet<Lobby> Lobbies { get; set; }
     public DbSet<PlayedKahoots> PlayedKahoots { get; set; }
+    public DbSet<KahootsPlayedByUser> KahootsPlayedByUser { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
