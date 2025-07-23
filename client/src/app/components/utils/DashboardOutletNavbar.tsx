@@ -67,7 +67,7 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
   }
 
   return (
-    <nav className={`bg-white py-3 px-4 w-full sticky top-0 shadow-sm shadow-zinc-300 ${className}`}>
+    <nav className={`bg-white py-3 px-4 w-full sticky top-0 shadow-sm shadow-zinc-300 z-30 ${className}`}>
       <div className="relative flex justify-end" ref={dropdownRef}>
         {user.userName && (
           <div className="flex items-center">
@@ -78,6 +78,7 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
               textColor={TextColors.WHITE}
               className="mr-2"
               onClick={() => setIsOpen(true)}
+              animateOnHover={false}
             >
               Create a Kahoot!
             </Button>
