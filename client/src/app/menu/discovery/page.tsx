@@ -2,6 +2,8 @@
 
 import DiscoverCategoryCard, { DiscoverCategoryCardSize } from "@/app/components/utils/Discovery/Cards/Categories/DiscoverCategoryCard";
 import DiscoverCategoryWrapper from "@/app/components/utils/Discovery/Cards/Categories/DiscoverCategoryWrapper";
+import DiscoverFeaturedCard, { DiscoverFeaturedCardSize } from "@/app/components/utils/Discovery/Cards/Featured/DiscoverFeaturedCard";
+import DiscoverFeaturedWrapper from "@/app/components/utils/Discovery/Cards/Featured/DiscoverFeaturedWrapper";
 import DiscoverKahootCard, { DiscoverKahootCardSize } from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootCard";
 import DiscoverKahootWrapper from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootWrapper";
 import SectionTitle, { SectionTitleSizes } from "@/app/components/utils/Discovery/Titles/SectionTitle";
@@ -14,6 +16,10 @@ export interface DiscoverCategoryCardInfo {
 export interface DiscoverKahootCardInfo {
   title: string;
   bgImg: string;
+}
+
+export interface DiscoverFeaturedCardInfo extends DiscoverKahootCardInfo {
+  numberOfQuestions: number;
 }
 
 const DiscoveryMenuPage = () => {
@@ -35,6 +41,11 @@ const DiscoveryMenuPage = () => {
     { title: "Test your videogames knowledge on this following quiz!", bgImg: "/assets/discovery/CardBG3.jpg" },
     { title: "Test your videogames knowledge on this following quiz!", bgImg: "/assets/discovery/CardBG.jpg" }
   ]
+
+  const featuredKahoots: DiscoverFeaturedCardInfo[] = kahoots.map(kahoot => ({
+    ...kahoot,
+    numberOfQuestions: Math.floor(Math.random() * 5) + 8
+  }))
 
   return (
     <div className="pr-10">
@@ -59,6 +70,17 @@ const DiscoveryMenuPage = () => {
           />
         ))}
       </DiscoverCategoryWrapper>
+
+      <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
+      <DiscoverFeaturedWrapper>
+        {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
+          <DiscoverFeaturedCard
+            key={i}
+            cardSize={DiscoverFeaturedCardSize.MEDIUM}
+            featuredKahoot={featuredKahoot}
+          />
+        ))}
+      </DiscoverFeaturedWrapper>
     </div>
   )
 }
