@@ -81,6 +81,51 @@ const DiscoveryMenuPage = () => {
           />
         ))}
       </DiscoverFeaturedWrapper>
+
+      <SectionTitle size={SectionTitleSizes.SMALL}>Teacher's choice</SectionTitle>
+      <DiscoverKahootWrapper>
+        {kahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
+          <DiscoverKahootCard
+            key={i}
+            cardSize={DiscoverKahootCardSize.SMALL}
+            kahoot={kahoot}
+          />
+        ))}
+      </DiscoverKahootWrapper>
+
+      <SectionTitle size={SectionTitleSizes.LARGE}>By Educational Level</SectionTitle>
+      <SectionTitle size={SectionTitleSizes.SMALL} viewAll={true}>Elementary School</SectionTitle>
+      <DiscoverKahootWrapper>
+        {kahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
+          <DiscoverKahootCard
+            key={i}
+            cardSize={DiscoverKahootCardSize.SMALL}
+            kahoot={kahoot}
+          />
+        ))}
+      </DiscoverKahootWrapper>
+
+      <SectionTitle size={SectionTitleSizes.SMALL} viewAll={true}>Middle School</SectionTitle>
+      <DiscoverKahootWrapper>
+        {kahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
+          <DiscoverKahootCard
+            key={i}
+            cardSize={DiscoverKahootCardSize.SMALL}
+            kahoot={kahoot}
+          />
+        ))}
+      </DiscoverKahootWrapper>
+
+      <SectionTitle size={SectionTitleSizes.SMALL} viewAll={true}>High School</SectionTitle>
+      <DiscoverKahootWrapper>
+        {kahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
+          <DiscoverKahootCard
+            key={i}
+            cardSize={DiscoverKahootCardSize.SMALL}
+            kahoot={kahoot}
+          />
+        ))}
+      </DiscoverKahootWrapper>
     </div>
   )
 }
