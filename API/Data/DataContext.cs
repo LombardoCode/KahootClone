@@ -1,4 +1,5 @@
 using API.Models;
+using API.Models.Classification;
 using API.Models.Creator;
 using API.Models.Play;
 using API.Models.Statistics;
@@ -19,6 +20,7 @@ namespace API.Data
     public DbSet<Lobby> Lobbies { get; set; }
     public DbSet<PlayedKahoots> PlayedKahoots { get; set; }
     public DbSet<KahootsPlayedByUser> KahootsPlayedByUser { get; set; }
+    public DbSet<Category> Categories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -26,22 +28,22 @@ namespace API.Data
         .HasMany(u => u.Kahoots)
         .WithOne(k => k.User)
         .HasForeignKey(k => k.UserId);
-      
+
       builder.Entity<Question>()
         .HasMany(q => q.Answers)
         .WithOne(a => a.Question)
         .HasForeignKey(a => a.QuestionId);
-      
+
       builder.Entity<Lobby>()
         .HasIndex(l => l.GamePIN)
         .IsUnique();
-      
+
       builder.Entity<Lobby>()
         .HasOne(l => l.Kahoot)
         .WithMany(k => k.Lobbies)
         .HasForeignKey(l => l.KahootId)
         .OnDelete(DeleteBehavior.Cascade);
-      
+
       base.OnModelCreating(builder);
     }
   }

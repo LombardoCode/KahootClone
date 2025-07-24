@@ -1,5 +1,6 @@
 using System.Text;
 using API.Data;
+using API.Data.Seeds;
 using API.Models;
 using API.Services;
 using API.Sockets.Hubs;
@@ -28,6 +29,10 @@ builder.Services.AddDbContext<DataContext>(opts =>
     .EnableSensitiveDataLogging()
     .EnableDetailedErrors();
 });
+
+// Database seeding
+builder.Services.AddTransient<DatabaseSeeder>();
+builder.Services.AddTransient<CategorySeeder>();
 
 // Adding CORS
 builder.Services.AddCors(opts =>
@@ -127,5 +132,12 @@ app.MapHub<LobbyHub>("/hubs/lobbyhub");
 
 // Using the controllers
 app.MapControllers();
+
+// Database seeding
+using (var scope = app.Services.CreateScope())
+{
+  var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+  await seeder.Seed();
+}
 
 app.Run();
