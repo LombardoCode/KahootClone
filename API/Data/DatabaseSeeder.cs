@@ -4,20 +4,23 @@ namespace API.Data
 {
   public class DatabaseSeeder
   {
-    private readonly CategorySeeder _categorySeeder;
     private readonly UserSeeder _userSeeder;
+    private readonly KahootSeeder _kahootSeeder;
+    private readonly CategorySeeder _categorySeeder;
 
-    public DatabaseSeeder(CategorySeeder categorySeeder, UserSeeder userSeeder)
+    public DatabaseSeeder(UserSeeder userSeeder, KahootSeeder kahootSeeder, CategorySeeder categorySeeder)
     {
-      _categorySeeder = categorySeeder;
       _userSeeder = userSeeder;
+      _kahootSeeder = kahootSeeder;
+      _categorySeeder = categorySeeder;
     }
 
     public async Task Seed()
     {
       Console.WriteLine($"[Info]: Seeding data");
-      await _categorySeeder.Seed();
       await _userSeeder.Seed();
+      await _kahootSeeder.Seed();
+      await _categorySeeder.Seed();
     }
   }
 }
