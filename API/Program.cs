@@ -32,6 +32,7 @@ builder.Services.AddDbContext<DataContext>(opts =>
 
 // Database seeding
 builder.Services.AddTransient<DatabaseSeeder>();
+builder.Services.AddTransient<UserSeeder>();
 builder.Services.AddTransient<CategorySeeder>();
 
 // Adding CORS
