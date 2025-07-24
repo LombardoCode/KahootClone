@@ -1,7 +1,8 @@
 import Text from "@/app/components/UIComponents/Text";
 import useAverageImageColor from "@/app/hooks/useAverageImageColor";
+import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Discover/RecentlyPlayedKahoots.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
-import { DiscoverKahootCardInfo } from "@/app/menu/discovery/page";
+import Logo, { LogoColors, LogoSize } from "../../../Logo";
 
 export enum DiscoverKahootCardSize {
   SMALL = "col-span-1",
@@ -18,22 +19,35 @@ const DiscoverKahootCard = ({ cardSize, kahoot }: DiscoverKahootCardProps) => {
 
   return (
     <div
-      className={`relative flex justify-start items-end rounded-md h-[12rem] px-4 py-4 overflow-hidden ${cardSize} ring-1 ring-zinc-300 shadow`}
-      style={{ backgroundColor: bgColor }}
+      className={`flex flex-col justify-start items-end rounded-md h-[12rem] overflow-hidden ${cardSize} ring-1 ring-zinc-300 shadow`}
+      style={{ backgroundColor: kahoot.mediaUrl ? bgColor : "rgb(255, 255, 255)" }}
     >
-      <img
-        ref={imgRef}
-        src={kahoot.bgImg}
-        className="absolute top-0 left-0 w-full"
-      />
-      <Text
-        textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
-        useCase={UseCases.LONGTEXT}
-        fontWeight={FontWeights.BOLD}
-        className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow shadow-black/80' : ''}`}
-      >
-        {kahoot.title}
-      </Text>
+      {kahoot.mediaUrl ? (
+        <img
+          ref={imgRef}
+          src={kahoot.mediaUrl}
+          crossOrigin="anonymous"
+          className="top-0 left-0 w-full min-h-32 object-cover"
+        />
+      ) : (
+        <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full min-h-32">
+          <Logo
+            size={LogoSize.SMALL}
+            color={LogoColors.WHITE}
+          />
+        </div>
+      )}
+
+      <div className="discover-kahoot-card-text w-full h-full px-2 py-1">
+        <Text
+          textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
+          useCase={UseCases.LONGTEXT}
+          fontWeight={FontWeights.BOLD}
+          className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow shadow-black/80' : ''}`}
+        >
+          {kahoot.title}
+        </Text>
+      </div>
     </div>
   )
 }

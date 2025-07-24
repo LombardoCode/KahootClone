@@ -1,6 +1,7 @@
 using API.Data;
 using API.Data.ForClient.Dashboard.Kahoot;
 using API.Data.Server.KahootCreator;
+using API.DTOs.Discover;
 using API.DTOs.Statistics;
 using API.Models.Statistics;
 using API.Services;
@@ -158,7 +159,7 @@ namespace API.Controllers
           PlayedAt = DateTime.UtcNow
         });
       }
-      
+
       _dbContext.PlayedKahoots.Add(newPlayedKahoot);
       _dbContext.KahootsPlayedByUser.AddRange(loggedUsersThatPlayedTheKahoot);
 
@@ -172,6 +173,33 @@ namespace API.Controllers
       {
         return StatusCode(500);
       }
+    }
+
+    [HttpGet("getRecentlyPlayedKahoots")]
+    [Authorize]
+    public async Task<ActionResult<List<DiscoverKahootCardInfoDTO>>> GetRecentlyPlayedKahoots()
+    {
+      var userId = await _userService.GetUserId();
+
+      var recentKahootIds = await _dbContext.KahootsPlayedByUser
+                              .Where(k => k.UserId == userId)
+                              .OrderByDescending(k => k.PlayedAt)
+                              .Select(k => k.KahootId)
+                              .Distinct()
+                              .Take(7)
+                              .ToListAsync();
+
+      var kahoots = await _dbContext.Kahoots
+                        .Where(k => recentKahootIds.Contains(k.Id))
+                        .Select(k => new DiscoverKahootCardInfoDTO
+                        {
+                          KahootId = k.Id,
+                          Title = k.Title,
+                          MediaUrl = k.MediaUrl
+                        })
+                        .ToListAsync();
+
+      return Ok(kahoots);
     }
   }
 }
