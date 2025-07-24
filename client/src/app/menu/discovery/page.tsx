@@ -7,13 +7,11 @@ import DiscoverFeaturedWrapper from "@/app/components/utils/Discovery/Cards/Feat
 import DiscoverKahootCard, { DiscoverKahootCardSize } from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootCard";
 import DiscoverKahootWrapper from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootWrapper";
 import SectionTitle, { SectionTitleSizes } from "@/app/components/utils/Discovery/Titles/SectionTitle";
+import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Discover/RecentlyPlayedKahoots.interface";
+import axiosInstance from "@/app/utils/axiosConfig";
+import { useEffect, useState } from "react";
 
 export interface DiscoverCategoryCardInfo {
-  title: string;
-  bgImg: string;
-}
-
-export interface DiscoverKahootCardInfo {
   title: string;
   bgImg: string;
 }
@@ -33,13 +31,13 @@ const DiscoveryMenuPage = () => {
   ];
 
   const kahoots: DiscoverKahootCardInfo[] = [
-    { title: "Test your videogames knowledge on this following quiz!", bgImg: "/assets/discovery/CardBG.jpg" },
-    { title: "Test your videogames knowledge on this following quiz!", bgImg: "/assets/discovery/CardBG2.jpg" },
-    { title: "Test your videogames knowledge on this following quiz!", bgImg: "/assets/discovery/CardBG3.jpg" },
-    { title: "Test your videogames knowledge on this following quiz!", bgImg: "/assets/discovery/CardBG.jpg" },
-    { title: "Test your videogames knowledge on this following quiz!", bgImg: "/assets/discovery/CardBG2.jpg" },
-    { title: "Test your videogames knowledge on this following quiz!", bgImg: "/assets/discovery/CardBG3.jpg" },
-    { title: "Test your videogames knowledge on this following quiz!", bgImg: "/assets/discovery/CardBG.jpg" }
+    { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG.jpg" },
+    { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG2.jpg" },
+    { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG3.jpg" },
+    { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG.jpg" },
+    { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG2.jpg" },
+    { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG3.jpg" },
+    { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG.jpg" }
   ]
 
   const featuredKahoots: DiscoverFeaturedCardInfo[] = kahoots.map(kahoot => ({
@@ -47,18 +45,39 @@ const DiscoveryMenuPage = () => {
     numberOfQuestions: Math.floor(Math.random() * 5) + 8
   }))
 
+  const [recentlyPlayedKahoots, setRecentlyPlayedKahoots] = useState<DiscoverKahootCardInfo[]>([]);
+
+  useEffect(() => {
+    getRecentlyPlayedKahoots();
+  }, [])
+
+  const getRecentlyPlayedKahoots = async () => {
+    console.log(`Recently played kahoots.`);
+    axiosInstance.get('/kahoot/getRecentlyPlayedKahoots')
+      .then(res => {
+        setRecentlyPlayedKahoots(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
   return (
     <div className="pr-10">
-      <SectionTitle size={SectionTitleSizes.SMALL}>Recently played</SectionTitle>
-      <DiscoverKahootWrapper>
-        {kahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
-          <DiscoverKahootCard
-            key={i}
-            cardSize={DiscoverKahootCardSize.SMALL}
-            kahoot={kahoot}
-          />
-        ))}
-      </DiscoverKahootWrapper>
+      {recentlyPlayedKahoots.length > 0 && (
+        <>
+          <SectionTitle size={SectionTitleSizes.SMALL}>Recently played</SectionTitle>
+          <DiscoverKahootWrapper>
+            {recentlyPlayedKahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
+              <DiscoverKahootCard
+                key={i}
+                cardSize={DiscoverKahootCardSize.SMALL}
+                kahoot={kahoot}
+              />
+            ))}
+          </DiscoverKahootWrapper>
+        </>
+      )}
 
       <SectionTitle size={SectionTitleSizes.SMALL}>Explore by subject</SectionTitle>
       <DiscoverCategoryWrapper>
