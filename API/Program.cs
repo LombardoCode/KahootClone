@@ -34,6 +34,7 @@ builder.Services.AddDbContext<DataContext>(opts =>
 builder.Services.AddTransient<DatabaseSeeder>();
 builder.Services.AddTransient<UserSeeder>();
 builder.Services.AddTransient<KahootSeeder>();
+builder.Services.AddTransient<PlayedKahootsSeeder>();
 builder.Services.AddTransient<CategorySeeder>();
 
 // Adding CORS
