@@ -8,5 +8,8 @@ namespace API.Models.Classification
     public string Slug { get; set; }
     public string? MediaUrl { get; set; }
     public bool IsVisible { get; set; }
+
+    // Navigation properties
+    public List<KahootCategory> KahootCategories { get; set; }
   }
 }

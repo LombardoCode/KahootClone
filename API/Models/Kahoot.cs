@@ -1,3 +1,4 @@
+using API.Models.Classification;
 using API.Models.Creator;
 using API.Models.Play;
 
@@ -18,5 +19,6 @@ namespace API.Models
     public AppUser User { get; set; }
     public List<Question> Questions { get; set; }
     public List<Lobby> Lobbies { get; set; }
+    public List<KahootCategory> KahootCategories { get; set; }
   }
 }
