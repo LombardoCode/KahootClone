@@ -21,6 +21,7 @@ namespace API.Data
     public DbSet<PlayedKahoots> PlayedKahoots { get; set; }
     public DbSet<KahootsPlayedByUser> KahootsPlayedByUser { get; set; }
     public DbSet<Category> Categories { get; set; }
+    public DbSet<KahootCategory> KahootCategories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -43,6 +44,20 @@ namespace API.Data
         .WithMany(k => k.Lobbies)
         .HasForeignKey(l => l.KahootId)
         .OnDelete(DeleteBehavior.Cascade);
+
+      // Categories
+      builder.Entity<KahootCategory>()
+        .HasKey(kc => new { kc.KahootId, kc.CategoryId });
+
+      builder.Entity<KahootCategory>()
+        .HasOne(kc => kc.Kahoot)
+        .WithMany(k => k.KahootCategories)
+        .HasForeignKey(kc => kc.KahootId);
+
+      builder.Entity<KahootCategory>()
+        .HasOne(kc => kc.Category)
+        .WithMany(c => c.KahootCategories)
+        .HasForeignKey(kc => kc.CategoryId);
 
       base.OnModelCreating(builder);
     }
