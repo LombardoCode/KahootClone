@@ -8,13 +8,20 @@ namespace API.Data
     private readonly UserSeeder _userSeeder;
     private readonly KahootSeeder _kahootSeeder;
     private readonly PlayedKahootsSeeder _playedKahootsSeeder;
+    private readonly KahootsPlayedByUserSeeder _kahootsPlayedByUserSeeder;
     private readonly CategorySeeder _categorySeeder;
 
-    public DatabaseSeeder(UserSeeder userSeeder, KahootSeeder kahootSeeder, PlayedKahootsSeeder playedKahootsSeeder, CategorySeeder categorySeeder)
+    public DatabaseSeeder(
+      UserSeeder userSeeder,
+      KahootSeeder kahootSeeder,
+      PlayedKahootsSeeder playedKahootsSeeder,
+      KahootsPlayedByUserSeeder kahootsPlayedByUserSeeder,
+      CategorySeeder categorySeeder)
     {
       _userSeeder = userSeeder;
       _kahootSeeder = kahootSeeder;
       _playedKahootsSeeder = playedKahootsSeeder;
+      _kahootsPlayedByUserSeeder = kahootsPlayedByUserSeeder;
       _categorySeeder = categorySeeder;
     }
 
@@ -25,6 +32,7 @@ namespace API.Data
       await _kahootSeeder.Seed();
       await _playedKahootsSeeder.Seed();
       await _categorySeeder.Seed();
+      await _kahootsPlayedByUserSeeder.Seed();
     }
   }
 }
