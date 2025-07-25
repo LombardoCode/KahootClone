@@ -31,17 +31,14 @@ const DiscoveryMenuPage = () => {
     { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG.jpg" }
   ]
 
-  const featuredKahoots: DiscoverFeaturedCardInfo[] = kahoots.map(kahoot => ({
-    ...kahoot,
-    numberOfQuestions: Math.floor(Math.random() * 5) + 8
-  }))
-
   const [recentlyPlayedKahoots, setRecentlyPlayedKahoots] = useState<DiscoverKahootCardInfo[]>([]);
   const [categories, setCategories] = useState<DiscoverCategoryCardInfo[]>([]);
+  const [featuredKahoots, setFeaturedKahoots] = useState<DiscoverFeaturedCardInfo[]>([]);
 
   useEffect(() => {
     getRecentlyPlayedKahoots();
     getCategories();
+    getFeaturedKahoots();
   }, [])
 
   const getRecentlyPlayedKahoots = async () => {
@@ -58,6 +55,16 @@ const DiscoveryMenuPage = () => {
     axiosInstance.get('/kahoot/getCategories')
       .then(res => {
         setCategories(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
+  const getFeaturedKahoots = () => {
+    axiosInstance.get('/kahoot/getFeaturedKahoots')
+      .then(res => {
+        setFeaturedKahoots(res.data);
       })
       .catch(err => {
         console.error(err);

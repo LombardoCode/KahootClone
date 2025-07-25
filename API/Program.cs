@@ -7,7 +7,6 @@ using API.Sockets.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +35,7 @@ builder.Services.AddTransient<UserSeeder>();
 builder.Services.AddTransient<KahootSeeder>();
 builder.Services.AddTransient<PlayedKahootsSeeder>();
 builder.Services.AddTransient<KahootsPlayedByUserSeeder>();
+builder.Services.AddTransient<FeaturedKahootSeeder>();
 builder.Services.AddTransient<CategorySeeder>();
 
 // Adding CORS
