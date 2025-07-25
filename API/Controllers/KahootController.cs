@@ -175,8 +175,8 @@ namespace API.Controllers
       }
     }
 
-    [HttpGet("getRecentlyPlayedKahoots")]
     [Authorize]
+    [HttpGet("getRecentlyPlayedKahoots")]
     public async Task<ActionResult<List<DiscoverKahootCardInfoDTO>>> GetRecentlyPlayedKahoots()
     {
       var userId = await _userService.GetUserId();
@@ -200,6 +200,23 @@ namespace API.Controllers
                         .ToListAsync();
 
       return Ok(kahoots);
+    }
+
+    [Authorize]
+    [HttpGet("getCategories")]
+    public async Task<ActionResult<List<DiscoverCategoryCardInfoDTO>>> getCategories()
+    {
+      var categories = await _dbContext.Categories
+                                .Where(k => k.IsVisible == true)
+                                .Select(k => new DiscoverCategoryCardInfoDTO
+                                {
+                                  Title = k.Name,
+                                  Slug = k.Slug,
+                                  MediaUrl = k.MediaUrl
+                                })
+                                .ToListAsync();
+
+      return Ok(categories);
     }
   }
 }

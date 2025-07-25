@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 export interface DiscoverCategoryCardInfo {
   title: string;
-  bgImg: string;
+  mediaUrl: string;
 }
 
 export interface DiscoverFeaturedCardInfo extends DiscoverKahootCardInfo {
@@ -21,15 +21,6 @@ export interface DiscoverFeaturedCardInfo extends DiscoverKahootCardInfo {
 }
 
 const DiscoveryMenuPage = () => {
-  const categories: DiscoverCategoryCardInfo[] = [
-    { title: "Math", bgImg: "/assets/discovery/CardBG.jpg" },
-    { title: "Science", bgImg: "/assets/discovery/CardBG2.jpg" },
-    { title: "Technology", bgImg: "/assets/discovery/CardBG3.jpg" },
-    { title: "Language", bgImg: "/assets/discovery/CardBG.jpg" },
-    { title: "Games", bgImg: "/assets/discovery/CardBG2.jpg" },
-    { title: "Food", bgImg: "/assets/discovery/CardBG3.jpg" }
-  ];
-
   const kahoots: DiscoverKahootCardInfo[] = [
     { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG.jpg" },
     { kahootId: "", title: "Test your videogames knowledge on this following quiz!", mediaUrl: "/assets/discovery/CardBG2.jpg" },
@@ -46,15 +37,27 @@ const DiscoveryMenuPage = () => {
   }))
 
   const [recentlyPlayedKahoots, setRecentlyPlayedKahoots] = useState<DiscoverKahootCardInfo[]>([]);
+  const [categories, setCategories] = useState<DiscoverCategoryCardInfo[]>([]);
 
   useEffect(() => {
     getRecentlyPlayedKahoots();
+    getCategories();
   }, [])
 
   const getRecentlyPlayedKahoots = async () => {
     axiosInstance.get('/kahoot/getRecentlyPlayedKahoots')
       .then(res => {
         setRecentlyPlayedKahoots(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
+  const getCategories = async () => {
+    axiosInstance.get('/kahoot/getCategories')
+      .then(res => {
+        setCategories(res.data);
       })
       .catch(err => {
         console.error(err);
