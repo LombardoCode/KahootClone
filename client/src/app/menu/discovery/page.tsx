@@ -52,7 +52,6 @@ const DiscoveryMenuPage = () => {
   }, [])
 
   const getRecentlyPlayedKahoots = async () => {
-    console.log(`Recently played kahoots.`);
     axiosInstance.get('/kahoot/getRecentlyPlayedKahoots')
       .then(res => {
         setRecentlyPlayedKahoots(res.data);

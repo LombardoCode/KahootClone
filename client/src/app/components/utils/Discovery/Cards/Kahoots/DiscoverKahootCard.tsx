@@ -43,7 +43,7 @@ const DiscoverKahootCard = ({ cardSize, kahoot }: DiscoverKahootCardProps) => {
           textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
           useCase={UseCases.LONGTEXT}
           fontWeight={FontWeights.BOLD}
-          className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow shadow-black/80' : ''}`}
+          className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
         >
           {kahoot.title}
         </Text>
