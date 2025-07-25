@@ -29,12 +29,13 @@ const DiscoverFeaturedCard = ({ cardSize, featuredKahoot }: DiscoverFeaturedCard
             fontWeight={FontWeights.REGULAR}
             className={`z-20 text-xs w-full overflow-hidden text-ellipsis line-clamp-2`}
           >
-            {featuredKahoot.numberOfQuestions} {featuredKahoot.numberOfQuestions !== 0 ? 'questions' : 'question'}
+            {featuredKahoot.numberOfQuestions} {featuredKahoot.numberOfQuestions === 1 ? 'question' : 'questions'}
           </Text>
         </div>
         <img
           ref={imgRef}
-          src={featuredKahoot.bgImg}
+          src={featuredKahoot.mediaUrl}
+          crossOrigin="anonymous"
           className="w-full h-full object-cover"
         />
       </div>
@@ -43,7 +44,7 @@ const DiscoverFeaturedCard = ({ cardSize, featuredKahoot }: DiscoverFeaturedCard
           textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
           useCase={UseCases.LONGTEXT}
           fontWeight={FontWeights.BOLD}
-          className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow shadow-black/80' : ''}`}
+          className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
         >
           {featuredKahoot.title}
         </Text>

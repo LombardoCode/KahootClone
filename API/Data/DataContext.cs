@@ -1,6 +1,7 @@
 using API.Models;
 using API.Models.Classification;
 using API.Models.Creator;
+using API.Models.Discover;
 using API.Models.Play;
 using API.Models.Statistics;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace API.Data
     public DbSet<KahootsPlayedByUser> KahootsPlayedByUser { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<KahootCategory> KahootCategories { get; set; }
+    public DbSet<FeaturedKahoot> FeaturedKahoots { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -218,5 +218,27 @@ namespace API.Controllers
 
       return Ok(categories);
     }
+
+    [Authorize]
+    [HttpGet("getFeaturedKahoots")]
+    public async Task<ActionResult<List<DiscoverFeaturedCardInfoDTO>>> getFeaturedKahoots()
+    {
+      List<Guid> featuredKahootsIds = await _dbContext.FeaturedKahoots
+                                              .Select(k => k.KahootId)
+                                              .ToListAsync();
+
+      List<DiscoverFeaturedCardInfoDTO> kahoots = await _dbContext.Kahoots
+                                        .Where(k => featuredKahootsIds.Contains(k.Id))
+                                        .Select(k => new DiscoverFeaturedCardInfoDTO
+                                        {
+                                          KahootId = k.Id,
+                                          Title = k.Title,
+                                          MediaUrl = k.MediaUrl,
+                                          NumberOfQuestions = k.Questions.Count()
+                                        })
+                                        .ToListAsync();
+
+      return Ok(kahoots);
+    }
   }
 }
