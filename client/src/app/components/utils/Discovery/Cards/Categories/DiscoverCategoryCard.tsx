@@ -23,7 +23,8 @@ const DiscoverCategoryCard = ({ cardSize, category }: DiscoverCategoryCardProps)
       <div className="absolute w-full h-full top-0 left-0 z-10 bg-black/40" />
       <img
         ref={imgRef}
-        src={category.bgImg}
+        src={category.mediaUrl}
+        crossOrigin="anonymous"
         className="absolute top-0 left-0 w-full"
       />
       <Text
