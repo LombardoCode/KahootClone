@@ -11,7 +11,6 @@ import KahootAnswerTextBox from "../Quizes/KahootAnswerTextBox";
 import Button, { ButtonSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { doesThisQuestionHasAnImage } from "@/app/utils/kahootUtils";
-import usePexelsSearch from "@/app/hooks/usePexelsSearch";
 import ImageSelectorModal from "../Modal/reusable/ImageSelectorModal";
 
 interface CreatorQuestionModifierProps {
@@ -25,8 +24,6 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
   // Local component
   const [title, setTitle] = useState<string>(kahoot?.questions[questionIndex]?.title || "");
   const [isMediaSelectorModalOpen, setIsMediaSelectorModalOpen] = useState<boolean>(false);
-  const [imageQueryText, setImageQueryText] = useState<string>("");
-  const { results: pexelsResults, loading: pexelsLoading } = usePexelsSearch(imageQueryText, 1000, 30);
 
   useEffect(() => {
     setTitle(kahoot?.questions[questionIndex]?.title || "");
@@ -146,10 +143,6 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
       <ImageSelectorModal
         isOpen={isMediaSelectorModalOpen}
         onClose={() => setIsMediaSelectorModalOpen(false)}
-        imageQueryText={imageQueryText}
-        onQueryChange={setImageQueryText}
-        pexelsResults={pexelsResults}
-        pexelsLoading={pexelsLoading}
         onImageSelect={(url: string) => {
           updateQuestionMediaUrl(questionIndex, url);
           setIsMediaSelectorModalOpen(false);

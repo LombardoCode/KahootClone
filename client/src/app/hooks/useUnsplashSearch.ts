@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const usePexelsSearch = () => {
-  const API_URL = "https://api.pexels.com/v1/search";
-  const API_KEY = process.env.NEXT_PUBLIC_PEXELS_API_KEY!;
+const useUnsplashSearch = () => {
+  const API_URL = "https://api.unsplash.com/search/photos";
+  const ACCESS_KEY = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY!;
 
   const search = async (query: string, delayMs = 1000, perPage = 30): Promise<any[]> => {
     if (!query.trim()) {
@@ -12,17 +12,17 @@ const usePexelsSearch = () => {
     try {
       const response = await axios.get(API_URL, {
         headers: {
-          Authorization: API_KEY
+          Authorization: `Client-ID ${ACCESS_KEY}`
         },
         params: {
           query,
           per_page: perPage
         }
       })
-  
-      return response.data.photos;
+
+      return response.data.results;
     } catch (err) {
-      console.error(`Error fetching images from Pexels: `, err);
+      console.error(`Error fetching images from Unsplash: `, err);
       return [];
     }
   }
@@ -30,4 +30,4 @@ const usePexelsSearch = () => {
   return { search };
 }
 
-export default usePexelsSearch;
+export default useUnsplashSearch;
