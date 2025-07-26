@@ -29,8 +29,10 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
   const setScreenType = () => {
     switch (screen) {
       case ScreenForFinalAnswerStatistics.STATISTICS:
-        setScreen(ScreenForFinalAnswerStatistics.SCOREBOARD);
-        
+        // For the last question, avoid showing the final stats, we want them to be shown on the podium, not on the <DisplayScoreboard /> component
+        isThisTheLastQuestion()
+          ? endTheGame()
+          : setScreen(ScreenForFinalAnswerStatistics.SCOREBOARD);
         break;
       case ScreenForFinalAnswerStatistics.SCOREBOARD:
         // Go to the next question or end the game
