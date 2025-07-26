@@ -73,7 +73,7 @@ const Signup = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar fixed={false} />
       <BackgroundShapes className="-z-10"/>
       <Container>
         <MainContent>
@@ -183,6 +183,8 @@ const Signup = () => {
                   <Button
                     backgroundColor={BackgroundColors.GREEN}
                     fontWeight={FontWeights.BOLD}
+                    textColor={TextColors.WHITE}
+                    animateOnHover={false}
                   >
                     Sign up
                   </Button>
