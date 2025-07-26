@@ -19,6 +19,7 @@ namespace API.Data.Seeds
 
     public async Task Seed()
     {
+      Console.WriteLine("\n\n\n\n");
       Console.WriteLine($"[Info]: Seeding KahootJsonSeeder");
 
       if (_dbContext.Kahoots.Any())
@@ -27,7 +28,7 @@ namespace API.Data.Seeds
         return;
       }
 
-      string kahootJsonPath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Seeds", "JSONs") + "/kahoots.json";
+      string kahootJsonPath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Seeds", "JSONs") + "/kahoots.jsonc";
 
       if (!File.Exists(kahootJsonPath))
       {
@@ -107,7 +108,7 @@ namespace API.Data.Seeds
         // DiscoverSubsection
         foreach (var subsectionTitle in seed.Subsections)
         {
-          var subsection = _dbContext.DiscoverSubsection.FirstOrDefaultAsync(ds => ds.Title == subsectionTitle);
+          var subsection = await _dbContext.DiscoverSubsection.FirstOrDefaultAsync(ds => ds.Title == subsectionTitle);
 
           if (subsection == null)
           {

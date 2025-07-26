@@ -31,6 +31,7 @@ builder.Services.AddDbContext<DataContext>(opts =>
 });
 
 // Database seeding
+builder.Services.AddTransient<DatabaseDataDeleter>();
 builder.Services.AddTransient<DatabaseSeeder>();
 builder.Services.AddTransient<UserSeeder>();
 builder.Services.AddTransient<PlayedKahootsSeeder>();
@@ -143,6 +144,8 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
   var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+  var databaseDataDeleter = scope.ServiceProvider.GetRequiredService<DatabaseDataDeleter>();
+  await databaseDataDeleter.Delete();
   await seeder.Seed();
 }
 

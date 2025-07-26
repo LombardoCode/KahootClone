@@ -14,6 +14,7 @@ namespace API.Data.Seeds
 
     public async Task Seed()
     {
+      Console.WriteLine("\n\n\n\n");
       Console.WriteLine($"[Info]: Seeding Users");
 
       var users = new List<(string UserName, string Email)>

@@ -1,0 +1,324 @@
+[
+  {
+    "Title": "Basic Math Challenge",
+    "Description": "Test your skills in addition, subtraction, and multiplication.",
+    "MediaUrl": "https://images.pexels.com/photos/1019470/abacus-mathematics-addition-subtraction-1019470.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "Questions": [
+      {
+        "Title": "6 + 9",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "15",
+            "IsCorrect": true
+          },
+          {
+            "Text": "13",
+            "IsCorrect": false
+          },
+          {
+            "Text": "14",
+            "IsCorrect": false
+          },
+          {
+            "Text": "16",
+            "IsCorrect": false
+          }
+        ]
+      },
+      {
+        "Title": "33 + 77",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "100",
+            "IsCorrect": false
+          },
+          {
+            "Text": "110",
+            "IsCorrect": false
+          },
+          {
+            "Text": "110",
+            "IsCorrect": true
+          },
+          {
+            "Text": "109",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ],
+    "Category": "Math",
+    "Subsections": [
+      "Elementary School",
+      "Middle School"
+    ]
+  },
+  {
+    "Title": "World Flags Quiz",
+    "Description": "Can you identify the countries by their flags?",
+    "MediaUrl": "https://images.unsplash.com/photo-1495149905644-c9f27692c2c3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHxGbGFnc3xlbnwwfHx8fDE3NTM0MzI3MDZ8MA&ixlib=rb-4.1.0&q=85",
+    "Questions": [
+      {
+        "Title": "",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "",
+            "IsCorrect": true
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ],
+    "Category": "General Knowledge",
+    "Subsections": [
+      "Elementary School",
+      "Middle School",
+      "High School"
+    ]
+  },
+  {
+    "Title": "Introduction to Biology",
+    "Description": "Learn basic cell structure and functions.",
+    "MediaUrl": "https://images.pexels.com/photos/6156448/pexels-photo-6156448.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "Questions": [
+      {
+        "Title": "",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "",
+            "IsCorrect": true
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ],
+    "Category": "Science",
+    "Subsections": [
+      "Middle School",
+      "High School",
+      "Human Body Systems"
+    ]
+  },
+  {
+    "Title": "English Grammar Basics",
+    "Description": "Identify verbs, nouns, adjectives and more!",
+    "MediaUrl": "https://images.pexels.com/photos/6503096/pexels-photo-6503096.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "Questions": [
+      {
+        "Title": "",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "",
+            "IsCorrect": true
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ],
+    "Category": "Language",
+    "Subsections": [
+      "Middle School",
+      "English"
+    ]
+  },
+  {
+    "Title": "Famous Landmarks Around the World",
+    "Description": "Guess the name or location of these iconic structures.",
+    "MediaUrl": "https://images.pexels.com/photos/1530259/pexels-photo-1530259.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "Questions": [
+      {
+        "Title": "",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "",
+            "IsCorrect": true
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ],
+    "Category": "General Knowledge",
+    "Subsections": [
+      "High School"
+    ]
+  },
+  {
+    "Title": "Basic Spanish Vocabulary",
+    "Description": "Match common Spanish words with their English meanings.",
+    "MediaUrl": "https://images.pexels.com/photos/54097/spain-flag-flutter-spanish-54097.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "Questions": [
+      {
+        "Title": "",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "",
+            "IsCorrect": true
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ],
+    "Category": "Language",
+    "Subsections": [
+      "Middle School",
+      "Spanish"
+    ]
+  },
+  {
+    "Title": "Periodic Table Challenge",
+    "Description": "Test your knowledge of chemical elements and their symbols.",
+    "MediaUrl": "https://images.pexels.com/photos/7755503/pexels-photo-7755503.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "Questions": [
+      {
+        "Title": "",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "",
+            "IsCorrect": true
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ],
+    "Category": "",
+    "Subsections": [
+      "Middle School",
+      "High School"
+    ]
+  },
+  {
+    "Title": "Internet Safety 101",
+    "Description": "Learn how to stay safe online with this digital literacy quiz.",
+    "MediaUrl": "https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "Questions": [
+      {
+        "Title": "",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "",
+            "IsCorrect": true
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          },
+          {
+            "Text": "",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ],
+    "Category": "Technology",
+    "Subsections": [
+      "Middle School",
+      "High School"
+    ]
+  }
+]

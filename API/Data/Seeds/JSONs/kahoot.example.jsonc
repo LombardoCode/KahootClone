@@ -1,0 +1,34 @@
+{
+  "Title": "",
+  "Description": "",
+  "MediaUrl": "",
+  "Questions": [
+    {
+      "Title": "",
+      "Layout": "CLASSIC",
+      "TimeLimit": 30,
+      "PointsMultiplier": 1,
+      "MediaUrl": "",
+      "Answers": [
+        {
+          "Text": "",
+          "IsCorrect": true
+        },
+        {
+          "Text": "",
+          "IsCorrect": false
+        },
+        {
+          "Text": "",
+          "IsCorrect": false
+        },
+        {
+          "Text": "",
+          "IsCorrect": false
+        }
+      ]
+    }
+  ],
+  "Category": "",
+  "Subsections": []
+}

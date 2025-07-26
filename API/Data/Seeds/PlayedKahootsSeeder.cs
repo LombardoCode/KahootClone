@@ -15,11 +15,18 @@ namespace API.Data.Seeds
 
     public async Task Seed()
     {
+      Console.WriteLine("\n\n\n\n");
       Console.WriteLine($"[Info]: Seeding PlayedKahoots");
 
       if (_dbContext.PlayedKahoots.Any())
       {
         Console.WriteLine("[Info]: PlayedKahoots already seeded, skipping.");
+        return;
+      }
+
+      if (!_dbContext.Kahoots.Any())
+      {
+        Console.WriteLine("[Info]: There were no Kahoots to seed PlayedKahoots records, skipping.");
         return;
       }
 
