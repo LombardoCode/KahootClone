@@ -14,6 +14,7 @@ namespace API.Data.Seeds
 
     public async Task Seed()
     {
+      Console.WriteLine("\n\n\n\n");
       Console.WriteLine($"[Info]: Seeding KahootsPlayedByUser");
 
       if (_dbContext.KahootsPlayedByUser.Any())

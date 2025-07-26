@@ -33,14 +33,21 @@ namespace API.Data
 
     public async Task Seed()
     {
+      Console.WriteLine("\n\n\n\n\n\n\n\n");
       Console.WriteLine($"[Info]: Seeding data");
+
+      // Data that doesn't require kahoots to exist
       await _userSeeder.Seed();
-      await _playedKahootsSeeder.Seed();
-      await _kahootsPlayedByUserSeeder.Seed();
-      await _featuredKahootsSeeder.Seed();
-      await _discoverSectionSeeder.Seed();
-      await _kahootJsonSeeder.Seed();
       await _categorySeeder.Seed();
+      await _discoverSectionSeeder.Seed();
+
+      // Creating kahoots
+      await _kahootJsonSeeder.Seed();
+
+      // Data that requires kahoots to exist
+      await _kahootsPlayedByUserSeeder.Seed();
+      await _playedKahootsSeeder.Seed();
+      await _featuredKahootsSeeder.Seed();
     }
   }
 }

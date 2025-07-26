@@ -13,6 +13,7 @@ namespace API.Data.Seeds.Sections
 
     public async Task Seed()
     {
+      Console.WriteLine("\n\n\n\n");
       Console.WriteLine($"[Info]: Seeding DiscoverSection");
 
       if (_dbContext.DiscoverSection.Any())
@@ -30,7 +31,7 @@ namespace API.Data.Seeds.Sections
             {
               new DiscoverSubsection { Title = "Elementary School" },
               new DiscoverSubsection { Title = "Middle School" },
-              new DiscoverSubsection { Title = "High School School" }
+              new DiscoverSubsection { Title = "High School" }
             }
           }
         },
