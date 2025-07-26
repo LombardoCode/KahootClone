@@ -1,11 +1,10 @@
 import Text from "@/app/components/UIComponents/Text";
 import useAverageImageColor from "@/app/hooks/useAverageImageColor";
+import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Discover/DiscoverFeaturedCardInfo";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
-import { DiscoverFeaturedCardInfo } from "@/app/menu/discovery/page";
 
 export enum DiscoverFeaturedCardSize {
-  SMALL = "col-span-1",
-  MEDIUM = "col-span-4"
+  MEDIUM = "2xl:col-span-4 lg:col-span-6 md:col-span-12"
 }
 
 interface DiscoverFeaturedCardProps {
@@ -21,7 +20,7 @@ const DiscoverFeaturedCard = ({ cardSize, featuredKahoot }: DiscoverFeaturedCard
       className={`flex items-center rounded-md h-24 overflow-hidden ${cardSize} ring-1 ring-zinc-300 shadow`}
       style={{ backgroundColor: bgColor }}
     >
-      <div className="relative w-48 h-full">
+      <div className="relative max-w-36 h-full">
         <div className="absolute bg-black/70 bottom-1 right-1 px-2 rounded-full">
           <Text
             textColor={TextColors.WHITE}
@@ -36,7 +35,7 @@ const DiscoverFeaturedCard = ({ cardSize, featuredKahoot }: DiscoverFeaturedCard
           ref={imgRef}
           src={featuredKahoot.mediaUrl}
           crossOrigin="anonymous"
-          className="w-full h-full object-cover"
+          className="top-0 left-0 w-full min-h-32 object-cover"
         />
       </div>
       <div className="px-3">

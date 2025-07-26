@@ -91,19 +91,16 @@ namespace API.Data.Seeds
         // KahootCategory
         var category = await _dbContext.Categories.FirstOrDefaultAsync(c => c.Name == seed.Category);
 
-        if (category == null)
+        if (category != null)
         {
-          Console.WriteLine($"[Error]: Category with name '{seed.Category}' was not found.");
-          return;
+          var kahootCategory = new KahootCategory
+          {
+            KahootId = kahoot.Id,
+            CategoryId = category.Id
+          };
+
+          _dbContext.KahootCategories.Add(kahootCategory);
         }
-
-        var kahootCategory = new KahootCategory
-        {
-          KahootId = kahoot.Id,
-          CategoryId = category.Id
-        };
-
-        _dbContext.KahootCategories.Add(kahootCategory);
 
         // DiscoverSubsection
         foreach (var subsectionTitle in seed.Subsections)

@@ -19,7 +19,7 @@ const DiscoverKahootCard = ({ cardSize, kahoot }: DiscoverKahootCardProps) => {
 
   return (
     <div
-      className={`flex flex-col justify-start items-end rounded-md h-[12rem] overflow-hidden ${cardSize} ring-1 ring-zinc-300 shadow`}
+      className={`flex flex-col justify-start items-end rounded-md h-[12rem] overflow-hidden ring-1 ring-zinc-300 shadow ${cardSize}`}
       style={{ backgroundColor: kahoot.mediaUrl ? bgColor : "rgb(255, 255, 255)" }}
     >
       {kahoot.mediaUrl ? (
