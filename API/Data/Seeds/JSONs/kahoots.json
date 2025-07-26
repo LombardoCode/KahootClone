@@ -1,0 +1,64 @@
+[
+  {
+    "Title": "Basic Math Challenge",
+    "Description": "Test your skills in addition, subtraction, and multiplication.",
+    "MediaUrl": "https://images.pexels.com/photos/1019470/abacus-mathematics-addition-subtraction-1019470.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "Questions": [
+      {
+        "Title": "6 + 9",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "15",
+            "IsCorrect": true
+          },
+          {
+            "Text": "13",
+            "IsCorrect": false
+          },
+          {
+            "Text": "14",
+            "IsCorrect": false
+          },
+          {
+            "Text": "16",
+            "IsCorrect": false
+          }
+        ]
+      },
+      {
+        "Title": "33 + 77",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          {
+            "Text": "100",
+            "IsCorrect": false
+          },
+          {
+            "Text": "110",
+            "IsCorrect": false
+          },
+          {
+            "Text": "110",
+            "IsCorrect": true
+          },
+          {
+            "Text": "109",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ],
+    "Category": "Math",
+    "Subsections": [
+      "Elementary School",
+      "Midde School"
+    ]
+  }
+]
