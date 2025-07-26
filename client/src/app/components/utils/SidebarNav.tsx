@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCompass, faList } from "@fortawesome/free-solid-svg-icons";
 import { usePathname, useRouter } from "next/navigation";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import Link from "next/link";
+import { ROUTES } from "@/app/utils/Routes/routesUtils";
 
 interface SidebarNavProps {
   className?: string;
@@ -29,7 +31,9 @@ const SidebarNav = ({ className }: SidebarNavProps) => {
   return (
     <div className={`${className} px-2 shadow-[inset_0_0px_4px_rgba(0,0,0,0.25)]`}>
       <div className="flex justify-start">
-        <Logo size={LogoSize.REGULAR} color={LogoColors.VIOLET} />
+        <Link href={ROUTES.MENU.DISCOVERY}>
+          <Logo size={LogoSize.REGULAR} color={LogoColors.VIOLET} />
+        </Link>
       </div>
       <div id="sidebar-nav-items" className="px-1">
         {sidebarMenuItems.map((item: SidebarMenuItemProps, key: number) => (
