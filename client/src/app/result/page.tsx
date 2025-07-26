@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
+import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
 
 const ResultPage = () => {
   // Hooks
@@ -76,6 +77,8 @@ const ResultPage = () => {
           </Text>
         </div>
       </div>
+      
+      <PlayerInGameStatus />
     </div>
   )
 }

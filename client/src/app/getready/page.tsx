@@ -7,6 +7,7 @@ import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface"
 import useInGameStore from "../stores/Kahoot/useInGameStore";
 import { SpinnerSizes } from "../components/UIComponents/Spinners/Spinner.interface";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
+import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
 
 const GetReady = () => {
   // Hooks
@@ -73,6 +74,8 @@ const GetReady = () => {
           </Text>
         </div>
       </div>
+
+      <PlayerInGameStatus />
     </div>
   )
 }
