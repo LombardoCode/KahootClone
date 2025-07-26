@@ -48,6 +48,8 @@ namespace API.Data
       await _kahootsPlayedByUserSeeder.Seed();
       await _playedKahootsSeeder.Seed();
       await _featuredKahootsSeeder.Seed();
+
+      Console.WriteLine($"[Info]: Seeding finished");
     }
   }
 }

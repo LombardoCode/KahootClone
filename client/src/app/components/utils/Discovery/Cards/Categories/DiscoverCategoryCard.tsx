@@ -1,7 +1,7 @@
 import Text from "@/app/components/UIComponents/Text";
 import useAverageImageColor from "@/app/hooks/useAverageImageColor";
+import { DiscoverCategoryCardInfo } from "@/app/interfaces/Kahoot/Discover/DiscoverCategoryCardInfo";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
-import { DiscoverCategoryCardInfo } from "@/app/menu/discovery/page";
 
 export enum DiscoverCategoryCardSize {
   SMALL = "col-span-1",
@@ -25,7 +25,7 @@ const DiscoverCategoryCard = ({ cardSize, category }: DiscoverCategoryCardProps)
         ref={imgRef}
         src={category.mediaUrl}
         crossOrigin="anonymous"
-        className="absolute top-0 left-0 w-full"
+        className="absolute top-0 left-0 w-full min-h-32 object-cover"
       />
       <Text
         textColor={TextColors.WHITE}
