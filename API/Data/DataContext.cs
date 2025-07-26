@@ -2,6 +2,7 @@ using API.Models;
 using API.Models.Classification;
 using API.Models.Creator;
 using API.Models.Discover;
+using API.Models.Discover.Section;
 using API.Models.Play;
 using API.Models.Statistics;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -24,6 +25,9 @@ namespace API.Data
     public DbSet<Category> Categories { get; set; }
     public DbSet<KahootCategory> KahootCategories { get; set; }
     public DbSet<FeaturedKahoot> FeaturedKahoots { get; set; }
+    public DbSet<DiscoverSection> DiscoverSection { get; set; }
+    public DbSet<DiscoverSubsection> DiscoverSubsection { get; set; }
+    public DbSet<DiscoverSubsectionKahoot> DiscoverSubsectionKahoots { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -61,6 +65,20 @@ namespace API.Data
         .WithMany(c => c.KahootCategories)
         .HasForeignKey(kc => kc.CategoryId);
 
+      // Discover's page sections
+      builder.Entity<DiscoverSubsectionKahoot>()
+        .HasKey(dsk => new { dsk.DiscoverSubsectionId, dsk.KahootId });
+
+      builder.Entity<DiscoverSubsectionKahoot>()
+        .HasOne(dsk => dsk.DiscoverSubsection)
+        .WithMany(ds => ds.DiscoverSubsectionKahoots)
+        .HasForeignKey(dsk => dsk.DiscoverSubsectionId);
+
+      builder.Entity<DiscoverSubsectionKahoot>()
+        .HasOne(dsk => dsk.Kahoot)
+        .WithMany()
+        .HasForeignKey(dsk => dsk.KahootId);
+      
       base.OnModelCreating(builder);
     }
   }

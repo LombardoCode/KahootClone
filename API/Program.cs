@@ -1,6 +1,7 @@
 using System.Text;
 using API.Data;
 using API.Data.Seeds;
+using API.Data.Seeds.Sections;
 using API.Models;
 using API.Services;
 using API.Sockets.Hubs;
@@ -32,11 +33,12 @@ builder.Services.AddDbContext<DataContext>(opts =>
 // Database seeding
 builder.Services.AddTransient<DatabaseSeeder>();
 builder.Services.AddTransient<UserSeeder>();
-builder.Services.AddTransient<KahootSeeder>();
 builder.Services.AddTransient<PlayedKahootsSeeder>();
 builder.Services.AddTransient<KahootsPlayedByUserSeeder>();
 builder.Services.AddTransient<FeaturedKahootSeeder>();
+builder.Services.AddTransient<DiscoverSectionSeeder>();
 builder.Services.AddTransient<CategorySeeder>();
+builder.Services.AddTransient<KahootJsonSeeder>();
 
 // Adding CORS
 builder.Services.AddCors(opts =>
