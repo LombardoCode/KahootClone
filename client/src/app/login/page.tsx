@@ -57,7 +57,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar fixed={false} />
       <Container>
         <MainContent>
           <Text
@@ -117,6 +117,8 @@ const LoginPage = () => {
                   <Button
                     backgroundColor={BackgroundColors.GREEN}
                     fontWeight={FontWeights.BOLD}
+                    textColor={TextColors.WHITE}
+                    animateOnHover={false}
                   >
                     Log in
                   </Button>
