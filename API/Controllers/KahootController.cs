@@ -1,4 +1,5 @@
 using API.Data;
+using API.Data.ForClient.Dashboard.Discover.Sections;
 using API.Data.ForClient.Dashboard.Kahoot;
 using API.Data.Server.KahootCreator;
 using API.DTOs.Discover;
@@ -239,6 +240,37 @@ namespace API.Controllers
                                         .ToListAsync();
 
       return Ok(kahoots);
+    }
+
+    [Authorize]
+    [HttpGet("getSections")]
+    public async Task<ActionResult> getSections()
+    {
+      var sectionsWithSubsectionAndItsRelatedKahoots = await _dbContext.DiscoverSection
+                                                        .Include(s => s.Subsections)
+                                                          .ThenInclude(ss => ss.DiscoverSubsectionKahoots)
+                                                            .ThenInclude(dsk => dsk.Kahoot)
+                                                        .Select(section => new DiscoverSectionClient
+                                                        {
+                                                          Title = section.Title,
+                                                          Subsections = section.Subsections
+                                                            .Where(sub => sub.DiscoverSubsectionKahoots.Any(dsk => dsk.Kahoot != null))
+                                                            .Select(sub => new DiscoverSubsectionClient
+                                                            {
+                                                              Title = sub.Title,
+                                                              Kahoots = sub.DiscoverSubsectionKahoots
+                                                                .Select(dsk => new DiscoverKahootsFromSubsectionClient
+                                                                {
+                                                                  KahootId = dsk.Kahoot.Id,
+                                                                  Title = dsk.Kahoot.Title,
+                                                                  MediaUrl = dsk.Kahoot.MediaUrl
+                                                                }).ToList()
+                                                            }).ToList()
+                                                        })
+                                                        .Where(section => section.Subsections.Any())
+                                                        .ToListAsync();
+
+      return Ok(sectionsWithSubsectionAndItsRelatedKahoots);
     }
   }
 }
