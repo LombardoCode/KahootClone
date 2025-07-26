@@ -122,6 +122,21 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
             valueContent={TimeLimits.THIRTY_S}
             onClick={() => handleQuestionTimeLimitChange({ textContent: "30 seconds", valueContent: TimeLimits.THIRTY_S })}
           ></ComboBoxOption>
+          <ComboBoxOption
+            textContent={"40 seconds"}
+            valueContent={TimeLimits.FOURTY_S}
+            onClick={() => handleQuestionTimeLimitChange({ textContent: "40 seconds", valueContent: TimeLimits.FOURTY_S })}
+          ></ComboBoxOption>
+          <ComboBoxOption
+            textContent={"50 seconds"}
+            valueContent={TimeLimits.FIFTY_S}
+            onClick={() => handleQuestionTimeLimitChange({ textContent: "50 seconds", valueContent: TimeLimits.FIFTY_S })}
+          ></ComboBoxOption>
+          <ComboBoxOption
+            textContent={"60 seconds"}
+            valueContent={TimeLimits.SIXTY_S}
+            onClick={() => handleQuestionTimeLimitChange({ textContent: "60 seconds", valueContent: TimeLimits.SIXTY_S })}
+          ></ComboBoxOption>
         </ComboBox>
       </div>
 
