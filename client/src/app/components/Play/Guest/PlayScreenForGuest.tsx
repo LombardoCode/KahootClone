@@ -123,8 +123,6 @@ const ShowAnswersToGuests = () => {
           </>
         )
       }
-
-      <PlayerInGameStatus />
     </div>
   )
 }
