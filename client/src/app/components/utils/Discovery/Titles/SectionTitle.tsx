@@ -5,6 +5,7 @@ interface SectionTitleProps {
   children: React.ReactNode;
   size?: SectionTitleSizes;
   viewAll?: boolean;
+  className?: string;
 }
 
 export enum SectionTitleSizes {
@@ -13,14 +14,14 @@ export enum SectionTitleSizes {
   SMALL = "text-lg"
 }
 
-const SectionTitle = ({ children, size = SectionTitleSizes.MEDIUM, viewAll = false }: SectionTitleProps) => {
+const SectionTitle = ({ children, size = SectionTitleSizes.MEDIUM, viewAll = false, className = "" }: SectionTitleProps) => {
   return (
     <div className={`${viewAll ? 'flex justify-between items-center' : ''}`}>
       <Text
         fontWeight={FontWeights.BOLD}
         useCase={UseCases.HEADER}
         textColor={TextColors.BLACK}
-        className={`${size}`}
+        className={`${size} ${className}`}
       >
         {children}
       </Text>
