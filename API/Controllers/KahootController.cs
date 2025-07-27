@@ -114,6 +114,7 @@ namespace API.Controllers
         Description = kahoot.Description,
         MediaUrl = kahoot.MediaUrl,
         IsPlayable = kahoot.IsPlayable,
+        IsPublic = kahoot.IsPublic,
         CreatedAt = kahoot.CreatedAt,
         UpdatedAt = kahoot.UpdatedAt,
         Questions = kahoot.Questions.Select(q => new QuestionClient

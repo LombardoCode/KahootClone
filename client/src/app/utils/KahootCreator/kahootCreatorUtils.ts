@@ -8,6 +8,7 @@ export const saveKahootDraft = async (kahoot: Kahoot, resetIsKahootFormDirty: ()
       title: kahoot?.title,
       description: kahoot?.description,
       mediaUrl: kahoot?.mediaUrl,
+      isPublic: kahoot?.isPublic,
       createdAt: kahoot?.createdAt,
       updatedAt: kahoot?.updatedAt,
       questions: kahoot?.questions

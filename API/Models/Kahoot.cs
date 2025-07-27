@@ -12,6 +12,7 @@ namespace API.Models
     public string? MediaUrl { get; set; }
     public string UserId { get; set; }
     public bool IsPlayable { get; set; } = false;
+    public bool IsPublic { get; set; } = true;
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 

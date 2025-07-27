@@ -1,4 +1,5 @@
 import { KahootHeaderInfo } from "@/app/interfaces/Creator/KahootHeaderInfo.interface";
+import { KahootVisibilityOption } from "@/app/interfaces/Creator/KahootVisibilityOption.enum";
 import { Answer, Kahoot, PointsMultiplier, Question, QuizQuestionLayoutTypes, TimeLimits } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { debugLog } from "@/app/utils/debugLog";
 import { create } from "zustand";
@@ -46,6 +47,9 @@ interface KahootCreatorStore {
   removeQuestionMediaUrl: (questionIndex: number) => void;
   updateKahootMediaUrl: (url: string) => void;
   removeKahootMediaUrl: () => void;
+
+  // Kahoot's visibility option
+  updateKahootVisibilityOption: (visibilityOption: KahootVisibilityOption) => void;
 }
 
 const createNewQuestion = (quizQuestionLayoutType: QuizQuestionLayoutTypes): Question => {
@@ -372,6 +376,25 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
       }
 
       state.kahoot.mediaUrl = null;
+
+      return {
+        kahoot: {
+          ...state.kahoot
+        }
+      }
+    })
+  },
+
+  // Kahoot's visibility option
+  updateKahootVisibilityOption: (visibilityOption: KahootVisibilityOption) => {
+    set(state => {
+      if (!state.kahoot) {
+        return state;
+      }
+
+      if (state.kahoot.isPublic !== (visibilityOption === KahootVisibilityOption.PUBLIC)) {
+        state.kahoot.isPublic = visibilityOption === KahootVisibilityOption.PUBLIC;
+      }
 
       return {
         kahoot: {
