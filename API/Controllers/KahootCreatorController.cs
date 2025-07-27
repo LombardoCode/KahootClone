@@ -8,7 +8,6 @@ using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers
 {
@@ -88,6 +87,7 @@ namespace API.Controllers
       kahootFromDB.Title = kahootDraft.Title;
       kahootFromDB.Description = kahootDraft.Description;
       kahootFromDB.UpdatedAt = new DateTime();
+      kahootFromDB.IsPublic = kahootDraft.IsPublic;
       kahootFromDB.MediaUrl = kahootDraft.MediaUrl;
 
       // We get the IDs from the questions that exists on the kahoot object (kahootDraft)

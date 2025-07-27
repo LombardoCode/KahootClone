@@ -4,6 +4,7 @@ export interface Kahoot {
   description: string;
   mediaUrl?: string | null;
   isPlayable: boolean;
+  isPublic: boolean;
   createdAt: Date;
   updatedAt: Date;
   questions: Question[]

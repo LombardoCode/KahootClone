@@ -16,14 +16,14 @@ import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import { saveKahootDraft } from "@/app/utils/KahootCreator/kahootCreatorUtils";
 import TextAreaForm from "../../UIComponents/TextAreaForm";
 import ImageSelectorModal from "../Modal/reusable/ImageSelectorModal";
-import usePexelsSearch from "@/app/hooks/usePexelsSearch";
-
+import RadioButton, { RadioButtonSize } from "../../UIComponents/RadioButton";
+import { KahootVisibilityOption } from "@/app/interfaces/Creator/KahootVisibilityOption.enum";
 
 const CreatorNavbar = () => {
   const router = useRouter();
 
   // Global store
-  const { kahoot, resetIsKahootFormDirty, getKahootPlayabilityStatus, kahootValidationStatus, updateTitleAndDescription, selectQuestion, updateKahootMediaUrl, removeKahootMediaUrl } = useKahootCreatorStore();
+  const { kahoot, resetIsKahootFormDirty, getKahootPlayabilityStatus, kahootValidationStatus, updateTitleAndDescription, selectQuestion, updateKahootMediaUrl, removeKahootMediaUrl, updateKahootVisibilityOption } = useKahootCreatorStore();
 
   // Modals states
   // Modal: Kahoot Header Information
@@ -33,8 +33,6 @@ const CreatorNavbar = () => {
 
   // Modal: ImageSelectorModal
   const [isMediaSelectorModalOpen, setIsMediaSelectorModalOpen] = useState<boolean>(false);
-  const [imageQueryText, setImageQueryText] = useState<string>("");
-  const { results: pexelsResults, loading: pexelsLoading } = usePexelsSearch(imageQueryText, 1000, 30);
 
   // Local component state
   const [kahootHeaderInfo, setKahootHeaderInfo] = useState<KahootHeaderInfo>({
@@ -42,12 +40,20 @@ const CreatorNavbar = () => {
     description: kahoot?.description || ""
   });
 
+  const [selectedVisibilityOption, setSelectedVisibilityOption] = useState<KahootVisibilityOption>(KahootVisibilityOption.PRIVATE);
+
   useEffect(() => {
     if (kahoot) {
       setKahootHeaderInfo({
         title: kahoot.title,
         description: kahoot.description
-      })
+      });
+
+      const kahootVisibilityOption = kahoot.isPublic
+        ? KahootVisibilityOption.PUBLIC
+        : KahootVisibilityOption.PRIVATE
+
+      setSelectedVisibilityOption(kahootVisibilityOption);
     }
   }, [kahoot]);
 
@@ -77,6 +83,11 @@ const CreatorNavbar = () => {
     return question.errors.questionTitle !== ""
       || question.errors.missingAnswerTitles !== ""
       || question.errors.answerCorrectness !== "";
+  }
+
+  const changeVisibilityOptionHandler = (visibilityOption: KahootVisibilityOption) => {
+    setSelectedVisibilityOption(visibilityOption);
+    updateKahootVisibilityOption(visibilityOption);
   }
 
   return (
@@ -138,9 +149,13 @@ const CreatorNavbar = () => {
         isOpen={isKahootHeaderModalOpen}
         title={`Kahoot information`}
         onClose={() => setIsKahootHeaderModalOpen(false)}
+        className="w-[1000px] max-w-[90vw] min-h-[80vh]"
         bodyContent={(
-          <>
-            <div id="modal-to-display-basic-information-about-kahoot">
+          <div
+            id="modal-to-display-basic-information-about-kahoot"
+            className="grid grid-cols-12 gap-10"
+          >
+            <div className="col-span-12 xl:col-span-7">
               <div id="basic-info-title" className="mb-4">
                 <Text
                   fontWeight={FontWeights.BOLD}
@@ -205,6 +220,93 @@ const CreatorNavbar = () => {
                 />
               </div>
 
+              <div id="basic-info-cover-visibility" className="mb-4">
+                <Text
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-sm mb-1"
+                >
+                  Visibility
+                </Text>
+
+                <Text
+                  fontWeight={FontWeights.REGULAR}
+                  textColor={TextColors.BLACK}
+                  useCase={UseCases.LONGTEXT}
+                  className="text-sm mb-1"
+                >
+                  Choose who can see this kahoot.
+                </Text>
+
+                <div id="basic-info-cover-visibility-radio-buttons">
+                  <div
+                    id="basic-info-cover-visibility-radio-buttons-private"
+                    className="flex items-center mt-4 cursor-pointer"
+                    onClick={() => changeVisibilityOptionHandler(KahootVisibilityOption.PRIVATE)}
+                  >
+                    <RadioButton
+                      id="private"
+                      name="kahoot-visibility"
+                      size={RadioButtonSize.MEDIUM}
+                      checked={selectedVisibilityOption === KahootVisibilityOption.PRIVATE}
+                      className="mx-5"
+                    />
+                    <div>
+                      <Text
+                        fontWeight={FontWeights.REGULAR}
+                        textColor={TextColors.BLACK}
+                        useCase={UseCases.LONGTEXT}
+                        className="text-sm mb-1"
+                      >
+                        Private
+                      </Text>
+                      <Text
+                        fontWeight={FontWeights.REGULAR}
+                        textColor={TextColors.GRAY}
+                        useCase={UseCases.LONGTEXT}
+                        className="text-sm mb-1"
+                      >
+                        Only visible to you
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div
+                    id="basic-info-cover-visibility-radio-buttons-public"
+                    className="flex items-center mt-4 cursor-pointer"
+                    onClick={() => changeVisibilityOptionHandler(KahootVisibilityOption.PUBLIC)}
+                  >
+                    <RadioButton
+                      id="public"
+                      name="kahoot-visibility"
+                      size={RadioButtonSize.MEDIUM}
+                      checked={selectedVisibilityOption === KahootVisibilityOption.PUBLIC}
+                      className="mx-5"
+                    />
+                    <div>
+                      <Text
+                        fontWeight={FontWeights.REGULAR}
+                        textColor={TextColors.BLACK}
+                        useCase={UseCases.LONGTEXT}
+                        className="text-sm mb-1"
+                      >
+                        Public
+                      </Text>
+                      <Text
+                        fontWeight={FontWeights.REGULAR}
+                        textColor={TextColors.GRAY}
+                        useCase={UseCases.LONGTEXT}
+                        className="text-sm mb-1"
+                      >
+                        Visible to everyone on the Discover page.
+                      </Text>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-span-12 xl:col-span-5">
               <div id="basic-info-cover-image" className="mb-4">
                 <Text
                   fontWeight={FontWeights.BOLD}
@@ -266,7 +368,7 @@ const CreatorNavbar = () => {
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
         footerContent={(
           <>
@@ -499,10 +601,6 @@ const CreatorNavbar = () => {
       <ImageSelectorModal
         isOpen={isMediaSelectorModalOpen}
         onClose={() => setIsMediaSelectorModalOpen(false)}
-        imageQueryText={imageQueryText}
-        onQueryChange={setImageQueryText}
-        pexelsResults={pexelsResults}
-        pexelsLoading={pexelsLoading}
         onImageSelect={(url: string) => {
           updateKahootMediaUrl(url);
           setIsMediaSelectorModalOpen(false);
