@@ -5,10 +5,9 @@ import Text from "@/app/components/UIComponents/Text";
 import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { useEffect, useState } from "react";
-import { faGamepad } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import usePexelsSearch from "@/app/hooks/usePexelsSearch";
 import useUnsplashSearch from "@/app/hooks/useUnsplashSearch";
+import SidebarTab from "../SidebarTab";
 var debounce = require('lodash.debounce');
 
 interface ImageSelectorModalProps {
@@ -89,7 +88,10 @@ const ImageSelectorModal = ({
     <Modal
       modalType={ModalTypes.INPUT}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={() => {
+        setSelectedExternalImageService(ExternalImageService.Pexels);
+        onClose();
+      }}
       className="w-[1000px] max-w-[90vw] min-h-[80vh]"
       bodyContent={(
         <>
@@ -118,13 +120,15 @@ const ImageSelectorModal = ({
               id="external-image-services-selector"
               className="col-span-3"
             >
-              <LayoutOption
+              <SidebarTab
                 text={'Pexels'}
                 onClick={() => setSelectedExternalImageService(ExternalImageService.Pexels)}
+                selected={selectedExternalImageService === ExternalImageService.Pexels}
               />
-              <LayoutOption
+              <SidebarTab
                 text={'Unsplash'}
                 onClick={() => setSelectedExternalImageService(ExternalImageService.Unsplash)}
+                selected={selectedExternalImageService === ExternalImageService.Unsplash}
               />
             </div>
             <div
@@ -187,26 +191,6 @@ const ImageSelectorModal = ({
         </Button>
       )}
     />
-  )
-}
-
-const LayoutOption = ({ text, onHover, onClick }: any) => {
-  return (
-    <div
-      className="layout-option flex items-center px-3 py-3 hover:bg-slate-400/60 cursor-pointer"
-      onMouseEnter={onHover}
-      onClick={onClick}
-    >
-      <FontAwesomeIcon icon={faGamepad} className={`${TextColors.GRAY} mr-2`} />
-      <Text
-        fontWeight={FontWeights.BOLD}
-        textColor={TextColors.BLACK}
-        useCase={UseCases.LONGTEXT}
-        className="text-base"
-      >
-        {text}
-      </Text>
-    </div>
   )
 }
 

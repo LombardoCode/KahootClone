@@ -9,6 +9,7 @@ import { faGamepad, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Modal, { ModalTypes } from "../Modal/Modal";
 import { useEffect, useState } from "react";
 import { getTextContentForLayout } from "../Quizes/KahootQuestion.utills";
+import SidebarTab from "../Modal/SidebarTab";
 
 interface CreatorSliderOfQuestionsProps {
   className?: string;
@@ -99,12 +100,12 @@ const CreatorSliderOfQuestions = ({ className }: CreatorSliderOfQuestionsProps) 
                 id="show-layout-modes"
                 className="col-span-4"
               >
-                <LayoutOption
+                <SidebarTab
                   text={'Classic'}
                   onHover={() => setHoveredLayout(QuizQuestionLayoutTypes.CLASSIC)}
                   onClick={() => createNewQuestion(QuizQuestionLayoutTypes.CLASSIC)}
                 />
-                <LayoutOption
+                <SidebarTab
                   text={'True or false'}
                   onHover={() => setHoveredLayout(QuizQuestionLayoutTypes.TRUE_OR_FALSE)}
                   onClick={() => createNewQuestion(QuizQuestionLayoutTypes.TRUE_OR_FALSE)}
