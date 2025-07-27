@@ -10,143 +10,156 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// SignalR
-builder.Services.AddSignalR();
-
-// Database
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
-var MySQLConnString = builder.Configuration.GetConnectionString("MySQLConnString");
-builder.Services.AddDbContext<DataContext>(opts =>
+public class Program
 {
-  opts.UseMySql(MySQLConnString, serverVersion)
-    .EnableSensitiveDataLogging()
-    .EnableDetailedErrors();
-});
-
-// Database seeding
-builder.Services.AddTransient<DatabaseDataDeleter>();
-builder.Services.AddTransient<DatabaseSeeder>();
-builder.Services.AddTransient<UserSeeder>();
-builder.Services.AddTransient<PlayedKahootsSeeder>();
-builder.Services.AddTransient<KahootsPlayedByUserSeeder>();
-builder.Services.AddTransient<FeaturedKahootSeeder>();
-builder.Services.AddTransient<DiscoverSectionSeeder>();
-builder.Services.AddTransient<CategorySeeder>();
-builder.Services.AddTransient<KahootJsonSeeder>();
-
-// Adding CORS
-builder.Services.AddCors(opts =>
-{
-  opts.AddPolicy("AllowSpecificOrigin", builder =>
+  public static async Task Main(string[] args)
   {
-    builder.WithOrigins("http://localhost:3000");
-    builder.AllowAnyHeader();
-    builder.AllowAnyMethod();
-    builder.AllowCredentials();
-  });
-});
+    var builder = WebApplication.CreateBuilder(args);
 
-// Adding Microsoft Identity
-builder.Services.AddIdentity<AppUser, IdentityRole>(opts =>
-{
-  opts.Password.RequireDigit = true;
-  opts.Password.RequiredLength = 4;
-  opts.Password.RequireNonAlphanumeric = false;
-  opts.Password.RequireLowercase = false;
-  opts.Password.RequireUppercase = false;
-  opts.User.RequireUniqueEmail = true;
-})
-.AddEntityFrameworkStores<DataContext>()
-.AddDefaultTokenProviders();
+    // Add services to the container.
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 
-// Adding authentication
-builder.Services.AddAuthentication(opts =>
-{
-  opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-  opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(opts =>
-{
-  opts.TokenValidationParameters = new TokenValidationParameters
-  {
-    ValidateIssuer = true,
-    ValidateAudience = true,
-    ValidateLifetime = true,
-    ValidateIssuerSigningKey = true,
-    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-    ValidAudience = builder.Configuration["Jwt:Audience"],
-    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-  };
+    // SignalR
+    builder.Services.AddSignalR();
 
-  // Custom JWT handler for SignalR connections.
-  opts.Events = new JwtBearerEvents
-  {
-    OnMessageReceived = context =>
+    // Database
+    var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
+    var MySQLConnString = builder.Configuration.GetConnectionString("MySQLConnString");
+    builder.Services.AddDbContext<DataContext>(opts =>
     {
-      var accessToken = context.Request.Query["access_token"];
+      opts.UseMySql(MySQLConnString, serverVersion)
+        .EnableSensitiveDataLogging()
+        .EnableDetailedErrors();
+    });
 
-      var path = context.HttpContext.Request.Path;
+    // Database seeding
+    builder.Services.AddTransient<DatabaseDataDeleter>();
+    builder.Services.AddTransient<DatabaseSeeder>();
+    builder.Services.AddTransient<UserSeeder>();
+    builder.Services.AddTransient<PlayedKahootsSeeder>();
+    builder.Services.AddTransient<KahootsPlayedByUserSeeder>();
+    builder.Services.AddTransient<FeaturedKahootSeeder>();
+    builder.Services.AddTransient<DiscoverSectionSeeder>();
+    builder.Services.AddTransient<CategorySeeder>();
+    builder.Services.AddTransient<KahootJsonSeeder>();
 
-      if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs/lobbyhub"))
+    // Adding CORS
+    builder.Services.AddCors(opts =>
+    {
+      opts.AddPolicy("AllowSpecificOrigin", builder =>
       {
-        context.Token = accessToken;
-      }
+        builder.WithOrigins("http://localhost:3000");
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+        builder.AllowCredentials();
+      });
+    });
 
-      return Task.CompletedTask;
+    // Adding Microsoft Identity
+    builder.Services.AddIdentity<AppUser, IdentityRole>(opts =>
+    {
+      opts.Password.RequireDigit = true;
+      opts.Password.RequiredLength = 4;
+      opts.Password.RequireNonAlphanumeric = false;
+      opts.Password.RequireLowercase = false;
+      opts.Password.RequireUppercase = false;
+      opts.User.RequireUniqueEmail = true;
+    })
+    .AddEntityFrameworkStores<DataContext>()
+    .AddDefaultTokenProviders();
+
+    // Adding authentication
+    builder.Services.AddAuthentication(opts =>
+    {
+      opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+      opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(opts =>
+    {
+      opts.TokenValidationParameters = new TokenValidationParameters
+      {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+      };
+
+      // Custom JWT handler for SignalR connections.
+      opts.Events = new JwtBearerEvents
+      {
+        OnMessageReceived = context =>
+        {
+          var accessToken = context.Request.Query["access_token"];
+
+          var path = context.HttpContext.Request.Path;
+
+          if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs/lobbyhub"))
+          {
+            context.Token = accessToken;
+          }
+
+          return Task.CompletedTask;
+        }
+      };
+    });
+
+    // Adding authorization
+    builder.Services.AddAuthorization();
+
+    // Adding the controllers
+    builder.Services.AddControllers();
+
+    // Additional services
+    builder.Services.AddScoped<AuthService>();
+    builder.Services.AddScoped<UserService>();
+    builder.Services.AddScoped<KahootValidationService>();
+    builder.Services.AddScoped<LobbyService>();
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+      app.UseSwagger();
+      app.UseSwaggerUI();
     }
-  };
-});
 
-// Adding authorization
-builder.Services.AddAuthorization();
+    // Using the CORS policy to allow our dev environment (Next.js (with port 3000)) to make server calls
+    app.UseCors("AllowSpecificOrigin");
 
-// Adding the controllers
-builder.Services.AddControllers();
+    app.UseHttpsRedirection();
 
-// Additional services
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<KahootValidationService>();
-builder.Services.AddScoped<LobbyService>();
+    // Using authentication and authorization
+    app.UseAuthentication();
+    app.UseAuthorization();
 
-var app = builder.Build();
+    // SignalR Hubs
+    app.MapHub<LobbyHub>("/hubs/lobbyhub");
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-  app.UseSwagger();
-  app.UseSwaggerUI();
+    // Using the controllers
+    app.MapControllers();
+
+    // Database seeding
+    using (var scope = app.Services.CreateScope())
+    {
+      var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+      
+      bool shouldDeleteData = args.Contains("--delete-data");
+
+      if (shouldDeleteData)
+      {
+        var databaseDataDeleter = scope.ServiceProvider.GetRequiredService<DatabaseDataDeleter>();
+        await databaseDataDeleter.Delete();
+      }
+      
+      await seeder.Seed();
+    }
+
+    app.Run();
+  }
 }
-
-// Using the CORS policy to allow our dev environment (Next.js (with port 3000)) to make server calls
-app.UseCors("AllowSpecificOrigin");
-
-app.UseHttpsRedirection();
-
-// Using authentication and authorization
-app.UseAuthentication();
-app.UseAuthorization();
-
-// SignalR Hubs
-app.MapHub<LobbyHub>("/hubs/lobbyhub");
-
-// Using the controllers
-app.MapControllers();
-
-// Database seeding
-using (var scope = app.Services.CreateScope())
-{
-  var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
-  var databaseDataDeleter = scope.ServiceProvider.GetRequiredService<DatabaseDataDeleter>();
-  await databaseDataDeleter.Delete();
-  await seeder.Seed();
-}
-
-app.Run();
