@@ -197,7 +197,7 @@ interface SliderItemsProps {
 }
 
 const SliderItem = ({ question, index }: SliderItemsProps) => {
-  const { setKahootsQuestionIndex, questionIndex, deleteQuestion } = useKahootCreatorStore();
+  const { setKahootsQuestionIndex, questionIndex, deleteQuestion, getQuestionCount } = useKahootCreatorStore();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
@@ -207,8 +207,12 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
           icon={faTrashCan}
           size="xs"
           color="#6E6E6E"
-          className="px-1 py-1 hover:bg-slate-300 rounded-sm hover:cursor-pointer"
-          onClick={() => setIsModalOpen(true)}
+          className={`px-1 py-1 hover:bg-slate-300 rounded-sm ${getQuestionCount() > 1 ? 'hover:cursor-pointer' : 'hover:cursor-not-allowed'}`}
+          onClick={() => {
+            if (getQuestionCount() > 1) {
+              setIsModalOpen(true)
+            }
+          }}
         />
       </div>
       <div id="slider-item-title-and-box" className="flex-1">
