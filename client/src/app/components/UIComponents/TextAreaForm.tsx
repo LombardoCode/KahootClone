@@ -14,6 +14,7 @@ export interface TextAreaFormProps {
   disabled?: boolean;
   cols?: number;
   rows?: number;
+  resizable?: boolean;
 }
 
 const TextAreaForm = ({
@@ -27,13 +28,14 @@ const TextAreaForm = ({
   onChange,
   disabled = false,
   cols = 1,
-  rows = 1
+  rows = 1,
+  resizable = false
 }: TextAreaFormProps) => {
   return (
     <textarea
       name={name}
       id={id}
-      className={`${montserrat.className} ${className} ${textColor} ${fontWeight} px-2 py-1 border border-gray-300 focus:border-blue-500 outline-none transition-all duration-300 rounded-md placeholder-gray-500`}
+      className={`${montserrat.className} ${className} ${textColor} ${fontWeight} px-2 py-1 border border-gray-300 focus:border-blue-500 outline-none transition-all duration-300 rounded-md placeholder-gray-500 ${!resizable && 'resize-none'}`}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
