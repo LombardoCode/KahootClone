@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using API.Data;
-using Microsoft.AspNetCore.Mvc;
+using API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Services
@@ -28,6 +28,13 @@ namespace API.Services
       }
 
       return Id;
+    }
+
+    public async Task<AppUser> GetCurrentUserAsync()
+    {
+      string username = await GetUserName();
+      AppUser user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == username);
+      return user;
     }
 
     public async Task<string> GetUserName()
