@@ -11,16 +11,22 @@ import SectionTitle, { SectionTitleSizes } from "@/app/components/utils/Discover
 import DiscoverFeaturedWrapper from "@/app/components/utils/Discovery/Cards/Featured/DiscoverFeaturedWrapper";
 import DiscoverFeaturedCard, { DiscoverFeaturedCardSize } from "@/app/components/utils/Discovery/Cards/Featured/DiscoverFeaturedCard";
 import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Discover/DiscoverFeaturedCardInfo";
+import { DiscoverSubsectionClient } from "@/app/interfaces/Kahoot/Discover/Sections/DiscoverSubsectionClient";
+import DiscoverKahootWrapper from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootWrapper";
+import DiscoverKahootCard, { DiscoverKahootCardSize } from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootCard";
+import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Discover/RecentlyPlayedKahoots.interface";
 
 const CategoryPage = () => {
   const params = useParams();
   let { slug } = params;
   const [category, setCategory] = useState<Category>();
   const [featuredKahoots, setFeaturedKahoots] = useState<DiscoverFeaturedCardInfo[]>([]);
+  const [subsections, setSubsections] = useState<DiscoverSubsectionClient[]>([]);
 
   useEffect(() => {
     getCategoryInfo();
     getFeaturedKahootsFromCategory();
+    getSubsectionsFromCategorySlug();
   }, []);
 
   const getCategoryInfo = async () => {
@@ -45,6 +51,20 @@ const CategoryPage = () => {
     })
       .then(res => {
         setFeaturedKahoots(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
+  const getSubsectionsFromCategorySlug = async () => {
+    await axiosInstance.get(`/category/getSubsectionsFromCategorySlug`, {
+      params: {
+        categorySlug: slug
+      }
+    })
+      .then(res => {
+        setSubsections(res.data);
       })
       .catch(err => {
         console.error(err);
@@ -103,6 +123,28 @@ const CategoryPage = () => {
             />
           ))}
         </DiscoverFeaturedWrapper>
+
+        {subsections.map((subsection: DiscoverSubsectionClient, index1: number) => (
+          <>
+            <SectionTitle
+              key={index1}
+              size={SectionTitleSizes.SMALL}
+              viewAll={true}
+            >
+              {subsection.title}
+            </SectionTitle>
+
+            <DiscoverKahootWrapper>
+              {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index2: number) => (
+                <DiscoverKahootCard
+                  key={index2}
+                  cardSize={DiscoverKahootCardSize.SMALL}
+                  kahoot={kahoot}
+                />
+              ))}
+            </DiscoverKahootWrapper>
+          </>
+        ))}
       </div>
     </DashboardLayout>
   )

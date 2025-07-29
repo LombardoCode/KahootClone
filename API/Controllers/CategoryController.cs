@@ -1,5 +1,6 @@
 using API.Data;
 using API.Data.ForClient.Categories;
+using API.Data.ForClient.Dashboard.Discover.Sections;
 using API.DTOs.Discover;
 using API.Models.Classification;
 using Microsoft.AspNetCore.Authorization;
@@ -57,6 +58,22 @@ namespace API.Controllers
       return Ok(kahoots);
     }
 
+    [Authorize]
+    [HttpGet("getSubsectionsFromCategorySlug")]
+    public async Task<ActionResult> GetSubsectionsFromCategorySlug(string categorySlug)
+    {
+      Category category = await getCategoryBySlugName(categorySlug);
+
+      if (category == null)
+      {
+        return NotFound();
+      }
+
+      List<DiscoverSubsectionClient> kahoots = await getSubsectionsWithKahootsFromSpecificCategoryId(category.Id);
+
+      return Ok(kahoots);
+    }
+
     #region Private Methods
 
     private async Task<Category> getCategoryBySlugName(string categorySlug)
@@ -72,13 +89,46 @@ namespace API.Controllers
                     on kahoot.Id equals kahootCategory.KahootId
                   join featured in _dbContext.FeaturedKahoots
                     on kahoot.Id equals featured.KahootId
-                  where kahootCategory.CategoryId == categoryId && kahoot.Id == featured.KahootId
+                  where kahootCategory.CategoryId == categoryId
+                    && kahoot.Id == featured.KahootId
                   select new DiscoverFeaturedCardInfoDTO
                   {
                     KahootId = kahoot.Id,
                     Title = kahoot.Title,
                     MediaUrl = kahoot.MediaUrl,
                     NumberOfQuestions = kahoot.Questions.Count()
+                  };
+
+      return await query.ToListAsync();
+    }
+
+    private async Task<List<DiscoverSubsectionClient>> getSubsectionsWithKahootsFromSpecificCategoryId(int categoryId)
+    {
+      var query = from kahoot in _dbContext.Kahoots
+                  join kahootCategory in _dbContext.KahootCategories
+                    on kahoot.Id equals kahootCategory.KahootId
+                  join discoverSubsectionKahoots in _dbContext.DiscoverSubsectionKahoots
+                    on kahoot.Id equals discoverSubsectionKahoots.KahootId
+                  join discoverSubsection in _dbContext.DiscoverSubsection
+                    on discoverSubsectionKahoots.DiscoverSubsectionId equals discoverSubsection.Id
+                  where kahootCategory.CategoryId == categoryId
+                    && kahootCategory.KahootId == kahoot.Id
+                    && kahootCategory.KahootId == discoverSubsectionKahoots.KahootId
+                    && discoverSubsectionKahoots.DiscoverSubsectionId == discoverSubsection.Id
+                  group new { kahoot, discoverSubsection } by new
+                  {
+                    discoverSubsection.Id,
+                    discoverSubsection.Title
+                  } into g
+                  select new DiscoverSubsectionClient
+                  {
+                    Title = g.Key.Title,
+                    Kahoots = g.Select(x => new DiscoverKahootsFromSubsectionClient
+                    {
+                      KahootId = x.kahoot.Id,
+                      Title = x.kahoot.Title,
+                      MediaUrl = x.kahoot.MediaUrl
+                    }).ToList()
                   };
 
       return await query.ToListAsync();
