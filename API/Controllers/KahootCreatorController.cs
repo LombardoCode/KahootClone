@@ -68,9 +68,12 @@ namespace API.Controllers
     /// This method will save the entire kahoot
     /// </summary>
     /// <returns></returns>
+    [Authorize]
     [HttpPut("drafts")]
     public async Task<ActionResult> Drafts(KahootCreatorFormDraftDTO kahootDraft)
     {
+      var user = await _userService.GetCurrentUserAsync();
+
       // Retrieving the kahoot from database
       Kahoot kahootFromDB = await _dbContext.Kahoots
                             .Where(k => k.Id == kahootDraft.Id)
@@ -81,6 +84,11 @@ namespace API.Controllers
       if (kahootFromDB == null)
       {
         return NotFound();
+      }
+
+      if (kahootFromDB.UserId != user.Id)
+      {
+        return Forbid();
       }
 
       // Updating the kahoot header information
