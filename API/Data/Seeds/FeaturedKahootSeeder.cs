@@ -20,6 +20,7 @@ namespace API.Data.Seeds
       if (_dbContext.FeaturedKahoots.Any())
       {
         Console.WriteLine($"[Info]: FeaturedKahoot already seeded, skipping.");
+        return;
       }
 
       List<Guid> kahootIds = await _dbContext.Kahoots
