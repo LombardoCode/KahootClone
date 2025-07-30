@@ -1,0 +1,161 @@
+import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
+import Modal, { ModalTypes } from "../Modal";
+import { BackgroundColors } from "@/app/interfaces/Colors.interface";
+import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
+import Text from "@/app/components/UIComponents/Text";
+import { useEffect, useState } from "react";
+import axiosInstance from "@/app/utils/axiosConfig";
+import { KahootMetadata } from "@/app/interfaces/Kahoot/KahootMetadata.interface";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay, faUser } from "@fortawesome/free-solid-svg-icons";
+import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
+import { useRouter } from "next/navigation";
+
+interface KahootSelectorModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  selectedKahootId: string | null;
+}
+
+const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelectorModalProps) => {
+  const [kahootMetadata, setKahootMetadata] = useState<KahootMetadata | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (selectedKahootId !== null) {
+      getKahootMetadata();
+    }
+  }, [selectedKahootId]);
+
+  const getKahootMetadata = () => {
+    axiosInstance.get('/kahoot/getKahootMetadata', {
+      params: {
+        kahootId: selectedKahootId
+      }
+    })
+      .then(res => {
+        setKahootMetadata(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
+  return (
+    <Modal
+      modalType={ModalTypes.INPUT}
+      isOpen={isOpen}
+      onClose={() => {
+        setKahootMetadata(null)
+        onClose();
+      }}
+      className="w-[800px] max-w-[90vw] min-h-[34vh]"
+      bodyContent={(
+        <div>
+          <div
+            id="image-and-kahoot-metadata-header-wrapper"
+            className="grid grid-cols-12 gap-8"
+          >
+            <div id="image-wrapper" className="col-span-4">
+              <img
+                src={kahootMetadata?.mediaUrl}
+                className="rounded-xl w-full h-40 object-cover"
+              />
+            </div>
+            <div id="kahoot-metadata-wrapper" className="col-span-8 flex items-center">
+              <div id="kahoot-metadata-content" className="w-full">
+                <div id="title-and-description">
+                  <Text
+                    fontWeight={FontWeights.BOLD}
+                    textColor={TextColors.GRAY}
+                    useCase={UseCases.LONGTEXT}
+                    className="text-2xl mb-4"
+                  >
+                    {kahootMetadata?.title}
+                  </Text>
+
+                  <Text
+                    fontWeight={FontWeights.REGULAR}
+                    textColor={TextColors.GRAY}
+                    useCase={UseCases.LONGTEXT}
+                    className="text-sm mb-4"
+                  >
+                    {kahootMetadata?.description}
+                  </Text>
+                </div>
+
+                <div id="kahoot-metadata-plays-and-participants-wrapper" className="flex mb-4">
+                  <div id="kahoot-metadata-plays" className="flex items-center mr-4">
+                    <FontAwesomeIcon
+                      icon={faPlay}
+                      className={`text-xs mr-1 ${TextColors.LIGHT_GRAY}`}
+                    />
+
+                    <Text
+                      fontWeight={FontWeights.BOLD}
+                      textColor={TextColors.LIGHT_GRAY}
+                      useCase={UseCases.LONGTEXT}
+                      className="text-sm"
+                    >
+                      {kahootMetadata?.timesPlayed} {kahootMetadata?.timesPlayed === 1 ? 'play' : 'plays'}
+                    </Text>
+                  </div>
+
+                  <div id="kahoot-metadata-participants" className="flex items-center">
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className={`text-xs mr-1 ${TextColors.LIGHT_GRAY}`}
+                    />
+
+                    <Text
+                      fontWeight={FontWeights.BOLD}
+                      textColor={TextColors.LIGHT_GRAY}
+                      useCase={UseCases.LONGTEXT}
+                      className="text-sm"
+                    >
+                      {kahootMetadata?.participants} {kahootMetadata?.participants === 1 ? 'participant' : 'participants'}
+                    </Text>
+                  </div>
+                </div>
+
+                <div id="kahoot-metadata-host-button">
+                  <Button
+                    backgroundColor={BackgroundColors.BLUE}
+                    fontWeight={FontWeights.BOLD}
+                    textColor={TextColors.WHITE}
+                    className={`text-md w-full ${kahootMetadata?.isPlayable ? 'opacity-100' : 'opacity-45'}`}
+                    size={ButtonSize.MEDIUM}
+                    perspective={false}
+                    animateOnHover={false}
+                    onClick={() => {
+                      if (kahootMetadata?.isPlayable) {
+                        createLobby(kahootMetadata.kahootId, router)
+                      }
+                    }}
+                  >
+                    Host
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      footerContent={(
+        <Button
+          backgroundColor={BackgroundColors.GRAY}
+          fontWeight={FontWeights.BOLD}
+          size={ButtonSize.MEDIUM}
+          textColor={TextColors.WHITE}
+          className="mr-2"
+          animateOnHover={false}
+          onClick={onClose}
+        >
+          Cancel
+        </Button>
+      )}
+    />
+  )
+}
+
+export default KahootSelectorModal;

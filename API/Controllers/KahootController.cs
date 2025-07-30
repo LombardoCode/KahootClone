@@ -273,5 +273,26 @@ namespace API.Controllers
 
       return Ok(sectionsWithSubsectionAndItsRelatedKahoots);
     }
+
+    [Authorize]
+    [HttpGet("getKahootMetadata")]
+    public async Task<ActionResult> getKahootMetadata(Guid kahootId)
+    {
+      var kahootMetadata = await _dbContext.Kahoots
+                                    .Where(k => k.Id == kahootId)
+                                    .Select(k => new KahootMetadataClient
+                                    {
+                                      KahootId = k.Id,
+                                      Title = k.Title,
+                                      Description = k.Description,
+                                      MediaUrl = k.MediaUrl,
+                                      TimesPlayed = _dbContext.PlayedKahoots.Count(pk => pk.KahootId == kahootId),
+                                      Participants = _dbContext.KahootsPlayedByUser.Count(kpbu => kpbu.KahootId == kahootId),
+                                      IsPlayable = k.IsPlayable
+                                    })
+                                    .FirstOrDefaultAsync();
+
+      return Ok(kahootMetadata);
+    }
   }
 }

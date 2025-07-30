@@ -217,7 +217,7 @@ const PexelsImagePreviewer = ({ images, loading, onImageSelect, onClose }: Pexel
         images.map((photo: any) => (
           <div
             key={photo.id}
-            className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-105 hover:shadow-lg hover:shadow-black/30"
+            className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/30"
             onClick={() => {
               onImageSelect(photo.src.large);
               onClose();
@@ -258,7 +258,7 @@ const UnsplashImagePreviewer = ({ images, loading, onImageSelect, onClose }: Uns
         images.map((photo: any) => (
           <div
             key={photo.id}
-            className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-105 hover:shadow-lg hover:shadow-black/30"
+            className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/30"
             onClick={() => {
               onImageSelect(photo.urls.full);
               onClose();

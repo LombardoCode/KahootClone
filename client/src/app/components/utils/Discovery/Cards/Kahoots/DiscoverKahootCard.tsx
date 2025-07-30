@@ -1,6 +1,6 @@
 import Text from "@/app/components/UIComponents/Text";
 import useAverageImageColor from "@/app/hooks/useAverageImageColor";
-import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Discover/RecentlyPlayedKahoots.interface";
+import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import Logo, { LogoColors, LogoSize } from "../../../Logo";
 
@@ -12,15 +12,17 @@ export enum DiscoverKahootCardSize {
 interface DiscoverKahootCardProps {
   cardSize: DiscoverKahootCardSize;
   kahoot: DiscoverKahootCardInfo;
+  onClick: (kahootId: string) => void;
 }
 
-const DiscoverKahootCard = ({ cardSize, kahoot }: DiscoverKahootCardProps) => {
+const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardProps) => {
   const { imgRef, facColor, bgColor } = useAverageImageColor();
 
   return (
     <div
-      className={`flex flex-col justify-start items-end rounded-md h-[12rem] overflow-hidden ring-1 ring-zinc-300 shadow ${cardSize}`}
+      className={`flex flex-col justify-start items-end rounded-md h-[12rem] overflow-hidden ring-1 ring-zinc-300 shadow cursor-pointer transition hover:scale-[1.03] ${cardSize}`}
       style={{ backgroundColor: kahoot.mediaUrl ? bgColor : "rgb(255, 255, 255)" }}
+      onClick={() => onClick(kahoot.kahootId)}
     >
       {kahoot.mediaUrl ? (
         <img

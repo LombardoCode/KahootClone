@@ -7,11 +7,12 @@ import DiscoverFeaturedWrapper from "@/app/components/utils/Discovery/Cards/Feat
 import DiscoverKahootCard, { DiscoverKahootCardSize } from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootCard";
 import DiscoverKahootWrapper from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootWrapper";
 import SectionTitle, { SectionTitleSizes } from "@/app/components/utils/Discovery/Titles/SectionTitle";
-import { DiscoverCategoryCardInfo } from "@/app/interfaces/Kahoot/Discover/DiscoverCategoryCardInfo";
-import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Discover/DiscoverFeaturedCardInfo";
-import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Discover/RecentlyPlayedKahoots.interface";
-import { DiscoverSectionClient } from "@/app/interfaces/Kahoot/Discover/Sections/DiscoverSectionClient";
-import { DiscoverSubsectionClient } from "@/app/interfaces/Kahoot/Discover/Sections/DiscoverSubsectionClient";
+import KahootSelectorModal from "@/app/components/utils/Modal/reusable/KahootSelectorModal";
+import { DiscoverCategoryCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverCategoryCardInfo";
+import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverFeaturedCardInfo";
+import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
+import { DiscoverSectionClient } from "@/app/interfaces/Kahoot/Dashboard/Discover/Sections/DiscoverSectionClient";
+import { DiscoverSubsectionClient } from "@/app/interfaces/Kahoot/Dashboard/Discover/Sections/DiscoverSubsectionClient";
 import axiosInstance from "@/app/utils/axiosConfig";
 import { useEffect, useState } from "react";
 
@@ -21,6 +22,14 @@ const DiscoveryMenuPage = () => {
   const [categories, setCategories] = useState<DiscoverCategoryCardInfo[]>([]);
   const [featuredKahoots, setFeaturedKahoots] = useState<DiscoverFeaturedCardInfo[]>([]);
   const [sections, setSections] = useState<DiscoverSectionClient[]>([]);
+
+  // Kahoot modal selector
+  const [isKahootSelectorModalOpen, setIsKahootSelectorModalOpen] = useState<boolean>(false);
+  const [selectedKahootId, setSelectedKahootId] = useState<string | null>(null);
+  const handleKahootCardClick = (kahootId: string) => {
+    setSelectedKahootId(kahootId);
+    setIsKahootSelectorModalOpen(true);
+  }
 
   useEffect(() => {
     getRecentlyPlayedKahoots();
@@ -70,85 +79,99 @@ const DiscoveryMenuPage = () => {
   }
 
   return (
-    <div className="pr-10">
-      {recentlyPlayedKahoots.length > 0 && (
-        <>
-          <SectionTitle size={SectionTitleSizes.SMALL}>Recently played</SectionTitle>
-          <DiscoverKahootWrapper>
-            {recentlyPlayedKahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
-              <DiscoverKahootCard
-                key={i}
-                cardSize={DiscoverKahootCardSize.SMALL}
-                kahoot={kahoot}
-              />
-            ))}
-          </DiscoverKahootWrapper>
-        </>
-      )}
+    <>
+      <div className="pr-10">
+        {recentlyPlayedKahoots.length > 0 && (
+          <>
+            <SectionTitle size={SectionTitleSizes.SMALL}>Recently played</SectionTitle>
+            <DiscoverKahootWrapper>
+              {recentlyPlayedKahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
+                <DiscoverKahootCard
+                  key={i}
+                  cardSize={DiscoverKahootCardSize.SMALL}
+                  kahoot={kahoot}
+                  onClick={handleKahootCardClick}
+                />
+              ))}
+            </DiscoverKahootWrapper>
+          </>
+        )}
 
-      {/* Categories */}
-      <SectionTitle size={SectionTitleSizes.SMALL}>Explore by subject</SectionTitle>
-      <DiscoverCategoryWrapper>
-        {categories.map((category: DiscoverCategoryCardInfo, i: number) => (
-          <DiscoverCategoryCard
-            key={i}
-            cardSize={DiscoverCategoryCardSize.SMALL}
-            category={category}
-          />
-        ))}
-      </DiscoverCategoryWrapper>
-
-
-      {/* Featured kahoots */}
-      <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
-      <DiscoverFeaturedWrapper>
-        {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
-          <DiscoverFeaturedCard
-            key={i}
-            cardSize={DiscoverFeaturedCardSize.MEDIUM}
-            featuredKahoot={featuredKahoot}
-          />
-        ))}
-      </DiscoverFeaturedWrapper>
-
-      {/* Sections, subsections and it's related kahoots */}
-      {sections.map((section: DiscoverSectionClient, index: number) => (
-        <div
-          id={`section-subsections-and-its-related-kahoots-${index}`}
-          className="mt-14"
-        >
-          <SectionTitle
-            key={index}
-            size={SectionTitleSizes.LARGE}
-            className="mb-2"
-          >
-            {section.title}
-          </SectionTitle>
-          
-          {section.subsections.map((subsection: DiscoverSubsectionClient, index2: number) => (
-            <>
-              <SectionTitle
-                key={index2}
-                size={SectionTitleSizes.SMALL}
-                viewAll={true}
-              >
-                {subsection.title}
-              </SectionTitle>
-              
-              <DiscoverKahootWrapper>
-                {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index3: number) => (
-                  <DiscoverKahootCard
-                    key={index3}
-                    cardSize={DiscoverKahootCardSize.SMALL}
-                    kahoot={kahoot}
-                  />
-                ))}
-              </DiscoverKahootWrapper>
-            </>
+        {/* Categories */}
+        <SectionTitle size={SectionTitleSizes.SMALL}>Explore by subject</SectionTitle>
+        <DiscoverCategoryWrapper>
+          {categories.map((category: DiscoverCategoryCardInfo, i: number) => (
+            <DiscoverCategoryCard
+              key={i}
+              cardSize={DiscoverCategoryCardSize.SMALL}
+              category={category}
+            />
           ))}
-        </div>
-      ))}
-    </div>
+        </DiscoverCategoryWrapper>
+
+
+        {/* Featured kahoots */}
+        <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
+        <DiscoverFeaturedWrapper>
+          {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
+            <DiscoverFeaturedCard
+              key={i}
+              cardSize={DiscoverFeaturedCardSize.MEDIUM}
+              featuredKahoot={featuredKahoot}
+              onClick={handleKahootCardClick}
+            />
+          ))}
+        </DiscoverFeaturedWrapper>
+
+        {/* Sections, subsections and it's related kahoots */}
+        {sections.map((section: DiscoverSectionClient, index: number) => (
+          <div
+            id={`section-subsections-and-its-related-kahoots-${index}`}
+            className="mt-14"
+          >
+            <SectionTitle
+              key={index}
+              size={SectionTitleSizes.LARGE}
+              className="mb-2"
+            >
+              {section.title}
+            </SectionTitle>
+            
+            {section.subsections.map((subsection: DiscoverSubsectionClient, index2: number) => (
+              <>
+                <SectionTitle
+                  key={index2}
+                  size={SectionTitleSizes.SMALL}
+                  viewAll={true}
+                >
+                  {subsection.title}
+                </SectionTitle>
+                
+                <DiscoverKahootWrapper>
+                  {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index3: number) => (
+                    <DiscoverKahootCard
+                      key={index3}
+                      cardSize={DiscoverKahootCardSize.SMALL}
+                      kahoot={kahoot}
+                      onClick={handleKahootCardClick}
+                    />
+                  ))}
+                </DiscoverKahootWrapper>
+              </>
+            ))}
+          </div>
+        ))}
+      </div>
+      
+      <KahootSelectorModal
+        isOpen={isKahootSelectorModalOpen}
+        onClose={() => {
+          setIsKahootSelectorModalOpen(false);
+          setSelectedKahootId(null);
+        }}
+        selectedKahootId={selectedKahootId}
+      />
+    </>
   )
 }
 
