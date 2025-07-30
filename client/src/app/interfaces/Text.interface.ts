@@ -13,7 +13,11 @@ export enum TextColors {
   WHITE = "text-white",
   RED = "text-red-700",
   GRAY = "text-slate-700",
-  LIGHT_GRAY = "text-slate-500"
+  LIGHT_GRAY = "text-slate-500",
+  PURPLE_VARIANT_1 = "text-kahoot-purple-variant-1",
+  PURPLE_VARIANT_2 = "text-kahoot-purple-variant-2",
+  PURPLE_VARIANT_3 = "text-kahoot-purple-variant-3",
+  PURPLE_VARIANT_4 = "text-kahoot-purple-variant-4"
 }
 
 export enum UseCases {

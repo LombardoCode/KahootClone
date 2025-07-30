@@ -103,7 +103,7 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
           <DropDownContainer>
             <DropDownItem
               icon={<FontAwesomeIcon icon={faGear} />}
-              onClick={() => router.push(ROUTES.ADMINISTRATION.SETTINGS)}
+              onClick={() => router.push(ROUTES.ADMINISTRATION.SETTINGS.PROFILE)}
             >
               Settings
             </DropDownItem>
