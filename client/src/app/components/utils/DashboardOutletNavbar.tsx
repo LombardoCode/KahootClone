@@ -14,6 +14,7 @@ import useModalStore from "@/app/stores/useModalStore";
 import Modal, { ModalTypes } from "./Modal/Modal";
 import InputForm, { InputFormTypes } from "../UIComponents/InputForm";
 import axiosInstance from "@/app/utils/axiosConfig";
+import { ROUTES } from "@/app/utils/Routes/routesUtils";
 
 interface DashboardOutletNavbarProps {
   fixed?: boolean;
@@ -102,6 +103,7 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
           <DropDownContainer>
             <DropDownItem
               icon={<FontAwesomeIcon icon={faGear} />}
+              onClick={() => router.push(ROUTES.ADMINISTRATION.SETTINGS)}
             >
               Settings
             </DropDownItem>

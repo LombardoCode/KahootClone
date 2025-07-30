@@ -3,5 +3,8 @@ export const ROUTES = {
     DISCOVERY: "/menu/discovery",
     LIBRARY: "/menu/library"
   },
-  CATEGORIES: "/categories"
+  CATEGORIES: "/categories",
+  ADMINISTRATION: {
+    SETTINGS: "/settings"
+  }
 }
