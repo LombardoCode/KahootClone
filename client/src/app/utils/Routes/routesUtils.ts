@@ -5,6 +5,9 @@ export const ROUTES = {
   },
   CATEGORIES: "/categories",
   ADMINISTRATION: {
-    SETTINGS: "/settings"
+    SETTINGS: {
+      PROFILE: "/user/profile",
+      CHANGE_PASSWORD: "/user/change-password"
+    }
   }
 }
