@@ -1,6 +1,6 @@
 import Text from "@/app/components/UIComponents/Text";
 import useAverageImageColor from "@/app/hooks/useAverageImageColor";
-import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Discover/DiscoverFeaturedCardInfo";
+import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverFeaturedCardInfo";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 
 export enum DiscoverFeaturedCardSize {
@@ -10,15 +10,17 @@ export enum DiscoverFeaturedCardSize {
 interface DiscoverFeaturedCardProps {
   cardSize: DiscoverFeaturedCardSize;
   featuredKahoot: DiscoverFeaturedCardInfo;
+  onClick: (kahootId: string) => void;
 }
 
-const DiscoverFeaturedCard = ({ cardSize, featuredKahoot }: DiscoverFeaturedCardProps) => {
+const DiscoverFeaturedCard = ({ cardSize, featuredKahoot, onClick }: DiscoverFeaturedCardProps) => {
   const { imgRef, facColor, bgColor } = useAverageImageColor();
 
   return (
     <div
-      className={`flex items-center rounded-md h-24 overflow-hidden ${cardSize} ring-1 ring-zinc-300 shadow`}
+      className={`flex items-center rounded-md h-24 overflow-hidden ring-1 ring-zinc-300 shadow cursor-pointer transition hover:scale-[1.03] ${cardSize}`}
       style={{ backgroundColor: bgColor }}
+      onClick={() => onClick(featuredKahoot.kahootId)}
     >
       <div className="relative max-w-36 h-full">
         <div className="absolute bg-black/70 bottom-1 right-1 px-2 rounded-full">

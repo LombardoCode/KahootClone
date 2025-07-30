@@ -10,11 +10,12 @@ import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interfa
 import SectionTitle, { SectionTitleSizes } from "@/app/components/utils/Discovery/Titles/SectionTitle";
 import DiscoverFeaturedWrapper from "@/app/components/utils/Discovery/Cards/Featured/DiscoverFeaturedWrapper";
 import DiscoverFeaturedCard, { DiscoverFeaturedCardSize } from "@/app/components/utils/Discovery/Cards/Featured/DiscoverFeaturedCard";
-import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Discover/DiscoverFeaturedCardInfo";
-import { DiscoverSubsectionClient } from "@/app/interfaces/Kahoot/Discover/Sections/DiscoverSubsectionClient";
+import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverFeaturedCardInfo";
+import { DiscoverSubsectionClient } from "@/app/interfaces/Kahoot/Dashboard/Discover/Sections/DiscoverSubsectionClient";
 import DiscoverKahootWrapper from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootWrapper";
 import DiscoverKahootCard, { DiscoverKahootCardSize } from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootCard";
-import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Discover/RecentlyPlayedKahoots.interface";
+import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
+import KahootSelectorModal from "@/app/components/utils/Modal/reusable/KahootSelectorModal";
 
 const CategoryPage = () => {
   const params = useParams();
@@ -22,6 +23,14 @@ const CategoryPage = () => {
   const [category, setCategory] = useState<Category>();
   const [featuredKahoots, setFeaturedKahoots] = useState<DiscoverFeaturedCardInfo[]>([]);
   const [subsections, setSubsections] = useState<DiscoverSubsectionClient[]>([]);
+
+  // Kahoot modal selector
+  const [isKahootSelectorModalOpen, setIsKahootSelectorModalOpen] = useState<boolean>(false);
+  const [selectedKahootId, setSelectedKahootId] = useState<string | null>(null);
+  const handleKahootCardClick = (kahootId: string) => {
+    setSelectedKahootId(kahootId);
+    setIsKahootSelectorModalOpen(true);
+  }
 
   useEffect(() => {
     getCategoryInfo();
@@ -72,81 +81,94 @@ const CategoryPage = () => {
   }
 
   return (
-    <DashboardLayout>
-      <div
-        id="category-banner"
-        className="w-full h-56 mb-4"
-      >
-        {category?.mediaUrl
-          ? (
-            <div className="relative h-full overflow-hidden">
-              <div className="absolute w-full h-full top-0 left-0 z-10 bg-black/40" />
-              <img
-                src={`${category.mediaUrl}`}
-                className="absolute top-0 left-0 w-full h-full object-cover"
-              />
-              <div className="flex justify-center items-center w-full h-full">
+    <>
+      <DashboardLayout>
+        <div
+          id="category-banner"
+          className="w-full h-56 mb-4"
+        >
+          {category?.mediaUrl
+            ? (
+              <div className="relative h-full overflow-hidden">
+                <div className="absolute w-full h-full top-0 left-0 z-10 bg-black/40" />
+                <img
+                  src={`${category.mediaUrl}`}
+                  className="absolute top-0 left-0 w-full h-full object-cover"
+                />
+                <div className="flex justify-center items-center w-full h-full">
+                  <Text
+                    textColor={TextColors.WHITE}
+                    useCase={UseCases.BODY}
+                    fontWeight={FontWeights.BOLD}
+                    className={`absolute z-20 text-4xl text-shadow shadow-black/80`}
+                  >
+                    {category.name}
+                  </Text>
+                </div>
+              </div>
+            )
+            : (
+              <div className="w-full h-full bg-kahoot-purple-variant-4 flex justify-center items-center">
                 <Text
+                  fontWeight={FontWeights.BOLD}
                   textColor={TextColors.WHITE}
                   useCase={UseCases.BODY}
-                  fontWeight={FontWeights.BOLD}
-                  className={`absolute z-20 text-4xl text-shadow shadow-black/80`}
+                  className="text-5xl"
                 >
-                  {category.name}
+                  {category?.name}
                 </Text>
               </div>
-            </div>
-          )
-          : (
-            <div className="w-full h-full bg-kahoot-purple-variant-4 flex justify-center items-center">
-              <Text
-                fontWeight={FontWeights.BOLD}
-                textColor={TextColors.WHITE}
-                useCase={UseCases.BODY}
-                className="text-5xl"
+            )}
+        </div>
+
+        <div id="featured-kahoots-from-category">
+          {/* Featured kahoots */}
+          <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
+          <DiscoverFeaturedWrapper>
+            {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
+              <DiscoverFeaturedCard
+                key={i}
+                cardSize={DiscoverFeaturedCardSize.MEDIUM}
+                featuredKahoot={featuredKahoot}
+                onClick={handleKahootCardClick}
+              />
+            ))}
+          </DiscoverFeaturedWrapper>
+
+          {subsections.map((subsection: DiscoverSubsectionClient, index1: number) => (
+            <>
+              <SectionTitle
+                key={index1}
+                size={SectionTitleSizes.SMALL}
+                viewAll={true}
               >
-                {category?.name}
-              </Text>
-            </div>
-          )}
-      </div>
+                {subsection.title}
+              </SectionTitle>
 
-      <div id="featured-kahoots-from-category">
-        {/* Featured kahoots */}
-        <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
-        <DiscoverFeaturedWrapper>
-          {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
-            <DiscoverFeaturedCard
-              key={i}
-              cardSize={DiscoverFeaturedCardSize.MEDIUM}
-              featuredKahoot={featuredKahoot}
-            />
+              <DiscoverKahootWrapper>
+                {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index2: number) => (
+                  <DiscoverKahootCard
+                    key={index2}
+                    cardSize={DiscoverKahootCardSize.SMALL}
+                    kahoot={kahoot}
+                    onClick={handleKahootCardClick}
+                  />
+                ))}
+              </DiscoverKahootWrapper>
+            </>
           ))}
-        </DiscoverFeaturedWrapper>
+        </div>
+      </DashboardLayout>
 
-        {subsections.map((subsection: DiscoverSubsectionClient, index1: number) => (
-          <>
-            <SectionTitle
-              key={index1}
-              size={SectionTitleSizes.SMALL}
-              viewAll={true}
-            >
-              {subsection.title}
-            </SectionTitle>
-
-            <DiscoverKahootWrapper>
-              {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index2: number) => (
-                <DiscoverKahootCard
-                  key={index2}
-                  cardSize={DiscoverKahootCardSize.SMALL}
-                  kahoot={kahoot}
-                />
-              ))}
-            </DiscoverKahootWrapper>
-          </>
-        ))}
-      </div>
-    </DashboardLayout>
+      <KahootSelectorModal
+        isOpen={isKahootSelectorModalOpen}
+        onClose={() => {
+          setIsKahootSelectorModalOpen(false);
+          setSelectedKahootId(null);
+        }}
+        selectedKahootId={selectedKahootId}
+      />
+    </>
   )
 }
 
