@@ -16,7 +16,6 @@ namespace API.Controllers
   {
     private readonly SignInManager<AppUser> _signInManager;
     private readonly UserManager<AppUser> _userManager;
-    private readonly IConfiguration _configuration;
     private readonly AuthService _authService;
 
     public AuthController(
@@ -27,7 +26,6 @@ namespace API.Controllers
     {
       _signInManager = signInManager;
       _userManager = userManager;
-      _configuration = configuration;
       _authService = authService;
     }
 
@@ -111,25 +109,9 @@ namespace API.Controllers
 
     private string GenerateJwtToken(string username)
     {
-      var issuer = _configuration["Jwt:Issuer"];
-      var audience = _configuration["Jwt:Audience"];
-      var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
-
-      var tokenDescriptor = new SecurityTokenDescriptor
-      {
-        Subject = new ClaimsIdentity(new[]
-        {
-          new Claim(ClaimTypes.NameIdentifier, username)
-        }),
-        Expires = DateTime.Now.AddDays(7),
-        Issuer = issuer,
-        Audience = audience,
-        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
-      };
-
-      var tokenHandler = new JwtSecurityTokenHandler();
-      var token = tokenHandler.CreateToken(tokenDescriptor);
-      return tokenHandler.WriteToken(token);
+      string token = _authService.GenerateJwtToken(username);
+      
+      return token;
     }
   }
 }

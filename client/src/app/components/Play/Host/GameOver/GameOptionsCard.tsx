@@ -1,4 +1,4 @@
-import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
+import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponents/Button";
 import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
@@ -62,7 +62,7 @@ const ClickableOption = ({ children, actions }: ClickableOptionProps) => {
         textColor={TextColors.WHITE}
         animateOnHover={false}
         size={ButtonSize.MEDIUM}
-        perspective={false}
+        perspective={PerspectiveSize.MEDIUM}
         className={`flex justify-between items-center w-full`}
         onClick={actions}
       >

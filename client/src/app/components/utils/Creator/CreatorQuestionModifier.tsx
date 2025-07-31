@@ -8,7 +8,7 @@ import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { useEffect, useState } from "react";
 import KahootAnswerTextBox from "../Quizes/KahootAnswerTextBox";
-import Button, { ButtonSize } from "../../UIComponents/Button";
+import Button, { ButtonSize, PerspectiveSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { doesThisQuestionHasAnImage } from "@/app/utils/kahootUtils";
 import ImageSelectorModal from "../Modal/reusable/ImageSelectorModal";
@@ -86,7 +86,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                       <Button
                         backgroundColor={BackgroundColors.WHITE}
                         animateOnHover={false}
-                        perspective={false}
+                        perspective={PerspectiveSize.MEDIUM}
                         size={ButtonSize.SMALL}
                         className="shadow-md"
                         onClick={() => deleteImageFromCurrentQuestion()}

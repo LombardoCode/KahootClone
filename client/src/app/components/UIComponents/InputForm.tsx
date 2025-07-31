@@ -13,6 +13,7 @@ export interface InputFormProps {
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  rightElement?: React.ReactNode;
 }
 
 export enum InputFormTypes {
@@ -30,19 +31,28 @@ const InputForm = ({
   value,
   placeholder = '',
   onChange,
-  disabled = false
+  disabled = false,
+  rightElement
 }: InputFormProps) => {
   return (
-    <input
-      type={type}
-      name={name}
-      id={id}
-      className={`${montserrat.className} ${className} ${textColor} ${fontWeight} px-2 py-1 border-1 border-gray-300 focus:border-blue-500 outline-none transition-all duration-300 rounded-md placeholder-gray-500`}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      disabled={disabled}
-    />
+    <div className={`relative`}>
+      <input
+        type={type}
+        name={name}
+        id={id}
+        className={`${montserrat.className} ${className} ${textColor} ${fontWeight} px-2 py-1 border-1 border-gray-400 focus:border-blue-500 outline-none transition-all duration-300 rounded-md placeholder-gray-500 w-full`}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        disabled={disabled}
+      />
+
+      {rightElement && (
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+          {rightElement}
+        </div>
+      )}
+    </div>
   );
 };
 

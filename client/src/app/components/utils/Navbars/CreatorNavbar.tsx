@@ -1,7 +1,7 @@
 import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/Text.interface";
 import Text from "../../UIComponents/Text";
 import Logo, { LogoColors, LogoSize } from "../Logo";
-import Button, { ButtonSize } from "../../UIComponents/Button";
+import Button, { ButtonSize, PerspectiveSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import useKahootCreatorStore, { KahootQuestionValidation } from "@/app/stores/Kahoot/useKahootCreatorStore";
 import Modal, { ModalTypes } from "../Modal/Modal";
@@ -135,7 +135,7 @@ const CreatorNavbar = () => {
             textColor={TextColors.WHITE}
             size={ButtonSize.SMALL}
             animateOnHover={false}
-            perspective={false}
+            perspective={PerspectiveSize.MEDIUM}
             onClick={() => saveDraft()}
           >
             Save
@@ -343,7 +343,7 @@ const CreatorNavbar = () => {
                         textColor={TextColors.WHITE}
                         className="text-sm mr-2"
                         size={ButtonSize.MEDIUM}
-                        perspective={false}
+                        perspective={PerspectiveSize.MEDIUM}
                         animateOnHover={false}
                         onClick={() => {
                           removeKahootMediaUrl();
@@ -378,7 +378,7 @@ const CreatorNavbar = () => {
               textColor={TextColors.WHITE}
               className="text-sm mr-2"
               size={ButtonSize.MEDIUM}
-              perspective={false}
+              perspective={PerspectiveSize.MEDIUM}
               animateOnHover={false}
               onClick={() => {
                 setIsKahootHeaderModalOpen(false);
@@ -393,7 +393,7 @@ const CreatorNavbar = () => {
               textColor={TextColors.WHITE}
               className="text-sm"
               size={ButtonSize.MEDIUM}
-              perspective={false}
+              perspective={PerspectiveSize.MEDIUM}
               animateOnHover={false}
               onClick={() => {
                 saveDraft();
@@ -426,7 +426,7 @@ const CreatorNavbar = () => {
                 textColor={TextColors.WHITE}
                 className="text-sm"
                 size={ButtonSize.MEDIUM}
-                perspective={false}
+                perspective={PerspectiveSize.MEDIUM}
                 animateOnHover={false}
                 onClick={() => {
                   if (kahoot?.id) {
@@ -569,7 +569,7 @@ const CreatorNavbar = () => {
                   textColor={TextColors.WHITE}
                   className="text-sm mr-2"
                   size={ButtonSize.MEDIUM}
-                  perspective={false}
+                  perspective={PerspectiveSize.MEDIUM}
                   animateOnHover={false}
                   onClick={() => {
                     setIsKahootSavedModalOpen(false);
@@ -584,7 +584,7 @@ const CreatorNavbar = () => {
                   textColor={TextColors.WHITE}
                   className="text-sm"
                   size={ButtonSize.MEDIUM}
-                  perspective={false}
+                  perspective={PerspectiveSize.MEDIUM}
                   animateOnHover={false}
                   onClick={() => router.push(ROUTES.MENU.LIBRARY)}
                 >

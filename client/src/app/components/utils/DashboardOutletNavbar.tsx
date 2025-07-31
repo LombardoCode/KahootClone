@@ -9,7 +9,7 @@ import { faCaretDown, faGear, faRightFromBracket } from "@fortawesome/free-solid
 import { DropDownContainer, DropDownItem } from "./Navbar";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { useRouter } from "next/navigation";
-import Button, { ButtonSize } from "../UIComponents/Button";
+import Button, { ButtonSize, PerspectiveSize } from "../UIComponents/Button";
 import useModalStore from "@/app/stores/useModalStore";
 import Modal, { ModalTypes } from "./Modal/Modal";
 import InputForm, { InputFormTypes } from "../UIComponents/InputForm";
@@ -79,6 +79,7 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
               textColor={TextColors.WHITE}
               className="mr-2"
               onClick={() => setIsOpen(true)}
+              perspective={PerspectiveSize.MEDIUM}
               animateOnHover={false}
             >
               Create a Kahoot!

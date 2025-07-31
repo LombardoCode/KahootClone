@@ -1,7 +1,7 @@
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
 import montserrat from "@/app/utils/fontsConfig";
 import React, { ReactElement, cloneElement, isValidElement, useState } from "react";
-import Button, { BorderColors, ButtonSize } from "./Button";
+import Button, { BorderColors, ButtonSize, PerspectiveSize } from "./Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 
 interface ComboBoxProps {
@@ -30,7 +30,7 @@ const ComboBox = ({ children = <></>, textContent = "", className, setTextConten
         borderColor={BorderColors.GRAY}
         animateOnHover={false}
         size={ButtonSize.SMALL}
-        perspective={false}
+        perspective={PerspectiveSize.NO_PERSPECTIVE}
         className={`${className} ${textColor} ${fontWeight} flex justify-between items-center w-full`}
         onClick={() => setOpened(!opened)}
       >
