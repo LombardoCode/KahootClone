@@ -10,7 +10,7 @@ import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import { Player } from "@/app/interfaces/Play/Player.interface";
 import Modal, { ModalTypes } from "@/app/components/utils/Modal/Modal";
 import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputForm";
-import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
+import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import LobbyUserCard from "@/app/components/utils/Lobby/LobbyUserCard";
 import Container from "@/app/components/utils/Container";
@@ -239,7 +239,7 @@ const LobbyPage = () => {
                   textColor={TextColors.GRAY}
                   className="text-md"
                   size={ButtonSize.MEDIUM}
-                  perspective={false}
+                  perspective={PerspectiveSize.MEDIUM}
                   animateOnHover={false}
                   onClick={() => startingTheGame()}
                 >

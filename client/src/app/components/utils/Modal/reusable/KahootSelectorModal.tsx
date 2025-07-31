@@ -1,4 +1,4 @@
-import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
+import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponents/Button";
 import Modal, { ModalTypes } from "../Modal";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
@@ -125,7 +125,7 @@ const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelect
                     textColor={TextColors.WHITE}
                     className={`text-md w-full ${kahootMetadata?.isPlayable ? 'opacity-100' : 'opacity-45'}`}
                     size={ButtonSize.MEDIUM}
-                    perspective={false}
+                    perspective={PerspectiveSize.MEDIUM}
                     animateOnHover={false}
                     onClick={() => {
                       if (kahootMetadata?.isPlayable) {

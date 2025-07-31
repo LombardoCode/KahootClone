@@ -7,7 +7,7 @@ import axiosInstance from "../../utils/axiosConfig";
 import { useRouter } from "next/navigation";
 import { KahootDashboardList } from "../../interfaces/Kahoot/Dashboard/KahootDashboardList.interface";
 import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
-import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
+import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical, faServer, faTrash, faWarning } from "@fortawesome/free-solid-svg-icons";
@@ -178,7 +178,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                       className="hidden group-hover:inline-block text-sm"
                       size={ButtonSize.SMALL}
                       onClick={() => createLobby(kahoot.id, router)}
-                      perspective={false}
+                      perspective={PerspectiveSize.MEDIUM}
                       animateOnHover={false}
                     >
                       Host
