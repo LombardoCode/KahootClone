@@ -70,5 +70,20 @@ namespace API.Controllers
         }
       });
     }
+
+    [Authorize]
+    [HttpPost("changeProfilePicture")]
+    public async Task<ActionResult> changeProfilePicture(ChangeProfilePictureDTO data)
+    {
+      AppUser user = await _userService.GetCurrentUserAsync();
+      user.MediaUrl = data.MediaUrl;
+      await _dbContext.SaveChangesAsync();
+      return Ok($"MediaUrl: {data.MediaUrl}");
+    }
+
+    public class ChangeProfilePictureDTO
+    {
+      public string? MediaUrl { get; set; }
+    }
   }
 }

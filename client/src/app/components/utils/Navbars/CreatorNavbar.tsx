@@ -18,6 +18,7 @@ import TextAreaForm from "../../UIComponents/TextAreaForm";
 import ImageSelectorModal from "../Modal/reusable/ImageSelectorModal";
 import RadioButton, { RadioButtonSize } from "../../UIComponents/RadioButton";
 import { KahootVisibilityOption } from "@/app/interfaces/Creator/KahootVisibilityOption.enum";
+import MediaSelector from "../Media/MediaSelector";
 
 const CreatorNavbar = () => {
   const router = useRouter();
@@ -326,46 +327,12 @@ const CreatorNavbar = () => {
                   Add a cover image to make your kahoot stand out.
                 </Text>
 
-                <div
-                  id="image-preview-wrapper"
-                  className="mt-3"
-                >
-                  {doesThisKahootHasAnImage ? (
-                    <div className="flex flex-col items-center">
-                      <img
-                        src={kahoot?.mediaUrl ?? ""}
-                        alt="Kahoot cover"
-                        className="w-64 h-auto object-cover rounded-md"
-                      />
-                      <Button
-                        backgroundColor={BackgroundColors.GRAY}
-                        fontWeight={FontWeights.BOLD}
-                        textColor={TextColors.WHITE}
-                        className="text-sm mr-2"
-                        size={ButtonSize.MEDIUM}
-                        perspective={PerspectiveSize.MEDIUM}
-                        animateOnHover={false}
-                        onClick={() => {
-                          removeKahootMediaUrl();
-                        }}
-                      >
-                        Remove image
-                      </Button>
-                    </div>
-                  ) : (
-                    <div
-                      id="image-preview-content"
-                      className="flex justify-center items-center w-40 h-24 rounded-md bg-slate-400/50 hover:bg-slate-400/80 cursor-pointer transition duration-300"
-                      onClick={() => setIsMediaSelectorModalOpen(true)}
-                    >
-                      <FontAwesomeIcon
-                        icon={faImage}
-                        className={`${TextColors.GRAY}`}
-                        size="2x"
-                      />
-                    </div>
-                  )}
-                </div>
+                <MediaSelector
+                  doesItContainsAnImage={doesThisKahootHasAnImage}
+                  imageSrc={kahoot?.mediaUrl ?? ""}
+                  removeImageActions={removeKahootMediaUrl}
+                  clickedOnTheEmptyImage={(open) => setIsMediaSelectorModalOpen(open)}
+                />
               </div>
             </div>
           </div>
