@@ -4,26 +4,23 @@ import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponen
 import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputForm";
 import Label from "@/app/components/UIComponents/Label";
 import Text from "@/app/components/UIComponents/Text";
-import Logo, { LogoSize } from "@/app/components/utils/Logo";
+import MediaSelector from "@/app/components/utils/Media/MediaSelector";
 import ChangeUsernameModal from "@/app/components/utils/Modal/reusable/ChangeUsernameModal";
+import ImageSelectorModal from "@/app/components/utils/Modal/reusable/ImageSelectorModal";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { UserMetadata } from "@/app/interfaces/Settings/EditProfile/UserMetadata.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
-import useUserStore from "@/app/stores/useUserStore";
 import axiosInstance from "@/app/utils/axiosConfig";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
 const UserSettingsProfileTab = () => {
-  // Store state
-  const { user } = useUserStore();
-
   // Local component state
   const [userData, setUserData] = useState<UserMetadata>({
     userName: "",
     email: "",
-    mediaUrl: ""
+    mediaUrl: null
   });
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +62,46 @@ const UserSettingsProfileTab = () => {
     })
   }
 
+  // Media
+  const [hasUserManuallyUpdateMediaUrl, setHasUserManuallyUpdateMediaUrl] = useState<boolean>(false);
+  const [isMediaSelectorModalOpen, setIsMediaSelectorModalOpen] = useState<boolean>(false);
+
+  const removeUserMediaUrl = () => {
+    setUserData({
+      ...userData,
+      mediaUrl: null
+    });
+
+    setHasUserManuallyUpdateMediaUrl(true);
+  }
+
+  const updateUserMediaUrl = (mediaUrlSrc: string) => {
+    setUserData({
+      ...userData,
+      mediaUrl: mediaUrlSrc
+    });
+
+    setHasUserManuallyUpdateMediaUrl(true);
+  }
+
+  useEffect(() => {
+    if (!hasUserManuallyUpdateMediaUrl) {
+      return;
+    }
+
+    changeUserMediaUrl();
+  }, [userData.mediaUrl]);
+
+  const changeUserMediaUrl = () => {
+    axiosInstance.post('/user/changeProfilePicture', {
+      mediaUrl: userData.mediaUrl
+    })
+      .then(() => {})
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
   return (
     <>
       <div className="px-3 pt-5 w-[1000px] max-w-[90vw]">
@@ -82,24 +119,21 @@ const UserSettingsProfileTab = () => {
 
           <div id="user-information-content" className="grid grid-cols-12 gap-6 mt-6">
             <div id="user-information-content-image-wrapper" className="col-span-3">
-              <div className="w-full h-40">
-                {userData.mediaUrl
-                  ? (
-                    <img
-                      src={`${userData.mediaUrl}`}
-                      alt="w-full h-full"
-                    />
-                  )
-                  : (
-                    <div className="flex justify-center items-center h-full bg-kahoot-purple-variant-4">
-                      <Logo
-                        size={LogoSize.REGULAR}
-                      />
-                    </div>
-                  )}
+              <div id="user-information-content-image-content" className="flex flex-col items-center">
+                <div className="w-full h-40">
+                  <MediaSelector
+                    doesItContainsAnImage={userData.mediaUrl !== null}
+                    imageSrc={userData?.mediaUrl ?? ""}
+                    removeImageActions={() => {
+                      removeUserMediaUrl();
+                    }}
+                    clickedOnTheEmptyImage={(open) => {
+                      setIsMediaSelectorModalOpen(open);
+                    }}
+                  />
+                </div>
               </div>
             </div>
-
             <div id="user-information-content-information-fields-wrapper" className="col-span-9">
               <div id="information-fields-username" className="flex flex-col mb-5">
                 <Label
@@ -162,13 +196,23 @@ const UserSettingsProfileTab = () => {
             </div>
           </div>
         </div>
+
+        <ChangeUsernameModal
+          isOpen={isChangeUsernameModalOpen}
+          onClose={() => setIsChangeUsernameModalOpen(false)}
+          userName={userData.userName}
+          setNewUserName={(newUserName: string) => handleNewUserNameChangeForm(newUserName)}
+        />
       </div>
 
-      <ChangeUsernameModal
-        isOpen={isChangeUsernameModalOpen}
-        onClose={() => setIsChangeUsernameModalOpen(false)}
-        userName={userData.userName}
-        setNewUserName={(newUserName: string) => handleNewUserNameChangeForm(newUserName)}
+      {/* Media selector modal */}
+      <ImageSelectorModal
+        isOpen={isMediaSelectorModalOpen}
+        onClose={() => setIsMediaSelectorModalOpen(false)}
+        onImageSelect={(url: string) => {
+          updateUserMediaUrl(url);
+          setIsMediaSelectorModalOpen(false);
+        }}
       />
     </>
   )
