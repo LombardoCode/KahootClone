@@ -72,6 +72,11 @@ namespace API.Controllers
     [HttpPut("drafts")]
     public async Task<ActionResult> Drafts(KahootCreatorFormDraftDTO kahootDraft)
     {
+      if (kahootDraft.Questions.Count == 0)
+      {
+        return BadRequest("You can't delete the last remaining question.");
+      }
+
       var user = await _userService.GetCurrentUserAsync();
 
       // Retrieving the kahoot from database
