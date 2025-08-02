@@ -161,6 +161,7 @@ const UserSettingsProfileTab = () => {
                       perspective={PerspectiveSize.SMALL}
                       animateOnHover={false}
                       onClick={() => setIsChangeUsernameModalOpen(true)}
+                      className="mr-3"
                     >
                       <FontAwesomeIcon
                         icon={faPencil}
