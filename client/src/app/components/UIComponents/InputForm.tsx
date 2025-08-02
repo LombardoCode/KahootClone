@@ -48,7 +48,7 @@ const InputForm = ({
       />
 
       {rightElement && (
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+        <div className="absolute right-0 top-0 flex items-center h-full cursor-pointer">
           {rightElement}
         </div>
       )}

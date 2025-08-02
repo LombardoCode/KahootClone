@@ -4,7 +4,9 @@ using API.DTOs.Settings.EditProfile;
 using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers
 {
@@ -15,12 +17,14 @@ namespace API.Controllers
     private readonly DataContext _dbContext;
     private readonly UserService _userService;
     private readonly AuthService _authService;
+    private readonly UserManager<AppUser> _userManager;
 
-    public UserController(DataContext dbContext, UserService userService, AuthService authService)
+    public UserController(DataContext dbContext, UserService userService, AuthService authService, UserManager<AppUser> userManager)
     {
       _dbContext = dbContext;
       _userService = userService;
       _authService = authService;
+      _userManager = userManager;
     }
 
     [Authorize]
@@ -84,6 +88,45 @@ namespace API.Controllers
     public class ChangeProfilePictureDTO
     {
       public string? MediaUrl { get; set; }
+    }
+
+    [Authorize]
+    [HttpPost("changePassword")]
+    public async Task<ActionResult> ChangePassword(ChangePasswordDTO data)
+    {
+      AppUser user = await _userService.GetCurrentUserAsync();
+
+      string oldPassword = data.OldPassword;
+      string newPassword = data.NewPassword;
+      string repeatNewPassword = data.RepeatNewPassword;
+
+      if (oldPassword.IsNullOrEmpty() || newPassword.IsNullOrEmpty() || repeatNewPassword.IsNullOrEmpty())
+      {
+        return BadRequest("All password fields must be filled.");
+      }
+
+      bool isPasswordCorrect = await _userManager.CheckPasswordAsync(user, oldPassword);
+
+      if (!isPasswordCorrect)
+      {
+        return BadRequest("Password is not correct");
+      }
+
+      if (newPassword != repeatNewPassword)
+      {
+        return BadRequest("New passwords must match");
+      }
+
+      await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+
+      return Ok();
+    }
+
+    public class ChangePasswordDTO
+    {
+      public string OldPassword { get; set; }
+      public string NewPassword { get; set; }
+      public string RepeatNewPassword { get; set; }
     }
   }
 }
