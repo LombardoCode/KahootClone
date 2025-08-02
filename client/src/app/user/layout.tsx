@@ -4,7 +4,7 @@ import { useState } from "react";
 import Text from "../components/UIComponents/Text"
 import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface"
 import DashboardLayout from "../menu/layout"
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ROUTES } from "../utils/Routes/routesUtils";
 
 interface UserSettingsLayoutProps {
@@ -17,12 +17,20 @@ interface SettingsTabOption {
 }
 
 const UserSettingsLayout = ({ children }: UserSettingsLayoutProps) => {
+  const pathname = usePathname();
   const router = useRouter();
   const [settingsTabOptions] = useState<SettingsTabOption[]>([
-    { id: "edit-profile", text: "Edit profile" },
+    { id: "profile", text: "Edit profile" },
     { id: "change-password", text: "Change password" }
   ]);
-  const [selectedTabOptionId, setSelectedTabOptionId] = useState<string>(settingsTabOptions[0].id);
+
+  const getLastPortionOfPath = () => {
+    let paths: string[] = pathname.split('/');
+    let lastPath: string = paths[paths.length - 1];
+    return lastPath;
+  }
+
+  const [selectedTabOptionId, setSelectedTabOptionId] = useState<string>(getLastPortionOfPath());
 
   const handleSelect = (tabOptionId: string) => {
     setSelectedTabOptionId(tabOptionId);
@@ -31,7 +39,7 @@ const UserSettingsLayout = ({ children }: UserSettingsLayoutProps) => {
 
   const redirectUserBasedOnTheSelectedTabOption = (tabOptionId: string) => {
     switch (tabOptionId) {
-      case "edit-profile": router.push(ROUTES.ADMINISTRATION.SETTINGS.PROFILE); return;
+      case "profile": router.push(ROUTES.ADMINISTRATION.SETTINGS.PROFILE); return;
       case "change-password": router.push(ROUTES.ADMINISTRATION.SETTINGS.CHANGE_PASSWORD); return;
     }
   }
