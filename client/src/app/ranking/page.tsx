@@ -11,8 +11,12 @@ import Button, { ButtonSize } from "../components/UIComponents/Button";
 import { BackgroundColors } from "../interfaces/Colors.interface";
 import { determineFinalMessageToPlayer } from "../utils/podium";
 import { useRouter } from "next/navigation";
+import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 
 const RankingPage = () => {
+  // Hooks
+  useLobbySocketEvents();
+
   const { signalRConnection, currentPlayer } = useInGameStore();
   const [finalPLayerData, setFinalPlayerData] = useState<FinalPlayerStats>();
   const [showPlayerFinalStats, setShowPlayerFinalStats] = useState<boolean>(false);

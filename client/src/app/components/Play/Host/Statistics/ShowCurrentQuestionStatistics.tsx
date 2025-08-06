@@ -27,19 +27,20 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
   const router = useRouter();
 
   const setScreenType = () => {
+    // Additional information: The screen order must be:
+    // STATISTICS -> SCOREBOARD
     switch (screen) {
       case ScreenForFinalAnswerStatistics.STATISTICS:
         // For the last question, avoid showing the final stats, we want them to be shown on the podium, not on the <DisplayScoreboard /> component
         isThisTheLastQuestion()
-          ? endTheGame()
+          ? goToThePodium()
           : setScreen(ScreenForFinalAnswerStatistics.SCOREBOARD);
         break;
       case ScreenForFinalAnswerStatistics.SCOREBOARD:
         // Go to the next question or end the game
         isThisTheLastQuestion()
-          ? endTheGame()
+          ? goToThePodium()
           : continueTheGame()
-
         break;
     }
   }
@@ -50,20 +51,16 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
     setCountOfAnswersProvidedByGuests(0);
   }
   
-  const endTheGame = () => {
+  const goToThePodium = () => {
     registerPlayCountOnCurrentKahoot();
 
     if (isHost) {
-      // Destroy all the data from current lobby
-      signalRConnection?.invoke('DestroyLobbyData', lobbyId)
-      .then(() => {
-        // Redirect the guests to the '/ranking' page
+      // Redirect the guests to the '/ranking' page
         signalRConnection?.invoke('RedirectGuestsFromLobbyToSpecificPage', lobbyId, '/ranking')
         .then(() => {
           // Redirect the host to the '/gameover' screen
           router.push('/gameover');
         })
-      });
     }
   }
 

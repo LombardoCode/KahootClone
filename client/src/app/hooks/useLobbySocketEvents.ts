@@ -5,6 +5,8 @@ import { Player } from "../interfaces/Play/Player.interface";
 import { KahootPlay } from "../interfaces/Kahoot/Kahoot.interface";
 import { isInLobbyRoute } from "../utils/Lobby/lobbyUtils";
 import { debugLog } from "../utils/debugLog";
+import { ROUTES } from "../utils/Routes/routesUtils";
+import SoundBank from "../singletons/SoundBank";
 
 const useLobbySocketEvents = () => {
   const { signalRConnection, addPlayer, removePlayer, isHost, setIsHost, lobbyId, setKahootInfo, setCurrentPlayer, setEarnedPointsFromCurrentQuestion } = useInGameStore();
@@ -101,8 +103,12 @@ const useLobbySocketEvents = () => {
         signalRConnection.invoke('DestroyLobbyData', lobbyId)
           .then(() => {
             // We don't want to kick the host when being at the lobby when there are no players left
-            if (!isInLobbyRoute(pathname)) {signalRConnection.stop();
-              router.push('/');
+            if (!isInLobbyRoute(pathname)) {
+              signalRConnection.stop().then(() => {
+                SoundBank.stopInGameBackgroundMusic();
+                SoundBank.stopPodiumBackgroundMusic();
+                router.push(ROUTES.ROOT);
+              });
             }
           })
       }

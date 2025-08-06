@@ -105,6 +105,16 @@ class SoundBank {
     this.inGameBackgroundMusic.pause();
     this.inGameBackgroundMusic.currentTime = 0;
   }
+
+  stopPodiumBackgroundMusic() {
+    if (!this.podiumBackgroundMusic) {
+      return;
+    }
+
+    debugLog(`Stopping the 'podiumBackgroundMusic' sound`);
+    this.podiumBackgroundMusic.pause();
+    this.podiumBackgroundMusic.currentTime = 0;
+  }
 }
 
 export default new SoundBank;

@@ -9,8 +9,12 @@ import { useWindowSize } from "react-use";
 import GameOptionsCard from "../components/Play/Host/GameOver/GameOptionsCard";
 import useInGameStore from "../stores/Kahoot/useInGameStore";
 import SoundBank from "../singletons/SoundBank";
+import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 
 const GameOverScreen = () => {
+  // Hooks
+  useLobbySocketEvents();
+
   // Local component state
   const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);

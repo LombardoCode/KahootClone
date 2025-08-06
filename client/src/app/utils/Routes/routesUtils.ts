@@ -1,4 +1,5 @@
 export const ROUTES = {
+  ROOT: "/",
   MENU: {
     DISCOVERY: "/menu/discovery",
     LIBRARY: "/menu/library"

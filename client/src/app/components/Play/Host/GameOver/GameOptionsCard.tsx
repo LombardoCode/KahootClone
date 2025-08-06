@@ -1,6 +1,8 @@
 import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponents/Button";
 import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
+import SoundBank from "@/app/singletons/SoundBank";
+import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -12,6 +14,21 @@ interface GameOptionsCardProps {
 
 const GameOptionsCard = ({ className }: GameOptionsCardProps) => {
   const router = useRouter();
+  const { signalRConnection } = useInGameStore();
+
+  const endTheGame = () => {
+    terminateTheHostConnectionFromTheLobbyAndRedirectToHomepage();
+  }
+
+  const terminateTheHostConnectionFromTheLobbyAndRedirectToHomepage = () => {
+    // Ending the host connection will trigger the LobbyHub's "OnDisconnectedAsync" method, which will trigger the "OnHostAbandonedTheGame" handler, which will cause the connected players to end their connections as well.
+    if (signalRConnection) {
+      signalRConnection.stop().then(() => {
+        SoundBank.stopPodiumBackgroundMusic();
+        router.push(ROUTES.MENU.DISCOVERY);
+      });
+    }
+  }
 
   return (
     <motion.div
@@ -41,7 +58,11 @@ const GameOptionsCard = ({ className }: GameOptionsCardProps) => {
           id="clickable-options-wrapper"
           className="mt-4 w-full"
         >
-          <ClickableOption actions={() => router.push(ROUTES.MENU.DISCOVERY)}>Go to homepage</ClickableOption>
+          <ClickableOption
+            onClick={() => endTheGame()}
+          >
+            Go to homepage
+          </ClickableOption>
         </div>
       </div>
     </motion.div>
@@ -50,10 +71,10 @@ const GameOptionsCard = ({ className }: GameOptionsCardProps) => {
 
 interface ClickableOptionProps {
   children: React.ReactNode;
-  actions: () => void;
+  onClick: () => void;
 }
 
-const ClickableOption = ({ children, actions }: ClickableOptionProps) => {
+const ClickableOption = ({ children, onClick }: ClickableOptionProps) => {
   return (
     <div className="rounded-md">
       <Button
@@ -64,7 +85,7 @@ const ClickableOption = ({ children, actions }: ClickableOptionProps) => {
         size={ButtonSize.MEDIUM}
         perspective={PerspectiveSize.MEDIUM}
         className={`flex justify-between items-center w-full`}
-        onClick={actions}
+        onClick={onClick}
       >
         {children}
       </Button>
