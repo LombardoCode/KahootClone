@@ -3,9 +3,17 @@ import ShowingQuestionTitle from "./ShowingQuestionTitle";
 import QuestionMetaInfo from "./QuestionMetaInfo";
 import ShowTheAnswersToTheGuests from "./ShowTheAnswersToTheGuests";
 import ShowCurrentQuestionStatistics from "./Statistics/ShowCurrentQuestionStatistics";
+import { useEffect } from "react";
+import SoundBank from "@/app/singletons/SoundBank";
 
 const ShowingQuestionTitleAndAnswers = () => {
   const { kahoot, questionIndex, everyoneHasAnsweredTheCurrentQuestion } = useInGameStore();
+
+  useEffect(() => {
+    !everyoneHasAnsweredTheCurrentQuestion
+      ? SoundBank.playInGameBackgroundMusic()
+      : SoundBank.stopInGameBackgroundMusic()
+  }, [everyoneHasAnsweredTheCurrentQuestion]);
 
   return (
     <div id="showing-question-title-and-answers" className="flex flex-col h-screen mx-10">

@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import PodiumHeader from "../components/Play/Host/GameOver/PodiumHeader";
 import PodiumKahootLogoAndKahootTitle from "../components/Play/Host/GameOver/PodiumKahootLogoAndKahootTitle";
 import PodiumBody from "../components/Play/Host/GameOver/PodiumBody/PodiumBody";
-import BackgroundAudioPlayer from "../components/utils/Audio/BackgroundAudioPlayer";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import GameOptionsCard from "../components/Play/Host/GameOver/GameOptionsCard";
 import useInGameStore from "../stores/Kahoot/useInGameStore";
+import SoundBank from "../singletons/SoundBank";
 
 const GameOverScreen = () => {
   // Local component state
@@ -24,6 +24,10 @@ const GameOverScreen = () => {
 
   // Store state
   const { players, setFinalPlayerStats, finalPlayerStats, lobbyId, signalRConnection } = useInGameStore();
+
+  useEffect(() => {
+    SoundBank.playPodiumBackgroundMusic();
+  }, []);
 
   useEffect(() => {
     setWidth(windowWidth);
@@ -100,12 +104,6 @@ const GameOverScreen = () => {
           run={isConfettiRunning}
           numberOfPieces={isConfettiSpawning ? 300 : 0}
           style={{ position: "fixed", top: 0, left: 0, zIndex: 100 }}
-        />
-
-        <BackgroundAudioPlayer
-          audio_src="/assets/audio/podium.mp3"
-          autoplay={true}
-          loop={false}
         />
 
         <div className={`relative px-6 pt-8 bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>

@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import useLobbySocketEvents from "@/app/hooks/useLobbySocketEvents";
 import useUserStore from "@/app/stores/useUserStore";
+import SoundBank from "@/app/singletons/SoundBank";
 
 const LobbyPage = () => {
   // Hooks
@@ -54,6 +55,7 @@ const LobbyPage = () => {
       .then(res => {
         setIsValidLobby(res.data);
         ConnectingToTheSignalRLobbyHub();
+        SoundBank.preloadAllInGameMusicAndSoundFX();
       })
       .catch(err => {
         console.error(err);

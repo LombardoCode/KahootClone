@@ -9,11 +9,12 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
+import SoundBank from "../singletons/SoundBank";
 
 const PlayPage = () => {
   // Hooks
   useLobbySocketEvents();
-  
+
   // Global store state
   const { signalRConnection, isHost, kahoot, setQuestionIndex } = useInGameStore();
   const router = useRouter();
@@ -81,7 +82,11 @@ const GettingReadyToPlay = () => {
   )
 }
 
-const ShowQuestionTitleAndCountdownToHost = ({ kahootTitle }: { kahootTitle: string | undefined }) => {
+interface ShowQuestionTitleAndCountdownToHostProps {
+  kahootTitle: string | undefined;
+}
+
+const ShowQuestionTitleAndCountdownToHost = ({ kahootTitle }: ShowQuestionTitleAndCountdownToHostProps) => {
   const [showTitle, setShowTitle] = useState<boolean>(false);
   const [showCountdown, setShowCountdown] = useState<boolean>(false);
 
@@ -151,14 +156,18 @@ const SquareCountdownTimer = () => {
 
     if (hasStarted) {
       if (countDisplay > 0) {
+        SoundBank.playTick();
+        
         const countTimer = setTimeout(() => {
           setCountDisplay(countDisplay - 1);
         }, 1000);
-  
+
         return () => {
           clearTimeout(countTimer);
         }
       } else {
+        SoundBank.playWhoosh();
+
         const countTimer = setTimeout(() => {
           if (isHost) {
             if (signalRConnection) {
