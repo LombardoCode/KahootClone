@@ -119,6 +119,7 @@ public class Program
     builder.Services.AddScoped<UserService>();
     builder.Services.AddScoped<KahootValidationService>();
     builder.Services.AddScoped<LobbyService>();
+    builder.Services.AddScoped<KahootService>();
 
     var app = builder.Build();
 

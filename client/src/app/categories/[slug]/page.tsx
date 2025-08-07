@@ -16,7 +16,7 @@ import DiscoverKahootWrapper from "@/app/components/utils/Discovery/Cards/Kahoot
 import DiscoverKahootCard, { DiscoverKahootCardSize } from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootCard";
 import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
 import KahootSelectorModal from "@/app/components/utils/Modal/reusable/KahootSelectorModal";
-import ResourceNotFound, { ResourceTypes } from "@/app/components/utils/ErrorHandlers/ResourceNotFound";
+import DisplayErrorMessage, { ResourceTypes } from "@/app/components/utils/ErrorHandlers/DisplayErrorMessage";
 
 const CategoryPage = () => {
   const params = useParams();
@@ -52,7 +52,7 @@ const CategoryPage = () => {
     <>
       <DashboardLayout>
         {!categoryExists
-          ? <ResourceNotFound resourceType={ResourceTypes.CATEGORY} />
+          ? <DisplayErrorMessage resourceType={ResourceTypes.NOT_FOUND} />
           : <PageContent categorySlug={slug} />}
       </DashboardLayout>
     </>

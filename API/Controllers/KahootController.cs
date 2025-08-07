@@ -4,6 +4,7 @@ using API.Data.ForClient.Dashboard.Kahoot;
 using API.Data.Server.KahootCreator;
 using API.DTOs.Discover;
 using API.DTOs.Statistics;
+using API.Models;
 using API.Models.Statistics;
 using API.Services;
 using API.Sockets.Hubs;
@@ -19,11 +20,13 @@ namespace API.Controllers
   {
     private readonly DataContext _dbContext;
     private readonly UserService _userService;
+    private readonly KahootService _kahootService;
 
-    public KahootController(DataContext dbContext, UserService userService)
+    public KahootController(DataContext dbContext, UserService userService, KahootService kahootService)
     {
       _dbContext = dbContext;
       _userService = userService;
+      _kahootService = kahootService;
     }
 
     [HttpGet("getBasicInfoFromUsersKahoots")]
@@ -89,13 +92,46 @@ namespace API.Controllers
     [HttpGet("KahootExists/{id}")]
     public async Task<ActionResult> KahootExists(Guid id)
     {
-      bool kahootExists = _dbContext.Kahoots.Any(k => k.Id == id);
-      return Ok(kahootExists);
+      bool doesKahootExists = await _kahootService.checkIfKahootExistsById(id);
+
+      if (!doesKahootExists)
+      {
+        return NotFound();
+      }
+
+      return Ok();
+    }
+
+    [HttpGet("VerifyOwnership/{id}")]
+    public async Task<ActionResult> VerifyOwnership(Guid id)
+    {
+      string loggedUserId = await _userService.GetUserId();
+      string kahootOwnerUserId = await _kahootService.getUserIdByKahootId(id);
+
+      if (loggedUserId != kahootOwnerUserId)
+      {
+        return Forbid();
+      }
+
+      return Ok();
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<KahootClient>> GetKahootInformation(Guid id)
     {
+      bool kahootExists = await _kahootService.checkIfKahootExistsById(id);
+      if (!kahootExists)
+      {
+        return NotFound();
+      }
+
+      var loggedUserId = await _userService.GetUserId();
+      bool isOwner = await _kahootService.IsOwner(id, loggedUserId);
+      if (!isOwner)
+      {
+        return Forbid();
+      }
+      
       var kahoot = await _dbContext.Kahoots
                       .Where(k => k.Id == id)
                       .Include(k => k.Questions)
