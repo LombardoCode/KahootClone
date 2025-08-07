@@ -20,7 +20,8 @@ interface ButtonProps {
 export enum ButtonSize {
   EXTRA_SMALL = "px-2 py-1",
   SMALL = "px-3 py-2",
-  MEDIUM = "px-5 py-3"
+  MEDIUM = "px-5 py-3",
+  LARGE = "px-8 py-6"
 }
 
 export enum BorderColors {

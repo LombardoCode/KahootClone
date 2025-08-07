@@ -16,10 +16,54 @@ import DiscoverKahootWrapper from "@/app/components/utils/Discovery/Cards/Kahoot
 import DiscoverKahootCard, { DiscoverKahootCardSize } from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootCard";
 import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
 import KahootSelectorModal from "@/app/components/utils/Modal/reusable/KahootSelectorModal";
+import ResourceNotFound, { ResourceTypes } from "@/app/components/utils/ErrorHandlers/ResourceNotFound";
 
 const CategoryPage = () => {
   const params = useParams();
   let { slug } = params;
+  if (Array.isArray(slug)) {
+    slug = slug[0];
+  }
+  const [categoryExists, setCategoryExists] = useState<boolean>(false);
+  
+
+  useEffect(() => {
+    const initialization = async () => {
+      const doesCategoryExists = await verifyIfCategoryExists()
+      if (doesCategoryExists) {
+        setCategoryExists(true);
+      }
+    }
+
+    initialization();
+  }, []);
+
+  const verifyIfCategoryExists = async (): Promise<boolean> => {
+    const categorySlug = slug;
+    try {
+      await axiosInstance.get(`/category/${categorySlug}`)
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  return (
+    <>
+      <DashboardLayout>
+        {!categoryExists
+          ? <ResourceNotFound resourceType={ResourceTypes.CATEGORY} />
+          : <PageContent categorySlug={slug} />}
+      </DashboardLayout>
+    </>
+  )
+}
+
+interface PageContentProps {
+  categorySlug: string;
+}
+
+const PageContent = ({ categorySlug }: PageContentProps) => {
   const [category, setCategory] = useState<Category>();
   const [featuredKahoots, setFeaturedKahoots] = useState<DiscoverFeaturedCardInfo[]>([]);
   const [subsections, setSubsections] = useState<DiscoverSubsectionClient[]>([]);
@@ -41,7 +85,7 @@ const CategoryPage = () => {
   const getCategoryInfo = async () => {
     await axiosInstance.get(`/category/getCategoryBySlug`, {
       params: {
-        categorySlug: slug
+        categorySlug
       }
     })
       .then(res => {
@@ -55,7 +99,7 @@ const CategoryPage = () => {
   const getFeaturedKahootsFromCategory = async () => {
     await axiosInstance.get(`/category/getFeaturedKahootsByCategorySlug`, {
       params: {
-        categorySlug: slug
+        categorySlug
       }
     })
       .then(res => {
@@ -69,7 +113,7 @@ const CategoryPage = () => {
   const getSubsectionsFromCategorySlug = async () => {
     await axiosInstance.get(`/category/getSubsectionsFromCategorySlug`, {
       params: {
-        categorySlug: slug
+        categorySlug
       }
     })
       .then(res => {
@@ -82,83 +126,81 @@ const CategoryPage = () => {
 
   return (
     <>
-      <DashboardLayout>
-        <div
-          id="category-banner"
-          className="w-full h-56 mb-4"
-        >
-          {category?.mediaUrl
-            ? (
-              <div className="relative h-full overflow-hidden">
-                <div className="absolute w-full h-full top-0 left-0 z-10 bg-black/40" />
-                <img
-                  src={`${category.mediaUrl}`}
-                  className="absolute top-0 left-0 w-full h-full object-cover"
-                />
-                <div className="flex justify-center items-center w-full h-full">
-                  <Text
-                    textColor={TextColors.WHITE}
-                    useCase={UseCases.BODY}
-                    fontWeight={FontWeights.BOLD}
-                    className={`absolute z-20 text-4xl text-shadow shadow-black/80`}
-                  >
-                    {category.name}
-                  </Text>
-                </div>
-              </div>
-            )
-            : (
-              <div className="w-full h-full bg-kahoot-purple-variant-4 flex justify-center items-center">
+      <div
+        id="category-banner"
+        className="w-full h-56 mb-4"
+      >
+        {category?.mediaUrl
+          ? (
+            <div className="relative h-full overflow-hidden">
+              <div className="absolute w-full h-full top-0 left-0 z-10 bg-black/40" />
+              <img
+                src={`${category.mediaUrl}`}
+                className="absolute top-0 left-0 w-full h-full object-cover"
+              />
+              <div className="flex justify-center items-center w-full h-full">
                 <Text
-                  fontWeight={FontWeights.BOLD}
                   textColor={TextColors.WHITE}
                   useCase={UseCases.BODY}
-                  className="text-5xl"
+                  fontWeight={FontWeights.BOLD}
+                  className={`absolute z-20 text-4xl text-shadow shadow-black/80`}
                 >
-                  {category?.name}
+                  {category.name}
                 </Text>
               </div>
-            )}
-        </div>
-
-        <div id="featured-kahoots-from-category">
-          {/* Featured kahoots */}
-          <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
-          <DiscoverFeaturedWrapper>
-            {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
-              <DiscoverFeaturedCard
-                key={i}
-                cardSize={DiscoverFeaturedCardSize.MEDIUM}
-                featuredKahoot={featuredKahoot}
-                onClick={handleKahootCardClick}
-              />
-            ))}
-          </DiscoverFeaturedWrapper>
-
-          {subsections.map((subsection: DiscoverSubsectionClient, index1: number) => (
-            <>
-              <SectionTitle
-                key={index1}
-                size={SectionTitleSizes.SMALL}
-                viewAll={true}
+            </div>
+          )
+          : (
+            <div className="w-full h-full bg-kahoot-purple-variant-4 flex justify-center items-center">
+              <Text
+                fontWeight={FontWeights.BOLD}
+                textColor={TextColors.WHITE}
+                useCase={UseCases.BODY}
+                className="text-5xl"
               >
-                {subsection.title}
-              </SectionTitle>
+                {category?.name}
+              </Text>
+            </div>
+          )}
+      </div>
 
-              <DiscoverKahootWrapper>
-                {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index2: number) => (
-                  <DiscoverKahootCard
-                    key={index2}
-                    cardSize={DiscoverKahootCardSize.SMALL}
-                    kahoot={kahoot}
-                    onClick={handleKahootCardClick}
-                  />
-                ))}
-              </DiscoverKahootWrapper>
-            </>
+      <div id="featured-kahoots-from-category">
+        {/* Featured kahoots */}
+        <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
+        <DiscoverFeaturedWrapper>
+          {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
+            <DiscoverFeaturedCard
+              key={i}
+              cardSize={DiscoverFeaturedCardSize.MEDIUM}
+              featuredKahoot={featuredKahoot}
+              onClick={handleKahootCardClick}
+            />
           ))}
-        </div>
-      </DashboardLayout>
+        </DiscoverFeaturedWrapper>
+
+        {subsections.map((subsection: DiscoverSubsectionClient, index1: number) => (
+          <>
+            <SectionTitle
+              key={index1}
+              size={SectionTitleSizes.SMALL}
+              viewAll={true}
+            >
+              {subsection.title}
+            </SectionTitle>
+
+            <DiscoverKahootWrapper>
+              {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index2: number) => (
+                <DiscoverKahootCard
+                  key={index2}
+                  cardSize={DiscoverKahootCardSize.SMALL}
+                  kahoot={kahoot}
+                  onClick={handleKahootCardClick}
+                />
+              ))}
+            </DiscoverKahootWrapper>
+          </>
+        ))}
+      </div>
 
       <KahootSelectorModal
         isOpen={isKahootSelectorModalOpen}

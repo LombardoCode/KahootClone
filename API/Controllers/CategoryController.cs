@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using API.Data;
 using API.Data.ForClient.Categories;
 using API.Data.ForClient.Dashboard.Discover.Sections;
@@ -18,6 +19,19 @@ namespace API.Controllers
     public CategoryController(DataContext dbContext)
     {
       _dbContext = dbContext;
+    }
+
+    [HttpGet("{categorySlug}")]
+    public async Task<ActionResult> Index(string categorySlug)
+    {
+      bool doesCategoryExists = await verifyIfCategoryExistsBySlug(categorySlug);
+
+      if (!doesCategoryExists)
+      {
+        return NotFound();
+      }
+
+      return Ok();
     }
 
     [Authorize]
@@ -75,6 +89,12 @@ namespace API.Controllers
     }
 
     #region Private Methods
+
+    private async Task<bool> verifyIfCategoryExistsBySlug(string slug)
+    {
+      bool doesThatCategoryExists = await _dbContext.Categories.AnyAsync(c => c.Slug == slug);
+      return doesThatCategoryExists;
+    }
 
     private async Task<Category> getCategoryBySlugName(string categorySlug)
     {
