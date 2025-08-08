@@ -39,7 +39,7 @@ const QuestionPreparationDisplay = () => {
         Question 1
       </Text>
 
-      <Spinner className="mb-3" />
+      <Spinner className="mb-3 text-white" />
 
       <Text
         fontWeight={FontWeights.BOLD}
@@ -108,7 +108,7 @@ const ShowAnswersToGuests = () => {
           <>
             <div className="absolute w-full h-screen">
               <div className="flex flex-col items-center justify-center h-full">
-                <Spinner className="mb-3" />
+                <Spinner className="mb-3 text-white" />
 
                 <Text
                   fontWeight={FontWeights.BOLD}

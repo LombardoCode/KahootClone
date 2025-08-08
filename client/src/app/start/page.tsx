@@ -65,7 +65,7 @@ const GettingReadyToPlay = () => {
           Get Ready
         </Text>
 
-        <Spinner className="mb-3" />
+        <Spinner className="mb-3 text-white" />
 
         <Text
           fontWeight={FontWeights.BOLD}

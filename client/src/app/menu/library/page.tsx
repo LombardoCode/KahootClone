@@ -14,12 +14,19 @@ import { faEllipsisVertical, faServer, faTrash, faWarning } from "@fortawesome/f
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import Modal, { ModalTypes } from "@/app/components/utils/Modal/Modal";
 import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
+import Spinner from "@/app/components/UIComponents/Spinners/Spinner";
 
 const LibraryMenuPage = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [kahootsFromUser, setKahootsFromUser] = useState<KahootDashboardList[]>([]);
 
   useEffect(() => {
-    getBasicInfoFromUsersKahoots();
+    const getInformation = async () => {
+      await getBasicInfoFromUsersKahoots();
+      setLoading(false);
+    }
+
+    getInformation();
   }, []);
 
   const getBasicInfoFromUsersKahoots = async () => {
@@ -30,6 +37,14 @@ const LibraryMenuPage = () => {
       .catch(err => {
         console.error(err);
       })
+  }
+
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <Spinner className="text-kahoot-purple-variant-3" />
+      </div>
+    )
   }
 
   return (

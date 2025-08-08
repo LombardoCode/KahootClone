@@ -1,5 +1,6 @@
 'use client';
 
+import Spinner from "@/app/components/UIComponents/Spinners/Spinner";
 import DiscoverCategoryCard, { DiscoverCategoryCardSize } from "@/app/components/utils/Discovery/Cards/Categories/DiscoverCategoryCard";
 import DiscoverCategoryWrapper from "@/app/components/utils/Discovery/Cards/Categories/DiscoverCategoryWrapper";
 import DiscoverFeaturedCard, { DiscoverFeaturedCardSize } from "@/app/components/utils/Discovery/Cards/Featured/DiscoverFeaturedCard";
@@ -18,6 +19,7 @@ import { useEffect, useState } from "react";
 
 
 const DiscoveryMenuPage = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [recentlyPlayedKahoots, setRecentlyPlayedKahoots] = useState<DiscoverKahootCardInfo[]>([]);
   const [categories, setCategories] = useState<DiscoverCategoryCardInfo[]>([]);
   const [featuredKahoots, setFeaturedKahoots] = useState<DiscoverFeaturedCardInfo[]>([]);
@@ -32,14 +34,20 @@ const DiscoveryMenuPage = () => {
   }
 
   useEffect(() => {
-    getRecentlyPlayedKahoots();
-    getCategories();
-    getFeaturedKahoots();
-    getSections();
+    const getInformation = async () => {
+      await getRecentlyPlayedKahoots();
+      await getCategories();
+      await getFeaturedKahoots();
+      await getSections();
+
+      setLoading(false);
+    }
+
+    getInformation();
   }, [])
 
   const getRecentlyPlayedKahoots = async () => {
-    axiosInstance.get('/kahoot/getRecentlyPlayedKahoots')
+    await axiosInstance.get('/kahoot/getRecentlyPlayedKahoots')
       .then(res => {
         setRecentlyPlayedKahoots(res.data);
       })
@@ -49,7 +57,7 @@ const DiscoveryMenuPage = () => {
   }
 
   const getCategories = async () => {
-    axiosInstance.get('/kahoot/getCategories')
+    await axiosInstance.get('/kahoot/getCategories')
       .then(res => {
         setCategories(res.data);
       })
@@ -58,8 +66,8 @@ const DiscoveryMenuPage = () => {
       })
   }
 
-  const getFeaturedKahoots = () => {
-    axiosInstance.get('/kahoot/getFeaturedKahoots')
+  const getFeaturedKahoots = async () => {
+    await axiosInstance.get('/kahoot/getFeaturedKahoots')
       .then(res => {
         setFeaturedKahoots(res.data);
       })
@@ -68,14 +76,22 @@ const DiscoveryMenuPage = () => {
       })
   }
 
-  const getSections = () => {
-    axiosInstance.get('/kahoot/getSections')
+  const getSections = async () => {
+    await axiosInstance.get('/kahoot/getSections')
       .then(res => {
         setSections(res.data);
       })
       .catch(err => {
         console.error(err);
       })
+  }
+
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <Spinner className="text-kahoot-purple-variant-3" />
+      </div>
+    )
   }
 
   return (
