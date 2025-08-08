@@ -15,24 +15,35 @@ import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import Modal, { ModalTypes } from "@/app/components/utils/Modal/Modal";
 import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
 import Spinner from "@/app/components/UIComponents/Spinners/Spinner";
+import Pagination from "@/app/components/utils/General/Pagination";
 
 const LibraryMenuPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [kahootsFromUser, setKahootsFromUser] = useState<KahootDashboardList[]>([]);
+  const [pageSize] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [totalOfResults, setTotalOfResults] = useState<number>(0);
 
   useEffect(() => {
     const getInformation = async () => {
+      setLoading(true);
       await getBasicInfoFromUsersKahoots();
       setLoading(false);
     }
 
     getInformation();
-  }, []);
+  }, [currentPage]);
 
   const getBasicInfoFromUsersKahoots = async () => {
-    await axiosInstance.get('/kahoot/getBasicInfoFromUsersKahoots')
+    await axiosInstance.get('/kahoot/getBasicInfoFromUsersKahoots', {
+      params: {
+        pageSize,
+        currentPage
+      }
+    })
       .then((res) => {
-        setKahootsFromUser(res.data);
+        setKahootsFromUser(res.data.kahoots);
+        setTotalOfResults(res.data.totalResults);
       })
       .catch(err => {
         console.error(err);
@@ -58,23 +69,32 @@ const LibraryMenuPage = () => {
         Your kahoots
       </Text>
 
-      {kahootsFromUser.length === 0
-        ? (
-          <Text
-            fontWeight={FontWeights.BOLD}
-            textColor={TextColors.BLACK}
-            useCase={UseCases.LONGTEXT}
-          >
-            You don&apos;t have any kahoots for now. Create your own Kahoot now!
-          </Text>
-        )
-        : (
-          <DisplayTableOfKahootsCreated
-            kahoots={kahootsFromUser}
-            className="mt-4"
-            onRefreshKahoots={getBasicInfoFromUsersKahoots}
-          />
-        )}
+      <div className="mb-7">
+        {kahootsFromUser.length === 0
+          ? (
+            <Text
+              fontWeight={FontWeights.BOLD}
+              textColor={TextColors.BLACK}
+              useCase={UseCases.LONGTEXT}
+            >
+              You don&apos;t have any kahoots for now. Create your own Kahoot now!
+            </Text>
+          )
+          : (
+            <DisplayTableOfKahootsCreated
+              kahoots={kahootsFromUser}
+              className="mt-4"
+              onRefreshKahoots={getBasicInfoFromUsersKahoots}
+            />
+          )}
+      </div>
+      
+      <Pagination
+        currentPage={currentPage}
+        pageSize={pageSize}
+        totalOfResults={totalOfResults}
+        setSelectedPage={(selectedPage: number) => setCurrentPage(selectedPage)}
+      />
     </>
   )
 }

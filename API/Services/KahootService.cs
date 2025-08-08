@@ -37,5 +37,10 @@ namespace API.Services
 
       return ownerId == userId;
     }
+
+    public async Task<int> GetKahootCountFromUserId(string userId)
+    {
+      return await _dbContext.Kahoots.CountAsync(k => k.UserId == userId);
+    }
   }
 }

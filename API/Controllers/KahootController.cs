@@ -31,9 +31,14 @@ namespace API.Controllers
 
     [HttpGet("getBasicInfoFromUsersKahoots")]
     [Authorize]
-    public async Task<ActionResult> GetBasicInfoFromUsersKahoots()
+    public async Task<ActionResult> GetBasicInfoFromUsersKahoots([FromQuery] int pageSize, int currentPage)
     {
       var userId = await _userService.GetUserId();
+
+      int numberOfTotalKahootThatTheUserHas = await _kahootService.GetKahootCountFromUserId(userId);
+
+      int offset = currentPage * pageSize;
+      int limit = pageSize;
 
       var kahoots = await _dbContext.Kahoots
                       .Where(k => k.UserId == userId)
@@ -48,9 +53,15 @@ namespace API.Controllers
                         CreatedAt = k.CreatedAt,
                         UpdatedAt = k.UpdatedAt,
                       })
+                      .Skip(offset)
+                      .Take(limit)
                       .ToListAsync();
 
-      return Ok(kahoots);
+      return Ok(new
+      {
+        Kahoots = kahoots,
+        TotalResults = numberOfTotalKahootThatTheUserHas
+      });
     }
 
     [HttpDelete("delete/{kahootId}")]
