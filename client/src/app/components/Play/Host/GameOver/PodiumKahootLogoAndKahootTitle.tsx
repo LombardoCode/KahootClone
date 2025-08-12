@@ -1,5 +1,6 @@
 import TitleCard from "@/app/components/UIComponents/TitleCard";
 import Logo, { LogoSize } from "@/app/components/utils/Logo";
+import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import { motion } from "framer-motion";
 
 interface PodiumKahootLogoAndKahootTitleProps {
@@ -8,6 +9,8 @@ interface PodiumKahootLogoAndKahootTitleProps {
 }
 
 const PodiumKahootLogoAndKahootTitle = ({ moveToTheTop, podiumHeaderDisappeared }: PodiumKahootLogoAndKahootTitleProps) => {
+  const { kahoot } = useInGameStore();
+
   return (
     <div className={`relative ${!podiumHeaderDisappeared ? 'h-1/2' : ''}`}>
       <motion.div
@@ -27,7 +30,7 @@ const PodiumKahootLogoAndKahootTitle = ({ moveToTheTop, podiumHeaderDisappeared 
         <div className="flex flex-col items-center">
           <Logo size={LogoSize.REGULAR} />
           <TitleCard className="mt-2 text-center w-full">
-            Kahoot title example
+            {kahoot?.title}
           </TitleCard>
         </div>
       </motion.div>
