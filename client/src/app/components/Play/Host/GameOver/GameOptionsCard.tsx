@@ -83,7 +83,7 @@ const ClickableOption = ({ children, onClick }: ClickableOptionProps) => {
         textColor={TextColors.WHITE}
         animateOnHover={false}
         size={ButtonSize.MEDIUM}
-        perspective={PerspectiveSize.MEDIUM}
+        perspective={PerspectiveSize.NO_PERSPECTIVE}
         className={`flex justify-between items-center w-full`}
         onClick={onClick}
       >
