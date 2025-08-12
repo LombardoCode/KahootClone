@@ -6,7 +6,7 @@ import montserrat from "@/app/utils/fontsConfig";
 
 interface ButtonProps {
   children: React.ReactNode;
-  backgroundColor: BackgroundColors | string;
+  backgroundColor?: BackgroundColors | string;
   className?: string;
   fontWeight?: FontWeights;
   textColor?: TextColors;
@@ -14,6 +14,7 @@ interface ButtonProps {
   animateOnHover?: boolean;
   perspective?: PerspectiveSize;
   size?: ButtonSize;
+  roundness?: ButtonRoundness;
   onClick?: (e?: any) => void;
 };
 
@@ -29,27 +30,44 @@ export enum BorderColors {
 }
 
 export enum PerspectiveSize {
-  NO_PERSPECTIVE = "border-b-0",
+  NO_PERSPECTIVE = "",
   SMALL = "border-b-2",
   MEDIUM = "border-b-4"
 }
 
-const Button = ({ children, backgroundColor, className, perspective = PerspectiveSize.NO_PERSPECTIVE, size = ButtonSize.MEDIUM, animateOnHover = true, fontWeight = FontWeights.LIGHT, textColor = TextColors.BLACK, borderColor = "", onClick }: ButtonProps) => {
+export enum ButtonRoundness {
+  NO_ROUNDNESS = "",
+  MEDIUM = "rounded-md",
+  FULL = "rounded-full"
+}
+
+const Button = ({
+  children,
+  backgroundColor = "",
+  className,
+  perspective = PerspectiveSize.NO_PERSPECTIVE,
+  size = ButtonSize.MEDIUM,
+  animateOnHover = true,
+  fontWeight = FontWeights.LIGHT,
+  textColor = TextColors.BLACK,
+  borderColor = "",
+  roundness = ButtonRoundness.MEDIUM,
+  onClick
+}: ButtonProps) => {
   return (
     <button
       className={`
         ${montserrat.className}
         ${size}
         ${perspective}
-        border-t-0 border-r-0
-        border-l-0 rounded-md my-2
+        ${roundness}
         ${backgroundColor}
         ${fontWeight}
         ${textColor}
         ${borderColor}
         ${className}
         ${animateOnHover ? 'hover:translate-y-0.5 hover:border-b-2' : ''}
-        outline-none`
+        outline-none my-2`
       }
       onClick={onClick}
     >

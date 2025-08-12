@@ -21,7 +21,7 @@ const LibraryMenuPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [kahootsFromUser, setKahootsFromUser] = useState<KahootDashboardList[]>([]);
   const [pageSize] = useState<number>(10);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalOfResults, setTotalOfResults] = useState<number>(0);
 
   useEffect(() => {

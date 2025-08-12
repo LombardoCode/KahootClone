@@ -37,7 +37,8 @@ namespace API.Controllers
 
       int numberOfTotalKahootThatTheUserHas = await _kahootService.GetKahootCountFromUserId(userId);
 
-      int offset = currentPage * pageSize;
+      // offset: We are receiving the currentPage value as a 1-based, we need to decrease it by 1, so we don't skip results on the first page.
+      int offset = (currentPage - 1) * pageSize;
       int limit = pageSize;
 
       var kahoots = await _dbContext.Kahoots
