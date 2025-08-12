@@ -273,8 +273,12 @@ namespace API.Controllers
     [HttpGet("getFeaturedKahoots")]
     public async Task<ActionResult<List<DiscoverFeaturedCardInfoDTO>>> getFeaturedKahoots()
     {
+      const int FIXED_AMOUNT_OF_KAHOOT_TO_RETRIEVE = 9;
+
       List<Guid> featuredKahootsIds = await _dbContext.FeaturedKahoots
                                               .Select(k => k.KahootId)
+                                              .Skip(0)
+                                              .Take(FIXED_AMOUNT_OF_KAHOOT_TO_RETRIEVE)
                                               .ToListAsync();
 
       List<DiscoverFeaturedCardInfoDTO> kahoots = await _dbContext.Kahoots
