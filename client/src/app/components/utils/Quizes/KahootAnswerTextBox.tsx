@@ -36,34 +36,38 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
         index={answerIndex}
         className={`${className}`}
       >
-        <InputForm
-          type={InputFormTypes.TEXT}
-          textColor={TextColors.WHITE}
-          fontWeight={FontWeights.BOLD}
-          name="email"
-          id="email"
-          value={answerText}
-          className={`flex- 1 h-24 w-full border-none rounded-none bg-transparent transition-all duration-0 placeholder:text-white/80 ${answerText.length === 0 ? 'italic' : ''}`}
-          placeholder={`Add answer ${answerIndex + 1}`}
-          onChange={handleAnswerTextChange}
-          disabled={isTheQuestionTrueOrFalse}
-        />
-        
-        {answerText.length > 0 && (
-          <div
-            className="self-center w-14 h-12 border-4 border-white rounded-full group cursor-pointer"
-            onClick={() => handleAnwserCorrectnessChange(!answer.isCorrect)}
-          >
-            <div className={`w-full h-full rounded-full flex justify-center items-center ${answer.isCorrect ? 'bg-green-600' : ''}`}>
-              <FontAwesomeIcon
-                icon={faCheck}
-                size={"lg"}
-                color={"white"}
-                className={`${!answer.isCorrect ? 'opacity-0 group-hover:opacity-100' : ''}`}
-              />
-            </div>
+        <div className="flex items-center">
+          <InputForm
+            type={InputFormTypes.TEXT}
+            textColor={TextColors.WHITE}
+            fontWeight={FontWeights.BOLD}
+            name="email"
+            id="email"
+            value={answerText}
+            className={`flex-1 h-24 border-none rounded-none bg-transparent transition-all duration-0 placeholder:text-white/80 ${answerText.length === 0 ? 'italic' : ''}`}
+            placeholder={`Add answer ${answerIndex + 1}`}
+            onChange={handleAnswerTextChange}
+            disabled={isTheQuestionTrueOrFalse}
+          />
+          
+          <div>
+            {answerText.length > 0 && (
+              <div
+                className="min-w-12 min-h-12 border-4 border-white rounded-full group cursor-pointer"
+                onClick={() => handleAnwserCorrectnessChange(!answer.isCorrect)}
+              >
+                <div className={`min-w-12 min-h-12 rounded-full flex justify-center items-center ${answer.isCorrect ? 'bg-green-600' : 'bg-gray-400'}`}>
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    size={"lg"}
+                    color={"white"}
+                    className={`${!answer.isCorrect ? 'opacity-0 group-hover:opacity-100' : ''}`}
+                  />
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </KahootAnswerBase>
     </>
   )

@@ -16,10 +16,13 @@ const KahootAnswerBase = ({ children, index, isCentered = false, showIcon = true
 
   return (
     <div
-      className={`px-2 rounded-md ${backgroundColor} ${className}`}
+      id={`kahoot-answer-base-${index}`}
+      className={`px-2 rounded-md flex items-center ${backgroundColor} ${className}`}
       onClick={onClick}
     >
-      <div className={`flex ${isCentered ? 'justify-center items-center' : 'items-stretch'}`}>
+      <div
+        id={`icon-for-kahoot-answer-wrapper-${index}`}
+        className={`flex ${isCentered ? 'justify-center items-center' : 'items-stretch'}`}>
         {showIcon
           ? <IconForKahootAnswer
             index={index}
@@ -27,6 +30,11 @@ const KahootAnswerBase = ({ children, index, isCentered = false, showIcon = true
             className={`${isCentered ? 'py-10 mr-2' : ''}`}
           />
           : <></>}
+      </div>
+      <div
+        id="input-and-answer-correctness-indicator-wrapper"
+        className="w-full"
+      >
         {children}
       </div>
     </div>

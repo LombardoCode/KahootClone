@@ -35,7 +35,7 @@ const InputForm = ({
   rightElement
 }: InputFormProps) => {
   return (
-    <div className={`relative`}>
+    <div className={`relative w-full`}>
       <input
         type={type}
         name={name}
