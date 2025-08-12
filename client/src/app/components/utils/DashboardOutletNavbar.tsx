@@ -10,11 +10,8 @@ import { DropDownContainer, DropDownItem } from "./Navbar";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { useRouter } from "next/navigation";
 import Button, { ButtonSize, PerspectiveSize } from "../UIComponents/Button";
-import useModalStore from "@/app/stores/useModalStore";
-import Modal, { ModalTypes } from "./Modal/Modal";
-import InputForm, { InputFormTypes } from "../UIComponents/InputForm";
-import axiosInstance from "@/app/utils/axiosConfig";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
+import KahootCreateModal from "./Modal/reusable/KahootCreateModal";
 
 interface DashboardOutletNavbarProps {
   fixed?: boolean;
@@ -24,12 +21,9 @@ interface DashboardOutletNavbarProps {
 const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutletNavbarProps) => {
   const router = useRouter();
   const { user, clearUser } = useUserStore();
-  const { isOpen, setIsOpen, closeModal } = useModalStore();
+  const [isCreateKahootModalOpen, setIsCreateKahootModalOpen] = useState<boolean>(false);
   const [toggleAccountDropdown, setToggleAccountDropdown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const [formData, setFormData] = useState({
-    newKahootName: ''
-  });
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -50,23 +44,6 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
     }
   };
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  }
-
-  const createKahoot = () => {
-    axiosInstance.post('/kahootcreator/create', { NewKahootName: formData.newKahootName })
-      .then(res => {
-        router.push(`/creator/${res.data.newKahootId}`);
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }
-
   return (
     <nav className={`bg-white py-3 px-4 w-full sticky top-0 shadow-sm shadow-zinc-300 z-30 ${className}`}>
       <div className="relative flex justify-end" ref={dropdownRef}>
@@ -78,7 +55,7 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
               size={ButtonSize.SMALL}
               textColor={TextColors.WHITE}
               className="mr-2"
-              onClick={() => setIsOpen(true)}
+              onClick={() => setIsCreateKahootModalOpen(true)}
               perspective={PerspectiveSize.MEDIUM}
               animateOnHover={false}
             >
@@ -119,46 +96,10 @@ const DashboardOutletNavbar = ({ fixed = true, className = '' }: DashboardOutlet
           </DropDownContainer>
         )}
       </div>
-      <Modal
-        modalType={ModalTypes.INPUT}
-        isOpen={isOpen}
-        title={`Create a Kahoot`}
-        onClose={closeModal}
-        bodyContent={(
-          <>
-            <Text
-              fontWeight={FontWeights.REGULAR}
-              textColor={TextColors.BLACK}
-              useCase={UseCases.LONGTEXT}
-              className="text-base"
-            >
-              Enter the name of your new Kahoot
-            </Text>
-            <InputForm
-              type={InputFormTypes.TEXT}
-              textColor={TextColors.BLACK}
-              fontWeight={FontWeights.LIGHT}
-              name="newKahootName"
-              id="newKahootName"
-              value={formData.newKahootName}
-              onChange={handleFormChange}
-            />
-          </>
-        )}
-        footerContent={(
-          <>
-            <Button
-              backgroundColor={BackgroundColors.GREEN}
-              fontWeight={FontWeights.BOLD}
-              size={ButtonSize.MEDIUM}
-              textColor={TextColors.WHITE}
-              className="mr-2"
-              onClick={() => createKahoot()}
-            >
-              Create
-            </Button>
-          </>
-        )}
+      
+      <KahootCreateModal
+        isOpen={isCreateKahootModalOpen}
+        onClose={() => setIsCreateKahootModalOpen(false)}
       />
     </nav>
   )
