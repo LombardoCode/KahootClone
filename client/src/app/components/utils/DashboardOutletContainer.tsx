@@ -6,7 +6,7 @@ interface DashboardOutletContainerProps {
 
 const DashboardOutletContainer = ({ children }: DashboardOutletContainerProps) => {
   return (
-    <div className="px-8 py-8 bg-zinc-200 h-full">
+    <div className="relative px-8 py-8 bg-zinc-200 h-full">
       {children}
     </div>
   )
