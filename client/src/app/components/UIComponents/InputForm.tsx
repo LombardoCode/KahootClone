@@ -15,6 +15,7 @@ export interface InputFormProps {
   disabled?: boolean;
   rightElement?: React.ReactNode;
   onEnterPress?: () => void;
+  autoComplete?: boolean;
 }
 
 export enum InputFormTypes {
@@ -34,7 +35,8 @@ const InputForm = ({
   onChange,
   disabled = false,
   rightElement,
-  onEnterPress
+  onEnterPress,
+  autoComplete = false
 }: InputFormProps) => {
   const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if ((e.nativeEvent as any).isComposing) {
@@ -59,6 +61,7 @@ const InputForm = ({
         placeholder={placeholder}
         disabled={disabled}
         onKeyDown={onKeyDownHandler}
+        autoComplete={autoComplete ? "on" : "off"}
       />
 
       {rightElement && (
