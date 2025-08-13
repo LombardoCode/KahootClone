@@ -6,6 +6,7 @@ import DashboardOutletNavbar from "../components/utils/DashboardOutletNavbar";
 import MainContent from "../components/utils/MainContent";
 import SidebarNav from "../components/utils/SidebarNav";
 import KahootSearchWindow from "../components/utils/General/KahootSearchWindow";
+import { DiscoverKahootCardInfo } from "../interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -13,6 +14,8 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [isKahootSearchWindowOpen, setIsKahootSearchWindowOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [searchedKahoots, setSearchedKahoots] = useState<DiscoverKahootCardInfo[]>([]);
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -20,6 +23,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <MainContent topSpacing={false} className={`flex-1 bg-white ${!isKahootSearchWindowOpen ? "overflow-y-scroll": "overflow-hidden"}`}>
         <DashboardOutletNavbar
           setIsKahootSearchWindowOpen={() => setIsKahootSearchWindowOpen(true)}
+          setLoading={setLoading}
+          setSearchedKahoots={(searchedKahoots: any) => setSearchedKahoots(searchedKahoots)}
         />
         <DashboardOutletContainer>
           <>
@@ -30,6 +35,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             {isKahootSearchWindowOpen && (
               <KahootSearchWindow
                 setIsKahootSearchWindowOpen={(isOpen: boolean) => setIsKahootSearchWindowOpen(isOpen)}
+                isLoading={loading}
+                searchedKahoots={searchedKahoots}
               />
             )}
           </>

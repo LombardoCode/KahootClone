@@ -13,19 +13,24 @@ import Button, { ButtonSize, PerspectiveSize } from "../UIComponents/Button";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import KahootCreateModal from "./Modal/reusable/KahootCreateModal";
 import InputForm, { InputFormTypes } from "../UIComponents/InputForm";
+import axiosInstance from "@/app/utils/axiosConfig";
+import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
 
 interface DashboardOutletNavbarProps {
   fixed?: boolean;
   className?: string;
   setIsKahootSearchWindowOpen: (isOpen: boolean) => void;
+  setLoading: (a: boolean) => void;
+  setSearchedKahoots: (kahoots: DiscoverKahootCardInfo[]) => void;
 }
 
-const DashboardOutletNavbar = ({ fixed = true, className = '', setIsKahootSearchWindowOpen }: DashboardOutletNavbarProps) => {
+const DashboardOutletNavbar = ({ fixed = true, className = '', setIsKahootSearchWindowOpen, setLoading, setSearchedKahoots }: DashboardOutletNavbarProps) => {
   const router = useRouter();
   const { user, clearUser } = useUserStore();
   const [isCreateKahootModalOpen, setIsCreateKahootModalOpen] = useState<boolean>(false);
   const [toggleAccountDropdown, setToggleAccountDropdown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [kahootSearchQuery, setKahootSearchQuery] = useState<string>("");
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -46,6 +51,21 @@ const DashboardOutletNavbar = ({ fixed = true, className = '', setIsKahootSearch
     }
   };
 
+  const searchKahoots = async () => {
+    setLoading(true);
+    await axiosInstance.post('/kahoot/search', {
+      query: kahootSearchQuery
+    })
+    .then(res => {
+      setSearchedKahoots(res.data);
+      setLoading(false);
+    })
+    .catch(err => {
+      setLoading(false);
+      console.error(err);
+    })
+  }
+
   return (
     <nav className={`bg-white py-3 px-4 w-full sticky top-0 shadow-sm shadow-zinc-300 z-30 ${className}`}>
       <div className="relative flex items-center justify-between" ref={dropdownRef}>
@@ -59,8 +79,11 @@ const DashboardOutletNavbar = ({ fixed = true, className = '', setIsKahootSearch
             fontWeight={FontWeights.LIGHT}
             name="image-query"
             id="image-query"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setKahootSearchQuery(e.target.value)}
+            value={kahootSearchQuery}
             className="w-full px-4 py-3"
-            placeholder="Search kahoots"
+            placeholder="Search public content"
+            onEnterPress={() => searchKahoots()}
           />
         </div>
 

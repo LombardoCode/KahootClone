@@ -2,9 +2,9 @@ using API.Data;
 using API.Data.ForClient.Dashboard.Discover.Sections;
 using API.Data.ForClient.Dashboard.Kahoot;
 using API.Data.Server.KahootCreator;
+using API.DTOs.Dashboard;
 using API.DTOs.Discover;
 using API.DTOs.Statistics;
-using API.Models;
 using API.Models.Statistics;
 using API.Services;
 using API.Sockets.Hubs;
@@ -143,7 +143,7 @@ namespace API.Controllers
       {
         return Forbid();
       }
-      
+
       var kahoot = await _dbContext.Kahoots
                       .Where(k => k.Id == id)
                       .Include(k => k.Questions)
@@ -345,6 +345,38 @@ namespace API.Controllers
                                     .FirstOrDefaultAsync();
 
       return Ok(kahootMetadata);
+    }
+
+    /// <summary>
+    /// This public method's responsability is to search public and playable kahoots based that matches either their title or description
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
+    [Authorize]
+    [HttpPost("search")]
+    public async Task<ActionResult<List<DiscoverKahootCardInfoDTO>>> SearchKahoots(SearchKahootDTO data)
+    {
+      string text = data.Query;
+
+      if (string.IsNullOrEmpty(text))
+      {
+        return BadRequest("Search cannot be empty.");
+      }
+
+      var kahoots = await _dbContext.Kahoots
+                                  .Where(k =>
+                                    (k.Title.Contains(text) || k.Description.Contains(text))
+                                    && k.IsPublic == true
+                                    && k.IsPlayable == true)
+                                  .Select(k => new DiscoverKahootCardInfoDTO
+                                  {
+                                    KahootId = k.Id,
+                                    Title = k.Title,
+                                    MediaUrl = k.MediaUrl
+                                  })
+                                  .ToListAsync();
+
+      return Ok(kahoots);
     }
   }
 }

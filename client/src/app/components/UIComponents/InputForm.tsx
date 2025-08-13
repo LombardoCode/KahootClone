@@ -14,6 +14,7 @@ export interface InputFormProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   rightElement?: React.ReactNode;
+  onEnterPress?: () => void;
 }
 
 export enum InputFormTypes {
@@ -32,8 +33,20 @@ const InputForm = ({
   placeholder = '',
   onChange,
   disabled = false,
-  rightElement
+  rightElement,
+  onEnterPress
 }: InputFormProps) => {
+  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if ((e.nativeEvent as any).isComposing) {
+      return;
+    }
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+      onEnterPress?.();
+    }
+  }
+
   return (
     <div className={`relative w-full`}>
       <input
@@ -45,6 +58,7 @@ const InputForm = ({
         onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
+        onKeyDown={onKeyDownHandler}
       />
 
       {rightElement && (
