@@ -10,14 +10,22 @@ import DiscoverKahootCard, { DiscoverKahootCardSize } from "../Discovery/Cards/K
 import DiscoverKahootWrapper from "../Discovery/Cards/Kahoots/DiscoverKahootWrapper";
 import KahootSelectorModal from "../Modal/reusable/KahootSelectorModal";
 import { useState } from "react";
+import Pagination from "./Pagination";
 
 interface KahootSearchWindowProps {
   setIsKahootSearchWindowOpen: (isOpen: boolean) => void;
   isLoading: boolean;
-  searchedKahoots: DiscoverKahootCardInfo[];
+  searchedKahootsMetadata: {
+    kahoots: DiscoverKahootCardInfo[],
+    total: number;
+  };
+  pageSize: number;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  setSelectedPage: (page: number) => void;
 }
 
-const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKahoots }: KahootSearchWindowProps) => {
+const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKahootsMetadata, pageSize, currentPage, setCurrentPage, setSelectedPage }: KahootSearchWindowProps) => {
   // Kahoot modal selector
   const [isKahootSelectorModalOpen, setIsKahootSelectorModalOpen] = useState<boolean>(false);
   const [selectedKahootId, setSelectedKahootId] = useState<string | null>(null);
@@ -39,9 +47,9 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
       <div className="absolute inset-0 w-full h-full z-20 px-8 py-8 overflow-y-auto">
         <div
           id="search-results-header-and-close-button-wrapper"
-          className={`flex ${searchedKahoots.length === 0 ? 'justify-end' : 'justify-between'} items-center w-full`}
+          className={`flex ${searchedKahootsMetadata.kahoots.length === 0 ? 'justify-end' : 'justify-between'} items-center w-full`}
         >
-          {searchedKahoots.length !== 0 && (
+          {searchedKahootsMetadata.kahoots.length !== 0 && (
             <div id="search-results-header">
               <Text
                 fontWeight={FontWeights.BOLD}
@@ -74,7 +82,7 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
         </div>
 
         <div id="searched-kahoots">
-          {searchedKahoots.length === 0 ? (
+          {searchedKahootsMetadata.kahoots.length === 0 ? (
             <Text
               fontWeight={FontWeights.REGULAR}
               textColor={TextColors.BLACK}
@@ -84,7 +92,7 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
             </Text>
           ) : (
             <DiscoverKahootWrapper>
-              {searchedKahoots.map((kahoot: DiscoverKahootCardInfo, index: number) => (
+              {searchedKahootsMetadata.kahoots.map((kahoot: DiscoverKahootCardInfo, index: number) => (
                 <DiscoverKahootCard
                   cardSize={DiscoverKahootCardSize.SMALL}
                   kahoot={kahoot}
@@ -94,6 +102,13 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
             </DiscoverKahootWrapper>
           )}
         </div>
+
+        <Pagination
+          currentPage={currentPage}
+          pageSize={pageSize}
+          totalOfResults={searchedKahootsMetadata.total}
+          setSelectedPage={(selectedPage: number) => setCurrentPage(selectedPage)}
+        />
       </div>
 
       <KahootSelectorModal

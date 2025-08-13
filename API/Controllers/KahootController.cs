@@ -363,6 +363,15 @@ namespace API.Controllers
         return BadRequest("Search cannot be empty.");
       }
 
+      int count = await _dbContext.Kahoots.CountAsync(k =>
+                                    (k.Title.Contains(text) || k.Description.Contains(text))
+                                    && k.IsPublic == true
+                                    && k.IsPlayable == true);
+
+      // offset: We are receiving the currentPage value as a 1-based, we need to decrease it by 1, so we don't skip results on the first page.
+      int offset = (data.CurrentPage - 1) * data.PageSize;
+      int limit = data.PageSize;
+
       var kahoots = await _dbContext.Kahoots
                                   .Where(k =>
                                     (k.Title.Contains(text) || k.Description.Contains(text))
@@ -374,9 +383,15 @@ namespace API.Controllers
                                     Title = k.Title,
                                     MediaUrl = k.MediaUrl
                                   })
+                                  .Skip(offset)
+                                  .Take(limit)
                                   .ToListAsync();
 
-      return Ok(kahoots);
+      return Ok(new
+      {
+        Kahoots = kahoots,
+        TotalResults = count
+      });
     }
   }
 }
