@@ -23,15 +23,20 @@ interface KahootSearchWindowProps {
   currentPage: number;
   setCurrentPage: (page: number) => void;
   setSelectedPage: (page: number) => void;
+  hasSearched: boolean;
 }
 
-const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKahootsMetadata, pageSize, currentPage, setCurrentPage, setSelectedPage }: KahootSearchWindowProps) => {
+const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKahootsMetadata, pageSize, currentPage, setCurrentPage, setSelectedPage, hasSearched }: KahootSearchWindowProps) => {
   // Kahoot modal selector
   const [isKahootSelectorModalOpen, setIsKahootSelectorModalOpen] = useState<boolean>(false);
   const [selectedKahootId, setSelectedKahootId] = useState<string | null>(null);
   const handleKahootCardClick = (kahootId: string) => {
     setSelectedKahootId(kahootId);
     setIsKahootSelectorModalOpen(true);
+  }
+
+  const closeKahootSearchWindowHandler = () => {
+    setIsKahootSearchWindowOpen(false);
   }
 
   if (isLoading) {
@@ -71,7 +76,7 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
               animateOnHover={false}
               size={ButtonSize.MEDIUM}
               perspective={PerspectiveSize.MEDIUM}
-              onClick={() => setIsKahootSearchWindowOpen(false)}
+              onClick={() => closeKahootSearchWindowHandler()}
             >
               <FontAwesomeIcon
                 icon={faXmark}
@@ -83,13 +88,9 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
 
         <div id="searched-kahoots">
           {searchedKahootsMetadata.kahoots.length === 0 ? (
-            <Text
-              fontWeight={FontWeights.REGULAR}
-              textColor={TextColors.BLACK}
-              useCase={UseCases.BODY}
-            >
-              There are no results
-            </Text>
+            hasSearched && (
+              <ShowNoResultsMessage />
+            )
           ) : (
             <DiscoverKahootWrapper>
               {searchedKahootsMetadata.kahoots.map((kahoot: DiscoverKahootCardInfo, index: number) => (
@@ -103,12 +104,14 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
           )}
         </div>
 
-        <Pagination
-          currentPage={currentPage}
-          pageSize={pageSize}
-          totalOfResults={searchedKahootsMetadata.total}
-          setSelectedPage={(selectedPage: number) => setCurrentPage(selectedPage)}
-        />
+        {searchedKahootsMetadata.kahoots.length !== 0 && (
+          <Pagination
+            currentPage={currentPage}
+            pageSize={pageSize}
+            totalOfResults={searchedKahootsMetadata.total}
+            setSelectedPage={(selectedPage: number) => setCurrentPage(selectedPage)}
+          />
+        )}
       </div>
 
       <KahootSelectorModal
@@ -120,6 +123,29 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
         selectedKahootId={selectedKahootId}
       />
     </>
+  )
+}
+
+const ShowNoResultsMessage = () => {
+  return (
+    <div className="flex flex-col items-center">
+      <Text
+        fontWeight={FontWeights.BOLD}
+        textColor={TextColors.PURPLE_VARIANT_4}
+        useCase={UseCases.BODY}
+        className="text-9xl text-center select-none mb-8"
+      >
+        :(
+      </Text>
+      <Text
+        fontWeight={FontWeights.BOLD}
+        textColor={TextColors.GRAY}
+        useCase={UseCases.BODY}
+        className="text-2xl text-center w-1/5"
+      >
+        Sorry, we couldn’t find any results matching your search.
+      </Text>
+    </div>
   )
 }
 

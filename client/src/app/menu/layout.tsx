@@ -17,6 +17,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [isKahootSearchWindowOpen, setIsKahootSearchWindowOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [kahootSearchQuery, setKahootSearchQuery] = useState<string>("");
+  const [hasSearched, setHasSearched] = useState<boolean>(false);
   const [searchedKahootsMetadata, setSearchedKahootsMetadata] = useState<{
     kahoots: DiscoverKahootCardInfo[],
     total: number
@@ -30,7 +31,12 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const searchKahoots = async (queryText: string) => {
+    if (queryText === "") {
+      return;
+    }
+
     setLoading(true);
+    setHasSearched(true);
     await axiosInstance.post('/kahoot/search', {
       query: queryText,
       pageSize,
@@ -50,6 +56,10 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   }
 
   useEffect(() => {
+    if (kahootSearchQuery === "") {
+      return;
+    }
+
     const searchKahootsInitializer = async () => {
       await searchKahoots(kahootSearchQuery);
     }
@@ -85,6 +95,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 currentPage={currentPage}
                 setCurrentPage={(page: number) => setCurrentPage(page)}
                 setSelectedPage={(page: number) => setCurrentPage(page)}
+                hasSearched={hasSearched}
               />
             )}
           </>
