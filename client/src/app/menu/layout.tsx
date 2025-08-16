@@ -28,7 +28,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   });
 
   // Pagination
-  const [pageSize] = useState<number>(10);
+  const [pageSize] = useState<number>(21);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   // Ref variables for the useClickAway hook
