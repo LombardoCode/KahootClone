@@ -24,9 +24,10 @@ interface KahootSearchWindowProps {
   setCurrentPage: (page: number) => void;
   setSelectedPage: (page: number) => void;
   hasSearched: boolean;
+  kahootSearchWindowRef: React.RefObject<HTMLDivElement>;
 }
 
-const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKahootsMetadata, pageSize, currentPage, setCurrentPage, setSelectedPage, hasSearched }: KahootSearchWindowProps) => {
+const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKahootsMetadata, pageSize, currentPage, setCurrentPage, setSelectedPage, hasSearched, kahootSearchWindowRef: containerRef }: KahootSearchWindowProps) => {
   // Kahoot modal selector
   const [isKahootSelectorModalOpen, setIsKahootSelectorModalOpen] = useState<boolean>(false);
   const [selectedKahootId, setSelectedKahootId] = useState<string | null>(null);
@@ -49,7 +50,10 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
 
   return (
     <>
-      <div className="absolute inset-0 w-full h-full z-20 px-8 py-8 overflow-y-auto">
+      <div
+        ref={containerRef}
+        className="absolute inset-0 w-full h-full z-20 px-8 py-8 overflow-y-auto"
+      >
         <div
           id="search-results-header-and-close-button-wrapper"
           className={`flex ${searchedKahootsMetadata.kahoots.length === 0 ? 'justify-end' : 'justify-between'} items-center w-full`}

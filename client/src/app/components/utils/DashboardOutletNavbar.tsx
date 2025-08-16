@@ -21,6 +21,7 @@ interface DashboardOutletNavbarProps {
   kahootSearchQuery: string;
   setKahootSearchQuery: (queryText: string) => void;
   executeKahootSearch: () => void;
+  navbarRef?: React.RefObject<HTMLDivElement>;
 }
 
 const DashboardOutletNavbar = ({
@@ -29,7 +30,8 @@ const DashboardOutletNavbar = ({
   setIsKahootSearchWindowOpen,
   kahootSearchQuery,
   setKahootSearchQuery,
-  executeKahootSearch
+  executeKahootSearch,
+  navbarRef: activatorRef
 }: DashboardOutletNavbarProps) => {
   const router = useRouter();
   const { user, clearUser } = useUserStore();
@@ -61,6 +63,7 @@ const DashboardOutletNavbar = ({
       <div className="relative flex items-center justify-between" ref={dropdownRef}>
         <div
           className="w-full"
+          ref={activatorRef}
           onClick={() => setIsKahootSearchWindowOpen(true)}
         >
           <InputForm

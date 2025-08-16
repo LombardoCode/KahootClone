@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DashboardOutletContainer from "../components/utils/DashboardOutletContainer";
 import DashboardOutletNavbar from "../components/utils/DashboardOutletNavbar";
 import MainContent from "../components/utils/MainContent";
@@ -8,6 +8,7 @@ import SidebarNav from "../components/utils/SidebarNav";
 import KahootSearchWindow from "../components/utils/General/KahootSearchWindow";
 import { DiscoverKahootCardInfo } from "../interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
 import axiosInstance from "../utils/axiosConfig";
+import useClickAway from "../hooks/useClickAway";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -29,6 +30,10 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   // Pagination
   const [pageSize] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
+
+  // Ref variables for the useClickAway hook
+  const navbarRef = useRef<HTMLDivElement | null>(null);
+  const kahootSearchWindowRef = useRef<HTMLDivElement | null>(null);
 
   const searchKahoots = async (queryText: string) => {
     if (queryText === "") {
@@ -67,6 +72,12 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     searchKahootsInitializer();
   }, [currentPage]);
 
+  useClickAway(
+    [navbarRef, kahootSearchWindowRef],
+    () => setIsKahootSearchWindowOpen(false),
+    isKahootSearchWindowOpen
+  )
+
   return (
     <div className="flex h-screen overflow-hidden">
       <SidebarNav className="min-w-60 bg-white h-full" />
@@ -79,6 +90,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           kahootSearchQuery={kahootSearchQuery}
           setKahootSearchQuery={(queryText: string) => setKahootSearchQuery(queryText)}
           executeKahootSearch={async () => await searchKahoots(kahootSearchQuery)}
+          navbarRef={navbarRef}
         />
         <DashboardOutletContainer>
           <>
@@ -96,6 +108,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 setCurrentPage={(page: number) => setCurrentPage(page)}
                 setSelectedPage={(page: number) => setCurrentPage(page)}
                 hasSearched={hasSearched}
+                kahootSearchWindowRef={kahootSearchWindowRef}
               />
             )}
           </>
