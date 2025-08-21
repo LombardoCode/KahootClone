@@ -10,10 +10,12 @@ import GameOptionsCard from "../components/Play/Host/GameOver/GameOptionsCard";
 import useInGameStore from "../stores/Kahoot/useInGameStore";
 import SoundBank from "../singletons/SoundBank";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
+import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
 
 const GameOverScreen = () => {
   // Hooks
   useLobbySocketEvents();
+  useBackButtonConfirm();
 
   // Local component state
   const [width, setWidth] = useState<number>(0);

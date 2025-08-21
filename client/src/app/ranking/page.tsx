@@ -12,38 +12,16 @@ import { BackgroundColors } from "../interfaces/Colors.interface";
 import { determineFinalMessageToPlayer } from "../utils/podium";
 import { useRouter } from "next/navigation";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
+import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
+import { ROUTES } from "../utils/Routes/routesUtils";
 
 const RankingPage = () => {
   // Hooks
   useLobbySocketEvents();
+  useBackButtonConfirm();
 
-  const { signalRConnection, currentPlayer } = useInGameStore();
-  const [finalPLayerData, setFinalPlayerData] = useState<FinalPlayerStats>();
-  const [showPlayerFinalStats, setShowPlayerFinalStats] = useState<boolean>(false);
-
-  useEffect(() => {
-    const setupConnection = async () => {
-      await initializeSignalREvents();
-    }
-
-    setupConnection();
-  }, []);
-
-  const initializeSignalREvents = async () => {
-    if (signalRConnection) {
-      signalRConnection.on('OnReceivePlayersFinalStats', (playersFinalStats: FinalPlayerStats[]) => {
-        const individualPlayerFinalStats: FinalPlayerStats | undefined = playersFinalStats.find(p => p.connectionId === currentPlayer.connectionId);
-
-        if (individualPlayerFinalStats !== undefined) {
-          setFinalPlayerData(individualPlayerFinalStats);
-        }
-      })
-
-      signalRConnection.on('OnNotifyOtherPlayersToShowTheirStats', (status: boolean) => {
-        setShowPlayerFinalStats(status);
-      })
-    }
-  }
+  // Global store state
+  const { finalPlayerData, showPlayerFinalStats } = useInGameStore();
 
   return (
     <div className={`relative bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>
@@ -71,7 +49,7 @@ const RankingPage = () => {
               </>
             )
             : (
-              <ShowPlayerTheirStats stats={finalPLayerData} />
+              <ShowPlayerTheirStats stats={finalPlayerData} />
             )}
         </div>
       </div>
@@ -80,12 +58,12 @@ const RankingPage = () => {
 }
 
 interface ShowPlayerTheirStatsProps {
-  stats: FinalPlayerStats | undefined;
+  stats: FinalPlayerStats | null;
 }
 
 const ShowPlayerTheirStats = ({ stats }: ShowPlayerTheirStatsProps) => {
-  if (stats === undefined) {
-    return null;
+  if (stats === null) {
+    return;
   }
 
   const router = useRouter();
@@ -129,7 +107,7 @@ const ShowPlayerTheirStats = ({ stats }: ShowPlayerTheirStatsProps) => {
         animateOnHover={false}
         size={ButtonSize.MEDIUM}
         className="w-full"
-        onClick={() => router.push('/')}
+        onClick={() => router.push(ROUTES.ROOT)}
       >
         Exit
       </Button>

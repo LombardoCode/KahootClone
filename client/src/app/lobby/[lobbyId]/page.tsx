@@ -21,6 +21,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import useLobbySocketEvents from "@/app/hooks/useLobbySocketEvents";
 import useUserStore from "@/app/stores/useUserStore";
 import SoundBank from "@/app/singletons/SoundBank";
+import { ROUTES } from "@/app/utils/Routes/routesUtils";
 
 const LobbyPage = () => {
   // Hooks
@@ -50,8 +51,8 @@ const LobbyPage = () => {
     }
   }, []);
 
-  const checkIfWeAreInAValidLobby = () => {
-    axiosInstance.post(`/lobby/checkIfValidLobby`, { lobbyId: lobbyIdFromParams })
+  const checkIfWeAreInAValidLobby = async () => {
+    await axiosInstance.post(`/lobby/checkIfValidLobby`, { lobbyId: lobbyIdFromParams })
       .then(res => {
         setIsValidLobby(res.data);
         ConnectingToTheSignalRLobbyHub();
@@ -75,21 +76,18 @@ const LobbyPage = () => {
 
     // Save the connection details to our store
     setSignalRConnection(connection);
+
+    // Start the connection
+    startSignalRConnection(connection);
   }
 
-  useEffect(() => {
-    if (signalRConnection) {
-      startSignalRConnection();
-    }
-  }, [signalRConnection]);
-
-  const startSignalRConnection = async () => {
-    if (!signalRConnection) {
+  const startSignalRConnection = async (connection: signalR.HubConnection) => {
+    if (connection === null) {
       return;
     }
 
     try {
-      await signalRConnection.start();
+      await connection.start();
 
       const res = await axiosInstance.get(`/lobby/checkIfTheUserIsHostFromTheGame?lobbyId=${lobbyIdFromParams}`);
       const isUserHost: boolean = res.data.isHost;
@@ -100,7 +98,7 @@ const LobbyPage = () => {
         await downloadAllKahootQuestions();
       }
 
-      signalRConnection.invoke('IntegrateConnectionIdToTheLobbyGroup', lobbyIdFromParams, isUserHost);
+      connection.invoke('IntegrateConnectionIdToTheLobbyGroup', lobbyIdFromParams, isUserHost);
     }
     catch (err) {
       console.error("Error establishing the connection: ", err);
@@ -399,7 +397,7 @@ const LobbyIsNotValidPage = () => {
             textColor={TextColors.WHITE}
             className="text-sm"
             size={ButtonSize.MEDIUM}
-            onClick={() => router.push('/')}
+            onClick={() => router.push(ROUTES.ROOT)}
           >
             Go to homepage
           </Button>

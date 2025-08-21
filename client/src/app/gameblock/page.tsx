@@ -4,10 +4,12 @@ import useInGameStore from "../stores/Kahoot/useInGameStore";
 import PlayScreenForHost from "../components/Play/Host/PlayScreenForHost";
 import PlayScreenForGuest from "../components/Play/Guest/PlayScreenForGuest";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
+import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
 
 const GameBlock = () => {
   // Hooks
   useLobbySocketEvents();
+  useBackButtonConfirm();
 
   // Global store state
   const { isHost, questionIndex } = useInGameStore();

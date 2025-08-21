@@ -10,34 +10,16 @@ import { useEffect, useState } from "react";
 import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 import SoundBank from "../singletons/SoundBank";
+import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
+import { HubConnectionState } from "@microsoft/signalr";
 
 const PlayPage = () => {
   // Hooks
   useLobbySocketEvents();
+  useBackButtonConfirm();
 
   // Global store state
-  const { signalRConnection, isHost, kahoot, setQuestionIndex } = useInGameStore();
-  const router = useRouter();
-
-  useEffect(() => {
-    const setupConnection = async() => {
-      await initializeSignalREvents();
-    }
-
-    setupConnection();
-  }, []);
-
-  const initializeSignalREvents = async() => {
-    if (signalRConnection) {
-      // Send the guest to the '/getready' page
-      if (!isHost) {
-        await signalRConnection.on('OnRedirectToTheGetReadyPage', (questionIndex: number) => {
-          setQuestionIndex(questionIndex);
-          router.push('/getready');
-        })
-      }
-    }
-  }
+  const { isHost, kahoot } = useInGameStore();
 
   return (
     <div className={`relative bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>
@@ -168,13 +150,9 @@ const SquareCountdownTimer = () => {
       } else {
         SoundBank.playWhoosh();
 
-        const countTimer = setTimeout(() => {
-          if (isHost) {
-            if (signalRConnection) {
-              signalRConnection.invoke('SendGuestsToTheGetReadyPage', lobbyId, questionIndex);
-            }
-
-            router.push('/gameblock');
+        const countTimer = setTimeout(async () => {
+          if (isHost && signalRConnection !== null && signalRConnection.state === HubConnectionState.Connected) {
+            await signalRConnection.invoke('StartRound', lobbyId, questionIndex);
           }
         }, 500);
 

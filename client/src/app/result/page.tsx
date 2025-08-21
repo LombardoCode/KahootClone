@@ -7,20 +7,20 @@ import useInGameStore from "../stores/Kahoot/useInGameStore";
 import { AnswerPlay, QuestionPlay } from "../interfaces/Kahoot/Kahoot.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "next/navigation";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
+import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
 
 const ResultPage = () => {
   // Hooks
   useLobbySocketEvents();
+  useBackButtonConfirm();
   
   // Global store state
-  const { kahoot, questionIndex, earnedPointsFromCurrentQuestion, signalRConnection } = useInGameStore();
+  const { kahoot, questionIndex, earnedPointsFromCurrentQuestion } = useInGameStore();
   
   // Local component state
   const [wasSelectedAnswerCorrect, setWasSelectedAnswerCorrect] = useState<boolean>(false);
-  const router = useRouter();
 
   useEffect(() => {
     const currentQuestion: QuestionPlay | undefined = kahoot?.questions[questionIndex];
@@ -31,19 +31,7 @@ const ResultPage = () => {
     if (correctAnswers?.some(correctAnswer => correctAnswer.id === selectedAnswer?.id)) {
       setWasSelectedAnswerCorrect(true);
     }
-
-    const setupConnection = async () => {
-      await initializeSignalREvents();
-    }
   }, []);
-
-  const initializeSignalREvents = async () => {
-    if (signalRConnection) {
-      await signalRConnection.on('OnRedirectGuestsToSpecificPage', (clientPath: string) => {
-        router.push(clientPath);
-      });
-    }
-  }
 
   return (
     <div className={`relative bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>

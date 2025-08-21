@@ -29,6 +29,10 @@ interface InGameStore {
   setFinalPlayerStats: (finalPlayerStats: Player[]) => void;
   everyoneHasAnsweredTheCurrentQuestion: boolean,
   setEveryoneHasAnsweredTheCurrentQuestion: (status: boolean) => void;
+  finalPlayerData: FinalPlayerStats | null;
+  setFinalPlayerData: (finalPlayerData: FinalPlayerStats) => void;
+  showPlayerFinalStats: boolean;
+  setShowPlayerFinalStats: (value: boolean) => void;
 
 
   // Kahoot and questions
@@ -184,6 +188,14 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
   setEveryoneHasAnsweredTheCurrentQuestion: (status: boolean) => set(() => ({
     everyoneHasAnsweredTheCurrentQuestion: status
   })),
+  finalPlayerData: null,
+  setFinalPlayerData: (finalPlayerData: FinalPlayerStats) => set(() => ({
+    finalPlayerData
+  })),
+  showPlayerFinalStats: false,
+  setShowPlayerFinalStats: (value: boolean) => set(() => ({
+    showPlayerFinalStats: value
+  })),
 
   // Kahoot and questions
   kahoot: null,
@@ -207,7 +219,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
         const newQuestionIndex: number = state.questionIndex + 1;
         // Send the guests to the '/getready' page
         if (state.signalRConnection) {
-          state.signalRConnection.invoke('SendGuestsToTheGetReadyPage', state.lobbyId, newQuestionIndex);
+          state.signalRConnection.invoke('StartRound', state.lobbyId, newQuestionIndex);
         }
         
         return {

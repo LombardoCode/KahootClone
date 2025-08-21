@@ -1,20 +1,20 @@
 import { usePathname, useRouter } from "next/navigation";
-import useInGameStore from "../stores/Kahoot/useInGameStore";
+import useInGameStore, { FinalPlayerStats } from "../stores/Kahoot/useInGameStore";
 import { useEffect } from "react";
 import { Player } from "../interfaces/Play/Player.interface";
 import { KahootPlay } from "../interfaces/Kahoot/Kahoot.interface";
-import { isInLobbyRoute } from "../utils/Lobby/lobbyUtils";
+import { isInLobbyRoute, kickingTheGuest, kickingTheHost } from "../utils/Lobby/lobbyUtils";
 import { debugLog } from "../utils/debugLog";
 import { ROUTES } from "../utils/Routes/routesUtils";
-import SoundBank from "../singletons/SoundBank";
+import { HubConnectionState } from "@microsoft/signalr";
 
 const useLobbySocketEvents = () => {
-  const { signalRConnection, addPlayer, removePlayer, isHost, setIsHost, lobbyId, setKahootInfo, setCurrentPlayer, setEarnedPointsFromCurrentQuestion } = useInGameStore();
+  const { signalRConnection, addPlayer, removePlayer, isHost, lobbyId, setKahootInfo, setCurrentPlayer, setEarnedPointsFromCurrentQuestion, setQuestionIndex, currentPlayer, setFinalPlayerData, setShowPlayerFinalStats } = useInGameStore();
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!signalRConnection || isHost === null) {
+    if (signalRConnection === null || isHost === null) {
       return;
     }
 
@@ -26,7 +26,7 @@ const useLobbySocketEvents = () => {
   }, [signalRConnection, isHost]);
 
   const registerSignalREvents = (isUserHost: boolean) => {
-    if (!signalRConnection) {
+    if (signalRConnection === null || signalRConnection.state === HubConnectionState.Disconnected) {
       return;
     }
 
@@ -40,7 +40,7 @@ const useLobbySocketEvents = () => {
   }
 
   const registerSignalREventsForBothHostAndGuestUsers = () => {
-    if (!signalRConnection) {
+    if (signalRConnection === null || signalRConnection.state === HubConnectionState.Disconnected) {
       return;
     }
 
@@ -49,10 +49,19 @@ const useLobbySocketEvents = () => {
     signalRConnection.on('GameHasStarted', () => {
       router.push('/start');
     });
+
+    signalRConnection.on('OnRoundTransition', (questionIndex: number) => {
+      if (!isHost) {
+        setQuestionIndex(questionIndex);
+        router.push('/getready');
+      } else {
+        router.push('/gameblock');
+      }
+    })
   }
 
   const registerSignalREventsForHost = () => {
-    if (!signalRConnection) {
+    if (signalRConnection === null || signalRConnection.state === HubConnectionState.Disconnected) {
       return;
     }
 
@@ -85,7 +94,7 @@ const useLobbySocketEvents = () => {
 
     signalRConnection.on("UpdateAnswerBoard", (playerConnId: string, selectedAnswerIdFromGuest: number) => {
       const state = useInGameStore.getState();
-      
+
       // Update the answer statistics for the current question
       state.increaseAnswerCountForCurrentQuestion(selectedAnswerIdFromGuest);
 
@@ -99,24 +108,16 @@ const useLobbySocketEvents = () => {
       const currentPlayers: Player[] = useInGameStore.getState().players;
 
       if (isHost && currentPlayers.length === 0) {
-        // The host is the only in the lobby, destroy the lobby data and redirect the host to "/"
-        signalRConnection.invoke('DestroyLobbyData', lobbyId)
-          .then(() => {
-            // We don't want to kick the host when being at the lobby when there are no players left
-            if (!isInLobbyRoute(pathname)) {
-              signalRConnection.stop().then(() => {
-                SoundBank.stopInGameBackgroundMusic();
-                SoundBank.stopPodiumBackgroundMusic();
-                router.push(ROUTES.ROOT);
-              });
-            }
-          })
+        // The host is the only user in the game, stop host's connection and redirect the host to the discover page
+        signalRConnection.stop().then(() => {
+          kickingTheHost(pathname, router);
+        })
       }
     });
   }
 
   const registerSignalREventsForGuest = () => {
-    if (!signalRConnection) {
+    if (signalRConnection === null || signalRConnection.state === HubConnectionState.Disconnected) {
       return;
     }
 
@@ -133,7 +134,7 @@ const useLobbySocketEvents = () => {
     signalRConnection.on('OnHostAbandonedTheGame', () => {
       // Stop the connection and redirect the user to "/", no matter if we are at the lobby of if the user is currently playing
       signalRConnection.stop();
-      router.push('/');
+      kickingTheGuest(router);
     });
 
     signalRConnection.on('ReceiveMyUpdatedPlayerInfo', (myUpdatedPlayerInfo: Player) => {
@@ -152,8 +153,20 @@ const useLobbySocketEvents = () => {
       // This SignalR is meant to be executed when the hosts clicks on the user card on the lobby waiting room
       if (isInLobbyRoute(pathname)) {
         signalRConnection.stop();
-        router.push('/');
+        router.push(ROUTES.ROOT);
       }
+    });
+
+    signalRConnection.on('OnReceivePlayersFinalStats', (playersFinalStats: FinalPlayerStats[]) => {
+      const individualPlayerFinalStats: FinalPlayerStats | undefined = playersFinalStats.find(p => p.connectionId === currentPlayer.connectionId);
+
+      if (individualPlayerFinalStats !== undefined) {
+        setFinalPlayerData(individualPlayerFinalStats);
+      }
+    });
+
+    signalRConnection.on('OnNotifyOtherPlayersToShowTheirStats', (status: boolean) => {
+      setShowPlayerFinalStats(status);
     });
   }
 
@@ -178,9 +191,12 @@ const useLobbySocketEvents = () => {
     signalRConnection.off('OnRedirectGuestsToSpecificPage');
     signalRConnection.off('OnReceiveHowManyPointsPlayerEarnedFromCurrentQuestion');
     signalRConnection.off('DisconnectPlayer');
+    signalRConnection.off('OnReceivePlayersFinalStats');
+    signalRConnection.off('OnNotifyOtherPlayersToShowTheirStats');
 
     // Host and guest events
     signalRConnection.off('GameHasStarted');
+    signalRConnection.off('OnRoundTransition');
   }
 }
 

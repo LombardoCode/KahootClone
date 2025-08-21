@@ -1,54 +1,16 @@
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import Text from "../../UIComponents/Text";
 import Spinner from "../../UIComponents/Spinners/Spinner";
-import { useState } from "react";
 import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import KahootAnswerContainer from "../../utils/Quizes/KahootAnswerContainer";
 import { AnswerPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import KahootAnswerDisplay from "../../utils/Quizes/KahootAnswerDisplay";
 import { getTextContentForLayout } from "../../utils/Quizes/KahootQuestion.utills";
-import PlayerInGameStatus from "../../utils/InGame/PlayerInGameStatus";
 
 const PlayScreenForGuest = () => {
-  // Local component state
-  const [showQuestionPreparation] = useState<boolean>(false);
-  const [showAnswers] = useState<boolean>(true);
-
   return (
     <div className="relative z-10 h-full flex justify-center items-center">
-      {showQuestionPreparation && (
-        <QuestionPreparationDisplay />
-      )}
-
-      {showAnswers && (
-        <ShowAnswersToGuests />
-      )}
-    </div>
-  )
-}
-
-const QuestionPreparationDisplay = () => {
-  return (
-    <div id="get-ready" className="w-96 flex flex-col items-center">
-      <Text
-        fontWeight={FontWeights.BOLD}
-        textColor={TextColors.WHITE}
-        useCase={UseCases.LONGTEXT}
-        className="text-4xl mb-3"
-      >
-        Question 1
-      </Text>
-
-      <Spinner className="mb-3 text-white" />
-
-      <Text
-        fontWeight={FontWeights.BOLD}
-        textColor={TextColors.WHITE}
-        useCase={UseCases.LONGTEXT}
-        className="text-2xl"
-      >
-        Ready...
-      </Text>
+      <ShowAnswersToGuests />
     </div>
   )
 }

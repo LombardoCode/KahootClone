@@ -223,9 +223,9 @@ namespace API.Sockets.Hubs
       await Clients.Group(lobbyId).SendAsync("GameHasStarted");
     }
 
-    public async Task SendGuestsToTheGetReadyPage(string lobbyId, int questionIndex)
+    public async Task StartRound(string lobbyId, int questionIndex)
     {
-      await Clients.OthersInGroup(lobbyId).SendAsync("OnRedirectToTheGetReadyPage", questionIndex);
+      await Clients.Group(lobbyId).SendAsync("OnRoundTransition", questionIndex);
     }
 
     public async Task NotifyGuestsThatTheQuestionHasStarted(string lobbyId)
@@ -287,7 +287,7 @@ namespace API.Sockets.Hubs
       await Clients.OthersInGroup(lobbyId).SendAsync("OnRedirectGuestsToSpecificPage", clientPath);
     }
 
-    public async Task DestroyLobbyData(string lobbyId)
+    private async Task DestroyLobbyData(string lobbyId)
     {
       RemoveAllPlayersFromSpecificLobby(lobbyId);
       RemoveAllPlayerReponsesFromSpecificLobby(lobbyId);

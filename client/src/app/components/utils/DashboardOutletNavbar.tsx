@@ -49,7 +49,7 @@ const DashboardOutletNavbar = ({
 
   const signOut = () => {
     clearUser();
-    router.push('/');
+    router.push(ROUTES.ROOT);
   }
 
   const handleClickOutside = (event: any) => {

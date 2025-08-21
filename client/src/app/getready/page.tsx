@@ -8,10 +8,12 @@ import useInGameStore from "../stores/Kahoot/useInGameStore";
 import { SpinnerSizes } from "../components/UIComponents/Spinners/Spinner.interface";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
+import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
 
 const GetReady = () => {
   // Hooks
   useLobbySocketEvents();
+  useBackButtonConfirm();
 
   // Global store state
   const { questionIndex } = useInGameStore();
