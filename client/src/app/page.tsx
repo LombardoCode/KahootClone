@@ -1,7 +1,7 @@
 'use client'
 
 import Input from "./components/UIComponents/Input";
-import Button from "./components/UIComponents/Button";
+import Button, { PerspectiveSize } from "./components/UIComponents/Button";
 import Text from "./components/UIComponents/Text";
 import Link from "next/link";
 import Logo, { LogoSize } from "./components/utils/Logo";
@@ -9,7 +9,7 @@ import { FontWeights, TextColors, UseCases } from "./interfaces/Text.interface";
 import BackgroundShapes, { ShapeColor } from "./components/utils/BackgroundShapes";
 import Card, { CardBackgroundColors } from "./components/UIComponents/Card";
 import { BackgroundColors } from "./interfaces/Colors.interface";
-import InputForm, { InputFormTypes } from "./components/UIComponents/InputForm";
+import InputForm, { InputFormTypes, Roundness } from "./components/UIComponents/InputForm";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -41,20 +41,26 @@ const Home = () => {
               className="mb-4"
             />
             <Card
-              backgroundColor={CardBackgroundColors.BLACK}
-              className="flex flex-col justify-between"
+              backgroundColor={CardBackgroundColors.GRAY}
+              className="min-w-[14vw] max-w-[14vw] flex flex-col justify-between"
             >
               <InputForm
                 type={InputFormTypes.TEXT}
-                textColor={TextColors.BLACK}
-                fontWeight={FontWeights.REGULAR}
-                name="gamePIN"
+                roundness={Roundness.SMALL}
+                textColor={TextColors.WHITE}
+                fontWeight={FontWeights.BOLD}
                 id="gamePIN"
+                name="gamePIN"
+                className="py-3 my-1 bg-gray-800 text-center"
+                placeholder="Game PIN"
                 value={formData.gamePIN}
                 onChange={handleFormChange}
               />
               <Button
                 backgroundColor={BackgroundColors.GRAY}
+                textColor={TextColors.WHITE}
+                perspective={PerspectiveSize.MEDIUM}
+                animateOnHover={false}
                 fontWeight={FontWeights.BOLD}
                 className="mt-3"
                 onClick={() => tryEnterIntoTheGame(formData.gamePIN)}

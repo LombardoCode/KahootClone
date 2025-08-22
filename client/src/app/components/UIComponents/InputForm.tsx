@@ -16,11 +16,18 @@ export interface InputFormProps {
   rightElement?: React.ReactNode;
   onEnterPress?: () => void;
   autoComplete?: boolean;
+  roundness?: Roundness;
 }
 
 export enum InputFormTypes {
   TEXT = "text",
   PASSWORD = "password"
+}
+
+export enum Roundness {
+  NO_ROUNDNESS = "",
+  SMALL = "rounded-sm",
+  MEDIUM = "rounded-md"
 }
 
 const InputForm = ({
@@ -36,7 +43,8 @@ const InputForm = ({
   disabled = false,
   rightElement,
   onEnterPress,
-  autoComplete = false
+  autoComplete = false,
+  roundness = Roundness.MEDIUM
 }: InputFormProps) => {
   const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if ((e.nativeEvent as any).isComposing) {
@@ -55,7 +63,13 @@ const InputForm = ({
         type={type}
         name={name}
         id={id}
-        className={`${montserrat.className} ${className} ${textColor} ${fontWeight} px-2 py-1 border-1 border-gray-400 focus:border-blue-500 outline-none transition-all duration-300 rounded-md placeholder-gray-500 w-full`}
+        className={`
+          ${montserrat.className}
+          ${className}
+          ${textColor}
+          ${fontWeight}
+          ${roundness}
+          px-2 py-1 border-1 border-gray-400 focus:border-blue-500 outline-none transition-all duration-300 placeholder-gray-500 w-full`}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
