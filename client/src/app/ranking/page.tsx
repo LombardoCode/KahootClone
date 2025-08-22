@@ -13,7 +13,7 @@ import { determineFinalMessageToPlayer } from "../utils/podium";
 import { useRouter } from "next/navigation";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
-import { ROUTES } from "../utils/Routes/routesUtils";
+import { kickingTheGuest } from "../utils/Lobby/lobbyUtils";
 
 const RankingPage = () => {
   // Hooks
@@ -65,13 +65,21 @@ const ShowPlayerTheirStats = ({ stats }: ShowPlayerTheirStatsProps) => {
   if (stats === null) {
     return;
   }
-
+  
+  const { terminateGameSession } = useInGameStore();
   const router = useRouter();
   const [finalMessageToPlayer, setFinalMessageToPlayer] = useState<string>();
 
   useEffect(() => {
     setFinalMessageToPlayer(determineFinalMessageToPlayer(stats.place));
   }, []);
+
+  const terminateGuestGame = () => {
+    terminateGameSession()
+      .finally(() => {
+        kickingTheGuest(router);
+    });
+  }
 
   return (
     <>
@@ -107,7 +115,7 @@ const ShowPlayerTheirStats = ({ stats }: ShowPlayerTheirStatsProps) => {
         animateOnHover={false}
         size={ButtonSize.MEDIUM}
         className="w-full"
-        onClick={() => router.push(ROUTES.ROOT)}
+        onClick={() => terminateGuestGame()}
       >
         Exit
       </Button>
