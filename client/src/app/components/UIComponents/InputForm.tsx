@@ -7,6 +7,8 @@ export interface InputFormProps {
   type: InputFormTypes;
   textColor: TextColors;
   fontWeight: FontWeights;
+  borderSize?: BorderSize;
+  focusBorderColor?: FocusBorderColor;
   name: string;
   id: string;
   value?: string;
@@ -30,10 +32,23 @@ export enum Roundness {
   MEDIUM = "rounded-md"
 }
 
+export enum BorderSize {
+  NO_BORDER = "border-0",
+  EXTRA_SMALL = "border-1",
+  SMALL = "border-2"
+};
+
+export enum FocusBorderColor {
+  BLUE = "focus:border-blue-500",
+  RED = "focus:border-kahoot-red-200"
+}
+
 const InputForm = ({
   textColor = TextColors.WHITE,
   fontWeight = FontWeights.LIGHT,
   type = InputFormTypes.TEXT,
+  borderSize = BorderSize.EXTRA_SMALL,
+  focusBorderColor = FocusBorderColor.BLUE,
   className,
   name,
   id,
@@ -69,7 +84,9 @@ const InputForm = ({
           ${textColor}
           ${fontWeight}
           ${roundness}
-          px-2 py-1 border-1 border-gray-400 focus:border-blue-500 outline-none transition-all duration-300 placeholder-gray-500 w-full`}
+          ${borderSize}
+          ${focusBorderColor}
+          px-2 py-1 outline-none transition-all duration-300 placeholder-gray-500 w-full`}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

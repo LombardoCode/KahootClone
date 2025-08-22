@@ -19,6 +19,11 @@ export const createLobby = (kahootId: string | null, router: AppRouterInstance) 
     })
 }
 
+export const validateIfLobbyExists = async (gamePIN: string | number) => {
+  const response = await axiosInstance.post(`/lobby/checkIfValidLobby`, { lobbyId: gamePIN });
+  return response;
+}
+
 export const kickingTheHost = (pathname: string, router: AppRouterInstance) => {
   // We don't want to kick the host when being at the lobby when there are no players left
   if (!isInLobbyRoute(pathname)) {

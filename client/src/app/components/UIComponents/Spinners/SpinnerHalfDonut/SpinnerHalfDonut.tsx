@@ -5,12 +5,13 @@ import { SpinnerSizes } from "../Spinner.interface";
 
 interface SpinnerHalfDonutProps {
   size: SpinnerSizes;
+  className?: string;
 }
 
-const SpinnerHalfDonut = ({ size = SpinnerSizes.MEDIUM }: SpinnerHalfDonutProps) => {
+const SpinnerHalfDonut = ({ size = SpinnerSizes.MEDIUM, className = "" }: SpinnerHalfDonutProps) => {
   return (
     <motion.div
-      className="relative"
+      className={`relative ${className}`}
       style={{
         width: `${size}px`,
         height: `${size}px`,
