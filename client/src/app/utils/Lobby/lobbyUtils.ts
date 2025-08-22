@@ -2,6 +2,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import axiosInstance from "../axiosConfig";
 import SoundBank from "@/app/singletons/SoundBank";
 import { ROUTES } from "../Routes/routesUtils";
+import { Player } from "@/app/interfaces/Play/Player.interface";
 
 export const isInLobbyRoute = (pathname: string): boolean => {
   return pathname.startsWith('/lobby'); // The URL path for guests to join a lobby is as follows: /lobby/123456
@@ -30,4 +31,15 @@ export const kickingTheHost = (pathname: string, router: AppRouterInstance) => {
 
 export const kickingTheGuest = (router: AppRouterInstance) => {
   router.push(ROUTES.ROOT);
+}
+
+export const createBaseNewPlayer = (connection: signalR.HubConnection, nickName: string): Player => {
+  let newPlayer: Player = {
+    connectionId: connection.connectionId,
+    userId: null,
+    name: nickName,
+    earnedPoints: 0
+  };
+
+  return newPlayer;
 }

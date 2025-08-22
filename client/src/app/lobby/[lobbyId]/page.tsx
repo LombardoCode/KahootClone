@@ -22,6 +22,7 @@ import useLobbySocketEvents from "@/app/hooks/useLobbySocketEvents";
 import useUserStore from "@/app/stores/useUserStore";
 import SoundBank from "@/app/singletons/SoundBank";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
+import { createBaseNewPlayer } from "@/app/utils/Lobby/lobbyUtils";
 
 const LobbyPage = () => {
   // Hooks
@@ -36,7 +37,7 @@ const LobbyPage = () => {
     : params.lobbyId;
 
   // Global store state
-  const { signalRConnection, setSignalRConnection, setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, kahoot, setKahootInfo } = useInGameStore();
+  const { signalRConnection, setSignalRConnection, setLobbyId, isHost, setIsHost, currentPlayer, setCurrentPlayer, players, kahoot, setKahoot } = useInGameStore();
   const { user } = useUserStore();
 
   // Local component state
@@ -108,7 +109,7 @@ const LobbyPage = () => {
   const downloadAllKahootQuestions = async () => {
     await axiosInstance.get(`/lobby/getKahootTitleAndQuestions?lobbyId=${lobbyIdFromParams}`)
       .then(res => {
-        setKahootInfo(res.data);
+        setKahoot(res.data);
       })
       .catch(err => {
         console.error(err);
@@ -116,16 +117,9 @@ const LobbyPage = () => {
   }
 
   const createNewPlayer = async () => {
-    if (signalRConnection) {
-      let newPlayer: Player = {
-        connectionId: signalRConnection.connectionId,
-        userId: null,
-        name: nickName,
-        earnedPoints: 0
-      };
-
-      setCurrentPlayer(newPlayer)
-
+    if (signalRConnection !== null && signalRConnection.state === signalR.HubConnectionState.Connected) {
+      let newPlayer: Player = createBaseNewPlayer(signalRConnection, nickName);
+      setCurrentPlayer(newPlayer);
       await putTheUserInTheLobbyQueue(newPlayer);
     }
   }
@@ -266,6 +260,10 @@ const LobbyPage = () => {
   }
 
   const ScreenForGuest = () => {
+    if (currentPlayer === null) {
+      return;
+    }
+
     return (
       <div className="flex justify-center items-center h-full">
         <div id="guest-player-card-information" className="flex flex-col items-center">
@@ -309,7 +307,7 @@ const LobbyPage = () => {
       <div className="relative z-10 h-full">
         {isHost
           ? <ScreenForHost />
-          : (currentPlayer.connectionId !== null ? <ScreenForGuest /> : null)}
+          : (currentPlayer !== null ? <ScreenForGuest /> : null)}
       </div>
 
       {/* Modal to be displayed for the user to enter their nickname, so it can be displayed to other users */}

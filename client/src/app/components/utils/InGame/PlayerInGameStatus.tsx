@@ -7,9 +7,13 @@ import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interfa
 const PlayerInGameStatus = () => {
   const { currentPlayer } = useInGameStore();
 
+  if (currentPlayer === null) {
+    return;
+  }
+
   return (
     <div className="get-ready-footer absolute bottom-0 w-full bg-white">
-      {currentPlayer.connectionId !== "" && (
+      {currentPlayer.connectionId !== null && (
         <div className="flex justify-between py-2 px-3">
           <div className="flex items-center">
             <FontAwesomeIcon

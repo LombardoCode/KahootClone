@@ -1,22 +1,31 @@
 import { AnswerPlay, KahootPlay, PointsMultiplier, QuestionPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import { debugLog } from "@/app/utils/debugLog";
+import { HubConnectionState } from "@microsoft/signalr";
 import { create } from "zustand";
 
 interface InGameStore {
+  // Crucial gameplay actions
+  terminateGameSession: () => Promise<void>;
+
+
   // SignalR connection
   signalRConnection: signalR.HubConnection | null;
-  setSignalRConnection: (connection: signalR.HubConnection) => void;
+  setSignalRConnection: (connection: signalR.HubConnection | null) => void;
 
   // Lobby
   lobbyId: string | null;
-  setLobbyId: (lobbyId: string) => void;
+  setLobbyId: (lobbyId: string | null) => void;
+
 
   // Host variables
   isHost: boolean | null;
-  setIsHost: (isHost: boolean) => void;
+  setIsHost: (isHost: boolean | null) => void;
+
 
   // Identity of the user
-  currentPlayer: Player;
-  setCurrentPlayer: (newPlayerData: Player) => void;
+  currentPlayer: Player | null;
+  setCurrentPlayer: (newPlayerData: Player | null) => void;
+
 
   // Players
   players: Player[];
@@ -30,14 +39,14 @@ interface InGameStore {
   everyoneHasAnsweredTheCurrentQuestion: boolean,
   setEveryoneHasAnsweredTheCurrentQuestion: (status: boolean) => void;
   finalPlayerData: FinalPlayerStats | null;
-  setFinalPlayerData: (finalPlayerData: FinalPlayerStats) => void;
+  setFinalPlayerData: (finalPlayerData: FinalPlayerStats | null) => void;
   showPlayerFinalStats: boolean;
   setShowPlayerFinalStats: (value: boolean) => void;
 
 
   // Kahoot and questions
   kahoot: KahootPlay | null;
-  setKahootInfo: (kahootInfo: KahootPlay) => void;
+  setKahoot: (kahootInfo: KahootPlay | null) => void;
   questionIndex: number;
   setQuestionIndex: (index: number) => void;
   goToTheNextQuestion: () => void;
@@ -46,6 +55,7 @@ interface InGameStore {
   setCountOfAnswersProvidedByGuests: (count: number) => void;
   remainingTime: number;
   setRemainingTime: (remainingTime: number) => void;
+
 
   // Answers
   selectAnswer: (answerId: number | null) => void;
@@ -73,27 +83,92 @@ export interface AnswerStatsForCurrentQuestion {
 };
 
 const useInGameStore = create<InGameStore>()((set, get) => ({
+  // Crucial gameplay actions
+  terminateGameSession: async () => {
+    const state = get();
+    const connection = state.signalRConnection;
+
+    try {
+      if (connection !== null && connection.state === HubConnectionState.Connected) {
+        await connection.stop();
+      }
+    } catch {
+      //
+    }
+    finally {
+      // Clean every single variable that we used during gameplay process
+      debugLog("Cleaning every single variable from gameplay");
+
+      set({
+        // The SignalR connection
+        signalRConnection: null,
+
+        // LobbyId
+        lobbyId: null,
+
+        // Host / Guest indicator
+        isHost: null,
+        
+        // Current player information
+        currentPlayer: null,
+        
+        // The players array
+        players: [],
+        
+        // Earned points
+        earnedPointsFromCurrentQuestion: 0,
+        
+        // Final players statistics
+        finalPlayerStats: [],
+        
+        // Indicator to check if everyone has answered the current question
+        everyoneHasAnsweredTheCurrentQuestion: false,
+        
+        // Current player's final statistics
+        finalPlayerData: null,
+        
+        // Indicator to show players' final statistics
+        showPlayerFinalStats: false,
+        
+        // The kahoot that was played
+        kahoot: null,
+        
+        // Current question holder
+        questionIndex: 0,
+        
+        // Number of provided answers by guests on current question
+        countOfAnswersProvidedByGuests: 0,
+        
+        // Current question's remaining time
+        remainingTime: 0,
+        
+        // Current question's answers statistics
+        answerStatsForCurrentQuestion: null
+      });
+    }
+  },
+
   // SignalR connection
   signalRConnection: null,
-  setSignalRConnection: (connection: signalR.HubConnection) => set(() => ({
+  setSignalRConnection: (connection: signalR.HubConnection | null) => set(() => ({
     signalRConnection: connection
   })),
 
   // Lobby
   lobbyId: null,
-  setLobbyId: (lobbyId: string) => set(() => ({
+  setLobbyId: (lobbyId: string | null) => set(() => ({
     lobbyId
   })),
 
   // Host variables
   isHost: null,
-  setIsHost: (isHost: boolean) => set(() => ({
+  setIsHost: (isHost: boolean | null) => set(() => ({
     isHost
   })),
 
   // Identity of the user
-  currentPlayer: { connectionId: '', userId: null, name: '', earnedPoints: 0 },
-  setCurrentPlayer: (newPlayerData: Player) => set(() => ({
+  currentPlayer: null,
+  setCurrentPlayer: (newPlayerData: Player | null) => set(() => ({
     currentPlayer: newPlayerData
   })),
 
@@ -189,7 +264,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
     everyoneHasAnsweredTheCurrentQuestion: status
   })),
   finalPlayerData: null,
-  setFinalPlayerData: (finalPlayerData: FinalPlayerStats) => set(() => ({
+  setFinalPlayerData: (finalPlayerData: FinalPlayerStats | null) => set(() => ({
     finalPlayerData
   })),
   showPlayerFinalStats: false,
@@ -199,15 +274,9 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
 
   // Kahoot and questions
   kahoot: null,
-  setKahootInfo: (kahootInfo: KahootPlay) => set(() => {
-    return {
-      kahoot: {
-        kahootId: kahootInfo.kahootId,
-        title: kahootInfo.title,
-        questions: kahootInfo.questions
-      }
-    }
-  }),
+  setKahoot: (kahootInfo: KahootPlay | null) => set(() => ({
+    kahoot: kahootInfo
+  })),
   questionIndex: 0,
   setQuestionIndex: (index: number) => set(() => ({
     questionIndex: index

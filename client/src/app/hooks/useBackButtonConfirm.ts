@@ -2,10 +2,9 @@ import { useEffect, useRef } from "react";
 import useInGameStore from "../stores/Kahoot/useInGameStore";
 import { usePathname, useRouter } from "next/navigation";
 import { kickingTheGuest, kickingTheHost } from "../utils/Lobby/lobbyUtils";
-import { HubConnectionState } from "@microsoft/signalr";
 
 const useBackButtonConfirm = () => {
-  const { signalRConnection, isHost } = useInGameStore();
+  const { isHost, terminateGameSession } = useInGameStore();
   const router = useRouter();
   const ignoreNext = useRef(false);
   const pathname = usePathname();
@@ -22,14 +21,12 @@ const useBackButtonConfirm = () => {
         ignoreNext.current = true;
         history.go(1);
       } else {
-        const stopP = signalRConnection !== null && signalRConnection.state === HubConnectionState.Connected
-          ? signalRConnection?.stop().catch(() => {})
-          : Promise.resolve();
-
-        stopP.finally(() =>
-          isHost
-            ? kickingTheHost(pathname, router)
-            : kickingTheGuest(router));
+        terminateGameSession()
+          .finally(() => 
+            isHost
+              ? kickingTheHost(pathname, router)
+              : kickingTheGuest(router)
+          );
       }
     };
 

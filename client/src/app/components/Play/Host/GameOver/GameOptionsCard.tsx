@@ -1,11 +1,10 @@
 import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponents/Button";
 import Logo, { LogoColors, LogoSize } from "@/app/components/utils/Logo";
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
-import SoundBank from "@/app/singletons/SoundBank";
 import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
-import { ROUTES } from "@/app/utils/Routes/routesUtils";
+import { kickingTheHost } from "@/app/utils/Lobby/lobbyUtils";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 interface GameOptionsCardProps {
@@ -14,7 +13,8 @@ interface GameOptionsCardProps {
 
 const GameOptionsCard = ({ className }: GameOptionsCardProps) => {
   const router = useRouter();
-  const { signalRConnection } = useInGameStore();
+  const pathname = usePathname();
+  const { terminateGameSession } = useInGameStore();
 
   const endTheGame = () => {
     terminateTheHostConnectionFromTheLobbyAndRedirectToHomepage();
@@ -22,12 +22,10 @@ const GameOptionsCard = ({ className }: GameOptionsCardProps) => {
 
   const terminateTheHostConnectionFromTheLobbyAndRedirectToHomepage = () => {
     // Ending the host connection will trigger the LobbyHub's "OnDisconnectedAsync" method, which will trigger the "OnHostAbandonedTheGame" handler, which will cause the connected players to end their connections as well.
-    if (signalRConnection) {
-      signalRConnection.stop().then(() => {
-        SoundBank.stopPodiumBackgroundMusic();
-        router.push(ROUTES.MENU.DISCOVERY);
-      });
-    }
+    terminateGameSession()
+      .finally(() => {
+        kickingTheHost(pathname, router);
+    });
   }
 
   return (

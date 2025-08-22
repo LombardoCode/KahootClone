@@ -5,11 +5,10 @@ import { Player } from "../interfaces/Play/Player.interface";
 import { KahootPlay } from "../interfaces/Kahoot/Kahoot.interface";
 import { isInLobbyRoute, kickingTheGuest, kickingTheHost } from "../utils/Lobby/lobbyUtils";
 import { debugLog } from "../utils/debugLog";
-import { ROUTES } from "../utils/Routes/routesUtils";
 import { HubConnectionState } from "@microsoft/signalr";
 
 const useLobbySocketEvents = () => {
-  const { signalRConnection, addPlayer, removePlayer, isHost, lobbyId, setKahootInfo, setCurrentPlayer, setEarnedPointsFromCurrentQuestion, setQuestionIndex, currentPlayer, setFinalPlayerData, setShowPlayerFinalStats } = useInGameStore();
+  const { signalRConnection, addPlayer, removePlayer, isHost, lobbyId, setKahoot, setCurrentPlayer, setEarnedPointsFromCurrentQuestion, setQuestionIndex, currentPlayer, setFinalPlayerData, setShowPlayerFinalStats, terminateGameSession } = useInGameStore();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -109,9 +108,10 @@ const useLobbySocketEvents = () => {
 
       if (isHost && currentPlayers.length === 0) {
         // The host is the only user in the game, stop host's connection and redirect the host to the discover page
-        signalRConnection.stop().then(() => {
-          kickingTheHost(pathname, router);
-        })
+        terminateGameSession()
+          .finally(() => {
+            kickingTheHost(pathname, router);
+        });
       }
     });
   }
@@ -124,7 +124,7 @@ const useLobbySocketEvents = () => {
     debugLog("%cRegistering SignalR events for guests", "color: cyan;");
 
     signalRConnection.on('ReceiveAllQuestionsFromHost', (kahootInfo: KahootPlay) => {
-      setKahootInfo(kahootInfo);
+      setKahoot(kahootInfo);
     });
 
     signalRConnection.on('GuestsAreNotifiedThatQuestionHasStarted', () => {
@@ -133,8 +133,10 @@ const useLobbySocketEvents = () => {
 
     signalRConnection.on('OnHostAbandonedTheGame', () => {
       // Stop the connection and redirect the user to "/", no matter if we are at the lobby of if the user is currently playing
-      signalRConnection.stop();
-      kickingTheGuest(router);
+      terminateGameSession()
+        .finally(() => {
+          kickingTheGuest(router);
+      });
     });
 
     signalRConnection.on('ReceiveMyUpdatedPlayerInfo', (myUpdatedPlayerInfo: Player) => {
@@ -152,12 +154,18 @@ const useLobbySocketEvents = () => {
     signalRConnection.on('DisconnectPlayer', () => {
       // This SignalR is meant to be executed when the hosts clicks on the user card on the lobby waiting room
       if (isInLobbyRoute(pathname)) {
-        signalRConnection.stop();
-        router.push(ROUTES.ROOT);
+        terminateGameSession()
+          .finally(() => {
+            kickingTheGuest(router);
+        });
       }
     });
 
     signalRConnection.on('OnReceivePlayersFinalStats', (playersFinalStats: FinalPlayerStats[]) => {
+      if (currentPlayer === null) {
+        return;
+      }
+      
       const individualPlayerFinalStats: FinalPlayerStats | undefined = playersFinalStats.find(p => p.connectionId === currentPlayer.connectionId);
 
       if (individualPlayerFinalStats !== undefined) {
