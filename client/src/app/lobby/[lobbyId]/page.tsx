@@ -226,7 +226,7 @@ const LobbyPage = () => {
             </div>
 
             <div id="lobby-host-buttons" className="absolute right-0">
-              {players.length > 1 && isHost && (
+              {players.length > 0 && isHost && (
                 <Button
                   backgroundColor={BackgroundColors.WHITE}
                   fontWeight={FontWeights.BOLD}
