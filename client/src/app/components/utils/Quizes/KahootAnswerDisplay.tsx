@@ -12,14 +12,18 @@ interface KahootAnswerDisplayProps {
 }
 
 const KahootAnswerDisplay = ({ index, answer, showText = true, className }: KahootAnswerDisplayProps) => {
-  const { selectAnswer } = useInGameStore();
+  const { isHost, selectAnswer } = useInGameStore();
 
   return (
     <KahootAnswerBase
       index={index}
       className={`${className}`}
       isCentered={true}
-      onClick={() => selectAnswer(answer.id)}
+      onClick={() => {
+        if (!isHost) {
+          selectAnswer(answer.id);
+        }
+      }}
     >
       {showText && (
         <Text
