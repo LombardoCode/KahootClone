@@ -9,12 +9,17 @@ import KahootSearchWindow from "../components/utils/General/KahootSearchWindow";
 import { DiscoverKahootCardInfo } from "../interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
 import axiosInstance from "../utils/axiosConfig";
 import useClickAway from "../hooks/useClickAway";
+import { useUserData } from "../hooks/useUserData";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+  // Hooks
+  useUserData();
+
+  // Local component state
   const [isKahootSearchWindowOpen, setIsKahootSearchWindowOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [kahootSearchQuery, setKahootSearchQuery] = useState<string>("");

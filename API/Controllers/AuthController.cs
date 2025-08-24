@@ -1,12 +1,8 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using API.DTOs;
 using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers
 {
@@ -17,16 +13,21 @@ namespace API.Controllers
     private readonly SignInManager<AppUser> _signInManager;
     private readonly UserManager<AppUser> _userManager;
     private readonly AuthService _authService;
+    private readonly IWebHostEnvironment _environment;
+    private readonly CookieService _cookieService;
 
     public AuthController(
       SignInManager<AppUser> signInManager,
       UserManager<AppUser> userManager,
-      IConfiguration configuration,
-      AuthService authService)
+      AuthService authService,
+      IWebHostEnvironment environment,
+      CookieService cookieService)
     {
       _signInManager = signInManager;
       _userManager = userManager;
       _authService = authService;
+      _environment = environment;
+      _cookieService = cookieService;
     }
 
     [HttpPost("register")]
@@ -94,9 +95,11 @@ namespace API.Controllers
       {
         var token = GenerateJwtToken(user.UserName);
 
+        // Set an HTTP-only cookie
+        _cookieService.Set(token);
+
         return Ok(new
         {
-          token,
           user = new
           {
             user.UserName
@@ -107,10 +110,32 @@ namespace API.Controllers
       return Unauthorized(errors);
     }
 
+    [HttpPost("logout")]
+    public ActionResult Logout()
+    {
+      _cookieService.Delete();
+
+      return Ok();
+    }
+
+    [HttpGet("me")]
+    public ActionResult me()
+    {
+      var userName = User.Identity?.Name;
+      
+      return Ok(new
+      {
+        user = new
+        {
+          userName
+        }
+      });
+    }
+
     private string GenerateJwtToken(string username)
     {
       string token = _authService.GenerateJwtToken(username);
-      
+
       return token;
     }
   }

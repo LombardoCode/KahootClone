@@ -42,10 +42,15 @@ namespace API.Services
         {
           new Claim(ClaimTypes.NameIdentifier, username)
         }),
-        Expires = DateTime.Now.AddDays(7),
+        NotBefore = DateTime.UtcNow,
+        IssuedAt = DateTime.UtcNow,
+        Expires = DateTime.UtcNow.AddDays(7),
         Issuer = issuer,
         Audience = audience,
-        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
+        SigningCredentials = new SigningCredentials(
+          new SymmetricSecurityKey(key),
+          SecurityAlgorithms.HmacSha512Signature
+        )
       };
 
       var tokenHandler = new JwtSecurityTokenHandler();

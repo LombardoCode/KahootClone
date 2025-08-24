@@ -41,9 +41,8 @@ const LoginPage = () => {
     axiosInstance.post('/auth/login', formData)
       .then(res => {
         const user = res.data.user.userName;
-        const token = res.data.token;
 
-        setUser(token, user);
+        setUser(user);
 
         router.push(ROUTES.MENU.DISCOVERY);
       })

@@ -13,6 +13,7 @@ import Button, { ButtonSize, PerspectiveSize } from "../UIComponents/Button";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import KahootCreateModal from "./Modal/reusable/KahootCreateModal";
 import InputForm, { InputFormTypes } from "../UIComponents/InputForm";
+import axiosInstance from "@/app/utils/axiosConfig";
 
 interface DashboardOutletNavbarProps {
   fixed?: boolean;
@@ -47,9 +48,15 @@ const DashboardOutletNavbar = ({
     }
   }, []);
 
-  const signOut = () => {
-    clearUser();
-    router.push(ROUTES.ROOT);
+  const signOut = async () => {
+    try {
+      await axiosInstance.post('/auth/logout');
+    } catch (err) {
+      console.error('Logout error:', err);
+    } finally {
+      clearUser();
+      router.push(ROUTES.ROOT);
+    }
   }
 
   const handleClickOutside = (event: any) => {

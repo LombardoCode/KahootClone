@@ -43,9 +43,8 @@ const ChangeUsernameModal = ({ isOpen, onClose, userName, setNewUserName }: Chan
     })
       .then(res => {
         const user = res.data.user.userName;
-        const token = res.data.newToken;
 
-        setUser(token, user);
+        setUser(user);
 
         if (setNewUserName) {
           setNewUserName(userNameForm);

@@ -6,6 +6,7 @@ using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers
@@ -18,13 +19,23 @@ namespace API.Controllers
     private readonly UserService _userService;
     private readonly AuthService _authService;
     private readonly UserManager<AppUser> _userManager;
+    private readonly IWebHostEnvironment _environment;
+    private readonly CookieService _cookieService;
 
-    public UserController(DataContext dbContext, UserService userService, AuthService authService, UserManager<AppUser> userManager)
+    public UserController(
+      DataContext dbContext,
+      UserService userService,
+      AuthService authService,
+      UserManager<AppUser> userManager,
+      IWebHostEnvironment environment,
+      CookieService cookieService)
     {
       _dbContext = dbContext;
       _userService = userService;
       _authService = authService;
       _userManager = userManager;
+      _environment = environment;
+      _cookieService = cookieService;
     }
 
     [Authorize]
@@ -49,30 +60,33 @@ namespace API.Controllers
     {
       string desiredUsername = data.UserName;
 
-      bool doesThatUserNameExists = _dbContext.Users.Any(u => u.UserName == desiredUsername);
+      AppUser currentUser = await _userService.GetCurrentUserAsync();
+
+      if (string.Equals(currentUser.UserName, desiredUsername))
+      {
+        return Ok(new { user = new { currentUser.UserName } });
+      }
+
+      bool doesThatUserNameExists = await _dbContext.Users.AnyAsync(u => u.UserName == desiredUsername);
 
       if (doesThatUserNameExists)
       {
         return BadRequest("That username already exists. Choose another username.");
       }
 
-      AppUser currentUser = await _userService.GetCurrentUserAsync();
+      var setUsername = await _userManager.SetUserNameAsync(currentUser, desiredUsername);
 
-      currentUser.UserName = desiredUsername;
-      currentUser.NormalizedUserName = desiredUsername.ToUpper();
-
-      await _dbContext.SaveChangesAsync();
+      if (!setUsername.Succeeded)
+      {
+        string msg = string.Join("; ", setUsername.Errors.Select(e => e.Description));
+        return BadRequest(msg);
+      }
 
       string newToken = _authService.GenerateJwtToken(currentUser.UserName);
 
-      return Ok(new
-      {
-        newToken,
-        user = new
-        {
-          currentUser.UserName
-        }
-      });
+      _cookieService.Set(newToken);
+
+      return Ok(new { user = new { currentUser.UserName } });
     }
 
     [Authorize]

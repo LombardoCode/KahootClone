@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using API.Data;
 using API.Data.Seeds;
@@ -86,7 +87,8 @@ public class Program
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        NameClaimType = ClaimTypes.NameIdentifier
       };
 
       // Custom JWT handler for SignalR connections.
@@ -94,6 +96,12 @@ public class Program
       {
         OnMessageReceived = context =>
         {
+          if (context.Request.Cookies.TryGetValue("auth-token", out var cookieToken) && !string.IsNullOrEmpty(cookieToken))
+          {
+            context.Token = cookieToken;
+            return Task.CompletedTask;
+          }
+
           var accessToken = context.Request.Query["access_token"];
 
           var path = context.HttpContext.Request.Path;
@@ -116,6 +124,7 @@ public class Program
 
     // Additional services
     builder.Services.AddScoped<AuthService>();
+    builder.Services.AddScoped<CookieService>();
     builder.Services.AddScoped<UserService>();
     builder.Services.AddScoped<KahootValidationService>();
     builder.Services.AddScoped<LobbyService>();
