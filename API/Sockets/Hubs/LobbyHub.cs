@@ -353,15 +353,12 @@ namespace API.Sockets.Hubs
 
     private async Task RemoveLobbyRecordFromDatabase(string lobbyId)
     {
-      if (int.TryParse(lobbyId, out var lobbyIdAsInt))
-      {
-        var lobby = await _dbContext.Lobbies.FirstOrDefaultAsync(l => l.GamePIN == lobbyIdAsInt);
+      var lobby = await _dbContext.Lobbies.FirstOrDefaultAsync(l => l.GamePIN == lobbyId);
 
-        if (lobby != null)
-        {
-          _dbContext.Lobbies.Remove(lobby);
-          await _dbContext.SaveChangesAsync();
-        }
+      if (lobby != null)
+      {
+        _dbContext.Lobbies.Remove(lobby);
+        await _dbContext.SaveChangesAsync();
       }
     }
   }

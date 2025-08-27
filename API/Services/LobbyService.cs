@@ -12,9 +12,9 @@ namespace API.Services
       _dbContext = dbContext;
     }
 
-    public async Task<int> GenerateUniquePIN()
+    public async Task<string> GenerateUniquePIN()
     {
-      int newPIN;
+      string newPIN;
       bool pinExists;
 
       do
@@ -27,10 +27,11 @@ namespace API.Services
       return newPIN;
     }
 
-    private int GenerateRandomPIN()
+    private string GenerateRandomPIN()
     {
       Random random = new Random();
-      return random.Next(100000, 999999);
+      string GamePIN = random.Next(100000, 999999).ToString();
+      return GamePIN;
     }
   }
 }

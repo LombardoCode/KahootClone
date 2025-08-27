@@ -3,7 +3,7 @@ namespace API.Models.Play
   public class Lobby
   {
     public int Id { get; set; }
-    public int GamePIN { get; set; }
+    public string GamePIN { get; set; }
     public GameState CurrentState { get; set; } = GameState.WaitingForPlayers;
     public Guid KahootId { get; set; }
     public string UserId { get; set; }

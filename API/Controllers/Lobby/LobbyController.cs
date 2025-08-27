@@ -51,7 +51,7 @@ namespace API.Controllers.Play
     [HttpPost("checkIfValidLobby")]
     public async Task<ActionResult<bool>> CheckIfValidLobby(ValidLobbyDTO lobbyData)
     {
-      int lobbyId = lobbyData.LobbyId;
+      string lobbyId = lobbyData.LobbyId;
 
       var lobby = await _dbContext.Lobbies
         .Where(l => l.GamePIN == lobbyId)
@@ -71,7 +71,7 @@ namespace API.Controllers.Play
     }
 
     [HttpGet("checkIfTheUserIsHostFromTheGame")]
-    public async Task<ActionResult> CheckIfUserIsHostFromTheGame(int lobbyId)
+    public async Task<ActionResult> CheckIfUserIsHostFromTheGame(string lobbyId)
     {
       bool lobbyExists = await _dbContext.Lobbies.AnyAsync(l => l.GamePIN == lobbyId);
 
@@ -102,7 +102,7 @@ namespace API.Controllers.Play
     [HttpPost("startTheGame")]
     public async Task<ActionResult<bool>> StartTheGame(StartTheGameDTO gameData)
     {
-      int lobbyId = gameData.LobbyId;
+      string lobbyId = gameData.LobbyId;
       string userId = await _userService.GetUserId();
       bool gameStarted = false;
 
@@ -129,7 +129,7 @@ namespace API.Controllers.Play
     }
 
     [HttpGet("getKahootTitleAndQuestions")]
-    public async Task<ActionResult> getKahootTitleAndQuestions(int lobbyId)
+    public async Task<ActionResult> getKahootTitleAndQuestions(string lobbyId)
     {
       string userId = await _userService.GetUserId();
 
