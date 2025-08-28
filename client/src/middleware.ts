@@ -1,12 +1,16 @@
 // middleware.ts
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
+import { ROUTES } from "./app/utils/Routes/routesUtils";
 
 const PUBLIC_PATHS: (string | RegExp)[] = [
-  '/',
-  '/login',
-  '/signup',
+  '/'
 ];
+
+const AUTH_PATHS: string[] = [
+  '/login',
+  '/signup'
+]
 
 const PUBLIC_GAMEPLAY_PATHS: (string | RegExp)[] = [
   /^\/lobby\/\d+$/,
@@ -24,6 +28,10 @@ const isPublicPath = (pathname: string): boolean => {
       ? path === pathname
       : path.test(pathname)
   );
+}
+
+const isAuthPath = (pathname: string): boolean => {
+  return AUTH_PATHS.some(ap => ap === pathname);
 }
 
 const verifyToken = async (token: string | null | undefined): Promise<boolean> => {
@@ -68,6 +76,15 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
 
   const token = req.cookies.get('auth-token')?.value;
   const isValid = await verifyToken(token);
+
+  if (isAuthPath(pathname)) {
+    if (isValid) {
+      const dashboardUrl: URL = new URL(ROUTES.MENU.DISCOVERY, req.url);
+      return NextResponse.redirect(dashboardUrl);
+    }
+
+    return NextResponse.next();
+  }
 
   if (!isValid) {
     const loginUrl: URL = new URL('/login', req.url);
