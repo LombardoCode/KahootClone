@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import montserrat from "@/app/utils/fontsConfig";
 import { faGear } from "@fortawesome/free-solid-svg-icons/faGear";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
+import Link from "next/link";
+import { ROUTES } from "@/app/utils/Routes/routesUtils";
 
 interface NavbarProps {
   hideLogo?: boolean;
@@ -39,11 +41,9 @@ const Navbar = ({ hideLogo = false, fixed = true }: NavbarProps) => {
       <div className={`top-0 bg-violet-900 py-3`}>
         <Container className={`flex items-center justify-between`}>
           {hideLogo === false && (
-            <span>
-              <Logo
-                size={LogoSize.REGULAR}
-              />
-            </span>
+            <Link href={ROUTES.ROOT}>
+              <Logo size={LogoSize.REGULAR} />
+            </Link>
           )}
           <div className="relative" ref={dropdownRef}>
             {user.userName && (
