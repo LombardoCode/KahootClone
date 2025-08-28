@@ -152,7 +152,7 @@ namespace API.Sockets.Hubs
       await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId);
     }
 
-    public async Task PutUserInLobbyQueue(string lobbyId, Player newPlayerData)
+    public async Task PutGuestInLobbyQueue(string lobbyId, Player newPlayerData)
     {
       var userId = await _userService.GetUserId();
 

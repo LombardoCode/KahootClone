@@ -89,8 +89,10 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
     const connection = state.signalRConnection;
 
     try {
-      if (connection !== null && connection.state === HubConnectionState.Connected) {
-        await connection.stop();
+      if (connection !== null) {
+        if (connection.state === HubConnectionState.Connected) {
+          await connection.stop();
+        }
       }
     } catch {
       //

@@ -11,11 +11,14 @@ import { BackgroundColors } from "./interfaces/Colors.interface";
 import InputForm, { BorderSize, FocusBorderColor, InputFormTypes, Roundness } from "./components/UIComponents/InputForm";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { validateIfLobbyExists } from "./utils/Lobby/lobbyUtils";
+import { createBaseNewPlayer, getOrCreateSignalRConnection, putTheGuestInTheLobbyQueue, validateIfLobbyExists } from "./utils/Lobby/lobbyUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import SpinnerHalfDonut from "./components/UIComponents/Spinners/SpinnerHalfDonut/SpinnerHalfDonut";
 import { SpinnerSizes } from "./components/UIComponents/Spinners/Spinner.interface";
+import { Player } from "./interfaces/Play/Player.interface";
+import useInGameStore from "./stores/Kahoot/useInGameStore";
+import { HubConnection } from "@microsoft/signalr";
 
 const Home = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -114,7 +117,7 @@ const ShowEnterLobbyIdFields = ({ highlightInput, setError, setHighlightInput, s
     await validateIfLobbyWithThatGamePinExists(gamePIN);
   }
 
-  const validateIfLobbyWithThatGamePinExists = async (gamePIN: string | number) => {
+  const validateIfLobbyWithThatGamePinExists = async (gamePIN: string) => {
     setLoading(true);
     setError(null);
 
@@ -185,13 +188,22 @@ interface ShowEnterNicknameFieldsProps {
   highlightInput: boolean;
   nickName: string;
   setNickName: (nickname: string) => void;
-  gamePIN: string | number;
+  gamePIN: string;
 }
 
 const ShowEnterNicknameFields = ({ highlightInput, nickName, setNickName, gamePIN }: ShowEnterNicknameFieldsProps) => {
+  const { setCurrentPlayer } = useInGameStore();
   const router = useRouter();
 
-  const enterToTheLobby = () => {
+  const saveNickName = async () => {
+    const connection: HubConnection = await getOrCreateSignalRConnection();
+    let newPlayer: Player = await createBaseNewPlayer(connection, nickName);
+    setCurrentPlayer(newPlayer);
+    enterToTheLobby(connection, gamePIN);
+  }
+
+  const enterToTheLobby = async (connection: signalR.HubConnection, gamePIN: string) => {
+    await putTheGuestInTheLobbyQueue(connection, gamePIN);
     router.push(`/lobby/${gamePIN}`);
   }
 
@@ -226,7 +238,7 @@ const ShowEnterNicknameFields = ({ highlightInput, nickName, setNickName, gamePI
         animateOnHover={false}
         fontWeight={FontWeights.BOLD}
         className="mt-3"
-        onClick={() => enterToTheLobby()}
+        onClick={() => saveNickName()}
       >
         Enter
       </Button>

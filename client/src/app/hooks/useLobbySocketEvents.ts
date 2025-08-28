@@ -108,10 +108,12 @@ const useLobbySocketEvents = () => {
 
       if (isHost && currentPlayers.length === 0) {
         // The host is the only user in the game, stop host's connection and redirect the host to the discover page
-        terminateGameSession()
-          .finally(() => {
-            kickingTheHost(pathname, router);
-        });
+        if (!isInLobbyRoute(pathname)) {
+          terminateGameSession()
+            .finally(() => {
+              kickingTheHost(pathname, router);
+          });
+        }
       }
     });
   }
