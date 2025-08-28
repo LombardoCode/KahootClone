@@ -9,19 +9,28 @@ import { SpinnerSizes } from "../components/UIComponents/Spinners/Spinner.interf
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
 import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
+import useProtectedGameplay from "../hooks/useProtectedGameplay";
+import { useUserData } from "../hooks/useUserData";
 
 const GetReady = () => {
   // Hooks
+  useUserData();
   useLobbySocketEvents();
   useBackButtonConfirm();
 
   // Global store state
   const { questionIndex } = useInGameStore();
   
+  const { ready } = useProtectedGameplay();
+
   // Local component state
   const [timer, setTimer] = useState<number>(5);
-
+  
   useEffect(() => {
+    if (!ready) {
+      return;
+    }
+
     const getReadyTimer = setTimeout(() => {
       if (timer > 0) {
         setTimer(timer - 1);
@@ -29,9 +38,13 @@ const GetReady = () => {
     }, 1000);
 
     return () => {
-      clearInterval(getReadyTimer);
+      clearTimeout(getReadyTimer);
     }
-  }, [timer]);
+  }, [timer, ready]);
+
+  if (!ready) {
+    return null;
+  }
 
   return (
     <div className={`relative bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>

@@ -14,14 +14,23 @@ import { useRouter } from "next/navigation";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
 import { kickingTheGuest } from "../utils/Lobby/lobbyUtils";
+import useProtectedGameplay from "../hooks/useProtectedGameplay";
+import { useUserData } from "../hooks/useUserData";
 
 const RankingPage = () => {
   // Hooks
+  useUserData();
   useLobbySocketEvents();
   useBackButtonConfirm();
 
   // Global store state
   const { finalPlayerData, showPlayerFinalStats } = useInGameStore();
+  
+  const { ready } = useProtectedGameplay();
+  
+  if (!ready) {
+    return null;
+  }
 
   return (
     <div className={`relative bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>

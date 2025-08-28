@@ -11,11 +11,20 @@ import useInGameStore from "../stores/Kahoot/useInGameStore";
 import SoundBank from "../singletons/SoundBank";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
+import useProtectedGameplay from "../hooks/useProtectedGameplay";
+import { HubConnectionState } from "@microsoft/signalr";
+import { useUserData } from "../hooks/useUserData";
 
 const GameOverScreen = () => {
   // Hooks
+  useUserData();
   useLobbySocketEvents();
   useBackButtonConfirm();
+
+  // Store state
+  const { players, setFinalPlayerStats, finalPlayerStats, lobbyId, signalRConnection } = useInGameStore();
+  
+  const { ready } = useProtectedGameplay();
 
   // Local component state
   const [width, setWidth] = useState<number>(0);
@@ -28,19 +37,28 @@ const GameOverScreen = () => {
   const [disappearPodiumElementsFromDOM, setDisappearPodiumElementsFromDOM] = useState<boolean>(false);
   const timeToWaitForPodiumPlayersToShowUp: number = 6.8;
 
-  // Store state
-  const { players, setFinalPlayerStats, finalPlayerStats, lobbyId, signalRConnection } = useInGameStore();
-
   useEffect(() => {
+    if (!ready) {
+      return;
+    }
+
     SoundBank.playPodiumBackgroundMusic();
-  }, []);
+  }, [ready]);
 
   useEffect(() => {
+    if (!ready) {
+      return;
+    }
+
     setWidth(windowWidth);
     setHeight(windowHeight);
-  }, [windowWidth, windowHeight]);
+  }, [ready, windowWidth, windowHeight]);
 
   useEffect(() => {
+    if (!ready) {
+      return;
+    }
+
     let disappearPodiumElementsFromDOMTimer: any;
     const podiumTimer = setTimeout(() => {
       setHidePodiumHeader(true);
@@ -50,12 +68,16 @@ const GameOverScreen = () => {
     }, 1500);
 
     return () => {
-      clearInterval(podiumTimer);
-      clearInterval(disappearPodiumElementsFromDOMTimer);
+      clearTimeout(podiumTimer);
+      clearTimeout(disappearPodiumElementsFromDOMTimer);
     };
-  }, []);
+  }, [ready]);
 
   useEffect(() => {
+    if (!ready) {
+      return;
+    }
+
     if (isConfettiSpawning) {
       const confettiTimer = setTimeout(() => {
         setIsConfettiSpawning(false);
@@ -63,7 +85,28 @@ const GameOverScreen = () => {
 
       return () => clearTimeout(confettiTimer);
     }
-  }, [isConfettiSpawning]);
+  }, [ready, isConfettiSpawning]);
+
+  useEffect(() => {
+    if (!ready) {
+      return;
+    }
+
+    if (players.length > 0) {
+      setFinalPlayerStats(players);
+    }
+  }, [ready, players, setFinalPlayerStats]);
+
+  useEffect(() => {
+    if (!ready) {
+      return;
+    }
+
+    // Send to all players the final player statistics
+    if (finalPlayerStats.length > 0 && signalRConnection !== null && signalRConnection.state === HubConnectionState.Connected) {
+      signalRConnection.invoke('SendPlayerFinalStatsToAllPlayers', lobbyId, finalPlayerStats);
+    }
+  }, [ready, finalPlayerStats]);
 
   const startShowUpTime = (val: boolean) => {
     // Start spawning confetti
@@ -78,27 +121,18 @@ const GameOverScreen = () => {
     notifyOtherPlayersToShowTheirStats();
     
     return () => {
-      clearInterval(showGameOptionsTimer);
+      clearTimeout(showGameOptionsTimer);
     }
   }
 
-  useEffect(() => {
-    if (players.length > 0) {
-      setFinalPlayerStats(players);
-    }
-  }, [players, setFinalPlayerStats]);
-
-  useEffect(() => {
-    // Send to all players the final player statistics
-    if (finalPlayerStats.length > 0 && signalRConnection) {
-      signalRConnection.invoke('SendPlayerFinalStatsToAllPlayers', lobbyId, finalPlayerStats);
-    }
-  }, [finalPlayerStats]);
-
   const notifyOtherPlayersToShowTheirStats = () => {
-    if (signalRConnection) {
+    if (signalRConnection !== null && signalRConnection.state === HubConnectionState.Connected) {
       signalRConnection.invoke('NotifyOtherPlayersToShowTheirStats', lobbyId);
     }
+  }
+
+  if (!ready) {
+    return null;
   }
 
   return (

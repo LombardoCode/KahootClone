@@ -12,14 +12,23 @@ import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 import SoundBank from "../singletons/SoundBank";
 import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
 import { HubConnectionState } from "@microsoft/signalr";
+import useProtectedGameplay from "../hooks/useProtectedGameplay";
+import { useUserData } from "../hooks/useUserData";
 
 const PlayPage = () => {
   // Hooks
+  useUserData();
   useLobbySocketEvents();
   useBackButtonConfirm();
 
   // Global store state
   const { isHost, kahoot } = useInGameStore();
+  
+  const { ready } = useProtectedGameplay();
+  
+  if (!ready) {
+    return null;
+  }
 
   return (
     <div className={`relative bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>

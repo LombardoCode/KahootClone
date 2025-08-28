@@ -10,19 +10,28 @@ import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import useLobbySocketEvents from "../hooks/useLobbySocketEvents";
 import PlayerInGameStatus from "../components/utils/InGame/PlayerInGameStatus";
 import useBackButtonConfirm from "../hooks/useBackButtonConfirm";
+import useProtectedGameplay from "../hooks/useProtectedGameplay";
+import { useUserData } from "../hooks/useUserData";
 
 const ResultPage = () => {
   // Hooks
+  useUserData();
   useLobbySocketEvents();
   useBackButtonConfirm();
-  
+
   // Global store state
   const { kahoot, questionIndex, earnedPointsFromCurrentQuestion } = useInGameStore();
+  
+  const { ready } = useProtectedGameplay();
   
   // Local component state
   const [wasSelectedAnswerCorrect, setWasSelectedAnswerCorrect] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!ready) {
+      return;
+    }
+
     const currentQuestion: QuestionPlay | undefined = kahoot?.questions[questionIndex];
     const selectedAnswer: AnswerPlay | undefined = currentQuestion?.answers.find(a => a.isSelected);
     const correctAnswers: AnswerPlay[] | undefined = currentQuestion?.answers.filter(a => a.isCorrect);
@@ -31,7 +40,11 @@ const ResultPage = () => {
     if (correctAnswers?.some(correctAnswer => correctAnswer.id === selectedAnswer?.id)) {
       setWasSelectedAnswerCorrect(true);
     }
-  }, []);
+  }, [ready]);
+
+  if (!ready) {
+    return null;
+  }
 
   return (
     <div className={`relative bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>
