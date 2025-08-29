@@ -8,9 +8,9 @@ const PUBLIC_PATHS: (string | RegExp)[] = [
 ];
 
 const AUTH_PATHS: string[] = [
-  '/login',
-  '/signup'
-]
+  ROUTES.AUTH.LOGIN,
+  ROUTES.AUTH.SIGNUP
+];
 
 const PUBLIC_GAMEPLAY_PATHS: (string | RegExp)[] = [
   /^\/lobby\/\d+$/,
@@ -20,7 +20,7 @@ const PUBLIC_GAMEPLAY_PATHS: (string | RegExp)[] = [
   '/result',
   '/gameover',
   '/ranking'
-]
+];
 
 const isPublicPath = (pathname: string): boolean => {
   return [...PUBLIC_PATHS, ...PUBLIC_GAMEPLAY_PATHS].some(path =>
@@ -87,7 +87,7 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
   }
 
   if (!isValid) {
-    const loginUrl: URL = new URL('/login', req.url);
+    const loginUrl: URL = new URL(ROUTES.AUTH.LOGIN, req.url);
 
     const response: NextResponse = NextResponse.redirect(loginUrl);
     response.cookies.delete('auth-token');

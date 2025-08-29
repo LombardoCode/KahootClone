@@ -1,24 +1,24 @@
 'use client'
 
 import Link from "next/link";
-import Button from "../components/UIComponents/Button";
-import InputForm, { InputFormTypes } from "../components/UIComponents/InputForm";
-import Label from "../components/UIComponents/Label";
-import Text from "../components/UIComponents/Text";
-import Container from "../components/utils/Container";
-import Navbar from "../components/utils/Navbar";
-import { FontWeights, TextColors, TextStyles, UseCases } from "../interfaces/Text.interface";
-import Card from "../components/UIComponents/Card";
-import BackgroundShapes from "../components/utils/BackgroundShapes";
-import MainContent from "../components/utils/MainContent";
+import Button from "../../components/UIComponents/Button";
+import InputForm, { InputFormTypes } from "../../components/UIComponents/InputForm";
+import Label from "../../components/UIComponents/Label";
+import Text from "../../components/UIComponents/Text";
+import Container from "../../components/utils/Container";
+import Navbar from "../../components/utils/Navbar";
+import { FontWeights, TextColors, TextStyles, UseCases } from "../../interfaces/Text.interface";
+import Card from "../../components/UIComponents/Card";
+import BackgroundShapes from "../../components/utils/BackgroundShapes";
+import MainContent from "../../components/utils/MainContent";
 import { useState } from "react";
-import { CreateAccount } from "../interfaces/Auth/CreateAccount.interface";
-import axiosInstance from "../utils/axiosConfig";
-import { AccountRegistrationFormErrors } from "../interfaces/Auth/AccountRegistrationFormErrors";
-import { AccountLoginInfo } from "../interfaces/Auth/AccountLoginInfo";
+import { CreateAccount } from "../../interfaces/Auth/CreateAccount.interface";
+import axiosInstance from "../../utils/axiosConfig";
+import { AccountRegistrationFormErrors } from "../../interfaces/Auth/AccountRegistrationFormErrors";
+import { AccountLoginInfo } from "../../interfaces/Auth/AccountLoginInfo";
 import { useRouter } from "next/navigation";
-import { BackgroundColors } from "../interfaces/Colors.interface";
-import { ROUTES } from "../utils/Routes/routesUtils";
+import { BackgroundColors } from "../../interfaces/Colors.interface";
+import { ROUTES } from "../../utils/Routes/routesUtils";
 
 const Signup = () => {
   const router = useRouter();
@@ -198,7 +198,7 @@ const Signup = () => {
               useCase={UseCases.LONGTEXT}
               className={'mt-2 text-center'}
             >
-              Already have an account? <Link href="/login">Log in</Link>
+              Already have an account? <Link href={ROUTES.AUTH.LOGIN}>Log in</Link>
             </Text>
           </div>
         </MainContent>

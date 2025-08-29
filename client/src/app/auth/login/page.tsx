@@ -1,22 +1,22 @@
 'use client'
 
 import Link from "next/link";
-import Button from "../components/UIComponents/Button";
-import InputForm, { InputFormTypes } from "../components/UIComponents/InputForm";
-import Label from "../components/UIComponents/Label";
-import Text from "../components/UIComponents/Text";
-import Container from "../components/utils/Container";
-import Navbar from "../components/utils/Navbar";
-import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
-import Card from "../components/UIComponents/Card";
-import MainContent from "../components/utils/MainContent";
-import axiosInstance from "../utils/axiosConfig";
+import Button from "../../components/UIComponents/Button";
+import InputForm, { InputFormTypes } from "../../components/UIComponents/InputForm";
+import Label from "../../components/UIComponents/Label";
+import Text from "../../components/UIComponents/Text";
+import Container from "../../components/utils/Container";
+import Navbar from "../../components/utils/Navbar";
+import { FontWeights, TextColors, UseCases } from "../../interfaces/Text.interface";
+import Card from "../../components/UIComponents/Card";
+import MainContent from "../../components/utils/MainContent";
+import axiosInstance from "../../utils/axiosConfig";
 import { useState } from "react";
-import { AccountLoginInfo } from "../interfaces/Auth/AccountLoginInfo";
-import useUserStore from "../stores/useUserStore";
+import { AccountLoginInfo } from "../../interfaces/Auth/AccountLoginInfo";
+import useUserStore from "../../stores/useUserStore";
 import { useRouter } from "next/navigation";
-import { BackgroundColors } from "../interfaces/Colors.interface";
-import { ROUTES } from "../utils/Routes/routesUtils";
+import { BackgroundColors } from "../../interfaces/Colors.interface";
+import { ROUTES } from "../../utils/Routes/routesUtils";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -139,7 +139,7 @@ const LoginPage = () => {
               useCase={UseCases.LONGTEXT}
               className={'mt-2 text-center'}
             >
-              Don&apos;t have an account yet? <Link href="/signup">Sign up</Link>
+              Don&apos;t have an account yet? <Link href={ROUTES.AUTH.SIGNUP}>Sign up</Link>
             </Text>
           </div>
         </MainContent>
