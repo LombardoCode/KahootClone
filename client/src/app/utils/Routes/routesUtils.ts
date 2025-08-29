@@ -2,7 +2,8 @@ export const ROUTES = {
   ROOT: "/",
   AUTH: {
     LOGIN: "/auth/login",
-    SIGNUP: "/auth/signup"
+    SIGNUP: "/auth/signup",
+    FORGOT_PASSWORD: "/auth/forgot-password"
   },
   MENU: {
     DISCOVERY: "/menu/discovery",

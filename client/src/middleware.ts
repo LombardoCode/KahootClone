@@ -9,7 +9,8 @@ const PUBLIC_PATHS: (string | RegExp)[] = [
 
 const AUTH_PATHS: string[] = [
   ROUTES.AUTH.LOGIN,
-  ROUTES.AUTH.SIGNUP
+  ROUTES.AUTH.SIGNUP,
+  ROUTES.AUTH.FORGOT_PASSWORD
 ];
 
 const PUBLIC_GAMEPLAY_PATHS: (string | RegExp)[] = [

@@ -112,6 +112,17 @@ const LoginPage = () => {
                   />
                 </div>
 
+                <div id="forgot-password-message">
+                  <Text
+                    textColor={TextColors.GRAY}
+                    fontWeight={FontWeights.REGULAR}
+                    useCase={UseCases.BODY}
+                    className="text-sm mt-4"
+                  >
+                    Forgot password? <Link href={ROUTES.AUTH.FORGOT_PASSWORD}>Reset your password</Link>
+                  </Text>
+                </div>
+
                 <div className="flex flex-col mt-4">
                   <Button
                     backgroundColor={BackgroundColors.GREEN}
