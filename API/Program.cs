@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Hangfire;
+using Hangfire.MySql;
 
 public class Program
 {
@@ -24,6 +26,25 @@ public class Program
 
     // SignalR
     builder.Services.AddSignalR();
+
+    // HangFire
+    builder.Services.AddHangfire(cfg =>
+    {
+      cfg.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+          .UseSimpleAssemblyNameTypeSerializer()
+          .UseRecommendedSerializerSettings()
+          .UseStorage(new MySqlStorage(
+            builder.Configuration.GetConnectionString("MySQLConnString"),
+            new MySqlStorageOptions
+            {
+              TablesPrefix = "hf_",
+              QueuePollInterval = TimeSpan.FromSeconds(5),
+              TransactionIsolationLevel = System.Transactions.IsolationLevel.ReadCommitted
+            }
+          ));
+    });
+
+    builder.Services.AddHangfireServer();
 
     // Database
     var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
@@ -129,6 +150,7 @@ public class Program
     builder.Services.AddScoped<KahootValidationService>();
     builder.Services.AddScoped<LobbyService>();
     builder.Services.AddScoped<KahootService>();
+    builder.Services.AddScoped<EmailService>();
 
     var app = builder.Build();
 
@@ -169,6 +191,9 @@ public class Program
       
       await seeder.Seed();
     }
+
+    // HangFire dashboard
+    app.UseHangfireDashboard("/jobs");
 
     app.Run();
   }

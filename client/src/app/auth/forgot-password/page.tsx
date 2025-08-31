@@ -10,6 +10,7 @@ import MainContent from "@/app/components/utils/MainContent";
 import Navbar from "@/app/components/utils/Navbar";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
+import axiosInstance from "@/app/utils/axiosConfig";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -51,8 +52,14 @@ const EnterYourEmailForm = ({ setEmailWasSent }: EnterYourEmailFormProps) => {
     });
   }
 
-  const sendResetLink = (e: any) => {
+  const sendResetLink = async (e: any) => {
     e.preventDefault();
+
+    await axiosInstance.post('/auth/forgot-password', formData)
+      .then(() => {})
+      .catch(err => {
+        console.error(err);
+      })
 
     setEmailWasSent(true);
   }

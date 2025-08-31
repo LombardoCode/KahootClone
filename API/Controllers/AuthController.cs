@@ -1,6 +1,9 @@
+using API.Data;
 using API.DTOs;
+using API.DTOs.Auth;
 using API.Models;
 using API.Services;
+using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,20 +16,17 @@ namespace API.Controllers
     private readonly SignInManager<AppUser> _signInManager;
     private readonly UserManager<AppUser> _userManager;
     private readonly AuthService _authService;
-    private readonly IWebHostEnvironment _environment;
     private readonly CookieService _cookieService;
 
     public AuthController(
       SignInManager<AppUser> signInManager,
       UserManager<AppUser> userManager,
       AuthService authService,
-      IWebHostEnvironment environment,
       CookieService cookieService)
     {
       _signInManager = signInManager;
       _userManager = userManager;
       _authService = authService;
-      _environment = environment;
       _cookieService = cookieService;
     }
 
@@ -130,6 +130,14 @@ namespace API.Controllers
           userName
         }
       });
+    }
+
+    [HttpPost("forgot-password")]
+    public async Task<ActionResult> ForgotPassword(ForgotPasswordDTO data, [FromServices] IBackgroundJobClient jobs)
+    {
+      jobs.Enqueue<EmailService>(svc => svc.SendPasswordResetEmailAsync(data.Email));
+
+      return Ok();
     }
 
     private string GenerateJwtToken(string username)
