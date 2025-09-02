@@ -1,9 +1,10 @@
 'use client';
 
 import { redirect } from "next/navigation";
+import { ROUTES } from "../utils/Routes/routesUtils";
 
-const DiscoveryMenuPage = () => {
-  redirect('/menu/discovery');
+const DiscoverMenuPage = () => {
+  redirect(ROUTES.MENU.DISCOVER);
 }
 
-export default DiscoveryMenuPage;
+export default DiscoverMenuPage;

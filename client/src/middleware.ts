@@ -81,7 +81,7 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
 
   if (isAuthPath(pathname)) {
     if (isValid) {
-      const dashboardUrl: URL = new URL(ROUTES.MENU.DISCOVERY, req.url);
+      const dashboardUrl: URL = new URL(ROUTES.MENU.DISCOVER, req.url);
       return NextResponse.redirect(dashboardUrl);
     }
 

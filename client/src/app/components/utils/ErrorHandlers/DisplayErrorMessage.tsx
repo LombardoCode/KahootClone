@@ -77,7 +77,7 @@ const DisplayErrorMessage = ({ resourceType }: DisplayErrorMessageProps) => {
           textColor={TextColors.WHITE}
           size={ButtonSize.LARGE}
           animateOnHover={false}
-          onClick={() => router.push(ROUTES.MENU.DISCOVERY)}
+          onClick={() => router.push(ROUTES.MENU.DISCOVER)}
           className="text-xl"
         >
           Go back to homepage

@@ -53,7 +53,7 @@ const LobbyPage = () => {
 
     if (!ready) {
       user.userName !== null
-        ? router.push(ROUTES.MENU.DISCOVERY)
+        ? router.push(ROUTES.MENU.DISCOVER)
         : router.push(ROUTES.ROOT);
 
       return;

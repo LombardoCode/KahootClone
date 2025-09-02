@@ -24,14 +24,14 @@ const SidebarNav = ({ className }: SidebarNavProps) => {
   const router = useRouter();
 
   const sidebarMenuItems: SidebarMenuItemProps[] = [
-    { name: "Discovery", pathname: "/menu/discovery", icon: faCompass },
-    { name: "Library", pathname: "/menu/library", icon: faList }
+    { name: "Discover", pathname: ROUTES.MENU.DISCOVER, icon: faCompass },
+    { name: "Library", pathname: ROUTES.MENU.LIBRARY, icon: faList }
   ];
 
   return (
     <div className={`${className} px-2 shadow-[inset_0_0px_4px_rgba(0,0,0,0.25)]`}>
       <div className="flex justify-start">
-        <Link href={ROUTES.MENU.DISCOVERY}>
+        <Link href={ROUTES.MENU.DISCOVER}>
           <Logo size={LogoSize.REGULAR} color={LogoColors.VIOLET} />
         </Link>
       </div>

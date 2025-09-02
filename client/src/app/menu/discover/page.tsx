@@ -1,13 +1,13 @@
 'use client';
 
 import Spinner from "@/app/components/UIComponents/Spinners/Spinner";
-import DiscoverCategoryCard, { DiscoverCategoryCardSize } from "@/app/components/utils/Discovery/Cards/Categories/DiscoverCategoryCard";
-import DiscoverCategoryWrapper from "@/app/components/utils/Discovery/Cards/Categories/DiscoverCategoryWrapper";
-import DiscoverFeaturedCard, { DiscoverFeaturedCardSize } from "@/app/components/utils/Discovery/Cards/Featured/DiscoverFeaturedCard";
-import DiscoverFeaturedWrapper from "@/app/components/utils/Discovery/Cards/Featured/DiscoverFeaturedWrapper";
-import DiscoverKahootCard, { DiscoverKahootCardSize } from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootCard";
-import DiscoverKahootWrapper from "@/app/components/utils/Discovery/Cards/Kahoots/DiscoverKahootWrapper";
-import SectionTitle, { SectionTitleSizes } from "@/app/components/utils/Discovery/Titles/SectionTitle";
+import DiscoverCategoryCard, { DiscoverCategoryCardSize } from "@/app/components/utils/Discover/Cards/Categories/DiscoverCategoryCard";
+import DiscoverCategoryWrapper from "@/app/components/utils/Discover/Cards/Categories/DiscoverCategoryWrapper";
+import DiscoverFeaturedCard, { DiscoverFeaturedCardSize } from "@/app/components/utils/Discover/Cards/Featured/DiscoverFeaturedCard";
+import DiscoverFeaturedWrapper from "@/app/components/utils/Discover/Cards/Featured/DiscoverFeaturedWrapper";
+import DiscoverKahootCard, { DiscoverKahootCardSize } from "@/app/components/utils/Discover/Cards/Kahoots/DiscoverKahootCard";
+import DiscoverKahootWrapper from "@/app/components/utils/Discover/Cards/Kahoots/DiscoverKahootWrapper";
+import SectionTitle, { SectionTitleSizes } from "@/app/components/utils/Discover/Titles/SectionTitle";
 import KahootSelectorModal from "@/app/components/utils/Modal/reusable/KahootSelectorModal";
 import { DiscoverCategoryCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverCategoryCardInfo";
 import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverFeaturedCardInfo";
@@ -18,7 +18,7 @@ import axiosInstance from "@/app/utils/axiosConfig";
 import { useEffect, useState } from "react";
 
 
-const DiscoveryMenuPage = () => {
+const DiscoverMenuPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [recentlyPlayedKahoots, setRecentlyPlayedKahoots] = useState<DiscoverKahootCardInfo[]>([]);
   const [categories, setCategories] = useState<DiscoverCategoryCardInfo[]>([]);
@@ -191,4 +191,4 @@ const DiscoveryMenuPage = () => {
   )
 }
 
-export default DiscoveryMenuPage;
+export default DiscoverMenuPage;

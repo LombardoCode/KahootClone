@@ -60,7 +60,7 @@ const Signup = () => {
 
     await axiosInstance.post('/auth/login', loginData)
       .then(res => {
-        router.push(ROUTES.MENU.DISCOVERY);
+        router.push(ROUTES.MENU.DISCOVER);
       })
       .catch(err => {
         console.error(err);

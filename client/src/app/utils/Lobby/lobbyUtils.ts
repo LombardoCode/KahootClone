@@ -38,7 +38,7 @@ export const kickingTheHost = (pathname: string, router: AppRouterInstance) => {
     SoundBank.stopInGameBackgroundMusic();
     SoundBank.stopPodiumBackgroundMusic();
 
-    router.push(ROUTES.MENU.DISCOVERY);
+    router.push(ROUTES.MENU.DISCOVER);
   }
 }
 

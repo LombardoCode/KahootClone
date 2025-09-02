@@ -7,7 +7,7 @@ export const ROUTES = {
     RESET_PASSWORD: "/auth/reset-password"
   },
   MENU: {
-    DISCOVERY: "/menu/discovery",
+    DISCOVER: "/menu/discover",
     LIBRARY: "/menu/library"
   },
   CATEGORIES: "/categories",

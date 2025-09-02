@@ -96,7 +96,7 @@ const CreatorNavbar = () => {
       <nav id="navigation-creator" className="flex justify-between items-center px-3">
         <div id="creator-page-logo-and-kahoots-title-and-description" className="flex items-center h-14">
           <div
-            onClick={() => router.push(ROUTES.MENU.DISCOVERY)}
+            onClick={() => router.push(ROUTES.MENU.DISCOVER)}
             className="cursor-pointer"
           >
             <Logo

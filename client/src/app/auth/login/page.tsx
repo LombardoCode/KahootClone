@@ -41,7 +41,7 @@ const LoginPage = () => {
 
         setUser(user);
 
-        router.push(ROUTES.MENU.DISCOVERY);
+        router.push(ROUTES.MENU.DISCOVER);
       })
       .catch(err => {
         console.error(err);

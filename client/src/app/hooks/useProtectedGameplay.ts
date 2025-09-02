@@ -27,7 +27,7 @@ const useProtectedGameplay = () => {
 
     if (!isValid) {
       const urlFallback = isAuthenticated
-        ? ROUTES.MENU.DISCOVERY
+        ? ROUTES.MENU.DISCOVER
         : ROUTES.ROOT;
       
       router.push(urlFallback);

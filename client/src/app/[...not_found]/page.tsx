@@ -8,7 +8,7 @@ const NotFoundPage = () => {
   const router = useRouter();
   
   // Just send the logged-in user to the dashboard whenever they try to access a non-existing path.
-  router.push(ROUTES.MENU.DISCOVERY);
+  router.push(ROUTES.MENU.DISCOVER);
 }
 
 export default NotFoundPage;
