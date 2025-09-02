@@ -7,6 +7,7 @@ import { BackgroundColors } from "@/app/interfaces/Colors.interface"
 import { useState } from "react"
 import axiosInstance from "@/app/utils/axiosConfig"
 import { useRouter } from "next/navigation"
+import BulletPointErrorsDisplayer from "../../ErrorHandlers/BulletPointErrorsDisplayer"
 
 interface KahootCreateModalProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ interface KahootCreateModalProps {
 
 const KahootCreateModal = ({ isOpen, onClose }: KahootCreateModalProps) => {
   const router = useRouter();
+  const [errors, setErrors] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     newKahootName: ''
   });
@@ -27,7 +29,15 @@ const KahootCreateModal = ({ isOpen, onClose }: KahootCreateModalProps) => {
   }
 
   const createKahoot = async () => {
-    await axiosInstance.post('/kahootcreator/create', { NewKahootName: formData.newKahootName })
+    const NewKahootName: string = formData.newKahootName.trim();
+
+    if (NewKahootName === "") {
+      const error: string = "A quiz name is required.";
+      setErrors([error]);
+      return;
+    }
+
+    await axiosInstance.post('/kahootcreator/create', { NewKahootName })
       .then(res => {
         router.push(`/creator/${res.data.newKahootId}`);
       })
@@ -52,6 +62,7 @@ const KahootCreateModal = ({ isOpen, onClose }: KahootCreateModalProps) => {
           >
             Enter the name of your new Kahoot
           </Text>
+
           <InputForm
             type={InputFormTypes.TEXT}
             textColor={TextColors.BLACK}
@@ -62,6 +73,8 @@ const KahootCreateModal = ({ isOpen, onClose }: KahootCreateModalProps) => {
             onChange={handleFormChange}
             onEnterPress={() => createKahoot()}
           />
+
+          <BulletPointErrorsDisplayer errors={errors} />
         </>
       )}
       footerContent={(
