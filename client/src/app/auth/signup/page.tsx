@@ -15,6 +15,7 @@ import { AccountLoginInfo } from "../../interfaces/Auth/AccountLoginInfo";
 import { useRouter } from "next/navigation";
 import { BackgroundColors } from "../../interfaces/Colors.interface";
 import { ROUTES } from "../../utils/Routes/routesUtils";
+import BulletPointErrorsDisplayer from "@/app/components/utils/ErrorHandlers/BulletPointErrorsDisplayer";
 
 const Signup = () => {
   const router = useRouter();
@@ -109,13 +110,8 @@ const Signup = () => {
                 value={formData.username}
                 onChange={handleFormChange}
               />
-              {errors.username.length > 0 && (
-                <>
-                  {errors.username.map((error: string, key: number) => (
-                    <Text key={key} fontWeight={FontWeights.REGULAR} useCase={UseCases.LONGTEXT} textColor={TextColors.RED} textStyle={TextStyles.ITALIC} className="text-sm mt-1">{error}</Text>
-                  ))}
-                </>
-              )}
+              
+              <BulletPointErrorsDisplayer errors={errors.username} />
             </div>
 
             <div className="flex flex-col mt-4">
@@ -135,13 +131,8 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleFormChange}
               />
-              {errors.email.length > 0 && (
-                <>
-                  {errors.email.map((error: string, key: number) => (
-                    <Text key={key} fontWeight={FontWeights.REGULAR} useCase={UseCases.LONGTEXT} textColor={TextColors.RED} textStyle={TextStyles.ITALIC} className="text-sm mt-1">{error}</Text>
-                  ))}
-                </>
-              )}
+              
+              <BulletPointErrorsDisplayer errors={errors.email} />
             </div>
 
             <div className="flex flex-col mt-4">
@@ -162,13 +153,8 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleFormChange}
               />
-              {errors.password.length > 0 && (
-                <>
-                  {errors.password.map((error: string, key: number) => (
-                    <Text key={key} fontWeight={FontWeights.REGULAR} useCase={UseCases.LONGTEXT} textColor={TextColors.RED} textStyle={TextStyles.ITALIC} className="text-sm mt-1">{error}</Text>
-                  ))}
-                </>
-              )}
+              
+              <BulletPointErrorsDisplayer errors={errors.password} />
             </div>
 
             <div className="flex flex-col mt-4">
