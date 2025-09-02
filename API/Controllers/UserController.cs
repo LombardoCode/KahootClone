@@ -58,6 +58,8 @@ namespace API.Controllers
     [HttpPost("changeUserName")]
     public async Task<ActionResult> changeUserName(ChangeUserNameDTO data)
     {
+      List<string> errors = new List<string>();
+
       string desiredUsername = data.UserName;
 
       AppUser currentUser = await _userService.GetCurrentUserAsync();
@@ -71,15 +73,16 @@ namespace API.Controllers
 
       if (doesThatUserNameExists)
       {
-        return BadRequest("That username already exists. Choose another username.");
+        errors.Add("That username already exists. Choose another username.");
+        return BadRequest(new { errors });
       }
 
       var setUsername = await _userManager.SetUserNameAsync(currentUser, desiredUsername);
 
       if (!setUsername.Succeeded)
       {
-        string msg = string.Join("; ", setUsername.Errors.Select(e => e.Description));
-        return BadRequest(msg);
+        errors.AddRange(setUsername.Errors.Select(e => e.Description).ToList());
+        return BadRequest(new { errors });
       }
 
       string newToken = _authService.GenerateJwtToken(currentUser.UserName);
@@ -108,6 +111,8 @@ namespace API.Controllers
     [HttpPost("changePassword")]
     public async Task<ActionResult> ChangePassword(ChangePasswordDTO data)
     {
+      List<string> errors = new List<string>();
+
       AppUser user = await _userService.GetCurrentUserAsync();
 
       string oldPassword = data.OldPassword;
@@ -116,19 +121,22 @@ namespace API.Controllers
 
       if (oldPassword.IsNullOrEmpty() || newPassword.IsNullOrEmpty() || repeatNewPassword.IsNullOrEmpty())
       {
-        return BadRequest("All password fields must be filled.");
+        errors.Add("All password fields must be filled.");
+        return BadRequest(new { errors });
       }
 
       bool isPasswordCorrect = await _userManager.CheckPasswordAsync(user, oldPassword);
 
       if (!isPasswordCorrect)
       {
-        return BadRequest("Password is not correct");
+        errors.Add("Password is not correct");
+        return BadRequest(new { errors });
       }
 
       if (newPassword != repeatNewPassword)
       {
-        return BadRequest("New passwords must match");
+        errors.Add("New passwords must match");
+        return BadRequest(new { errors });
       }
 
       await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);

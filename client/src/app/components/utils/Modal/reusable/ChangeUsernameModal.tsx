@@ -7,6 +7,7 @@ import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputFo
 import { useEffect, useState } from "react";
 import axiosInstance from "@/app/utils/axiosConfig";
 import useUserStore from "@/app/stores/useUserStore";
+import BulletPointErrorsDisplayer from "../../ErrorHandlers/BulletPointErrorsDisplayer";
 
 interface ChangeUsernameModalProps {
   isOpen: boolean;
@@ -21,11 +22,11 @@ const ChangeUsernameModal = ({ isOpen, onClose, userName, setNewUserName }: Chan
 
   // Local component states
   const [userNameForm, setUserNameForm] = useState<string>(userName);
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<string[]>([]);
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (error !== null) {
-      setError(null)
+    if (errors.length > 0) {
+      setErrors([]);
     }
 
     setUserNameForm(e.target.value);
@@ -37,10 +38,8 @@ const ChangeUsernameModal = ({ isOpen, onClose, userName, setNewUserName }: Chan
     }
   }, [userName, isOpen])
 
-  const tryAndChangeUsersUserName = () => {
-    axiosInstance.post('/user/changeUserName', {
-      userName: userNameForm
-    })
+  const tryAndChangeUsersUserName = async () => {
+    await axiosInstance.post('/user/changeUserName', { userName: userNameForm })
       .then(res => {
         const user = res.data.user.userName;
 
@@ -54,8 +53,8 @@ const ChangeUsernameModal = ({ isOpen, onClose, userName, setNewUserName }: Chan
       })
       .catch(err => {
         console.error(err);
-        const error: string = err.response.data;
-        setError(error);
+        const errors: string[] = err.response.data.errors;
+        setErrors(errors);
       })
   }
 
@@ -64,7 +63,7 @@ const ChangeUsernameModal = ({ isOpen, onClose, userName, setNewUserName }: Chan
       modalType={ModalTypes.INPUT}
       isOpen={isOpen}
       onClose={() => {
-        setError(null);
+        setErrors([]);
         onClose();
       }}
       className="w-[800px] max-w-[90vw]"
@@ -94,18 +93,7 @@ const ChangeUsernameModal = ({ isOpen, onClose, userName, setNewUserName }: Chan
             />
           </div>
 
-          {error && (
-            <div id="error" className="py-1">
-              <Text
-                fontWeight={FontWeights.REGULAR}
-                textColor={TextColors.RED}
-                useCase={UseCases.BODY}
-                className="text-sm"
-              >
-                {error}
-              </Text>
-            </div>
-          )}
+          <BulletPointErrorsDisplayer errors={errors} />
         </>
       )}
       footerContent={(

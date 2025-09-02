@@ -4,6 +4,7 @@ import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponen
 import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputForm";
 import Label from "@/app/components/UIComponents/Label";
 import Text from "@/app/components/UIComponents/Text";
+import BulletPointErrorsDisplayer from "@/app/components/utils/ErrorHandlers/BulletPointErrorsDisplayer";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import axiosInstance from "@/app/utils/axiosConfig";
@@ -28,7 +29,7 @@ const UserSettingsChangePasswordTab = () => {
     newPassword: { value: "", visible: false },
     repeatNewPassword: { value: "", visible: false }
   });
-  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<string[]>([]);
 
   const handleTextFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const field = e.target.name as keyof PasswordFieldsState;
@@ -41,8 +42,8 @@ const UserSettingsChangePasswordTab = () => {
       }
     });
 
-    if (passwordError !== null) {
-      setPasswordError(null);
+    if (errors.length > 0) {
+      setErrors([]);
     }
   }
 
@@ -56,17 +57,17 @@ const UserSettingsChangePasswordTab = () => {
     })
   }
 
-  const saveNewPassword = () => {
-    axiosInstance.post('/user/changePassword', {
+  const saveNewPassword = async () => {
+    await axiosInstance.post('/user/changePassword', {
       oldPassword: passwordFields.oldPassword.value,
       newPassword: passwordFields.newPassword.value,
       repeatNewPassword: passwordFields.repeatNewPassword.value
     })
-    .then(() => {})
-    .catch(err => {
-      console.error(err);
-      setPasswordError(err.response.data);
-    })
+      .then(() => {})
+      .catch(err => {
+        console.error(err);
+        setErrors(err.response.data.errors);
+      })
   }
 
   return (
@@ -197,18 +198,7 @@ const UserSettingsChangePasswordTab = () => {
           </div>
         </div>
 
-        {passwordError !== null && (
-          <div id="password-errors">
-            <Text
-              fontWeight={FontWeights.REGULAR}
-              textColor={TextColors.RED}
-              useCase={UseCases.BODY}
-              className="text-sm"
-            >
-              {passwordError}
-            </Text>
-          </div>
-        )}
+        <BulletPointErrorsDisplayer errors={errors} />
       </div>
     </>
   )

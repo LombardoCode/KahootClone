@@ -5,9 +5,6 @@ import Card from "@/app/components/UIComponents/Card";
 import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputForm";
 import Label from "@/app/components/UIComponents/Label";
 import Text from "@/app/components/UIComponents/Text";
-import Container from "@/app/components/utils/Container";
-import MainContent from "@/app/components/utils/MainContent";
-import Navbar from "@/app/components/utils/Navbar";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import axiosInstance from "@/app/utils/axiosConfig";
@@ -18,22 +15,9 @@ import { useState } from "react";
 const ForgotPasswordPage = () => {
   const [emailWasSent, setEmailWasSent] = useState<boolean>(false);
 
-  return (
-    <>
-      <Navbar fixed={false} />
-      <Container>
-        <MainContent>
-          {!emailWasSent
-            ? (
-              <EnterYourEmailForm setEmailWasSent={setEmailWasSent} />
-            )
-            : (
-              <ResetLinkWasSentConfirmation />
-            )}
-        </MainContent>
-      </Container>
-    </>
-  )
+  return emailWasSent
+    ? <ResetLinkWasSentConfirmation />
+    : <EnterYourEmailForm setEmailWasSent={setEmailWasSent} />
 }
 
 interface EnterYourEmailFormProps {

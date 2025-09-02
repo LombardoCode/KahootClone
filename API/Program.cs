@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Hangfire;
 using Hangfire.MySql;
+using API.HTMLTemplates.Emailing;
 
 public class Program
 {
@@ -143,6 +144,9 @@ public class Program
     // Adding the controllers
     builder.Services.AddControllers();
 
+    // Singletons
+    builder.Services.AddSingleton<EmailTemplateRenderer>();
+
     // Additional services
     builder.Services.AddScoped<AuthService>();
     builder.Services.AddScoped<CookieService>();
@@ -151,6 +155,7 @@ public class Program
     builder.Services.AddScoped<LobbyService>();
     builder.Services.AddScoped<KahootService>();
     builder.Services.AddScoped<EmailService>();
+    builder.Services.AddScoped<PasswordResetTokensService>();
 
     var app = builder.Build();
 
