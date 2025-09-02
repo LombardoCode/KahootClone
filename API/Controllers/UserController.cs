@@ -22,6 +22,7 @@ namespace API.Controllers
     private readonly IWebHostEnvironment _environment;
     private readonly CookieService _cookieService;
 
+
     public UserController(
       DataContext dbContext,
       UserService userService,
@@ -38,6 +39,7 @@ namespace API.Controllers
       _cookieService = cookieService;
     }
 
+
     [Authorize]
     [HttpGet("")]
     public async Task<ActionResult> getUserInformation()
@@ -53,6 +55,7 @@ namespace API.Controllers
 
       return Ok(safeUserData);
     }
+
 
     [Authorize]
     [HttpPost("changeUserName")]
@@ -92,6 +95,7 @@ namespace API.Controllers
       return Ok(new { user = new { currentUser.UserName } });
     }
 
+
     [Authorize]
     [HttpPost("changeProfilePicture")]
     public async Task<ActionResult> changeProfilePicture(ChangeProfilePictureDTO data)
@@ -102,10 +106,6 @@ namespace API.Controllers
       return Ok($"MediaUrl: {data.MediaUrl}");
     }
 
-    public class ChangeProfilePictureDTO
-    {
-      public string? MediaUrl { get; set; }
-    }
 
     [Authorize]
     [HttpPost("changePassword")]
@@ -143,6 +143,13 @@ namespace API.Controllers
 
       return Ok();
     }
+
+
+    public class ChangeProfilePictureDTO
+    {
+      public string? MediaUrl { get; set; }
+    }
+
 
     public class ChangePasswordDTO
     {

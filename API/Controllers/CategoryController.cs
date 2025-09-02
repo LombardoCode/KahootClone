@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using API.Data;
 using API.Data.ForClient.Categories;
 using API.Data.ForClient.Dashboard.Discover.Sections;
@@ -16,11 +15,14 @@ namespace API.Controllers
   {
     private readonly DataContext _dbContext;
 
+
     public CategoryController(DataContext dbContext)
     {
       _dbContext = dbContext;
     }
 
+
+    [Authorize]
     [HttpGet("{categorySlug}")]
     public async Task<ActionResult> Index(string categorySlug)
     {
@@ -33,6 +35,7 @@ namespace API.Controllers
 
       return Ok();
     }
+
 
     [Authorize]
     [HttpGet("getCategoryBySlug")]
@@ -56,6 +59,7 @@ namespace API.Controllers
       return Ok(categoryForClient);
     }
 
+
     [Authorize]
     [HttpGet("getFeaturedKahootsByCategorySlug")]
     public async Task<ActionResult> GetFeaturedKahootsByCategorySlug(string categorySlug)
@@ -71,6 +75,7 @@ namespace API.Controllers
 
       return Ok(kahoots);
     }
+
 
     [Authorize]
     [HttpGet("getSubsectionsFromCategorySlug")]
@@ -88,6 +93,7 @@ namespace API.Controllers
       return Ok(kahoots);
     }
 
+
     #region Private Methods
 
     private async Task<bool> verifyIfCategoryExistsBySlug(string slug)
@@ -96,11 +102,13 @@ namespace API.Controllers
       return doesThatCategoryExists;
     }
 
+
     private async Task<Category> getCategoryBySlugName(string categorySlug)
     {
       Category category = await _dbContext.Categories.FirstOrDefaultAsync(c => c.Slug == categorySlug);
       return category;
     }
+
 
     private async Task<List<DiscoverFeaturedCardInfoDTO>> getFeaturedKahootsFromSpecificCategoryId(int categoryId)
     {
@@ -121,6 +129,7 @@ namespace API.Controllers
 
       return await query.ToListAsync();
     }
+
 
     private async Task<List<DiscoverSubsectionClient>> getSubsectionsWithKahootsFromSpecificCategoryId(int categoryId)
     {

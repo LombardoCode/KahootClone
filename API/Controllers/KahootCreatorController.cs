@@ -19,6 +19,7 @@ namespace API.Controllers
     private readonly KahootValidationService _kahootValidationService;
     private readonly UserService _userService;
 
+
     public KahootCreatorController(DataContext dbContext, KahootValidationService kahootValidationService, UserService userService)
     {
       _dbContext = dbContext;
@@ -26,8 +27,9 @@ namespace API.Controllers
       _userService = userService;
     }
 
-    [HttpPost("create")]
+
     [Authorize]
+    [HttpPost("create")]
     public async Task<ActionResult> CreateKahoot(CreateKahootQuizDTO data)
     {
       var userId = await _userService.GetUserId();
@@ -63,6 +65,7 @@ namespace API.Controllers
         return StatusCode(500);
       }
     }
+
 
     /// <summary>
     /// This method will save the entire kahoot
@@ -222,6 +225,7 @@ namespace API.Controllers
 
       return Ok(kahootDTO);
     }
+
 
     #region Private functions
 

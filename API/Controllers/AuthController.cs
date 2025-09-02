@@ -1,9 +1,9 @@
-using API.Data;
 using API.DTOs;
 using API.DTOs.Auth;
 using API.Models;
 using API.Services;
 using Hangfire;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +18,7 @@ namespace API.Controllers
     private readonly AuthService _authService;
     private readonly CookieService _cookieService;
 
+
     public AuthController(
       SignInManager<AppUser> signInManager,
       UserManager<AppUser> userManager,
@@ -30,6 +31,8 @@ namespace API.Controllers
       _cookieService = cookieService;
     }
 
+
+    [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser(RegisterDTO newUserData)
     {
@@ -77,6 +80,8 @@ namespace API.Controllers
       return BadRequest(response);
     }
 
+
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDTO credentials)
     {
@@ -110,6 +115,8 @@ namespace API.Controllers
       return Unauthorized(errors);
     }
 
+
+    [Authorize]
     [HttpPost("logout")]
     public ActionResult Logout()
     {
@@ -117,6 +124,7 @@ namespace API.Controllers
 
       return Ok();
     }
+
 
     [HttpGet("me")]
     public ActionResult me()
@@ -132,6 +140,8 @@ namespace API.Controllers
       });
     }
 
+
+    [AllowAnonymous]
     [HttpPost("forgot-password")]
     public async Task<ActionResult> ForgotPassword(ForgotPasswordDTO data, [FromServices] IBackgroundJobClient jobs)
     {
@@ -139,6 +149,7 @@ namespace API.Controllers
 
       return Ok();
     }
+
 
     private string GenerateJwtToken(string username)
     {

@@ -1,4 +1,5 @@
 using API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,12 +11,14 @@ namespace API.Controllers
   {
     private readonly UserManager<AppUser> _userManager;
 
+
     public ResetPasswordController(UserManager<AppUser> userManager)
     {
       _userManager = userManager;
     }
 
 
+    [AllowAnonymous]
     [HttpPost("validate")]
     public async Task<ActionResult> Validate(ValidateDTO data)
     {
@@ -46,6 +49,7 @@ namespace API.Controllers
     }
 
 
+    [AllowAnonymous]
     [HttpPost("reset-password")]
     public async Task<ActionResult> ResetPassword(ResetPasswordDTO data)
     {

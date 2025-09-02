@@ -22,6 +22,7 @@ namespace API.Controllers
     private readonly UserService _userService;
     private readonly KahootService _kahootService;
 
+
     public KahootController(DataContext dbContext, UserService userService, KahootService kahootService)
     {
       _dbContext = dbContext;
@@ -29,8 +30,9 @@ namespace API.Controllers
       _kahootService = kahootService;
     }
 
-    [HttpGet("getBasicInfoFromUsersKahoots")]
+
     [Authorize]
+    [HttpGet("getBasicInfoFromUsersKahoots")]
     public async Task<ActionResult> GetBasicInfoFromUsersKahoots([FromQuery] int pageSize, int currentPage)
     {
       var userId = await _userService.GetUserId();
@@ -65,8 +67,9 @@ namespace API.Controllers
       });
     }
 
-    [HttpDelete("delete/{kahootId}")]
+
     [Authorize]
+    [HttpDelete("delete/{kahootId}")]
     public async Task<ActionResult> DeleteKahoot(Guid kahootId)
     {
       var userId = await _userService.GetUserId();
@@ -101,6 +104,8 @@ namespace API.Controllers
       }
     }
 
+
+    [Authorize]
     [HttpGet("KahootExists/{id}")]
     public async Task<ActionResult> KahootExists(Guid id)
     {
@@ -114,6 +119,8 @@ namespace API.Controllers
       return Ok();
     }
 
+
+    [Authorize]
     [HttpGet("VerifyOwnership/{id}")]
     public async Task<ActionResult> VerifyOwnership(Guid id)
     {
@@ -128,6 +135,8 @@ namespace API.Controllers
       return Ok();
     }
 
+
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<KahootClient>> GetKahootInformation(Guid id)
     {
@@ -185,6 +194,8 @@ namespace API.Controllers
       return Ok(kahootDTO);
     }
 
+
+    [Authorize]
     [HttpPost("RegisterPlayCount")]
     public async Task<ActionResult> RegisterPlayCount(PlayedKahootDTO playedKahootData)
     {
@@ -225,6 +236,7 @@ namespace API.Controllers
       }
     }
 
+
     [Authorize]
     [HttpGet("getRecentlyPlayedKahoots")]
     public async Task<ActionResult<List<DiscoverKahootCardInfoDTO>>> GetRecentlyPlayedKahoots()
@@ -252,6 +264,7 @@ namespace API.Controllers
       return Ok(kahoots);
     }
 
+
     [Authorize]
     [HttpGet("getCategories")]
     public async Task<ActionResult<List<DiscoverCategoryCardInfoDTO>>> getCategories()
@@ -268,6 +281,7 @@ namespace API.Controllers
 
       return Ok(categories);
     }
+
 
     [Authorize]
     [HttpGet("getFeaturedKahoots")]
@@ -294,6 +308,7 @@ namespace API.Controllers
 
       return Ok(kahoots);
     }
+
 
     [Authorize]
     [HttpGet("getSections")]
@@ -326,6 +341,7 @@ namespace API.Controllers
       return Ok(sectionsWithSubsectionAndItsRelatedKahoots);
     }
 
+
     [Authorize]
     [HttpGet("getKahootMetadata")]
     public async Task<ActionResult> getKahootMetadata(Guid kahootId)
@@ -346,6 +362,7 @@ namespace API.Controllers
 
       return Ok(kahootMetadata);
     }
+
 
     /// <summary>
     /// This public method's responsability is to search public and playable kahoots based that matches either their title or description

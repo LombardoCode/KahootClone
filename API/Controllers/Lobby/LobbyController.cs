@@ -4,7 +4,6 @@ using API.DTOs.Lobby;
 using API.Models.Play;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,12 +17,14 @@ namespace API.Controllers.Play
     private readonly LobbyService _lobbyService;
     private readonly UserService _userService;
 
+
     public LobbyController(DataContext dbContext, LobbyService lobbyService, UserService userService)
     {
       _dbContext = dbContext;
       _lobbyService = lobbyService;
       _userService = userService;
     }
+
 
     [Authorize]
     [HttpPost("create")]
@@ -48,6 +49,8 @@ namespace API.Controllers.Play
       });
     }
 
+
+    [AllowAnonymous]
     [HttpPost("checkIfValidLobby")]
     public async Task<ActionResult<bool>> CheckIfValidLobby(ValidLobbyDTO lobbyData)
     {
@@ -70,35 +73,8 @@ namespace API.Controllers.Play
       return Ok(true);
     }
 
-    [HttpGet("checkIfTheUserIsHostFromTheGame")]
-    public async Task<ActionResult> CheckIfUserIsHostFromTheGame(string lobbyId)
-    {
-      bool lobbyExists = await _dbContext.Lobbies.AnyAsync(l => l.GamePIN == lobbyId);
 
-      if (!lobbyExists)
-      {
-        return NotFound("Lobby was not found");
-      }
-
-      bool IsHost = false;
-      var userId = await _userService.GetUserId();
-
-      if (!String.IsNullOrEmpty(userId))
-      {
-        string hostIdFromTheGame = await _dbContext.Lobbies
-          .Where(l => l.GamePIN == lobbyId)
-          .Select(l => l.UserId)
-          .FirstOrDefaultAsync();
-        
-        if (!String.IsNullOrEmpty(hostIdFromTheGame) && userId == hostIdFromTheGame)
-        {
-          IsHost = true;
-        }
-      }
-
-      return Ok(new { IsHost });
-    }
-
+    [Authorize]
     [HttpPost("startTheGame")]
     public async Task<ActionResult<bool>> StartTheGame(StartTheGameDTO gameData)
     {
@@ -128,6 +104,8 @@ namespace API.Controllers.Play
       return Ok(gameStarted);
     }
 
+
+    [Authorize]
     [HttpGet("getKahootTitleAndQuestions")]
     public async Task<ActionResult> getKahootTitleAndQuestions(string lobbyId)
     {
