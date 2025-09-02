@@ -2,6 +2,7 @@
 
 import Button, { ButtonSize } from "@/app/components/UIComponents/Button";
 import Card from "@/app/components/UIComponents/Card";
+import Form from "@/app/components/UIComponents/Form";
 import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputForm";
 import Label from "@/app/components/UIComponents/Label";
 import Text from "@/app/components/UIComponents/Text";
@@ -121,9 +122,7 @@ const TokenIsValid = () => {
     });
   }
 
-  const changePassword = async (e: any) => {
-    e.preventDefault();
-
+  const changePassword = async () => {
     await axiosInstance.post('/reset-password/reset-password', {
       email,
       token,
@@ -152,9 +151,7 @@ const TokenIsValid = () => {
 
       <div className="login-form w-96 mx-auto">
         <Card className="w-96 mx-auto mt-4">
-          <form
-            onSubmit={changePassword}
-          >
+          <Form onSubmit={changePassword}>
             <div className="flex flex-col">
               <Label
                 fontWeight={FontWeights.BOLD}
@@ -207,7 +204,7 @@ const TokenIsValid = () => {
             </div>
 
             <BulletPointErrorsDisplayer errors={errors} />
-          </form>
+          </Form>
         </Card>
       </div>
 

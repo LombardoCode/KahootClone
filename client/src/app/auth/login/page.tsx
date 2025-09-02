@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { BackgroundColors } from "../../interfaces/Colors.interface";
 import { ROUTES } from "../../utils/Routes/routesUtils";
 import BulletPointErrorsDisplayer from "@/app/components/utils/ErrorHandlers/BulletPointErrorsDisplayer";
+import Form from "@/app/components/UIComponents/Form";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -33,9 +34,7 @@ const LoginPage = () => {
     });
   }
 
-  const logIn = async (e: any) => {
-    e.preventDefault();
-
+  const logIn = async () => {
     await axiosInstance.post('/auth/login', formData)
       .then(res => {
         const user = res.data.user.userName;
@@ -65,9 +64,7 @@ const LoginPage = () => {
 
       <div className="login-form w-96 mx-auto">
         <Card className="w-96 mx-auto mt-4">
-          <form
-            onSubmit={logIn}
-          >
+          <Form onSubmit={logIn}>
             <div className="flex flex-col">
               <Label
                 fontWeight={FontWeights.BOLD}
@@ -130,7 +127,7 @@ const LoginPage = () => {
             </div>
 
             <BulletPointErrorsDisplayer errors={errors} />
-          </form>
+          </Form>
         </Card>
 
         <Text

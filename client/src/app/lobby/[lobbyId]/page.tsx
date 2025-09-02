@@ -22,7 +22,7 @@ import { integrateConnectionIdToTheLobbyGroup } from "@/app/utils/Lobby/lobbyUti
 import { HubConnectionState } from "@microsoft/signalr";
 import useUserStore from "@/app/stores/useUserStore";
 import { useUserData } from "@/app/hooks/useUserData";
-import Tooltip from "@/app/components/UIComponents/Tooltip";
+import Tooltip from "@/app/components/UIComponents/ToolTip";
 
 const LobbyPage = () => {
   // Hooks

@@ -2,6 +2,7 @@
 
 import Button from "@/app/components/UIComponents/Button";
 import Card from "@/app/components/UIComponents/Card";
+import Form from "@/app/components/UIComponents/Form";
 import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputForm";
 import Label from "@/app/components/UIComponents/Label";
 import Text from "@/app/components/UIComponents/Text";
@@ -36,9 +37,7 @@ const EnterYourEmailForm = ({ setEmailWasSent }: EnterYourEmailFormProps) => {
     });
   }
 
-  const sendResetLink = async (e: any) => {
-    e.preventDefault();
-
+  const sendResetLink = async () => {
     await axiosInstance.post('/auth/forgot-password', formData)
       .then(() => {})
       .catch(err => {
@@ -61,9 +60,7 @@ const EnterYourEmailForm = ({ setEmailWasSent }: EnterYourEmailFormProps) => {
 
       <div className="login-form w-96 mx-auto">
         <Card className="w-96 mx-auto mt-4">
-          <form
-            onSubmit={sendResetLink}
-          >
+          <Form onSubmit={sendResetLink}>
             <div className="flex flex-col">
               <Label
                 fontWeight={FontWeights.BOLD}
@@ -94,7 +91,7 @@ const EnterYourEmailForm = ({ setEmailWasSent }: EnterYourEmailFormProps) => {
                 Send reset link
               </Button>
             </div>
-          </form>
+          </Form>
         </Card>
       </div>
     </>

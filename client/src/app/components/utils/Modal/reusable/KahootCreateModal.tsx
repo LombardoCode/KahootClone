@@ -60,6 +60,7 @@ const KahootCreateModal = ({ isOpen, onClose }: KahootCreateModalProps) => {
             id="newKahootName"
             value={formData.newKahootName}
             onChange={handleFormChange}
+            onEnterPress={() => createKahoot()}
           />
         </>
       )}

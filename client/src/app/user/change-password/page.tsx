@@ -1,6 +1,7 @@
 "use client";
 
 import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponents/Button";
+import Form from "@/app/components/UIComponents/Form";
 import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputForm";
 import Label from "@/app/components/UIComponents/Label";
 import Text from "@/app/components/UIComponents/Text";
@@ -86,7 +87,11 @@ const UserSettingsChangePasswordTab = () => {
           </div>
         </div>
 
-        <div id="change-password-password-fields-wrapper" className="mt-6">
+        <Form
+          id="change-password-password-fields-wrapper"
+          className="mt-6"
+          onSubmit={() => saveNewPassword()}
+        >
           <div id="old-password-content" className="mb-2">
             <Label
               fontWeight={FontWeights.BOLD}
@@ -196,7 +201,7 @@ const UserSettingsChangePasswordTab = () => {
               Save
             </Button>
           </div>
-        </div>
+        </Form>
 
         <BulletPointErrorsDisplayer errors={errors} />
       </div>

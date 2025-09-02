@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { BackgroundColors } from "../../interfaces/Colors.interface";
 import { ROUTES } from "../../utils/Routes/routesUtils";
 import BulletPointErrorsDisplayer from "@/app/components/utils/ErrorHandlers/BulletPointErrorsDisplayer";
+import Form from "@/app/components/UIComponents/Form";
 
 const Signup = () => {
   const router = useRouter();
@@ -38,9 +39,7 @@ const Signup = () => {
     });
   }
 
-  const createAccount = async (e: any) => {
-    e.preventDefault();
-
+  const createAccount = async () => {
     await axiosInstance.post('/auth/register', formData)
       .then(res => {
         logInUser();
@@ -90,9 +89,7 @@ const Signup = () => {
         </Text>
 
         <Card className="w-96 mx-auto mt-4">
-          <form
-            onSubmit={createAccount}
-          >
+          <Form onSubmit={createAccount}>
             <div className="flex flex-col">
               <Label
                 fontWeight={FontWeights.BOLD}
@@ -167,7 +164,7 @@ const Signup = () => {
                 Sign up
               </Button>
             </div>
-          </form>
+          </Form>
         </Card>
 
         <Text

@@ -90,6 +90,7 @@ const ChangeUsernameModal = ({ isOpen, onClose, userName, setNewUserName }: Chan
               value={userNameForm}
               onChange={handleUsernameChange}
               className="text-md py-2"
+              onEnterPress={tryAndChangeUsersUserName}
             />
           </div>
 

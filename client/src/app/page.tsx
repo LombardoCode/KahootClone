@@ -168,6 +168,7 @@ const ShowEnterLobbyIdFields = ({ highlightInput, setError, setHighlightInput, s
             />
           )
         }
+        onEnterPress={() => processGamePIN()}
       />
       <Button
         backgroundColor={BackgroundColors.GRAY}
@@ -230,6 +231,7 @@ const ShowEnterNicknameFields = ({ highlightInput, nickName, setNickName, gamePI
             />
           )
         }
+        onEnterPress={() => saveNickName()}
       />
       <Button
         backgroundColor={BackgroundColors.GRAY}
