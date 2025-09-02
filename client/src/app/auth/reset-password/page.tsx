@@ -5,6 +5,7 @@ import Card from "@/app/components/UIComponents/Card";
 import Form from "@/app/components/UIComponents/Form";
 import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputForm";
 import Label from "@/app/components/UIComponents/Label";
+import Spinner from "@/app/components/UIComponents/Spinners/Spinner";
 import Text from "@/app/components/UIComponents/Text";
 import BulletPointErrorsDisplayer from "@/app/components/utils/ErrorHandlers/BulletPointErrorsDisplayer";
 import PasswordWasChangedSuccessfullyModal from "@/app/components/utils/Modal/reusable/PasswordWasChangedSuccessfullyModal";
@@ -50,7 +51,11 @@ const ResetPasswordPage = () => {
   }
 
   if (isLoading) {
-    return null;
+    return (
+      <div className="flex justify-center">
+        <Spinner className="text-kahoot-purple-variant-3" />
+      </div>
+    )
   }
 
   if (!isValidToken) {

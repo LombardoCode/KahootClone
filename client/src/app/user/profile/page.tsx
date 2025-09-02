@@ -3,6 +3,7 @@
 import Button, { ButtonSize, PerspectiveSize } from "@/app/components/UIComponents/Button";
 import InputForm, { InputFormTypes } from "@/app/components/UIComponents/InputForm";
 import Label from "@/app/components/UIComponents/Label";
+import Spinner from "@/app/components/UIComponents/Spinners/Spinner";
 import Text from "@/app/components/UIComponents/Text";
 import MediaSelector from "@/app/components/utils/Media/MediaSelector";
 import ChangeUsernameModal from "@/app/components/utils/Modal/reusable/ChangeUsernameModal";
@@ -22,6 +23,7 @@ const UserSettingsProfileTab = () => {
     email: "",
     mediaUrl: null
   });
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({
@@ -52,6 +54,9 @@ const UserSettingsProfileTab = () => {
       })
       .catch(err => {
         console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
   }
 
@@ -100,6 +105,14 @@ const UserSettingsProfileTab = () => {
       .catch(err => {
         console.error(err);
       })
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-6">
+        <Spinner className="text-kahoot-purple-variant-3" />
+      </div>
+    )
   }
 
   return (
