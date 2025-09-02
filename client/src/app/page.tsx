@@ -64,6 +64,7 @@ const Home = () => {
                   nickName={nickName}
                   setNickName={setNickName}
                   gamePIN={gamePIN}
+                  setError={setError}
                 />
               )}
             </Card>
@@ -190,13 +191,19 @@ interface ShowEnterNicknameFieldsProps {
   nickName: string;
   setNickName: (nickname: string) => void;
   gamePIN: string;
+  setError: (error: string | null) => void;
 }
 
-const ShowEnterNicknameFields = ({ highlightInput, nickName, setNickName, gamePIN }: ShowEnterNicknameFieldsProps) => {
+const ShowEnterNicknameFields = ({ highlightInput, nickName, setNickName, gamePIN, setError }: ShowEnterNicknameFieldsProps) => {
   const { setCurrentPlayer } = useInGameStore();
   const router = useRouter();
 
   const saveNickName = async () => {
+    if (nickName.trim() === "") {
+      setError("Nickname is required.");
+      return;
+    }
+
     const connection: HubConnection = await getOrCreateSignalRConnection();
     let newPlayer: Player = await createBaseNewPlayer(connection, nickName);
     setCurrentPlayer(newPlayer);
