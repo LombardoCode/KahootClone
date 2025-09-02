@@ -23,11 +23,13 @@ import { HubConnectionState } from "@microsoft/signalr";
 import useUserStore from "@/app/stores/useUserStore";
 import { useUserData } from "@/app/hooks/useUserData";
 import Tooltip from "@/app/components/UIComponents/ToolTip";
+import useBackButtonConfirm from "@/app/hooks/useBackButtonConfirm";
 
 const LobbyPage = () => {
   // Hooks
   useUserData();
   useLobbySocketEvents();
+  useBackButtonConfirm();
 
   // Global store state
   const { signalRConnection, lobbyId, isHost, currentPlayer, players, kahoot, setKahoot } = useInGameStore();
