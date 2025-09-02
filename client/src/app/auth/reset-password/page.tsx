@@ -124,7 +124,7 @@ const TokenIsValid = () => {
   const changePassword = async (e: any) => {
     e.preventDefault();
 
-    await axiosInstance.post('/reset-password/change-password', {
+    await axiosInstance.post('/reset-password/reset-password', {
       email,
       token,
       newPassword: formData.newPassword,

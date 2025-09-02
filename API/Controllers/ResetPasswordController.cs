@@ -46,8 +46,8 @@ namespace API.Controllers
     }
 
 
-    [HttpPost("change-password")]
-    public async Task<ActionResult> ChangePassword(ChangePasswordDTO data)
+    [HttpPost("reset-password")]
+    public async Task<ActionResult> ResetPassword(ResetPasswordDTO data)
     {
       List<string> errors = new List<string>();
 
@@ -103,7 +103,7 @@ namespace API.Controllers
     public string Token { get; set; }
   }
 
-  public class ChangePasswordDTO
+  public class ResetPasswordDTO
   {
     public string Email { get; set; }
     public string Token { get; set; }
