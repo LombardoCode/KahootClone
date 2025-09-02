@@ -35,6 +35,8 @@ const LobbyPage = () => {
   // Local component state
   const router = useRouter();
   const [isValidLobby, setIsValidLobby] = useState<boolean>(false);
+  const [wasTheStartButtonClicked, setWasTheStartButtonClicked] = useState<boolean>(false);
+
 
   const ready: boolean =
     signalRConnection !== null &&
@@ -111,8 +113,11 @@ const LobbyPage = () => {
   }
 
   const startingTheGame = async () => {
-    await shareAllQuestionsFromHostToTheOtherClients();
-    await setTheGameInProgressMode();
+    if (!wasTheStartButtonClicked) {
+      setWasTheStartButtonClicked(true);
+      await shareAllQuestionsFromHostToTheOtherClients();
+      await setTheGameInProgressMode();
+    }
   }
 
   const shareAllQuestionsFromHostToTheOtherClients = async () => {
@@ -211,7 +216,7 @@ const LobbyPage = () => {
                   backgroundColor={BackgroundColors.WHITE}
                   fontWeight={FontWeights.BOLD}
                   textColor={TextColors.GRAY}
-                  className="text-md"
+                  className={`text-md select-none ${!wasTheStartButtonClicked ? 'opacity-100' : 'opacity-45'}`}
                   size={ButtonSize.MEDIUM}
                   perspective={PerspectiveSize.MEDIUM}
                   animateOnHover={false}
