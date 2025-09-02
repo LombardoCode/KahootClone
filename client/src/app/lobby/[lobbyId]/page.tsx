@@ -22,6 +22,7 @@ import { integrateConnectionIdToTheLobbyGroup } from "@/app/utils/Lobby/lobbyUti
 import { HubConnectionState } from "@microsoft/signalr";
 import useUserStore from "@/app/stores/useUserStore";
 import { useUserData } from "@/app/hooks/useUserData";
+import Tooltip from "@/app/components/UIComponents/Tooltip";
 
 const LobbyPage = () => {
   // Hooks
@@ -31,11 +32,12 @@ const LobbyPage = () => {
   // Global store state
   const { signalRConnection, lobbyId, isHost, currentPlayer, players, kahoot, setKahoot } = useInGameStore();
   const { user, isUserLoaded } = useUserStore();
-  
+
   // Local component state
   const router = useRouter();
   const [isValidLobby, setIsValidLobby] = useState<boolean>(false);
   const [wasTheStartButtonClicked, setWasTheStartButtonClicked] = useState<boolean>(false);
+  const [wasLobbyIdCopiedToClipboard, setWasLobbyIdCopiedToClipboard] = useState<boolean>(false);
 
 
   const ready: boolean =
@@ -53,7 +55,7 @@ const LobbyPage = () => {
       user.userName !== null
         ? router.push(ROUTES.MENU.DISCOVERY)
         : router.push(ROUTES.ROOT);
-      
+
       return;
     }
 
@@ -69,6 +71,20 @@ const LobbyPage = () => {
 
     initialization();
   }, [ready, isUserLoaded, user.userName]);
+
+  useEffect(() => {
+    if (!wasLobbyIdCopiedToClipboard) {
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setWasLobbyIdCopiedToClipboard(false);
+    }, 2500);
+
+    return () => {
+      clearTimeout(timeout);
+    }
+  }, [wasLobbyIdCopiedToClipboard]);
 
   const checkIfWeAreInAValidLobby = async () => {
     await axiosInstance.post(`/lobby/checkIfValidLobby`, { lobbyId })
@@ -141,6 +157,17 @@ const LobbyPage = () => {
       })
   }
 
+  const sendGamePINToClipboard = async () => {
+    if (lobbyId === null) {
+      return;
+    }
+
+    await navigator.clipboard.writeText(lobbyId)
+      .then(() => {
+        setWasLobbyIdCopiedToClipboard(true);
+      });
+  }
+
   if (!isUserLoaded) {
     return null;
   }
@@ -189,14 +216,19 @@ const LobbyPage = () => {
                 Game PIN
               </Text>
 
-              <Text
-                fontWeight={FontWeights.BLACK}
-                textColor={TextColors.GRAY}
-                useCase={UseCases.HEADER}
-                className="text-7xl text-center"
-              >
-                {lobbyId}
-              </Text>
+              <div className="relative group">
+                <Text
+                  fontWeight={FontWeights.BLACK}
+                  textColor={TextColors.GRAY}
+                  useCase={UseCases.HEADER}
+                  className="text-7xl text-center hover:bg-zinc-300 px-3 py-2 cursor-pointer"
+                  onClick={sendGamePINToClipboard}
+                >
+                  {lobbyId}
+                </Text>
+
+                <Tooltip text={!wasLobbyIdCopiedToClipboard ? 'Copy Game PIN to share' : 'Game PIN copied!'} />
+              </div>
             </div>
           </div>
         </div>
