@@ -37,8 +37,8 @@ const UserSettingsProfileTab = () => {
     getUserInformation();
   }, []);
 
-  const getUserInformation = () => {
-    axiosInstance.get('/user')
+  const getUserInformation = async () => {
+    await axiosInstance.get('/user')
       .then(res => {
         const userName: string = res.data.userName;
         const email: string = res.data.email;
@@ -92,8 +92,8 @@ const UserSettingsProfileTab = () => {
     changeUserMediaUrl();
   }, [userData.mediaUrl]);
 
-  const changeUserMediaUrl = () => {
-    axiosInstance.post('/user/changeProfilePicture', {
+  const changeUserMediaUrl = async () => {
+    await axiosInstance.post('/user/changeProfilePicture', {
       mediaUrl: userData.mediaUrl
     })
       .then(() => {})

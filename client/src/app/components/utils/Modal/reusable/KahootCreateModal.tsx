@@ -26,8 +26,8 @@ const KahootCreateModal = ({ isOpen, onClose }: KahootCreateModalProps) => {
     });
   }
 
-  const createKahoot = () => {
-    axiosInstance.post('/kahootcreator/create', { NewKahootName: formData.newKahootName })
+  const createKahoot = async () => {
+    await axiosInstance.post('/kahootcreator/create', { NewKahootName: formData.newKahootName })
       .then(res => {
         router.push(`/creator/${res.data.newKahootId}`);
       })

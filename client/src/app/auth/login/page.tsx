@@ -33,10 +33,10 @@ const LoginPage = () => {
     });
   }
 
-  const logIn = (e: any) => {
+  const logIn = async (e: any) => {
     e.preventDefault();
 
-    axiosInstance.post('/auth/login', formData)
+    await axiosInstance.post('/auth/login', formData)
       .then(res => {
         const user = res.data.user.userName;
 
