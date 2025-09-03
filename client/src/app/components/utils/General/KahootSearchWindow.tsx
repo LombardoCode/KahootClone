@@ -1,6 +1,4 @@
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
-import { BackgroundColors } from "@/app/interfaces/Colors.interface";
-import Button, { BorderColors, ButtonSize, PerspectiveSize } from "../../UIComponents/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Spinner from "../../UIComponents/Spinners/Spinner";
@@ -9,10 +7,17 @@ import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discov
 import DiscoverKahootCard, { DiscoverKahootCardSize } from "../Discover/Cards/Kahoots/DiscoverKahootCard";
 import DiscoverKahootWrapper from "../Discover/Cards/Kahoots/DiscoverKahootWrapper";
 import KahootSelectorModal from "../Modal/reusable/KahootSelectorModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
+import axiosInstance from "@/app/utils/axiosConfig";
+import { DiscoverCategoryCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverCategoryCardInfo";
+import SectionTitle, { SectionTitleSizes } from "../Discover/Titles/SectionTitle";
+import DiscoverCategoryWrapper from "../Discover/Cards/Categories/DiscoverCategoryWrapper";
+import DiscoverCategoryCard, { DiscoverCategoryCardSize } from "../Discover/Cards/Categories/DiscoverCategoryCard";
+import { getRecentSearches } from "@/app/utils/kahootSearchWindowUtils";
 
 interface KahootSearchWindowProps {
+  visible: boolean;
   setIsKahootSearchWindowOpen: (isOpen: boolean) => void;
   isLoading: boolean;
   searchedKahootsMetadata: {
@@ -25,9 +30,11 @@ interface KahootSearchWindowProps {
   setSelectedPage: (page: number) => void;
   hasSearched: boolean;
   kahootSearchWindowRef: React.RefObject<HTMLDivElement>;
+  fillSearchBoxAndSearch: (queryText: string) => void;
+  onClose: () => void;
 }
 
-const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKahootsMetadata, pageSize, currentPage, setCurrentPage, setSelectedPage, hasSearched, kahootSearchWindowRef: containerRef }: KahootSearchWindowProps) => {
+const KahootSearchWindow = ({ visible, setIsKahootSearchWindowOpen, isLoading, searchedKahootsMetadata, pageSize, currentPage, setCurrentPage, setSelectedPage, hasSearched, kahootSearchWindowRef: containerRef, fillSearchBoxAndSearch, onClose }: KahootSearchWindowProps) => {
   // Kahoot modal selector
   const [isKahootSelectorModalOpen, setIsKahootSelectorModalOpen] = useState<boolean>(false);
   const [selectedKahootId, setSelectedKahootId] = useState<string | null>(null);
@@ -37,7 +44,28 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
   }
 
   const closeKahootSearchWindowHandler = () => {
-    setIsKahootSearchWindowOpen(false);
+    onClose();
+  }
+
+  useEffect(() => {
+    const initialization = async () => {
+      await getCategories();
+    }
+
+    initialization();
+  }, []);
+
+  // Local component state
+  const [categories, setCategories] = useState<DiscoverCategoryCardInfo[]>([]);
+
+  const getCategories = async () => {
+    await axiosInstance.get('/kahoot/getCategories')
+      .then(res => {
+        setCategories(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
   }
 
   if (isLoading) {
@@ -52,60 +80,93 @@ const KahootSearchWindow = ({ setIsKahootSearchWindowOpen, isLoading, searchedKa
     <>
       <div
         ref={containerRef}
-        className="absolute inset-0 w-full h-full z-20 px-8 py-8 overflow-y-auto"
+        className={`${!visible && 'hidden'} absolute inset-0 w-full h-full z-20 px-8 py-8 overflow-y-auto`}
       >
-        <div
-          id="search-results-header-and-close-button-wrapper"
-          className={`flex ${searchedKahootsMetadata.kahoots.length === 0 ? 'justify-end' : 'justify-between'} items-center w-full`}
-        >
-          {searchedKahootsMetadata.kahoots.length !== 0 && (
-            <div id="search-results-header">
-              <Text
-                fontWeight={FontWeights.BOLD}
-                useCase={UseCases.HEADER}
-                textColor={TextColors.BLACK}
-                className="text-3xl"
-              >
-                Results
-              </Text>
-            </div>
-          )}
+        <div className="relative">
+          <div
+            id="search-results-header-and-close-button-wrapper"
+            className={`${searchedKahootsMetadata.kahoots.length === 0 ? 'absolute top-0 right-0' : 'flex justify-between items-center'}`}
+          >
+            {searchedKahootsMetadata.kahoots.length !== 0 && (
+              <div id="search-results-header">
+                <Text
+                  fontWeight={FontWeights.BOLD}
+                  useCase={UseCases.HEADER}
+                  textColor={TextColors.BLACK}
+                  className="text-3xl"
+                >
+                  Results
+                </Text>
+              </div>
+            )}
 
-          <div id="search-close-button">
-            <Button
-              backgroundColor={BackgroundColors.WHITE}
-              fontWeight={FontWeights.REGULAR}
-              textColor={TextColors.BLACK}
-              borderColor={BorderColors.GRAY}
-              animateOnHover={false}
-              size={ButtonSize.MEDIUM}
-              perspective={PerspectiveSize.MEDIUM}
-              onClick={() => closeKahootSearchWindowHandler()}
-            >
+            <div id="search-close-button" className="bg-gray-300 hover:bg-gray-400 rounded-md">
               <FontAwesomeIcon
                 icon={faXmark}
                 size="lg"
+                className={`${TextColors.BLACK} px-4 py-4 cursor-pointer`}
+                onClick={() => closeKahootSearchWindowHandler()}
               />
-            </Button>
+            </div>
           </div>
-        </div>
 
-        <div id="searched-kahoots">
-          {searchedKahootsMetadata.kahoots.length === 0 ? (
-            hasSearched && (
-              <ShowNoResultsMessage />
-            )
-          ) : (
-            <DiscoverKahootWrapper>
-              {searchedKahootsMetadata.kahoots.map((kahoot: DiscoverKahootCardInfo, index: number) => (
-                <DiscoverKahootCard
-                  cardSize={DiscoverKahootCardSize.SMALL}
-                  kahoot={kahoot}
-                  onClick={handleKahootCardClick}
-                />
-              ))}
-            </DiscoverKahootWrapper>
+          {/* Recent searches */}
+          {getRecentSearches().length > 0 && (
+            <div id="recent-searches-wrapper" className="mb-4">
+              <SectionTitle
+                size={SectionTitleSizes.SMALL}
+                className="mb-1"
+              >
+                Recent searches
+              </SectionTitle>
+
+              <div id="recent-searches-content" className="flex">
+                {getRecentSearches().map((search: string, index: number) => (
+                  <div
+                    key={index}
+                    className="border-1 border-gray-500 bg-white hover:bg-gray-300 rounded-sm px-3 py-1.5 mr-2 cursor-pointer select-none"
+                    onClick={() => fillSearchBoxAndSearch(search)}
+                  >
+                    {search}
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
+
+          {/* Categories */}
+          {searchedKahootsMetadata.kahoots.length === 0 && !hasSearched && (
+            <>
+              <SectionTitle size={SectionTitleSizes.SMALL} className="pt-8">Categories</SectionTitle>
+              <DiscoverCategoryWrapper>
+                {categories.map((category: DiscoverCategoryCardInfo, i: number) => (
+                  <DiscoverCategoryCard
+                    key={i}
+                    cardSize={DiscoverCategoryCardSize.SMALL}
+                    category={category}
+                  />
+                ))}
+              </DiscoverCategoryWrapper>
+            </>
+          )}
+
+          <div id="searched-kahoots">
+            {searchedKahootsMetadata.kahoots.length === 0 ? (
+              hasSearched && (
+                <ShowNoResultsMessage />
+              )
+            ) : (
+              <DiscoverKahootWrapper>
+                {searchedKahootsMetadata.kahoots.map((kahoot: DiscoverKahootCardInfo, index: number) => (
+                  <DiscoverKahootCard
+                    cardSize={DiscoverKahootCardSize.SMALL}
+                    kahoot={kahoot}
+                    onClick={handleKahootCardClick}
+                  />
+                ))}
+              </DiscoverKahootWrapper>
+            )}
+          </div>
         </div>
 
         {searchedKahootsMetadata.kahoots.length !== 0 && (

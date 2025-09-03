@@ -10,6 +10,7 @@ import { DiscoverKahootCardInfo } from "../interfaces/Kahoot/Dashboard/Discover/
 import axiosInstance from "../utils/axiosConfig";
 import useClickAway from "../hooks/useClickAway";
 import { useUserData } from "../hooks/useUserData";
+import { saveKahootSearch } from "../utils/kahootSearchWindowUtils";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -47,6 +48,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
     setLoading(true);
     setHasSearched(true);
+
     await axiosInstance.post('/kahoot/search', {
       query: queryText,
       pageSize,
@@ -57,6 +59,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         kahoots: res.data.kahoots,
         total: res.data.totalResults
       });
+
+      saveKahootSearch(queryText);
+
       setLoading(false);
     })
     .catch(err => {
@@ -77,9 +82,27 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     searchKahootsInitializer();
   }, [currentPage]);
 
+  const clearSearchQueryAndResults = () => {
+    setIsKahootSearchWindowOpen(false);
+    setKahootSearchQuery("");
+    setSearchedKahootsMetadata({ kahoots: [], total: 0 });
+    setHasSearched(false);
+  }
+
+  const fillSearchBoxAndSearch = async (queryText: string) => {
+    queryText = queryText.trim();
+
+    if (queryText === "") {
+      return;
+    }
+
+    setKahootSearchQuery(queryText);
+    await searchKahoots(queryText);
+  }
+
   useClickAway(
     [navbarRef, kahootSearchWindowRef],
-    () => setIsKahootSearchWindowOpen(false),
+    () => clearSearchQueryAndResults(),
     isKahootSearchWindowOpen
   )
 
@@ -103,19 +126,20 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               {children}
             </div>
 
-            {isKahootSearchWindowOpen && (
-              <KahootSearchWindow
-                setIsKahootSearchWindowOpen={(isOpen: boolean) => setIsKahootSearchWindowOpen(isOpen)}
-                isLoading={loading}
-                searchedKahootsMetadata={searchedKahootsMetadata}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                setCurrentPage={(page: number) => setCurrentPage(page)}
-                setSelectedPage={(page: number) => setCurrentPage(page)}
-                hasSearched={hasSearched}
-                kahootSearchWindowRef={kahootSearchWindowRef}
-              />
-            )}
+            <KahootSearchWindow
+              visible={isKahootSearchWindowOpen}
+              setIsKahootSearchWindowOpen={(isOpen: boolean) => setIsKahootSearchWindowOpen(isOpen)}
+              isLoading={loading}
+              searchedKahootsMetadata={searchedKahootsMetadata}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              setCurrentPage={(page: number) => setCurrentPage(page)}
+              setSelectedPage={(page: number) => setCurrentPage(page)}
+              hasSearched={hasSearched}
+              kahootSearchWindowRef={kahootSearchWindowRef}
+              fillSearchBoxAndSearch={fillSearchBoxAndSearch}
+              onClose={clearSearchQueryAndResults}
+            />
           </>
         </DashboardOutletContainer>
       </MainContent>
