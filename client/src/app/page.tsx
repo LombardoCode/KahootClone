@@ -14,11 +14,10 @@ import { useRouter } from "next/navigation";
 import { createBaseNewPlayer, getOrCreateSignalRConnection, putTheGuestInTheLobbyQueue, validateIfLobbyExists } from "./utils/Lobby/lobbyUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
-import SpinnerHalfDonut from "./components/UIComponents/Spinners/SpinnerHalfDonut/SpinnerHalfDonut";
-import { SpinnerSizes } from "./components/UIComponents/Spinners/Spinner.interface";
 import { Player } from "./interfaces/Play/Player.interface";
 import useInGameStore from "./stores/Kahoot/useInGameStore";
 import { HubConnection } from "@microsoft/signalr";
+import LoadingFullScreen from "./components/UIComponents/Loading/LoadingFullScreen";
 
 const Home = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,7 +31,7 @@ const Home = () => {
     <>
       <div className="bg-violet-950 w-full h-screen">
         {loading && (
-          <LoadingKahootScreen />
+          <LoadingFullScreen text={`Connecting to Kahoot!`} />
         )}
 
         <BackgroundShapes shapeColor={ShapeColor.VIOLET} />
@@ -252,26 +251,6 @@ const ShowEnterNicknameFields = ({ highlightInput, nickName, setNickName, gamePI
         Enter
       </Button>
     </>
-  )
-}
-
-const LoadingKahootScreen = () => {
-  return (
-    <div className="fixed flex flex-col items-center justify-center bg-black/80 w-full h-full z-30">
-      <SpinnerHalfDonut
-        size={SpinnerSizes.MEDIUM}
-        className="mb-4"
-      />
-
-      <Text
-        fontWeight={FontWeights.BOLD}
-        textColor={TextColors.WHITE}
-        useCase={UseCases.LONGTEXT}
-        className="text-2xl"
-      >
-        Connecting to Kahoot!
-      </Text>
-    </div>
   )
 }
 

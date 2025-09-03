@@ -17,18 +17,21 @@ namespace API.Controllers
     private readonly UserManager<AppUser> _userManager;
     private readonly AuthService _authService;
     private readonly CookieService _cookieService;
+    private readonly UserService _userService;
 
 
     public AuthController(
       SignInManager<AppUser> signInManager,
       UserManager<AppUser> userManager,
       AuthService authService,
-      CookieService cookieService)
+      CookieService cookieService,
+      UserService userService)
     {
       _signInManager = signInManager;
       _userManager = userManager;
       _authService = authService;
       _cookieService = cookieService;
+      _userService = userService;
     }
 
 
@@ -146,6 +149,38 @@ namespace API.Controllers
     public async Task<ActionResult> ForgotPassword(ForgotPasswordDTO data, [FromServices] IBackgroundJobClient jobs)
     {
       jobs.Enqueue<EmailService>(svc => svc.SendPasswordResetEmailAsync(data.Email));
+
+      return Ok();
+    }
+
+
+    [Authorize]
+    [HttpDelete("delete-account")]
+    public async Task<ActionResult> DeleteAccount()
+    {
+      List<string> errors = new List<string>();
+
+      var user = await _userService.GetCurrentUserAsync();
+
+      if (user == null)
+      {
+        return Unauthorized();
+      }
+
+      var result = await _userManager.DeleteAsync(user);
+
+      if (!result.Succeeded)
+      {
+        // Performing a 1 second timer, so user in the client-side can see the UI indicating that their account is getting deleted
+        await Task.Delay(1000);
+        errors.AddRange(result.Errors.Select(e => e.Description).ToList());
+        return BadRequest(new { errors });
+      }
+
+      _cookieService.Delete();
+
+      // Performing a 4 second timer, so user in the client-side can see the UI indicating that their account is getting deleted
+      await Task.Delay(4000);
 
       return Ok();
     }

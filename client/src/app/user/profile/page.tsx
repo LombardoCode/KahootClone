@@ -12,8 +12,10 @@ import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { UserMetadata } from "@/app/interfaces/Settings/EditProfile/UserMetadata.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import axiosInstance from "@/app/utils/axiosConfig";
+import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const UserSettingsProfileTab = () => {
@@ -186,7 +188,7 @@ const UserSettingsProfileTab = () => {
                 />
               </div>
 
-              <div id="information-fields-email" className="flex flex-col">
+              <div id="information-fields-email" className="flex flex-col mb-10">
                 <Label
                   fontWeight={FontWeights.BOLD}
                   textColor={TextColors.GRAY}
@@ -206,6 +208,31 @@ const UserSettingsProfileTab = () => {
                   className="text-md py-2 opacity-45"
                   disabled={true}
                 />
+              </div>
+
+              <div id="information-fields-delete-account">
+                <Text
+                  fontWeight={FontWeights.BOLD}
+                  textColor={TextColors.RED}
+                  useCase={UseCases.BODY}
+                  className="text-sm underline mb-2.5 cursor-pointer"
+                >
+                  <Link
+                    href={ROUTES.ADMINISTRATION.ACCOUNT.DELETE_ACCOUNT}
+                    className={`${TextColors.RED}`}
+                  >
+                    Delete account
+                  </Link>
+                </Text>
+
+                <Text
+                  fontWeight={FontWeights.REGULAR}
+                  textColor={TextColors.GRAY}
+                  useCase={UseCases.BODY}
+                  className="text-sm"
+                >
+                  If you delete your account, you'll lose access to all the kahoots you created.
+                </Text>
               </div>
             </div>
           </div>

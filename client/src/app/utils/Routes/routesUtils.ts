@@ -15,6 +15,9 @@ export const ROUTES = {
     SETTINGS: {
       PROFILE: "/user/profile",
       CHANGE_PASSWORD: "/user/change-password"
+    },
+    ACCOUNT: {
+      DELETE_ACCOUNT: "/account/delete-account"
     }
   }
 }
