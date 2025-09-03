@@ -1,3 +1,4 @@
+using API.Data;
 using API.DTOs;
 using API.DTOs.Auth;
 using API.Models;
@@ -6,6 +7,7 @@ using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -18,6 +20,7 @@ namespace API.Controllers
     private readonly AuthService _authService;
     private readonly CookieService _cookieService;
     private readonly UserService _userService;
+    private readonly DataContext _dbContext;
 
 
     public AuthController(
@@ -25,13 +28,15 @@ namespace API.Controllers
       UserManager<AppUser> userManager,
       AuthService authService,
       CookieService cookieService,
-      UserService userService)
+      UserService userService,
+      DataContext dbContext)
     {
       _signInManager = signInManager;
       _userManager = userManager;
       _authService = authService;
       _cookieService = cookieService;
       _userService = userService;
+      _dbContext = dbContext;
     }
 
 
@@ -39,6 +44,26 @@ namespace API.Controllers
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser(RegisterDTO newUserData)
     {
+      List<string> errors = new List<string>();
+
+      string username = newUserData.UserName.Trim().ToLower();
+      string email = newUserData.Email.Trim().ToLower();
+      string password = newUserData.Password.Trim();
+
+      if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+      {
+        errors.Add("Make sure to fill all the fields.");
+        return BadRequest(new { errors });
+      }
+
+      bool doesUsernameOrEmailExists = await _dbContext.Users.AnyAsync(u => u.UserName.ToLower() == username || u.Email.ToLower() == email);
+
+      if (doesUsernameOrEmailExists)
+      {
+        errors.Add("Username or email is already taken.");
+        return BadRequest(new { errors });
+      }
+
       var user = new AppUser
       {
         UserName = newUserData.UserName,
@@ -47,40 +72,20 @@ namespace API.Controllers
 
       var result = await _userManager.CreateAsync(user, newUserData.Password);
 
-      if (result.Succeeded)
+      if (!result.Succeeded)
       {
-        return Ok();
+        foreach (var error in result.Errors)
+        {
+          if (error.Code.Contains("Password"))
+          {
+            errors.Add(error.Description);
+          }
+        }
+        
+        return BadRequest(new { errors });
       }
 
-      var errorsDict = new Dictionary<string, List<string>>()
-      {
-        { "username", new List<string>() },
-        { "email", new List<string>() },
-        { "password", new List<string>() },
-      };
-
-      foreach (var error in result.Errors)
-      {
-        if (error.Code.Contains("UserName"))
-        {
-          errorsDict["username"].Add(error.Description);
-        }
-        else if (error.Code.Contains("Email"))
-        {
-          errorsDict["email"].Add(error.Description);
-        }
-        else if (error.Code.Contains("Password"))
-        {
-          errorsDict["password"].Add(error.Description);
-        }
-      }
-
-      var response = new
-      {
-        errors = errorsDict
-      };
-
-      return BadRequest(response);
+      return Ok();
     }
 
 

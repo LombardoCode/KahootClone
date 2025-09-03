@@ -10,7 +10,6 @@ import Card from "../../components/UIComponents/Card";
 import { useState } from "react";
 import { CreateAccount } from "../../interfaces/Auth/CreateAccount.interface";
 import axiosInstance from "../../utils/axiosConfig";
-import { AccountRegistrationFormErrors } from "../../interfaces/Auth/AccountRegistrationFormErrors";
 import { AccountLoginInfo } from "../../interfaces/Auth/AccountLoginInfo";
 import { useRouter } from "next/navigation";
 import { BackgroundColors } from "../../interfaces/Colors.interface";
@@ -26,11 +25,7 @@ const Signup = () => {
     password: ''
   });
 
-  const [errors, setErrors] = useState<AccountRegistrationFormErrors>({
-    email: [],
-    username: [],
-    password: []
-  });
+  const [errors, setErrors] = useState<string[]>([]);
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -107,8 +102,6 @@ const Signup = () => {
                 value={formData.username}
                 onChange={handleFormChange}
               />
-              
-              <BulletPointErrorsDisplayer errors={errors.username} />
             </div>
 
             <div className="flex flex-col mt-4">
@@ -128,8 +121,6 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleFormChange}
               />
-              
-              <BulletPointErrorsDisplayer errors={errors.email} />
             </div>
 
             <div className="flex flex-col mt-4">
@@ -151,7 +142,7 @@ const Signup = () => {
                 onChange={handleFormChange}
               />
               
-              <BulletPointErrorsDisplayer errors={errors.password} />
+              <BulletPointErrorsDisplayer errors={errors} />
             </div>
 
             <div className="flex flex-col mt-4">
