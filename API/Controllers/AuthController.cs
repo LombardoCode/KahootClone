@@ -42,7 +42,7 @@ namespace API.Controllers
 
     [AllowAnonymous]
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterUser(RegisterDTO newUserData)
+    public async Task<IActionResult> RegisterUser(RegisterDTO newUserData, [FromServices] IBackgroundJobClient jobs)
     {
       List<string> errors = new List<string>();
 
@@ -84,6 +84,8 @@ namespace API.Controllers
         
         return BadRequest(new { errors });
       }
+
+      jobs.Enqueue<EmailService>(svc => svc.SendWelcomeEmailAsync(email, username));
 
       return Ok();
     }

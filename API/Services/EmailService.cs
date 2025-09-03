@@ -1,6 +1,7 @@
 using API.Data;
 using API.HTMLTemplates.Emailing;
 using API.Models.Emailing.PasswordReset;
+using API.Models.Emailing.WelcomeUser;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +20,9 @@ namespace API.Services
     private readonly int _port;
     private readonly string _fromEmail;
     private readonly string _fromEmailAppPassword;
-    private readonly string _fromName = "Experimenting email sending";
-    
+    private readonly string _fromName;
+    private readonly string _dashboardUrl;
+
 
     public EmailService(
       DataContext dbContext,
@@ -35,6 +37,8 @@ namespace API.Services
       _port = int.TryParse(config["Email:Port"], out var p) ? p : 587;
       _fromEmail = config["Email:FromEmail"];
       _fromEmailAppPassword = config["Email:FromEmailAppPassword"];
+      _fromName = config["AppName"];
+      _dashboardUrl = config["Client:BaseUrl"];
     }
 
 
@@ -66,6 +70,23 @@ namespace API.Services
       };
 
       string htmlBody = await _renderer.RenderAsync("PasswordReset.cshtml", model);
+
+      await SendEmailAsync(email, subject, htmlBody);
+    }
+
+
+    public async Task SendWelcomeEmailAsync(string email, string username)
+    {
+      string subject = "Welcome!";
+
+      var model = new WelcomeUserModel
+      {
+        Username = username,
+        AppName = _fromName,
+        DashboardUrl = _dashboardUrl
+      };
+
+      string htmlBody = await _renderer.RenderAsync("WelcomeUser.cshtml", model);
 
       await SendEmailAsync(email, subject, htmlBody);
     }

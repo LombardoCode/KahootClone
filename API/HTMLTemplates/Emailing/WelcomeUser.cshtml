@@ -1,0 +1,117 @@
+@using API.Models.Emailing.WelcomeUser
+@model WelcomeUserModel
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style type="text/css">
+      @@font-face {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        src: url('https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm45xWxZ.woff2') format('woff2');
+      }
+
+      @@font-face {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        src: url('https://fonts.gstatic.com/s/montserrat/v25/JTURjIg1_i6t8kCHKm45_TZF7g.woff2') format('woff2');
+      }
+
+      body {
+        color: #111827;
+        background-color: #25076B;
+      }
+
+      .font-montserrat {
+        font-family: 'Montserrat', Arial, 'Helvetica Neue', Helvetica, sans-serif !important;
+      }
+      
+      #card {
+        width: calc(100% - 40px);
+        background-color: #FFFFFF;
+        padding: 0px 20px 16px 20px;
+        border-radius: 10px;
+      }
+      
+      #app_name {
+        text-align: center;
+        font-size: 1.4rem;
+        margin: 0px 0px;
+        padding: 14px 0px;
+      }
+      
+      #separator {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #separator hr {
+        text-align: center;
+        width: calc(100% - 2rem);
+        border: 0;
+        border-top: 1px solid #e5e7eb;
+        margin: 0;
+      }
+      
+      #greeting {
+        font-size: 1.5rem;
+      }
+      
+      .base-text {
+        font-size: 1rem;
+      }
+      
+      ul li {
+        margin-bottom: 0.4rem;
+      }
+      
+      #get-started-button {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #get-started-button a {
+        display: inline-block;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #864CBF;
+        font-size: 1.3rem;
+        border-radius: 10px;
+        padding: 12px 20px;
+        font-weight: 700;
+        margin: 0.5rem 0;
+      }
+    </style>
+  </head>
+
+  <body class="font-montserrat">
+    <div id="card">
+      <p id="app_name">@Model.AppName</p>
+        
+      <div id="separator">
+        <hr>
+      </div>
+        
+      <h1 id="greeting" class="font-montserrat">
+        Hi, @Model.Username!
+      </h1>
+        
+      <p class="base-text">Welcome to @Model.AppName. We're excited to have you on board. Here's what you can do next:</p>
+        
+      <ul class="base-text">
+        <li>Create your first kahoot and add questions in minutes.</li>
+        <li>Invite players with a game PIN and host live sessions.</li>
+        <li>Review results and keep improving your quizzes.</li>
+      </ul>
+      
+      <div id="get-started-button">
+        <a href="@Model.DashboardUrl">Get started</a>
+      </div>
+  </body>
+</html>
