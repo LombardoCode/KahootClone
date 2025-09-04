@@ -75,9 +75,13 @@ namespace API.Controllers
     [HttpPut("drafts")]
     public async Task<ActionResult> Drafts(KahootCreatorFormDraftDTO kahootDraft)
     {
+      List<string> errors = new List<string>();
+
       if (kahootDraft.Questions.Count == 0)
       {
-        return BadRequest("You can't delete the last remaining question.");
+        string error = "You can't delete the last remaining question.";
+        errors.Add(error);
+        return BadRequest(new { errors });
       }
 
       var user = await _userService.GetCurrentUserAsync();
@@ -100,7 +104,16 @@ namespace API.Controllers
       }
 
       // Updating the kahoot header information
-      kahootFromDB.Title = kahootDraft.Title;
+      string newKahootTitle = kahootDraft.Title.Trim();
+
+      if (string.IsNullOrEmpty(newKahootTitle))
+      {
+        string error = "Title must not be empty.";
+        errors.Add(error);
+        return BadRequest(new { errors });
+      }
+
+      kahootFromDB.Title = newKahootTitle;
       kahootFromDB.Description = kahootDraft.Description;
       kahootFromDB.UpdatedAt = new DateTime();
       kahootFromDB.IsPublic = kahootDraft.IsPublic;
