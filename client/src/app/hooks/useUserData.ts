@@ -17,8 +17,13 @@ export const useUserData = () => {
             return;
           }
 
-          const name = res.data.user.userName;
-          setUser(name);
+          const userName: string = res.data.user.userName;
+          const mediaUrl: string = res.data.user.mediaUrl;
+
+          setUser({
+            userName,
+            mediaUrl
+          });
         })
         .catch(() => {
           if (!mounted) {

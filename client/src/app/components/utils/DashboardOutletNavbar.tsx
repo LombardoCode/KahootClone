@@ -14,6 +14,7 @@ import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import KahootCreateModal from "./Modal/reusable/KahootCreateModal";
 import InputForm, { InputFormTypes } from "../UIComponents/InputForm";
 import axiosInstance from "@/app/utils/axiosConfig";
+import Logo, { LogoColors, LogoSize } from "./Logo";
 
 interface DashboardOutletNavbarProps {
   fixed?: boolean;
@@ -89,37 +90,66 @@ const DashboardOutletNavbar = ({
 
         <div
           id="create-kahoot-button-and-user-card-wrapper"
-          className="whitespace-nowrap ml-4"
+          className="flex items-center whitespace-nowrap ml-4"
         >
-          {user.userName && (
-            <div className="flex items-center">
-              <Button
-                backgroundColor={BackgroundColors.GREEN}
-                fontWeight={FontWeights.BOLD}
-                size={ButtonSize.SMALL}
-                textColor={TextColors.WHITE}
-                className="mr-2"
-                onClick={() => setIsCreateKahootModalOpen(true)}
-                perspective={PerspectiveSize.MEDIUM}
-                animateOnHover={false}
-              >
-                Create a Kahoot!
-              </Button>
-              <Text
-                fontWeight={FontWeights.BOLD}
-                textColor={TextColors.BLACK}
-                useCase={UseCases.LONGTEXT}
-                className="hover:bg-gray-400 px-3 py-2 select-none cursor-pointer"
-                onClick={() => setToggleAccountDropdown(!toggleAccountDropdown)}
-              >
-                {user.userName}
-                <FontAwesomeIcon
-                  className="ml-2"
-                  icon={faCaretDown}
+          <div id="create-kahoot-button">
+            <Button
+              backgroundColor={BackgroundColors.GREEN}
+              fontWeight={FontWeights.BOLD}
+              size={ButtonSize.SMALL}
+              textColor={TextColors.WHITE}
+              className="mr-2"
+              onClick={() => setIsCreateKahootModalOpen(true)}
+              perspective={PerspectiveSize.MEDIUM}
+              animateOnHover={false}
+            >
+              Create a Kahoot!
+            </Button>
+          </div>
+
+          <div
+            id="user-data"
+            className="flex items-center hover:bg-gray-400 px-3 py-2 select-none cursor-pointer"
+          >
+            <div id="user-data-photo" className="mr-3">
+              {user.mediaUrl ? (
+                <img
+                  src={user.mediaUrl}
+                  crossOrigin="anonymous"
+                  className="top-0 left-0 min-w-10 max-w-10 min-h-10 max-h-10 object-cover rounded-full"
                 />
-              </Text>
+              ) : (
+                <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full min-w-10 max-w-10 min-h-10 max-h-10 rounded-full">
+                  <Logo
+                    size={LogoSize.SMALL}
+                    color={LogoColors.WHITE}
+                  />
+                </div>
+              )}
             </div>
-          )}
+
+            <div id="user-data-username">
+              {user.userName && (
+                <div>
+                  <Text
+                    fontWeight={FontWeights.BOLD}
+                    textColor={TextColors.BLACK}
+                    useCase={UseCases.LONGTEXT}
+                    onClick={() => setToggleAccountDropdown(!toggleAccountDropdown)}
+                  >
+                    {user.userName}
+                  </Text>
+                </div>
+              )}
+            </div>
+
+            <div id="user-data-caret">
+              <FontAwesomeIcon
+                className="ml-2"
+                icon={faCaretDown}
+              />
+            </div>
+          </div>
         </div>
 
         {toggleAccountDropdown && (
@@ -141,7 +171,7 @@ const DashboardOutletNavbar = ({
           </DropDownContainer>
         )}
       </div>
-      
+
       <KahootCreateModal
         isOpen={isCreateKahootModalOpen}
         onClose={() => setIsCreateKahootModalOpen(false)}

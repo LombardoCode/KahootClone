@@ -1,30 +1,38 @@
 import { create } from 'zustand';
 
+interface UserData {
+  userName: string | null;
+  mediaUrl: string | null;
+}
+
 type GlobalStore = {
   user: {
     userName: string | null;
+    mediaUrl: string | null;
   },
   isUserLoaded: boolean;
   markLoaded: () => void;
-  setUser: (userName: string) => void;
+  setUser: (userData: UserData) => void;
   clearUser: () => void;
 };
 
 const useUserStore = create<GlobalStore>((set) => ({
   user: {
-    userName: null
+    userName: null,
+    mediaUrl: null
   },
   isUserLoaded: false,
   markLoaded: () => set({
     isUserLoaded: true
   }),
-  setUser: (userName: string | null) => {
-    set({ user: { userName } })
+  setUser: (userData: UserData) => {
+    set({ user: userData })
   },
   clearUser: () => {
     set({
       user: {
-        userName: null
+        userName: null,
+        mediaUrl: null
       }
     })
   }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.DTOs.Auth;
@@ -137,15 +138,25 @@ namespace API.Controllers
 
 
     [HttpGet("me")]
-    public ActionResult me()
+    public async Task<ActionResult> me()
     {
       var userName = User.Identity?.Name;
+
+      var userData = await _dbContext.Users
+                              .Where(u => u.UserName == userName)
+                              .Select(u => new
+                              {
+                                UserName = u.UserName,
+                                MediaUrl = u.MediaUrl
+                              })
+                              .SingleOrDefaultAsync();
       
       return Ok(new
       {
         user = new
         {
-          userName
+          userName = userData.UserName,
+          mediaUrl = userData.MediaUrl
         }
       });
     }
