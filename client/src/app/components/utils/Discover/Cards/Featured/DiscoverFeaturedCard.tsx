@@ -2,6 +2,7 @@ import Text from "@/app/components/UIComponents/Text";
 import useAverageImageColor from "@/app/hooks/useAverageImageColor";
 import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverFeaturedCardInfo";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
+import Logo, { LogoColors, LogoSize } from "../../../Logo";
 
 export enum DiscoverFeaturedCardSize {
   MEDIUM = "2xl:col-span-4 lg:col-span-6 md:col-span-12"
@@ -19,10 +20,10 @@ const DiscoverFeaturedCard = ({ cardSize, featuredKahoot, onClick }: DiscoverFea
   return (
     <div
       className={`flex items-center rounded-md h-24 overflow-hidden ring-1 ring-zinc-300 shadow cursor-pointer transition hover:scale-[1.03] ${cardSize}`}
-      style={{ backgroundColor: bgColor }}
+      style={{ backgroundColor: featuredKahoot.mediaUrl ? bgColor : "rgb(255, 255, 255)" }}
       onClick={() => onClick(featuredKahoot.kahootId)}
     >
-      <div className="relative max-w-36 h-full">
+      <div className="relative min-w-36 max-w-36 h-full">
         <div className="absolute bg-black/70 bottom-1 right-1 px-2 rounded-full">
           <Text
             textColor={TextColors.WHITE}
@@ -33,12 +34,24 @@ const DiscoverFeaturedCard = ({ cardSize, featuredKahoot, onClick }: DiscoverFea
             {featuredKahoot.numberOfQuestions} {featuredKahoot.numberOfQuestions === 1 ? 'question' : 'questions'}
           </Text>
         </div>
-        <img
-          ref={imgRef}
-          src={featuredKahoot.mediaUrl}
-          crossOrigin="anonymous"
-          className="top-0 left-0 w-full min-h-32 object-cover"
-        />
+        
+        <div className="flex items-center">
+          {featuredKahoot.mediaUrl ? (
+            <img
+              ref={imgRef}
+              src={featuredKahoot.mediaUrl}
+              crossOrigin="anonymous"
+              className="top-0 left-0 w-full object-cover"
+            />
+          ) : (
+            <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full">
+              <Logo
+                size={LogoSize.SMALL}
+                color={LogoColors.WHITE}
+              />
+            </div>
+          )}
+        </div>
       </div>
       <div className="px-3">
         <div id="kahoot-title" className="mb-2">
