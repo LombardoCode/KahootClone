@@ -10,6 +10,7 @@ import Modal, { ModalTypes } from "../Modal/Modal";
 import { useEffect, useState } from "react";
 import { getTextContentForLayout } from "../Quizes/KahootQuestion.utills";
 import SidebarTab from "../Modal/SidebarTab";
+import DeleteQuestionModal from "../Modal/reusable/DeleteQuestionModal";
 
 interface CreatorSliderOfQuestionsProps {
   className?: string;
@@ -165,40 +166,14 @@ const CreatorSliderOfQuestions = ({ className }: CreatorSliderOfQuestionsProps) 
   )
 }
 
-interface LayoutOptionProps {
-  text: string;
-  onHover: () => void;
-  onClick: (e: any) => void;
-}
-
-const LayoutOption = ({ text, onHover, onClick }: LayoutOptionProps) => {
-  return (
-    <div
-      className="layout-option flex items-center px-3 py-3 hover:bg-slate-400/60 cursor-pointer"
-      onMouseEnter={onHover}
-      onClick={onClick}
-    >
-      <FontAwesomeIcon icon={faGamepad} className={`${TextColors.GRAY} mr-2`} />
-      <Text
-        fontWeight={FontWeights.BOLD}
-        textColor={TextColors.BLACK}
-        useCase={UseCases.LONGTEXT}
-        className="text-base"
-      >
-        {text}
-      </Text>
-    </div>
-  )
-}
-
 interface SliderItemsProps {
   question: Question;
   index: number;
 }
 
 const SliderItem = ({ question, index }: SliderItemsProps) => {
-  const { setKahootsQuestionIndex, questionIndex, deleteQuestion, getQuestionCount } = useKahootCreatorStore();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { setKahootsQuestionIndex, questionIndex, getQuestionCount } = useKahootCreatorStore();
+  const [isDeleteQuestionModalOpen, setIsDeleteQuestionModalOpen] = useState<boolean>(false);
 
   return (
     <div className="flex mb-3">
@@ -210,7 +185,7 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
           className={`px-1 py-1 hover:bg-slate-300 rounded-sm ${getQuestionCount() > 1 ? 'hover:cursor-pointer' : 'hover:cursor-not-allowed'}`}
           onClick={() => {
             if (getQuestionCount() > 1) {
-              setIsModalOpen(true)
+              setIsDeleteQuestionModalOpen(true)
             }
           }}
         />
@@ -237,38 +212,10 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
         </div>
       </div>
 
-      <Modal
-        modalType={ModalTypes.DELETION}
-        isOpen={isModalOpen}
-        title={`Delete quiz question`}
-        onClose={() => setIsModalOpen(false)}
-        bodyContent={(
-          <>
-            <Text
-              fontWeight={FontWeights.REGULAR}
-              textColor={TextColors.BLACK}
-              useCase={UseCases.LONGTEXT}
-              className="text-base"
-            >
-              Are you sure you want to delete this question? This action cannot be undone.
-            </Text>
-          </>
-        )}
-        footerContent={(
-          <Button
-            backgroundColor={BackgroundColors.RED}
-            fontWeight={FontWeights.BOLD}
-            size={ButtonSize.MEDIUM}
-            textColor={TextColors.WHITE}
-            className="mr-2"
-            onClick={() => {
-              setIsModalOpen(false);
-              deleteQuestion(question.id)
-            }}
-          >
-            Delete
-          </Button>
-        )}
+      <DeleteQuestionModal
+        isOpen={isDeleteQuestionModalOpen}
+        onClose={() => setIsDeleteQuestionModalOpen(false)}
+        question={question}
       />
     </div>
   )
