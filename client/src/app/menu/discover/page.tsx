@@ -127,17 +127,21 @@ const DiscoverMenuPage = () => {
 
 
         {/* Featured kahoots */}
-        <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
-        <DiscoverFeaturedWrapper>
-          {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
-            <DiscoverFeaturedCard
-              key={i}
-              cardSize={DiscoverFeaturedCardSize.MEDIUM}
-              featuredKahoot={featuredKahoot}
-              onClick={handleKahootCardClick}
-            />
-          ))}
-        </DiscoverFeaturedWrapper>
+        {featuredKahoots.length > 0 && (
+          <>
+            <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
+            <DiscoverFeaturedWrapper>
+              {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
+                <DiscoverFeaturedCard
+                  key={i}
+                  cardSize={DiscoverFeaturedCardSize.MEDIUM}
+                  featuredKahoot={featuredKahoot}
+                  onClick={handleKahootCardClick}
+                />
+              ))}
+            </DiscoverFeaturedWrapper>
+          </>
+        )}
 
         {/* Sections, subsections and it's related kahoots */}
         {sections.map((section: DiscoverSectionClient, index: number) => (
@@ -152,7 +156,7 @@ const DiscoverMenuPage = () => {
             >
               {section.title}
             </SectionTitle>
-            
+
             {section.subsections.map((subsection: DiscoverSubsectionClient, index2: number) => (
               <>
                 <SectionTitle
@@ -162,7 +166,7 @@ const DiscoverMenuPage = () => {
                 >
                   {subsection.title}
                 </SectionTitle>
-                
+
                 <DiscoverKahootWrapper>
                   {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index3: number) => (
                     <DiscoverKahootCard
@@ -178,7 +182,7 @@ const DiscoverMenuPage = () => {
           </div>
         ))}
       </div>
-      
+
       <KahootSelectorModal
         isOpen={isKahootSelectorModalOpen}
         onClose={() => {

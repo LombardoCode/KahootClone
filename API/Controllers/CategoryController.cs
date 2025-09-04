@@ -119,6 +119,8 @@ namespace API.Controllers
                     on kahoot.Id equals featured.KahootId
                   where kahootCategory.CategoryId == categoryId
                     && kahoot.Id == featured.KahootId
+                    && kahoot.IsPublic == true
+                    && kahoot.IsPlayable == true
                   select new DiscoverFeaturedCardInfoDTO
                   {
                     KahootId = kahoot.Id,
@@ -144,6 +146,8 @@ namespace API.Controllers
                     && kahootCategory.KahootId == kahoot.Id
                     && kahootCategory.KahootId == discoverSubsectionKahoots.KahootId
                     && discoverSubsectionKahoots.DiscoverSubsectionId == discoverSubsection.Id
+                    && kahoot.IsPublic == true
+                    && kahoot.IsPlayable == true
                   group new { kahoot, discoverSubsection } by new
                   {
                     discoverSubsection.Id,

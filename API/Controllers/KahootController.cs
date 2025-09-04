@@ -252,7 +252,7 @@ namespace API.Controllers
                               .ToListAsync();
 
       var kahoots = await _dbContext.Kahoots
-                        .Where(k => recentKahootIds.Contains(k.Id))
+                        .Where(k => recentKahootIds.Contains(k.Id) && k.IsPublic == true && k.IsPlayable == true)
                         .Select(k => new DiscoverKahootCardInfoDTO
                         {
                           KahootId = k.Id,
@@ -297,7 +297,7 @@ namespace API.Controllers
                                               .ToListAsync();
 
       List<DiscoverFeaturedCardInfoDTO> kahoots = await _dbContext.Kahoots
-                                        .Where(k => featuredKahootsIds.Contains(k.Id))
+                                        .Where(k => featuredKahootsIds.Contains(k.Id) && k.IsPublic == true && k.IsPlayable == true)
                                         .Select(k => new DiscoverFeaturedCardInfoDTO
                                         {
                                           KahootId = k.Id,
@@ -324,11 +324,12 @@ namespace API.Controllers
                                                         {
                                                           Title = section.Title,
                                                           Subsections = section.Subsections
-                                                            .Where(sub => sub.DiscoverSubsectionKahoots.Any(dsk => dsk.Kahoot != null))
+                                                            .Where(sub => sub.DiscoverSubsectionKahoots.Any(dsk => dsk.Kahoot != null && dsk.Kahoot.IsPublic == true && dsk.Kahoot.IsPlayable == true))
                                                             .Select(sub => new DiscoverSubsectionClient
                                                             {
                                                               Title = sub.Title,
                                                               Kahoots = sub.DiscoverSubsectionKahoots
+                                                                .Where(dsk => dsk.Kahoot.IsPublic == true && dsk.Kahoot.IsPlayable == true)
                                                                 .Select(dsk => new DiscoverKahootsFromSubsectionClient
                                                                 {
                                                                   KahootId = dsk.Kahoot.Id,

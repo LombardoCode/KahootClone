@@ -25,7 +25,7 @@ const CategoryPage = () => {
     slug = slug[0];
   }
   const [categoryExists, setCategoryExists] = useState<boolean>(false);
-  
+
 
   useEffect(() => {
     const initialization = async () => {
@@ -166,17 +166,21 @@ const PageContent = ({ categorySlug }: PageContentProps) => {
 
       <div id="featured-kahoots-from-category">
         {/* Featured kahoots */}
-        <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
-        <DiscoverFeaturedWrapper>
-          {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
-            <DiscoverFeaturedCard
-              key={i}
-              cardSize={DiscoverFeaturedCardSize.MEDIUM}
-              featuredKahoot={featuredKahoot}
-              onClick={handleKahootCardClick}
-            />
-          ))}
-        </DiscoverFeaturedWrapper>
+        {featuredKahoots.length > 0 && (
+          <>
+            <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
+            <DiscoverFeaturedWrapper>
+              {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
+                <DiscoverFeaturedCard
+                  key={i}
+                  cardSize={DiscoverFeaturedCardSize.MEDIUM}
+                  featuredKahoot={featuredKahoot}
+                  onClick={handleKahootCardClick}
+                />
+              ))}
+            </DiscoverFeaturedWrapper>
+          </>
+        )}
 
         {subsections.map((subsection: DiscoverSubsectionClient, index1: number) => (
           <>
