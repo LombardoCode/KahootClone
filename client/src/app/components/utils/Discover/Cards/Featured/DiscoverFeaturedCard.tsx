@@ -41,14 +41,29 @@ const DiscoverFeaturedCard = ({ cardSize, featuredKahoot, onClick }: DiscoverFea
         />
       </div>
       <div className="px-3">
-        <Text
-          textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
-          useCase={UseCases.LONGTEXT}
-          fontWeight={FontWeights.BOLD}
-          className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
-        >
-          {featuredKahoot.title}
-        </Text>
+        <div id="kahoot-title" className="mb-2">
+          <Text
+            textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
+            useCase={UseCases.LONGTEXT}
+            fontWeight={FontWeights.BOLD}
+            className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
+          >
+            {featuredKahoot.title}
+          </Text>
+        </div>
+
+        <div id="kahoot-owner-details">
+          <div id="kahoot-owner-username">
+            <Text
+              textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
+              useCase={UseCases.LONGTEXT}
+              fontWeight={FontWeights.REGULAR}
+              className={`z-20 text-xs w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
+            >
+              {featuredKahoot.createdByUserName}
+            </Text>
+          </div>
+        </div>
       </div>
     </div>
   )

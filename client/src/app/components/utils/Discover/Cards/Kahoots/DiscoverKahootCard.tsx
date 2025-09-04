@@ -20,7 +20,7 @@ const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardPro
 
   return (
     <div
-      className={`flex flex-col justify-start items-end rounded-md h-[12rem] overflow-hidden ring-1 ring-zinc-300 shadow cursor-pointer transition hover:scale-[1.03] ${cardSize}`}
+      className={`flex flex-col justify-start items-end rounded-md h-[13rem] overflow-hidden ring-1 ring-zinc-300 shadow cursor-pointer transition hover:scale-[1.03] ${cardSize}`}
       style={{ backgroundColor: kahoot.mediaUrl ? bgColor : "rgb(255, 255, 255)" }}
       onClick={() => onClick(kahoot.kahootId)}
     >
@@ -40,15 +40,30 @@ const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardPro
         </div>
       )}
 
-      <div className="discover-kahoot-card-text w-full h-full px-2 py-1">
-        <Text
-          textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
-          useCase={UseCases.LONGTEXT}
-          fontWeight={FontWeights.BOLD}
-          className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
-        >
-          {kahoot.title}
-        </Text>
+      <div className="discover-kahoot-card-text w-full h-full px-2 pt-1 pb-2 flex flex-col justify-between">
+        <div id="kahoot-title" className="">
+          <Text
+            textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
+            useCase={UseCases.LONGTEXT}
+            fontWeight={FontWeights.BOLD}
+            className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
+          >
+            {kahoot.title}
+          </Text>
+        </div>
+
+        <div id="kahoot-owner-details">
+          <div id="kahoot-owner-username">
+            <Text
+              textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
+              useCase={UseCases.LONGTEXT}
+              fontWeight={FontWeights.REGULAR}
+              className={`z-20 text-xs w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
+            >
+              {kahoot.createdByUserName}
+            </Text>
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -257,7 +257,8 @@ namespace API.Controllers
                         {
                           KahootId = k.Id,
                           Title = k.Title,
-                          MediaUrl = k.MediaUrl
+                          MediaUrl = k.MediaUrl,
+                          CreatedByUserName = k.User.UserName
                         })
                         .ToListAsync();
 
@@ -302,7 +303,8 @@ namespace API.Controllers
                                           KahootId = k.Id,
                                           Title = k.Title,
                                           MediaUrl = k.MediaUrl,
-                                          NumberOfQuestions = k.Questions.Count()
+                                          NumberOfQuestions = k.Questions.Count(),
+                                          CreatedByUserName = k.User.UserName
                                         })
                                         .ToListAsync();
 
@@ -331,7 +333,8 @@ namespace API.Controllers
                                                                 {
                                                                   KahootId = dsk.Kahoot.Id,
                                                                   Title = dsk.Kahoot.Title,
-                                                                  MediaUrl = dsk.Kahoot.MediaUrl
+                                                                  MediaUrl = dsk.Kahoot.MediaUrl,
+                                                                  CreatedByUserName = dsk.Kahoot.User.UserName
                                                                 }).ToList()
                                                             }).ToList()
                                                         })
@@ -398,7 +401,8 @@ namespace API.Controllers
                                   {
                                     KahootId = k.Id,
                                     Title = k.Title,
-                                    MediaUrl = k.MediaUrl
+                                    MediaUrl = k.MediaUrl,
+                                    CreatedByUserName = k.User.UserName
                                   })
                                   .Skip(offset)
                                   .Take(limit)
