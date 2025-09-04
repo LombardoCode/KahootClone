@@ -359,7 +359,12 @@ namespace API.Controllers
                                       MediaUrl = k.MediaUrl,
                                       TimesPlayed = _dbContext.PlayedKahoots.Count(pk => pk.KahootId == kahootId),
                                       Participants = _dbContext.KahootsPlayedByUser.Count(kpbu => kpbu.KahootId == kahootId),
-                                      IsPlayable = k.IsPlayable
+                                      IsPlayable = k.IsPlayable,
+                                      OwnerInfo = new OwnerInfo
+                                      {
+                                        UserName = k.User.UserName,
+                                        MediaUrl = k.User.MediaUrl
+                                      }
                                     })
                                     .FirstOrDefaultAsync();
 

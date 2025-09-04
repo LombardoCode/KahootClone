@@ -11,6 +11,7 @@ import { faPlay, faUser } from "@fortawesome/free-solid-svg-icons";
 import { createLobby } from "@/app/utils/Lobby/lobbyUtils";
 import { useRouter } from "next/navigation";
 import Spinner from "@/app/components/UIComponents/Spinners/Spinner";
+import Logo, { LogoColors, LogoSize } from "../../Logo";
 
 interface KahootSelectorModalProps {
   isOpen: boolean;
@@ -79,16 +80,48 @@ const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelect
               </div>
               <div id="kahoot-metadata-wrapper" className="col-span-8 flex items-center">
                 <div id="kahoot-metadata-content" className="w-full">
-                  <div id="title-and-description">
+                  <div id="kahoot-metadata-content-title" className="mb-2">
                     <Text
                       fontWeight={FontWeights.BOLD}
                       textColor={TextColors.GRAY}
                       useCase={UseCases.LONGTEXT}
-                      className="text-2xl mb-4"
+                      className="text-2xl"
                     >
                       {kahootMetadata?.title}
                     </Text>
+                  </div>
 
+                  <div id="kahoot-metadata-content-owner-content" className="flex items-center mb-3 select-none">
+                    <div id="kahoot-metadata-content-owner-content-photo" className="mr-2">
+                      {kahootMetadata?.ownerInfo.mediaUrl ? (
+                        <img
+                          src={kahootMetadata.ownerInfo.mediaUrl}
+                          crossOrigin="anonymous"
+                          className="top-0 left-0 min-w-7 max-w-7 min-h-7 max-h-7 object-cover rounded-full"
+                        />
+                      ) : (
+                        <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full min-w-7 max-w-7 min-h-7 max-h-7 rounded-full">
+                          <Logo
+                            size={LogoSize.SMALL}
+                            color={LogoColors.WHITE}
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    <div id="kahoot-metadata-content-owner-content-username">
+                      <Text
+                        fontWeight={FontWeights.REGULAR}
+                        textColor={TextColors.GRAY}
+                        useCase={UseCases.LONGTEXT}
+                        className="text-sm"
+                      >
+                        {kahootMetadata?.ownerInfo.userName}
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div id="kahoot-metadata-content-description">
                     <Text
                       fontWeight={FontWeights.REGULAR}
                       textColor={TextColors.GRAY}

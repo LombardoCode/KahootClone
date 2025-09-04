@@ -9,5 +9,12 @@ namespace API.Data.ForClient.Dashboard.Kahoot
     public int TimesPlayed { get; set; }
     public int Participants { get; set; }
     public bool IsPlayable { get; set; }
+    public OwnerInfo OwnerInfo { get; set; }
+  }
+
+  public class OwnerInfo
+  {
+    public string UserName { get; set; }
+    public string? MediaUrl { get; set; }
   }
 }

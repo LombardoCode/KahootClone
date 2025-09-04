@@ -6,4 +6,8 @@ export interface KahootMetadata {
   timesPlayed: number;
   participants: number;
   isPlayable: boolean;
+  ownerInfo: {
+    userName: string;
+    mediaUrl?: string;
+  }
 };
