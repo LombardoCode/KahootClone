@@ -98,7 +98,14 @@ namespace API.Controllers
 
       _cookieService.Set(newToken);
 
-      return Ok(new { user = new { currentUser.UserName } });
+      return Ok(new
+      {
+        user = new
+        {
+          userName = currentUser.UserName,
+          mediaUrl = currentUser.MediaUrl
+        }
+      });
     }
 
 

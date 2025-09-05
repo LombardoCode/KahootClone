@@ -41,9 +41,10 @@ const ChangeUsernameModal = ({ isOpen, onClose, userName, setNewUserName }: Chan
   const tryAndChangeUsersUserName = async () => {
     await axiosInstance.post('/user/changeUserName', { userName: userNameForm })
       .then(res => {
-        const user = res.data.user.userName;
+        const userName = res.data.user.userName;
+        const mediaUrl = res.data.user.mediaUrl;
 
-        setUser(user);
+        setUser({ userName, mediaUrl });
 
         if (setNewUserName) {
           setNewUserName(userNameForm);
