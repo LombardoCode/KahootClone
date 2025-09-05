@@ -13,6 +13,7 @@ type GlobalStore = {
   isUserLoaded: boolean;
   markLoaded: () => void;
   setUser: (userData: UserData) => void;
+  changeUserProfilePicture: (mediaUrl: string | null) => void;
   clearUser: () => void;
 };
 
@@ -27,6 +28,14 @@ const useUserStore = create<GlobalStore>((set) => ({
   }),
   setUser: (userData: UserData) => {
     set({ user: userData })
+  },
+  changeUserProfilePicture: (mediaUrl: string | null) => {
+    set((state) => ({
+      user: {
+        ...state.user,
+        mediaUrl
+      }
+    }))
   },
   clearUser: () => {
     set({

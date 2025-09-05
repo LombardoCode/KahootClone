@@ -11,6 +11,7 @@ import ImageSelectorModal from "@/app/components/utils/Modal/reusable/ImageSelec
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { UserMetadata } from "@/app/interfaces/Settings/EditProfile/UserMetadata.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
+import useUserStore from "@/app/stores/useUserStore";
 import axiosInstance from "@/app/utils/axiosConfig";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
@@ -19,6 +20,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const UserSettingsProfileTab = () => {
+  // Global state
+  const { changeUserProfilePicture } = useUserStore();
+  
   // Local component state
   const [userData, setUserData] = useState<UserMetadata>({
     userName: "",
@@ -74,10 +78,14 @@ const UserSettingsProfileTab = () => {
   const [isMediaSelectorModalOpen, setIsMediaSelectorModalOpen] = useState<boolean>(false);
 
   const removeUserMediaUrl = () => {
+    const mediaUrl = null;
+
     setUserData({
       ...userData,
-      mediaUrl: null
+      mediaUrl
     });
+
+    changeUserProfilePicture(mediaUrl);
 
     setHasUserManuallyUpdateMediaUrl(true);
   }
@@ -87,6 +95,8 @@ const UserSettingsProfileTab = () => {
       ...userData,
       mediaUrl: mediaUrlSrc
     });
+
+    changeUserProfilePicture(mediaUrlSrc);
 
     setHasUserManuallyUpdateMediaUrl(true);
   }
