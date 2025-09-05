@@ -80,6 +80,12 @@ namespace API.Controllers
         return BadRequest(new { errors });
       }
 
+      if (desiredUsername.Length > 20)
+      {
+        errors.Add("Username must not exceed 20 characters.");
+        return BadRequest(new { errors });
+      }
+
       var setUsername = await _userManager.SetUserNameAsync(currentUser, desiredUsername);
 
       if (!setUsername.Succeeded)
