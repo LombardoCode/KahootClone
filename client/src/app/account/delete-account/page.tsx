@@ -5,6 +5,8 @@ import Card from "@/app/components/UIComponents/Card";
 import LoadingFullScreen from "@/app/components/UIComponents/Loading/LoadingFullScreen";
 import Text from "@/app/components/UIComponents/Text";
 import BulletPointErrorsDisplayer from "@/app/components/utils/ErrorHandlers/BulletPointErrorsDisplayer";
+import DisplayUsersPhoto from "@/app/components/utils/General/DisplayUsersPhoto";
+import DisplayUsersUsername from "@/app/components/utils/General/DisplayUsersUsername";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import useUserStore from "@/app/stores/useUserStore";
@@ -19,7 +21,7 @@ const DeleteAccountPage = () => {
   const [deletingAccountInProcess, setDeletingAccountInProcess] = useState<boolean>(false);
 
   // Global store state
-  const { clearUser } = useUserStore();
+  const { user, clearUser } = useUserStore();
 
   const initializeAccountDeletionProcess = async () => {
     setDeletingAccountInProcess(true);
@@ -46,7 +48,7 @@ const DeleteAccountPage = () => {
       {deletingAccountInProcess && (
         <LoadingFullScreen text={`Deleting account`} />
       )}
-      
+
       <div className=" px-3 pt-5 w-[700px] max-w-[90vw]">
         <div id="heading" className="mb-4">
           <Text
@@ -61,19 +63,11 @@ const DeleteAccountPage = () => {
 
         <Card>
           <div id="profile-picture-and-username" className="flex items-center mb-3">
-            <div id="profile-picture" className="w-8 h-8 bg-red-500 rounded-full mr-3">
-              {/*  */}
+            <div id="users-photo-and-username-content-photo" className="mr-2">
+              <DisplayUsersPhoto photo={user.mediaUrl} size={"extra_small"} />
             </div>
-
-            <div id="username">
-              <Text
-                fontWeight={FontWeights.BOLD}
-                textColor={TextColors.GRAY}
-                useCase={UseCases.BODY}
-                className="text-md"
-              >
-                Username
-              </Text>
+            <div id="users-photo-and-username-content-username">
+              <DisplayUsersUsername username={user.userName} />
             </div>
           </div>
 
