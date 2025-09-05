@@ -77,11 +77,8 @@ const KahootSearchWindow = ({ visible, setIsKahootSearchWindowOpen, isLoading, s
   }
 
   return (
-    <>
-      <div
-        ref={containerRef}
-        className={`${!visible && 'hidden'} absolute inset-0 w-full h-full z-20 px-8 py-8 overflow-y-auto`}
-      >
+    <div ref={containerRef}>
+      <div className={`${!visible && 'hidden'} absolute inset-0 w-full h-full z-20 px-8 py-8 overflow-y-auto`}>
         <div className="relative">
           <div
             id="search-results-header-and-close-button-wrapper"
@@ -187,7 +184,7 @@ const KahootSearchWindow = ({ visible, setIsKahootSearchWindowOpen, isLoading, s
         }}
         selectedKahootId={selectedKahootId}
       />
-    </>
+    </div>
   )
 }
 
