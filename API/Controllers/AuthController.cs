@@ -47,7 +47,7 @@ namespace API.Controllers
     {
       List<string> errors = new List<string>();
 
-      string username = newUserData.UserName.Trim().ToLower();
+      string username = newUserData.UserName.Trim();
       string email = newUserData.Email.Trim().ToLower();
       string password = newUserData.Password.Trim();
 
@@ -57,11 +57,17 @@ namespace API.Controllers
         return BadRequest(new { errors });
       }
 
-      bool doesUsernameOrEmailExists = await _dbContext.Users.AnyAsync(u => u.UserName.ToLower() == username || u.Email.ToLower() == email);
+      bool doesUsernameOrEmailExists = await _dbContext.Users.AnyAsync(u => u.UserName == username || u.Email.ToLower() == email);
 
       if (doesUsernameOrEmailExists)
       {
         errors.Add("Username or email is already taken.");
+        return BadRequest(new { errors });
+      }
+
+      if (username.Length > 20)
+      {
+        errors.Add("Username must not exceed 20 characters.");
         return BadRequest(new { errors });
       }
 

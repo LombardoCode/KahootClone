@@ -31,6 +31,20 @@ namespace API.Data
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+      base.OnModelCreating(builder);
+
+      // User
+      builder.Entity<AppUser>(entity =>
+      {
+        entity.Property(u => u.UserName)
+          .HasMaxLength(20)
+          .IsRequired();
+
+        entity.Property(u => u.NormalizedUserName)
+          .HasMaxLength(20)
+          .IsRequired();
+      });
+
       builder.Entity<AppUser>()
         .HasMany(u => u.Kahoots)
         .WithOne(k => k.User)
@@ -78,8 +92,6 @@ namespace API.Data
         .HasOne(dsk => dsk.Kahoot)
         .WithMany()
         .HasForeignKey(dsk => dsk.KahootId);
-      
-      base.OnModelCreating(builder);
     }
   }
 }
