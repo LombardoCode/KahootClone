@@ -92,7 +92,7 @@ const DropDownContainer = ({ children }: DropDownContainer) => {
   return (
     <div
       id="account-dropdown-options"
-      className="absolute top-full bg-white py-0 right-0 shadow-md shadow-gray-400 select-none w-52"
+      className="absolute top-full bg-white py-0 right-0 shadow-md shadow-gray-400 select-none w-60"
     >
       {children}
     </div>

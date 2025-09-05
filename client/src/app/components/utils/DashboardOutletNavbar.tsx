@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Text from "../UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { DropDownContainer, DropDownItem } from "./Navbar";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { useRouter } from "next/navigation";
@@ -109,57 +109,36 @@ const DashboardOutletNavbar = ({
 
           <div
             id="user-data"
-            className="flex items-center hover:bg-gray-400 px-3 py-2 select-none cursor-pointer"
+            className="flex items-center px-3 py-2 select-none cursor-pointer"
+            onClick={() => setToggleAccountDropdown(!toggleAccountDropdown)}
           >
-            <div id="user-data-photo" className="mr-3">
-              {user.mediaUrl ? (
-                <img
-                  src={user.mediaUrl}
-                  crossOrigin="anonymous"
-                  className="top-0 left-0 min-w-10 max-w-10 min-h-10 max-h-10 object-cover rounded-full"
-                />
-              ) : (
-                <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full min-w-10 max-w-10 min-h-10 max-h-10 rounded-full">
-                  <Logo
-                    size={LogoSize.SMALL}
-                    color={LogoColors.WHITE}
-                  />
-                </div>
-              )}
-            </div>
-
-            <div id="user-data-username">
-              {user.userName && (
-                <div>
-                  <Text
-                    fontWeight={FontWeights.BOLD}
-                    textColor={TextColors.BLACK}
-                    useCase={UseCases.LONGTEXT}
-                    onClick={() => setToggleAccountDropdown(!toggleAccountDropdown)}
-                  >
-                    {user.userName}
-                  </Text>
-                </div>
-              )}
-            </div>
-
-            <div id="user-data-caret">
-              <FontAwesomeIcon
-                className="ml-2"
-                icon={faCaretDown}
-              />
+            <div id="user-data-photo">
+              <DisplayUsersPhoto photo={user.mediaUrl} size={"small"} />
             </div>
           </div>
         </div>
 
         {toggleAccountDropdown && (
           <DropDownContainer>
+            <div
+              id="users-photo-and-username-wrapper"
+              className="flex flex-col items-center py-4"
+            >
+              <div id="users-photo-and-username-content-photo" className="mb-3">
+                <DisplayUsersPhoto photo={user.mediaUrl} size={"medium"} />
+              </div>
+              <div id="users-photo-and-username-content-username">
+                <DisplayUsersUsername username={user.userName} />
+              </div>
+            </div>
+
             <DropDownItem
               icon={<FontAwesomeIcon icon={faGear} />}
               onClick={() => router.push(ROUTES.ADMINISTRATION.SETTINGS.PROFILE)}
             >
               Settings
             </DropDownItem>
+
             <DropDownItem
               icon={<FontAwesomeIcon icon={faRightFromBracket} />}
               backgroundColor={BackgroundColors.RED}
@@ -177,6 +156,68 @@ const DashboardOutletNavbar = ({
         onClose={() => setIsCreateKahootModalOpen(false)}
       />
     </nav>
+  )
+}
+
+interface DisplayUsersUsernameProps {
+  username: string | null;
+}
+
+const DisplayUsersUsername = ({ username }: DisplayUsersUsernameProps) => {
+  if (username === null) {
+    return;
+  }
+
+  return (
+    <div>
+      <Text
+        fontWeight={FontWeights.BOLD}
+        textColor={TextColors.BLACK}
+        useCase={UseCases.LONGTEXT}
+      >
+        {username}
+      </Text>
+    </div>
+  )
+}
+
+interface DisplayUsersPhotoProps {
+  photo: string | null;
+  size: "small" | "medium";
+}
+
+const DisplayUsersPhoto = ({ photo, size = "small" }: DisplayUsersPhotoProps) => {
+  const determinePhotoSize = () => {
+    let photoSize: string = "";
+    switch (size) {
+      case "small":
+        photoSize = "min-w-10 max-w-10 min-h-10 max-h-10";
+        break;
+      case "medium":
+        photoSize = "min-w-24 max-w-24 min-h-24 max-h-24"
+        break;
+    }
+
+    return photoSize;
+  }
+
+  return (
+    <div className="border-1.5 border-kahoot-purple-variant-3 rounded-full">
+      {photo ? (
+        <img
+          src={photo}
+          crossOrigin="anonymous"
+          className={`top-0 left-0 object-cover rounded-full ${determinePhotoSize()}`}
+        />
+      ) : (
+        <div className={`bg-kahoot-purple-variant-4 flex justify-center items-center w-full rounded-full ${determinePhotoSize()}`}>
+          <Logo
+            size={LogoSize.SMALL}
+            color={LogoColors.WHITE}
+          />
+        </div>
+      )}
+    </div>
   )
 }
 
