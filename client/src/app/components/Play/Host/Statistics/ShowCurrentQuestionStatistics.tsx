@@ -51,8 +51,8 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
     setCountOfAnswersProvidedByGuests(0);
   }
   
-  const goToThePodium = () => {
-    registerPlayCountOnCurrentKahoot();
+  const goToThePodium = async () => {
+    await registerPlayCountOnCurrentKahoot();
 
     if (isHost) {
       // Redirect the guests to the '/ranking' page

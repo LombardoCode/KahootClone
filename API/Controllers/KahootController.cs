@@ -208,11 +208,6 @@ namespace API.Controllers
 
       foreach (Player player in playedKahootData.Players)
       {
-        if (string.IsNullOrEmpty(player.UserId))
-        {
-          continue;
-        }
-
         loggedUsersThatPlayedTheKahoot.Add(new KahootsPlayedByUser
         {
           KahootId = playedKahootData.KahootId,
@@ -221,7 +216,10 @@ namespace API.Controllers
         });
       }
 
+      // Register a play (+1) on the Kahoot
       _dbContext.PlayedKahoots.Add(newPlayedKahoot);
+
+      // Register the number of participants that the Kahoot had
       _dbContext.KahootsPlayedByUser.AddRange(loggedUsersThatPlayedTheKahoot);
 
       try

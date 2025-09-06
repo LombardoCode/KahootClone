@@ -13,7 +13,7 @@ namespace API.Models.Statistics
     public Kahoot Kahoot { get; set; }
 
     // Navigation property for User
-    public string UserId { get; set; }
+    public string? UserId { get; set; }
     public AppUser User { get; set; }
 
     public DateTime PlayedAt { get; set; }
