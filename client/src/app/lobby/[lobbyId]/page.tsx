@@ -163,8 +163,12 @@ const LobbyPage = () => {
     if (lobbyId === null) {
       return;
     }
+    
+    const url: URL = new URL(process.env.NEXT_PUBLIC_CLIENT_URL + ROUTES.ROOT);
+    url.searchParams.set("pin", lobbyId);
+    const urlToCopy: string = url.toString();
 
-    await navigator.clipboard.writeText(lobbyId)
+    await navigator.clipboard.writeText(urlToCopy)
       .then(() => {
         setWasLobbyIdCopiedToClipboard(true);
       });

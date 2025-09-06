@@ -10,7 +10,7 @@ import Card, { CardBackgroundColors } from "./components/UIComponents/Card";
 import { BackgroundColors } from "./interfaces/Colors.interface";
 import InputForm, { BorderSize, FocusBorderColor, InputFormTypes, Roundness } from "./components/UIComponents/InputForm";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createBaseNewPlayer, getOrCreateSignalRConnection, putTheGuestInTheLobbyQueue, validateIfLobbyExists } from "./utils/Lobby/lobbyUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
@@ -20,12 +20,23 @@ import { HubConnection } from "@microsoft/signalr";
 import LoadingFullScreen from "./components/UIComponents/Loading/LoadingFullScreen";
 
 const Home = () => {
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [highlightInput, setHighlightInput] = useState<boolean>(false);
   const [userEnteredAValidLobbyId, setUserEnteredAValidLobbyId] = useState<boolean>(false);
+  const [gamePINComesFromParams, setGamePINComesFromParams] = useState<boolean>(false);
   const [gamePIN, setGamePIN] = useState<string>("");
   const [nickName, setNickName] = useState<string>("");
+
+  useEffect(() => {
+    const pin = searchParams.get("pin");
+
+    if (pin !== null) {
+      setGamePIN(pin);
+      setGamePINComesFromParams(true);
+    }
+  }, [searchParams]);
 
   return (
     <>
@@ -53,6 +64,7 @@ const Home = () => {
                   setHighlightInput={setHighlightInput}
                   setLoading={setLoading}
                   setUserEnteredAValidLobbyId={setUserEnteredAValidLobbyId}
+                  gamePINComesFromParams={gamePINComesFromParams}
                   gamePIN={gamePIN}
                   setGamePIN={setGamePIN}
                 />
@@ -94,11 +106,20 @@ interface ShowEnterLobbyIdFieldsProps {
   setHighlightInput: (val: boolean) => void;
   setLoading: (val: boolean) => void;
   setUserEnteredAValidLobbyId: (val: boolean) => void;
+  gamePINComesFromParams: boolean;
   gamePIN: string;
   setGamePIN: (gamePIN: string) => void;
 }
 
-const ShowEnterLobbyIdFields = ({ highlightInput, setError, setHighlightInput, setLoading, setUserEnteredAValidLobbyId, gamePIN, setGamePIN }: ShowEnterLobbyIdFieldsProps) => {
+const ShowEnterLobbyIdFields = ({ highlightInput, setError, setHighlightInput, setLoading, setUserEnteredAValidLobbyId, gamePINComesFromParams = false, gamePIN, setGamePIN }: ShowEnterLobbyIdFieldsProps) => {
+  useEffect(() => {
+    if (!gamePINComesFromParams) {
+      return;
+    }
+
+    processGamePIN();
+  }, [gamePINComesFromParams]);
+
   const processGamePIN = async () => {
     setError(null);
     setHighlightInput(false);
