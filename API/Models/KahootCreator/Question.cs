@@ -10,7 +10,7 @@ namespace API.Models.Creator
     public QuizQuestionLayoutTypes Layout { get; set; }
     public TimeLimits TimeLimit { get; set; }
     public PointsMultiplier PointsMultiplier { get; set; }
-    public string MediaUrl { get; set; }
+    public string? MediaUrl { get; set; }
 
     // Navigation properties
     public Kahoot Kahoot { get; set; }
