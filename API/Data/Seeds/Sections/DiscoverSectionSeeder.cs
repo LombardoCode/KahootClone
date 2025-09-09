@@ -26,8 +26,8 @@ namespace API.Data.Seeds.Sections
       var categories = await _dbContext.Categories.ToListAsync();
       int categoryMath = categories.Single(c => c.Slug == "math").Id;
       int categoryGeography = categories.Single(c => c.Slug == "geography").Id;
-      int categoryLanguage = categories.Single(c => c.Slug == "language").Id;
       int categoryScience = categories.Single(c => c.Slug == "science").Id;
+      int categoryLanguage = categories.Single(c => c.Slug == "language").Id;
       int categoryCoding = categories.Single(c => c.Slug == "coding").Id;
 
       // Math
@@ -101,8 +101,33 @@ namespace API.Data.Seeds.Sections
         }
       };
 
+      // Science
+      List<DiscoverSection> newScienceDiscoverSections = new List<DiscoverSection>()
+      {
+        {
+          new DiscoverSection {
+            Title = "Life science",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Human body", CategoryId = categoryScience }
+            }
+          }
+        },
+        {
+          new DiscoverSection {
+            Title = "Earth and space science",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Earth systems", CategoryId = categoryScience },
+              new DiscoverSubsection { Title = "Space exploration", CategoryId = categoryScience }
+            }
+          }
+        }
+      };
+
       _dbContext.DiscoverSection.AddRange(newMathDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newGeographyDiscoverSections);
+      _dbContext.DiscoverSection.AddRange(newScienceDiscoverSections);
 
       await _dbContext.SaveChangesAsync();
     }
