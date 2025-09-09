@@ -33,42 +33,43 @@ namespace API.Data.Seeds.Sections
       {
         {
           new DiscoverSection {
-            Title = "By Educational Level",
+            Title = "Math games for the classroom",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Elementary School", CategoryId = categoryMath },
-              new DiscoverSubsection { Title = "Middle School", CategoryId = categoryMath },
-              new DiscoverSubsection { Title = "High School", CategoryId = categoryMath }
+              new DiscoverSubsection { Title = "Additions and subtractions", CategoryId = categoryMath },
+              new DiscoverSubsection { Title = "Multiplications and divisions", CategoryId = categoryMath },
+              new DiscoverSubsection { Title = "Reasoning with numbers", CategoryId = categoryMath }
             }
           }
         },
         {
           new DiscoverSection {
-            Title = "Language learning",
+            Title = "Multiples and factors",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Spanish", CategoryId = categoryLanguage },
-              new DiscoverSubsection { Title = "English", CategoryId = categoryLanguage }
+              new DiscoverSubsection { Title = "Finding multiples", CategoryId = categoryMath },
+              new DiscoverSubsection { Title = "Factors and divisibility", CategoryId = categoryMath }
             }
           }
         },
         {
           new DiscoverSection {
-            Title = "Science Exploration",
+            Title = "Geometry and measurements",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "The Solar System", CategoryId = categoryScience },
-              new DiscoverSubsection { Title = "Human Body Systems", CategoryId = categoryScience },
-              new DiscoverSubsection { Title = "Famous Scientists", CategoryId = categoryScience }
+              new DiscoverSubsection { Title = "Shapes and figures", CategoryId = categoryMath },
+              new DiscoverSubsection { Title = "Angles and lines", CategoryId = categoryMath },
+              new DiscoverSubsection { Title = "Measurements and conversions", CategoryId = categoryMath }
             }
           }
         },
         {
           new DiscoverSection {
-            Title = "Software Development",
+            Title = "Applied math",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Programming Languages", CategoryId = categoryCoding }
+              new DiscoverSubsection { Title = "Time and calendars", CategoryId = categoryMath },
+              new DiscoverSubsection { Title = "Fractions", CategoryId = categoryMath }
             }
           }
         }

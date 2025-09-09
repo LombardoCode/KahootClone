@@ -30,26 +30,6 @@ namespace API.Data.Seeds
         return;
       }
 
-      string kahootJsonPath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Seeds", "JSONs") + "/kahoots.jsonc";
-
-      if (!File.Exists(kahootJsonPath))
-      {
-        Console.WriteLine($"[Error]: JSON file not found at path: {kahootJsonPath}");
-        return;
-      }
-
-      var jsonContent = await File.ReadAllTextAsync(kahootJsonPath);
-      var kahootSeedList = JsonSerializer.Deserialize<List<KahootSeedModel>>(jsonContent, new JsonSerializerOptions
-      {
-        PropertyNameCaseInsensitive = true
-      });
-
-      if (kahootSeedList == null || kahootSeedList.Count == 0)
-      {
-        Console.WriteLine($"[Warning]: JSON contained no kahoots");
-        return;
-      }
-
       user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == "lombardo");
 
       if (user == null)
@@ -58,12 +38,45 @@ namespace API.Data.Seeds
         return;
       }
 
-      await processKahoots(kahootSeedList);
+      string jsonsBasePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Seeds", "JSONs");
+      List<string> kahootJsonPaths = new List<string>();
+
+      // JSON files for all the kahoots that we are going to create
+      string mathJson = jsonsBasePath + "/math.kahoots.jsonc";
+
+      // Add all the JSON paths
+      kahootJsonPaths.Add(mathJson);
+
+      bool wereAllJsonFilesFound = true;
+
+      foreach (string path in kahootJsonPaths)
+      {
+        if (!File.Exists(path))
+        {
+          wereAllJsonFilesFound = false;
+          Console.WriteLine($"[Error]: JSON file not found at path: {path}");
+          return;
+        }
+
+        var jsonContent = await File.ReadAllTextAsync(path);
+        var kahootSeedList = JsonSerializer.Deserialize<List<KahootSeedModel>>(jsonContent, new JsonSerializerOptions
+        {
+          PropertyNameCaseInsensitive = true
+        });
+
+        if (kahootSeedList == null || kahootSeedList.Count == 0)
+        {
+          Console.WriteLine($"[Warning]: JSON contained no kahoots");
+          return;
+        }
+
+        await processKahoots(path, kahootSeedList);
+      }
 
       await _dbContext.SaveChangesAsync();
     }
 
-    private async Task processKahoots(List<KahootSeedModel> kahootList)
+    private async Task processKahoots(string path, List<KahootSeedModel> kahootList)
     {
       Console.WriteLine("[KahootJsonSeeder] - Processing Kahoots");
 
@@ -80,7 +93,7 @@ namespace API.Data.Seeds
         {
           invalidCount++;
           Console.ForegroundColor = ConsoleColor.Red;
-          Console.WriteLine($"[KahootJsonSeeder]: index = {index} - {errors.Count} errors(s):");
+          Console.WriteLine($"[KahootJsonSeeder]: path: {path} | index = {index} - {errors.Count} errors(s):");
 
           foreach (string error in errors)
           {
