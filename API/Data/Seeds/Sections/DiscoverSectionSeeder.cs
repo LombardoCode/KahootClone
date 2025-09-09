@@ -125,9 +125,34 @@ namespace API.Data.Seeds.Sections
         }
       };
 
+      // Language
+      List<DiscoverSection> newLanguageDiscoverSections = new List<DiscoverSection>()
+      {
+        {
+          new DiscoverSection {
+            Title = "Core Spanish skills",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Everyday Spanish practice", CategoryId = categoryLanguage },
+              new DiscoverSubsection { Title = "Spanish grammar and usage", CategoryId = categoryLanguage }
+            }
+          }
+        },
+        {
+          new DiscoverSection {
+            Title = "English basics",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Vocabulary and grammar", CategoryId = categoryLanguage }
+            }
+          }
+        }
+      };
+
       _dbContext.DiscoverSection.AddRange(newMathDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newGeographyDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newScienceDiscoverSections);
+      _dbContext.DiscoverSection.AddRange(newLanguageDiscoverSections);
 
       await _dbContext.SaveChangesAsync();
     }
