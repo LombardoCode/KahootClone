@@ -25,11 +25,13 @@ namespace API.Data.Seeds.Sections
 
       var categories = await _dbContext.Categories.ToListAsync();
       int categoryMath = categories.Single(c => c.Slug == "math").Id;
+      int categoryGeography = categories.Single(c => c.Slug == "geography").Id;
       int categoryLanguage = categories.Single(c => c.Slug == "language").Id;
       int categoryScience = categories.Single(c => c.Slug == "science").Id;
       int categoryCoding = categories.Single(c => c.Slug == "coding").Id;
 
-      List<DiscoverSection> newDiscoverSections = new List<DiscoverSection>()
+      // Math
+      List<DiscoverSection> newMathDiscoverSections = new List<DiscoverSection>()
       {
         {
           new DiscoverSection {
@@ -75,7 +77,33 @@ namespace API.Data.Seeds.Sections
         }
       };
 
-      _dbContext.DiscoverSection.AddRange(newDiscoverSections);
+      // Geography
+      List<DiscoverSection> newGeographyDiscoverSections = new List<DiscoverSection>()
+      {
+        {
+          new DiscoverSection {
+            Title = "World capitals and countries",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Capitals by continent", CategoryId = categoryGeography },
+              new DiscoverSubsection { Title = "Flags", CategoryId = categoryGeography },
+            }
+          }
+        },
+        {
+          new DiscoverSection {
+            Title = "Human and cultural geography",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Cities and landmarks", CategoryId = categoryGeography }
+            }
+          }
+        }
+      };
+
+      _dbContext.DiscoverSection.AddRange(newMathDiscoverSections);
+      _dbContext.DiscoverSection.AddRange(newGeographyDiscoverSections);
+
       await _dbContext.SaveChangesAsync();
     }
   }

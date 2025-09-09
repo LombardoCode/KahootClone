@@ -29,10 +29,10 @@ namespace API.Data.Seeds
           },
           new Category {
             Id = 2,
-            Name = "Technology",
-            Slug = "technology",
+            Name = "Geography",
+            Slug = "geography",
             IsVisible = true,
-            MediaUrl = "https://images.unsplash.com/photo-1562408590-e32931084e23?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxN3x8VGVjaG5vbG9neXxlbnwwfHx8fDE3NTM0MzQ3NzB8MA&ixlib=rb-4.1.0&q=85"
+            MediaUrl = "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHxXb3JsZHxlbnwwfHx8fDE3NTM0MzUxMTN8MA&ixlib=rb-4.1.0&q=85"
           },
           new Category {
             Id = 3,
