@@ -20,6 +20,6 @@ namespace API.Models
     public AppUser User { get; set; }
     public List<Question> Questions { get; set; }
     public List<Lobby> Lobbies { get; set; }
-    public List<KahootCategory> KahootCategories { get; set; }
+    public KahootCategory KahootCategories { get; set; }
   }
 }

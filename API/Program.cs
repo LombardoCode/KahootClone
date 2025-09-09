@@ -184,13 +184,19 @@ public class Program
     // Database seeding
     using (var scope = app.Services.CreateScope())
     {
-      var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+      var services = scope.ServiceProvider;
+
+      var db = services.GetRequiredService<DataContext>();
+
+      await db.Database.MigrateAsync();
+
+      var seeder = services.GetRequiredService<DatabaseSeeder>();
       
       bool shouldDeleteData = args.Contains("--delete-data");
 
       if (shouldDeleteData)
       {
-        var databaseDataDeleter = scope.ServiceProvider.GetRequiredService<DatabaseDataDeleter>();
+        var databaseDataDeleter = services.GetRequiredService<DatabaseDataDeleter>();
         await databaseDataDeleter.Delete();
       }
       

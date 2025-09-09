@@ -67,17 +67,19 @@ namespace API.Data
 
       // Categories
       builder.Entity<KahootCategory>()
-        .HasKey(kc => new { kc.KahootId, kc.CategoryId });
+        .HasKey(kc => kc.KahootId);
 
       builder.Entity<KahootCategory>()
         .HasOne(kc => kc.Kahoot)
-        .WithMany(k => k.KahootCategories)
-        .HasForeignKey(kc => kc.KahootId);
+        .WithOne(k => k.KahootCategories)
+        .HasForeignKey<KahootCategory>(kc => kc.KahootId)
+        .OnDelete(DeleteBehavior.Cascade);
 
       builder.Entity<KahootCategory>()
         .HasOne(kc => kc.Category)
         .WithMany(c => c.KahootCategories)
-        .HasForeignKey(kc => kc.CategoryId);
+        .HasForeignKey(kc => kc.CategoryId)
+        .OnDelete(DeleteBehavior.Restrict);
 
       // Discover's page sections
       builder.Entity<DiscoverSubsectionKahoot>()
@@ -86,12 +88,24 @@ namespace API.Data
       builder.Entity<DiscoverSubsectionKahoot>()
         .HasOne(dsk => dsk.DiscoverSubsection)
         .WithMany(ds => ds.DiscoverSubsectionKahoots)
-        .HasForeignKey(dsk => dsk.DiscoverSubsectionId);
+        .HasForeignKey(dsk => dsk.DiscoverSubsectionId)
+        .OnDelete(DeleteBehavior.Cascade);
 
       builder.Entity<DiscoverSubsectionKahoot>()
         .HasOne(dsk => dsk.Kahoot)
         .WithMany()
-        .HasForeignKey(dsk => dsk.KahootId);
+        .HasForeignKey(dsk => dsk.KahootId)
+        .OnDelete(DeleteBehavior.Cascade);
+
+      builder.Entity<DiscoverSubsection>()
+        .HasOne(ds => ds.Category)
+        .WithMany(c => c.DiscoverSubsections)
+        .HasForeignKey(ds => ds.CategoryId)
+        .OnDelete(DeleteBehavior.Cascade);
+
+      builder.Entity<DiscoverSubsection>()
+        .HasIndex(ds => new { ds.Title, ds.CategoryId })
+        .IsUnique();
     }
   }
 }

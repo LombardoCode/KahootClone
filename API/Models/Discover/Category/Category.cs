@@ -1,3 +1,5 @@
+using API.Models.Discover.Section;
+
 namespace API.Models.Classification
 {
   public class Category
@@ -11,5 +13,6 @@ namespace API.Models.Classification
 
     // Navigation properties
     public List<KahootCategory> KahootCategories { get; set; }
+    public List<DiscoverSubsection> DiscoverSubsections { get; set; }
   }
 }

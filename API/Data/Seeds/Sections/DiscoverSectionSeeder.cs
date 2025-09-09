@@ -1,4 +1,5 @@
 using API.Models.Discover.Section;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Seeds.Sections
 {
@@ -16,11 +17,17 @@ namespace API.Data.Seeds.Sections
       Console.WriteLine("\n\n\n\n");
       Console.WriteLine($"[Info]: Seeding DiscoverSection");
 
-      if (_dbContext.DiscoverSection.Any())
+      if (await _dbContext.DiscoverSection.AnyAsync())
       {
         Console.WriteLine("[Info]: DiscoverSection already seeded, skipping.");
         return;
       }
+
+      var categories = await _dbContext.Categories.ToListAsync();
+      int categoryMath = categories.Single(c => c.Slug == "math").Id;
+      int categoryLanguage = categories.Single(c => c.Slug == "language").Id;
+      int categoryScience = categories.Single(c => c.Slug == "science").Id;
+      int categoryCoding = categories.Single(c => c.Slug == "coding").Id;
 
       List<DiscoverSection> newDiscoverSections = new List<DiscoverSection>()
       {
@@ -29,9 +36,9 @@ namespace API.Data.Seeds.Sections
             Title = "By Educational Level",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Elementary School" },
-              new DiscoverSubsection { Title = "Middle School" },
-              new DiscoverSubsection { Title = "High School" }
+              new DiscoverSubsection { Title = "Elementary School", CategoryId = categoryMath },
+              new DiscoverSubsection { Title = "Middle School", CategoryId = categoryMath },
+              new DiscoverSubsection { Title = "High School", CategoryId = categoryMath }
             }
           }
         },
@@ -40,8 +47,8 @@ namespace API.Data.Seeds.Sections
             Title = "Language learning",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Spanish" },
-              new DiscoverSubsection { Title = "English" }
+              new DiscoverSubsection { Title = "Spanish", CategoryId = categoryLanguage },
+              new DiscoverSubsection { Title = "English", CategoryId = categoryLanguage }
             }
           }
         },
@@ -50,9 +57,9 @@ namespace API.Data.Seeds.Sections
             Title = "Science Exploration",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "The Solar System" },
-              new DiscoverSubsection { Title = "Human Body Systems" },
-              new DiscoverSubsection { Title = "Famous Scientists" }
+              new DiscoverSubsection { Title = "The Solar System", CategoryId = categoryScience },
+              new DiscoverSubsection { Title = "Human Body Systems", CategoryId = categoryScience },
+              new DiscoverSubsection { Title = "Famous Scientists", CategoryId = categoryScience }
             }
           }
         },
@@ -61,7 +68,7 @@ namespace API.Data.Seeds.Sections
             Title = "Software Development",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Programming Languages" }
+              new DiscoverSubsection { Title = "Programming Languages", CategoryId = categoryCoding }
             }
           }
         }
