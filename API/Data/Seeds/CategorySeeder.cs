@@ -50,18 +50,18 @@ namespace API.Data.Seeds
           },
           new Category {
             Id = 5,
+            Name = "Technology",
+            Slug = "technology",
+            IsVisible = true,
+            MediaUrl = "https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+          },
+          new Category {
+            Id = 6,
             Name = "General Knowledge",
             Slug = "general-knowledge",
             IsVisible = true,
             MediaUrl = "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHxXb3JsZHxlbnwwfHx8fDE3NTM0MzUxMTN8MA&ixlib=rb-4.1.0&q=85"
           },
-          new Category {
-            Id = 6,
-            Name = "Coding",
-            Slug = "coding",
-            IsVisible = true,
-            MediaUrl = "https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-          }
         };
 
         _dbContext.Categories.AddRange(categories);

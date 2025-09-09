@@ -46,12 +46,14 @@ namespace API.Data.Seeds
       string geographyJson = jsonsBasePath + "/geography.kahoots.jsonc";
       string scienceJson = jsonsBasePath + "/science.kahoots.jsonc";
       string languageJson = jsonsBasePath + "/language.kahoots.jsonc";
+      string technologyJson = jsonsBasePath + "/technology.kahoots.jsonc";
 
       // Add all the JSON paths
       kahootJsonPaths.Add(mathJson);
       kahootJsonPaths.Add(geographyJson);
       kahootJsonPaths.Add(scienceJson);
       kahootJsonPaths.Add(languageJson);
+      kahootJsonPaths.Add(technologyJson);
 
       bool wereAllJsonFilesFound = true;
 

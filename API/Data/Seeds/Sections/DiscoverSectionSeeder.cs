@@ -28,7 +28,7 @@ namespace API.Data.Seeds.Sections
       int categoryGeography = categories.Single(c => c.Slug == "geography").Id;
       int categoryScience = categories.Single(c => c.Slug == "science").Id;
       int categoryLanguage = categories.Single(c => c.Slug == "language").Id;
-      int categoryCoding = categories.Single(c => c.Slug == "coding").Id;
+      int categoryTechnology = categories.Single(c => c.Slug == "technology").Id;
 
       // Math
       List<DiscoverSection> newMathDiscoverSections = new List<DiscoverSection>()
@@ -149,10 +149,44 @@ namespace API.Data.Seeds.Sections
         }
       };
 
+      // Technology
+      List<DiscoverSection> newTechnologyDiscoverSections = new List<DiscoverSection>()
+      {
+        {
+          new DiscoverSection {
+            Title = "History of technology",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Inventions that changed the world", CategoryId = categoryTechnology }
+            }
+          }
+        },
+        {
+          new DiscoverSection {
+            Title = "Everyday technology",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Digital literacy", CategoryId = categoryTechnology },
+              new DiscoverSubsection { Title = "Software applications", CategoryId = categoryTechnology },
+            }
+          }
+        },
+        {
+          new DiscoverSection {
+            Title = "Operating systems",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Desktop operating systems", CategoryId = categoryTechnology }
+            }
+          }
+        }
+      };
+
       _dbContext.DiscoverSection.AddRange(newMathDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newGeographyDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newScienceDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newLanguageDiscoverSections);
+      _dbContext.DiscoverSection.AddRange(newTechnologyDiscoverSections);
 
       await _dbContext.SaveChangesAsync();
     }
