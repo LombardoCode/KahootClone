@@ -57,8 +57,8 @@ namespace API.Data.Seeds
           },
           new Category {
             Id = 6,
-            Name = "General Knowledge",
-            Slug = "general-knowledge",
+            Name = "Trivia",
+            Slug = "trivia",
             IsVisible = true,
             MediaUrl = "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHxXb3JsZHxlbnwwfHx8fDE3NTM0MzUxMTN8MA&ixlib=rb-4.1.0&q=85"
           },

@@ -29,6 +29,7 @@ namespace API.Data.Seeds.Sections
       int categoryScience = categories.Single(c => c.Slug == "science").Id;
       int categoryLanguage = categories.Single(c => c.Slug == "language").Id;
       int categoryTechnology = categories.Single(c => c.Slug == "technology").Id;
+      int categoryTrivia = categories.Single(c => c.Slug == "trivia").Id;
 
       // Math
       List<DiscoverSection> newMathDiscoverSections = new List<DiscoverSection>()
@@ -182,11 +183,55 @@ namespace API.Data.Seeds.Sections
         }
       };
 
+      // Trivia
+      List<DiscoverSection> newTriviaDiscoverSections = new List<DiscoverSection>()
+      {
+        {
+          new DiscoverSection {
+            Title = "Science & nature",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Natural wonders", CategoryId = categoryTrivia }
+            }
+          }
+        },
+        {
+          new DiscoverSection {
+            Title = "Human curiosities",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Human body trivia", CategoryId = categoryTrivia },
+              new DiscoverSubsection { Title = "Human behavior", CategoryId = categoryTrivia },
+            }
+          }
+        },
+        {
+          new DiscoverSection {
+            Title = "Space trivia",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Space curiosities", CategoryId = categoryTrivia }
+            }
+          }
+        },
+        {
+          new DiscoverSection {
+            Title = "Random fun facts",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "General trivia", CategoryId = categoryTrivia },
+              new DiscoverSubsection { Title = "Fun records & games", CategoryId = categoryTrivia }
+            }
+          }
+        }
+      };
+
       _dbContext.DiscoverSection.AddRange(newMathDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newGeographyDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newScienceDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newLanguageDiscoverSections);
       _dbContext.DiscoverSection.AddRange(newTechnologyDiscoverSections);
+      _dbContext.DiscoverSection.AddRange(newTriviaDiscoverSections);
 
       await _dbContext.SaveChangesAsync();
     }
