@@ -20,7 +20,7 @@ const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardPro
 
   return (
     <div
-      className={`flex flex-col justify-start items-end rounded-md h-[13rem] overflow-hidden ring-1 ring-zinc-300 shadow cursor-pointer transition hover:scale-[1.03] ${cardSize}`}
+      className={`flex flex-col justify-start items-end rounded-md h-[15.5rem] overflow-hidden ring-1 ring-zinc-300 shadow cursor-pointer transition hover:scale-[1.03] ${cardSize}`}
       style={{ backgroundColor: kahoot.mediaUrl ? bgColor : "rgb(255, 255, 255)" }}
       onClick={() => onClick(kahoot.kahootId)}
     >
@@ -29,10 +29,10 @@ const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardPro
           ref={imgRef}
           src={kahoot.mediaUrl}
           crossOrigin="anonymous"
-          className="top-0 left-0 w-full min-h-32 object-cover"
+          className="top-0 left-0 w-full min-h-[10.5rem] object-cover"
         />
       ) : (
-        <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full min-h-32">
+        <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full min-h-[10.5rem]">
           <Logo
             size={LogoSize.SMALL}
             color={LogoColors.WHITE}

@@ -111,7 +111,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <SidebarNav className="min-w-60 bg-white h-full" />
       <MainContent
         topSpacing={false}
-        className={`flex-1 bg-white ${!isKahootSearchWindowOpen ? "overflow-y-scroll": "overflow-hidden"}`}
+        className={`flex-1 ${!isKahootSearchWindowOpen ? "overflow-y-scroll" : "overflow-hidden"}`}
       >
         <DashboardOutletNavbar
           setIsKahootSearchWindowOpen={() => setIsKahootSearchWindowOpen(true)}

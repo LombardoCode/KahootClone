@@ -96,92 +96,90 @@ const DiscoverMenuPage = () => {
 
   return (
     <>
-      <div className="pr-10">
-        {recentlyPlayedKahoots.length > 0 && (
-          <>
-            <SectionTitle size={SectionTitleSizes.SMALL}>Recently played</SectionTitle>
-            <DiscoverKahootWrapper>
-              {recentlyPlayedKahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
-                <DiscoverKahootCard
-                  key={i}
-                  cardSize={DiscoverKahootCardSize.SMALL}
-                  kahoot={kahoot}
-                  onClick={handleKahootCardClick}
-                />
-              ))}
-            </DiscoverKahootWrapper>
-          </>
-        )}
-
-        {/* Categories */}
-        <SectionTitle size={SectionTitleSizes.SMALL}>Explore by subject</SectionTitle>
-        <DiscoverCategoryWrapper>
-          {categories.map((category: DiscoverCategoryCardInfo, i: number) => (
-            <DiscoverCategoryCard
-              key={i}
-              cardSize={DiscoverCategoryCardSize.SMALL}
-              category={category}
-            />
-          ))}
-        </DiscoverCategoryWrapper>
-
-
-        {/* Featured kahoots */}
-        {featuredKahoots.length > 0 && (
-          <>
-            <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
-            <DiscoverFeaturedWrapper>
-              {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
-                <DiscoverFeaturedCard
-                  key={i}
-                  cardSize={DiscoverFeaturedCardSize.MEDIUM}
-                  featuredKahoot={featuredKahoot}
-                  onClick={handleKahootCardClick}
-                />
-              ))}
-            </DiscoverFeaturedWrapper>
-          </>
-        )}
-
-        {/* Sections, subsections and it's related kahoots */}
-        {sections.map((section: DiscoverSectionClient, index: number) => (
-          <div
-            id={`section-subsections-and-its-related-kahoots-${index}`}
-            className="mt-14"
-          >
-            <SectionTitle
-              key={index}
-              size={SectionTitleSizes.LARGE}
-              className="mb-2"
-            >
-              {section.title}
-            </SectionTitle>
-
-            {section.subsections.map((subsection: DiscoverSubsectionClient, index2: number) => (
-              <>
-                <SectionTitle
-                  key={index2}
-                  size={SectionTitleSizes.SMALL}
-                  viewAll={true}
-                >
-                  {subsection.title}
-                </SectionTitle>
-
-                <DiscoverKahootWrapper>
-                  {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index3: number) => (
-                    <DiscoverKahootCard
-                      key={index3}
-                      cardSize={DiscoverKahootCardSize.SMALL}
-                      kahoot={kahoot}
-                      onClick={handleKahootCardClick}
-                    />
-                  ))}
-                </DiscoverKahootWrapper>
-              </>
+      {recentlyPlayedKahoots.length > 0 && (
+        <>
+          <SectionTitle size={SectionTitleSizes.SMALL}>Recently played</SectionTitle>
+          <DiscoverKahootWrapper>
+            {recentlyPlayedKahoots.map((kahoot: DiscoverKahootCardInfo, i: number) => (
+              <DiscoverKahootCard
+                key={i}
+                cardSize={DiscoverKahootCardSize.SMALL}
+                kahoot={kahoot}
+                onClick={handleKahootCardClick}
+              />
             ))}
-          </div>
+          </DiscoverKahootWrapper>
+        </>
+      )}
+
+      {/* Categories */}
+      <SectionTitle size={SectionTitleSizes.SMALL}>Explore by subject</SectionTitle>
+      <DiscoverCategoryWrapper>
+        {categories.map((category: DiscoverCategoryCardInfo, i: number) => (
+          <DiscoverCategoryCard
+            key={i}
+            cardSize={DiscoverCategoryCardSize.SMALL}
+            category={category}
+          />
         ))}
-      </div>
+      </DiscoverCategoryWrapper>
+
+
+      {/* Featured kahoots */}
+      {featuredKahoots.length > 0 && (
+        <>
+          <SectionTitle size={SectionTitleSizes.SMALL}>Featured kahoots</SectionTitle>
+          <DiscoverFeaturedWrapper>
+            {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
+              <DiscoverFeaturedCard
+                key={i}
+                cardSize={DiscoverFeaturedCardSize.MEDIUM}
+                featuredKahoot={featuredKahoot}
+                onClick={handleKahootCardClick}
+              />
+            ))}
+          </DiscoverFeaturedWrapper>
+        </>
+      )}
+
+      {/* Sections, subsections and it's related kahoots */}
+      {sections.map((section: DiscoverSectionClient, index: number) => (
+        <div
+          id={`section-subsections-and-its-related-kahoots-${index}`}
+          className="mt-14"
+        >
+          <SectionTitle
+            key={index}
+            size={SectionTitleSizes.LARGE}
+            className="mb-2"
+          >
+            {section.title}
+          </SectionTitle>
+
+          {section.subsections.map((subsection: DiscoverSubsectionClient, index2: number) => (
+            <>
+              <SectionTitle
+                key={index2}
+                size={SectionTitleSizes.SMALL}
+                viewAll={true}
+              >
+                {subsection.title}
+              </SectionTitle>
+
+              <DiscoverKahootWrapper>
+                {subsection.kahoots.map((kahoot: DiscoverKahootCardInfo, index3: number) => (
+                  <DiscoverKahootCard
+                    key={index3}
+                    cardSize={DiscoverKahootCardSize.SMALL}
+                    kahoot={kahoot}
+                    onClick={handleKahootCardClick}
+                  />
+                ))}
+              </DiscoverKahootWrapper>
+            </>
+          ))}
+        </div>
+      ))}
 
       <KahootSelectorModal
         isOpen={isKahootSelectorModalOpen}
