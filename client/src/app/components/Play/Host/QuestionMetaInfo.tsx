@@ -58,13 +58,14 @@ const QuestionMetaInfo = () => {
           </div>
         </div>
 
-        {doesThisQuestionHasAnImage(questionIndex)
+        {doesThisQuestionHasAnImage(kahoot?.questions[questionIndex].mediaUrl ?? null)
           ? (
             <div id="show-question-media">
               <img
                 src={`${kahoot?.questions[questionIndex].mediaUrl}`}
+                crossOrigin="anonymous"
                 alt="Question media"
-                className="rounded-md shadow-md max-h-64 object-contain mx-auto"
+                className="rounded-md shadow-md min-h-96 max-h-96 object-contain mx-auto"
               />
             </div>
           )

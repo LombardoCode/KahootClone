@@ -68,7 +68,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
             className="my-6 mx-auto w-96 bg-white/50 hover:bg-white/35 transition inset-0 backdrop-blur-md rounded-md"
           >
             <div className="relative">
-              {doesThisQuestionHasAnImage(questionIndex)
+              {doesThisQuestionHasAnImage(kahoot?.questions[questionIndex].mediaUrl ?? null)
                 ? (
                   <div
                     id="question-media-preview-and-media-options-wrapper"
