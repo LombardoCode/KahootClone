@@ -8,12 +8,21 @@ import { useEffect, useState } from "react";
 import usePexelsSearch from "@/app/hooks/usePexelsSearch";
 import useUnsplashSearch from "@/app/hooks/useUnsplashSearch";
 import SidebarTab from "../SidebarTab";
+import { debugLog } from "@/app/utils/debugLog";
 var debounce = require('lodash.debounce');
 
 interface ImageSelectorModalProps {
   isOpen: boolean;
   onClose: () => void;
+  pictureQuality: ExternalImagePictureQuality;
   onImageSelect: (url: string) => void;
+}
+
+export enum ExternalImagePictureQuality {
+  ULTRA_LOW,
+  LOW,
+  MEDIUM,
+  HIGH
 }
 
 enum ExternalImageService {
@@ -24,6 +33,7 @@ enum ExternalImageService {
 const ImageSelectorModal = ({
   isOpen,
   onClose,
+  pictureQuality,
   onImageSelect
 }: ImageSelectorModalProps) => {
   // Image query text
@@ -43,6 +53,60 @@ const ImageSelectorModal = ({
   const { search: searchUnsplash } = useUnsplashSearch();
   const [unsplashResults, setUnsplashResults] = useState<any[]>([]);
   const [unsplashLoading, setUnsplashLoading] = useState<boolean>(false);
+
+  const determineWhichQualityToSaveImage = (photoResolutions: any) => {
+    let mediaUrl: string = "";
+
+    switch (selectedExternalImageService)
+    {
+      case ExternalImageService.Pexels:
+        if (pictureQuality === ExternalImagePictureQuality.ULTRA_LOW) {
+          debugLog(`Pexels - ULTRA_LOW`);
+          mediaUrl =  photoResolutions.tiny;
+        }
+
+        if (pictureQuality === ExternalImagePictureQuality.LOW) {
+          debugLog(`Pexels - LOW`);
+          mediaUrl =  photoResolutions.small;
+        }
+
+        if (pictureQuality === ExternalImagePictureQuality.MEDIUM) {
+          debugLog(`Pexels - MEDIUM`);
+          mediaUrl =  photoResolutions.medium;
+        }
+
+        if (pictureQuality === ExternalImagePictureQuality.HIGH) {
+          debugLog(`Pexels - HIGH`);
+          mediaUrl =  photoResolutions.large;
+        }
+
+        break;
+      case ExternalImageService.Unsplash:
+        if (pictureQuality === ExternalImagePictureQuality.ULTRA_LOW) {
+          debugLog(`Unsplash - ULTRA_LOW`);
+          mediaUrl =  photoResolutions.thumb;
+        }
+
+        if (pictureQuality === ExternalImagePictureQuality.LOW) {
+          debugLog(`Unsplash - LOW`);
+          mediaUrl =  photoResolutions.small;
+        }
+
+        if (pictureQuality === ExternalImagePictureQuality.MEDIUM) {
+          debugLog(`Unsplash - MEDIUM`);
+          mediaUrl =  photoResolutions.regular;
+        }
+
+        if (pictureQuality === ExternalImagePictureQuality.HIGH) {
+          debugLog(`Unsplash - HIGH`);
+          mediaUrl =  photoResolutions.full;
+        }
+
+        break;
+    }
+
+    onImageSelect(mediaUrl);
+  }
 
   useEffect(() => {
     if (!imageQueryText) {
@@ -159,7 +223,7 @@ const ImageSelectorModal = ({
                       <PexelsImagePreviewer
                         images={pexelsResults}
                         loading={pexelsLoading}
-                        onImageSelect={onImageSelect}
+                        onImageSelect={determineWhichQualityToSaveImage}
                         onClose={onClose}
                       />
                     )
@@ -167,7 +231,7 @@ const ImageSelectorModal = ({
                       <UnsplashImagePreviewer
                         images={unsplashResults}
                         loading={unsplashLoading}
-                        onImageSelect={onImageSelect}
+                        onImageSelect={determineWhichQualityToSaveImage}
                         onClose={onClose}
                       />
                     )}
@@ -197,7 +261,7 @@ const ImageSelectorModal = ({
 interface PexelsImagePreviewerProps {
   images: any[];
   loading: boolean;
-  onImageSelect: (url: string) => void;
+  onImageSelect: (photoResolutions: any) => void;
   onClose: () => void;
 }
 
@@ -219,7 +283,7 @@ const PexelsImagePreviewer = ({ images, loading, onImageSelect, onClose }: Pexel
             key={photo.id}
             className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/30"
             onClick={() => {
-              onImageSelect(photo.src.large);
+              onImageSelect(photo.src);
               onClose();
             }}
           >
@@ -238,7 +302,7 @@ const PexelsImagePreviewer = ({ images, loading, onImageSelect, onClose }: Pexel
 interface UnsplashImagePreviewerProps {
   images: any[];
   loading: boolean;
-  onImageSelect: (url: string) => void;
+  onImageSelect: (photoResolutions: any) => void;
   onClose: () => void;
 }
 
@@ -260,7 +324,7 @@ const UnsplashImagePreviewer = ({ images, loading, onImageSelect, onClose }: Uns
             key={photo.id}
             className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/30"
             onClick={() => {
-              onImageSelect(photo.urls.full);
+              onImageSelect(photo.urls);
               onClose();
             }}
           >

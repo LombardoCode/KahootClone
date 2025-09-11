@@ -7,7 +7,7 @@ import Spinner from "@/app/components/UIComponents/Spinners/Spinner";
 import Text from "@/app/components/UIComponents/Text";
 import MediaSelector from "@/app/components/utils/Media/MediaSelector";
 import ChangeUsernameModal from "@/app/components/utils/Modal/reusable/ChangeUsernameModal";
-import ImageSelectorModal from "@/app/components/utils/Modal/reusable/ImageSelectorModal";
+import ImageSelectorModal, { ExternalImagePictureQuality } from "@/app/components/utils/Modal/reusable/ImageSelectorModal";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { UserMetadata } from "@/app/interfaces/Settings/EditProfile/UserMetadata.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
@@ -260,6 +260,7 @@ const UserSettingsProfileTab = () => {
       <ImageSelectorModal
         isOpen={isMediaSelectorModalOpen}
         onClose={() => setIsMediaSelectorModalOpen(false)}
+        pictureQuality={ExternalImagePictureQuality.ULTRA_LOW}
         onImageSelect={(url: string) => {
           updateUserMediaUrl(url);
           setIsMediaSelectorModalOpen(false);

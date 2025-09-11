@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { KahootHeaderInfo } from "@/app/interfaces/Creator/KahootHeaderInfo.interface";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { saveKahootDraft } from "@/app/utils/KahootCreator/kahootCreatorUtils";
-import ImageSelectorModal from "./ImageSelectorModal";
+import ImageSelectorModal, { ExternalImagePictureQuality } from "./ImageSelectorModal";
 import BulletPointErrorsDisplayer from "../../ErrorHandlers/BulletPointErrorsDisplayer";
 
 interface EditKahootMetadataModalProps {
@@ -327,6 +327,7 @@ const EditKahootMetadataModal = ({ isOpen, onClose }: EditKahootMetadataModalPro
       <ImageSelectorModal
         isOpen={isImageSelectorModalOpen}
         onClose={() => setIsImageSelectorModalOpen(false)}
+        pictureQuality={ExternalImagePictureQuality.LOW}
         onImageSelect={(url: string) => {
           updateKahootMediaUrl(url);
           setIsImageSelectorModalOpen(false);
