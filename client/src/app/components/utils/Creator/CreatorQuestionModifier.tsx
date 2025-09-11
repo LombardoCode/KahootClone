@@ -11,7 +11,7 @@ import KahootAnswerTextBox from "../Quizes/KahootAnswerTextBox";
 import Button, { ButtonSize, PerspectiveSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { doesThisQuestionHasAnImage } from "@/app/utils/kahootUtils";
-import ImageSelectorModal, { ExternalImagePictureQuality } from "../Modal/reusable/ImageSelectorModal";
+import ImageSelectorModal, { ExternalImagePurpose } from "../Modal/reusable/ImageSelectorModal";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -143,7 +143,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
       <ImageSelectorModal
         isOpen={isMediaSelectorModalOpen}
         onClose={() => setIsMediaSelectorModalOpen(false)}
-        pictureQuality={ExternalImagePictureQuality.MEDIUM}
+        imagePurpose={ExternalImagePurpose.QUESTION_IMAGE}
         onImageSelect={(url: string) => {
           updateQuestionMediaUrl(questionIndex, url);
           setIsMediaSelectorModalOpen(false);

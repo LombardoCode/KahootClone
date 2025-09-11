@@ -14,15 +14,14 @@ var debounce = require('lodash.debounce');
 interface ImageSelectorModalProps {
   isOpen: boolean;
   onClose: () => void;
-  pictureQuality: ExternalImagePictureQuality;
+  imagePurpose: ExternalImagePurpose;
   onImageSelect: (url: string) => void;
 }
 
-export enum ExternalImagePictureQuality {
-  ULTRA_LOW,
-  LOW,
-  MEDIUM,
-  HIGH
+export enum ExternalImagePurpose {
+  KAHOOT_THUMBNAIL,
+  QUESTION_IMAGE,
+  PROFILE_PICTURE
 }
 
 enum ExternalImageService {
@@ -33,7 +32,7 @@ enum ExternalImageService {
 const ImageSelectorModal = ({
   isOpen,
   onClose,
-  pictureQuality,
+  imagePurpose,
   onImageSelect
 }: ImageSelectorModalProps) => {
   // Image query text
@@ -56,56 +55,71 @@ const ImageSelectorModal = ({
 
   const determineWhichQualityToSaveImage = (photoResolutions: any) => {
     let mediaUrl: string = "";
-
+    
     switch (selectedExternalImageService)
     {
       case ExternalImageService.Pexels:
-        if (pictureQuality === ExternalImagePictureQuality.ULTRA_LOW) {
-          debugLog(`Pexels - ULTRA_LOW`);
-          mediaUrl =  photoResolutions.tiny;
+        if (imagePurpose === ExternalImagePurpose.KAHOOT_THUMBNAIL) {
+          // Original photo from API
+          const originalPhoto: string = photoResolutions.original;
+
+          // 3:2 aspect ratio
+          const width: number = 350; const height: number = 233.33;
+          const compressor: string = `?auto=compress&cs=tinysrgb&fit=crop&w=${width}&h=${height}`;
+
+          // Build the final image URL
+          mediaUrl = getFinalMediaUrl(originalPhoto, compressor);
+          debugLog(`Pexels - Kahoot Thumbnail`);
         }
 
-        if (pictureQuality === ExternalImagePictureQuality.LOW) {
-          debugLog(`Pexels - LOW`);
-          mediaUrl =  photoResolutions.small;
+        if (imagePurpose === ExternalImagePurpose.QUESTION_IMAGE) {
+          const originalPhoto: string = photoResolutions.medium;
+          mediaUrl = originalPhoto;
+          debugLog(`Pexels - Question Image`);
         }
 
-        if (pictureQuality === ExternalImagePictureQuality.MEDIUM) {
-          debugLog(`Pexels - MEDIUM`);
-          mediaUrl =  photoResolutions.medium;
-        }
-
-        if (pictureQuality === ExternalImagePictureQuality.HIGH) {
-          debugLog(`Pexels - HIGH`);
-          mediaUrl =  photoResolutions.large;
+        if (imagePurpose === ExternalImagePurpose.PROFILE_PICTURE) {
+          const originalPhoto: string = photoResolutions.medium;
+          mediaUrl = originalPhoto;
+          debugLog(`Pexels - Profile picture`);
         }
 
         break;
+      
       case ExternalImageService.Unsplash:
-        if (pictureQuality === ExternalImagePictureQuality.ULTRA_LOW) {
-          debugLog(`Unsplash - ULTRA_LOW`);
-          mediaUrl =  photoResolutions.thumb;
+        if (imagePurpose === ExternalImagePurpose.KAHOOT_THUMBNAIL) {
+          // Original photo from API
+          const originalPhoto: string = photoResolutions.raw;
+
+          // 3:2 aspect ratio
+          const width: number = 350; const height: number = 233.33;
+          const compressor = `&fit=crop&w=${width}&h=${height}`;
+
+          // Build the final image URL
+          mediaUrl = getFinalMediaUrl(originalPhoto, compressor);
+          debugLog(`Unsplash - Kahoot Thumbnail`);
         }
 
-        if (pictureQuality === ExternalImagePictureQuality.LOW) {
-          debugLog(`Unsplash - LOW`);
-          mediaUrl =  photoResolutions.small;
+        if (imagePurpose === ExternalImagePurpose.QUESTION_IMAGE) {
+          const originalPhoto: string = photoResolutions.regular;
+          mediaUrl = originalPhoto;
+          debugLog(`Unsplash - Question Image`);
         }
 
-        if (pictureQuality === ExternalImagePictureQuality.MEDIUM) {
-          debugLog(`Unsplash - MEDIUM`);
-          mediaUrl =  photoResolutions.regular;
-        }
-
-        if (pictureQuality === ExternalImagePictureQuality.HIGH) {
-          debugLog(`Unsplash - HIGH`);
-          mediaUrl =  photoResolutions.full;
+        if (imagePurpose === ExternalImagePurpose.PROFILE_PICTURE) {
+          const originalPhoto: string = photoResolutions.regular;
+          mediaUrl = originalPhoto;
+          debugLog(`Unsplash - Profile picture`);
         }
 
         break;
     }
 
     onImageSelect(mediaUrl);
+  }
+
+  const getFinalMediaUrl = (originalPhoto: string, compressor: string): string => {
+    return `${originalPhoto}${compressor}`;
   }
 
   useEffect(() => {
