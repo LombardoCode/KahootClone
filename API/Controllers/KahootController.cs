@@ -348,6 +348,8 @@ namespace API.Controllers
     [HttpGet("getKahootMetadata")]
     public async Task<ActionResult> getKahootMetadata(Guid kahootId)
     {
+      string userId = await _userService.GetUserId();
+
       var kahootMetadata = await _dbContext.Kahoots
                                     .Where(k => k.Id == kahootId)
                                     .Select(k => new KahootMetadataClient
@@ -362,7 +364,8 @@ namespace API.Controllers
                                       OwnerInfo = new OwnerInfo
                                       {
                                         UserName = k.User.UserName,
-                                        MediaUrl = k.User.MediaUrl
+                                        MediaUrl = k.User.MediaUrl,
+                                        IsOwnerOfThisKahoot = k.UserId == userId
                                       }
                                     })
                                     .FirstOrDefaultAsync();

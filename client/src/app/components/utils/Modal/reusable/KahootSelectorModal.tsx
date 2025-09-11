@@ -166,23 +166,43 @@ const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelect
                     </div>
                   </div>
 
-                  <div id="kahoot-metadata-host-button">
-                    <Button
-                      backgroundColor={BackgroundColors.BLUE}
-                      fontWeight={FontWeights.BOLD}
-                      textColor={TextColors.WHITE}
-                      className={`text-md w-full ${kahootMetadata?.isPlayable ? 'opacity-100' : 'opacity-45'}`}
-                      size={ButtonSize.MEDIUM}
-                      perspective={PerspectiveSize.MEDIUM}
-                      animateOnHover={false}
-                      onClick={() => {
-                        if (kahootMetadata?.isPlayable) {
-                          createLobby(kahootMetadata.kahootId, router)
-                        }
-                      }}
-                    >
-                      Host
-                    </Button>
+                  <div id="kahoot-action-buttons">
+                    {kahootMetadata?.ownerInfo.isOwnerOfThisKahoot && (
+                      <div id="kahoot-action-buttons-edit-button" className="flex-1">
+                        <Button
+                          backgroundColor={BackgroundColors.WHITE}
+                          fontWeight={FontWeights.BOLD}
+                          textColor={TextColors.GRAY}
+                          className={`text-md w-full`}
+                          size={ButtonSize.MEDIUM}
+                          perspective={PerspectiveSize.MEDIUM}
+                          animateOnHover={false}
+                          onClick={() => {
+                            router.push(`/creator/${kahootMetadata.kahootId}`)
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      </div>
+                    )}
+                    <div id="kahoot-action-buttons-host-button" className="flex-1">
+                      <Button
+                        backgroundColor={BackgroundColors.BLUE}
+                        fontWeight={FontWeights.BOLD}
+                        textColor={TextColors.WHITE}
+                        className={`text-md w-full ${kahootMetadata?.isPlayable ? 'opacity-100' : 'opacity-45'}`}
+                        size={ButtonSize.MEDIUM}
+                        perspective={PerspectiveSize.MEDIUM}
+                        animateOnHover={false}
+                        onClick={() => {
+                          if (kahootMetadata?.isPlayable) {
+                            createLobby(kahootMetadata.kahootId, router)
+                          }
+                        }}
+                      >
+                        Host
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>

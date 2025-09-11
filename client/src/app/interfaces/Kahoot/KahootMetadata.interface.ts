@@ -9,5 +9,6 @@ export interface KahootMetadata {
   ownerInfo: {
     userName: string;
     mediaUrl?: string;
+    isOwnerOfThisKahoot: boolean;
   }
 };

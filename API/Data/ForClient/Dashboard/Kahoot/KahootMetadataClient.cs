@@ -16,5 +16,6 @@ namespace API.Data.ForClient.Dashboard.Kahoot
   {
     public string UserName { get; set; }
     public string? MediaUrl { get; set; }
+    public bool IsOwnerOfThisKahoot { get; set; }
   }
 }
