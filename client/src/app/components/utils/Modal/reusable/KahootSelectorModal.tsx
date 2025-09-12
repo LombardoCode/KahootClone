@@ -167,24 +167,6 @@ const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelect
                   </div>
 
                   <div id="kahoot-action-buttons">
-                    {kahootMetadata?.ownerInfo.isOwnerOfThisKahoot && (
-                      <div id="kahoot-action-buttons-edit-button" className="flex-1">
-                        <Button
-                          backgroundColor={BackgroundColors.WHITE}
-                          fontWeight={FontWeights.BOLD}
-                          textColor={TextColors.GRAY}
-                          className={`text-md w-full`}
-                          size={ButtonSize.MEDIUM}
-                          perspective={PerspectiveSize.MEDIUM}
-                          animateOnHover={false}
-                          onClick={() => {
-                            router.push(`/creator/${kahootMetadata.kahootId}`)
-                          }}
-                        >
-                          Edit
-                        </Button>
-                      </div>
-                    )}
                     <div id="kahoot-action-buttons-host-button" className="flex-1">
                       <Button
                         backgroundColor={BackgroundColors.BLUE}
@@ -203,6 +185,25 @@ const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelect
                         Host
                       </Button>
                     </div>
+
+                    {kahootMetadata?.ownerInfo.isOwnerOfThisKahoot && (
+                      <div id="kahoot-action-buttons-edit-button" className="flex-1">
+                        <Button
+                          backgroundColor={BackgroundColors.WHITE}
+                          fontWeight={FontWeights.BOLD}
+                          textColor={TextColors.GRAY}
+                          className={`text-md w-full`}
+                          size={ButtonSize.MEDIUM}
+                          perspective={PerspectiveSize.MEDIUM}
+                          animateOnHover={false}
+                          onClick={() => {
+                            router.push(`/creator/${kahootMetadata.kahootId}`)
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
