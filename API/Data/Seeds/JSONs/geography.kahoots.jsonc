@@ -1,32 +1,137 @@
 [
   {
     "Title": "Capitals of Europe",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Test your knowledge of the capitals of European countries. Can you match each nation with its capital city?",
+    "MediaUrl": "https://images.unsplash.com/photo-1668640019831-072823bc0ce1?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxN3x8ZXVyb3BlJTIwbWFwfGVufDB8fHx8MTc1NzYyODk5NXww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the capital of France?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Lyon", "IsCorrect": false },
+          { "Text": "Nice", "IsCorrect": false },
+          { "Text": "Paris", "IsCorrect": true },
+          { "Text": "Marseille", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Germany?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Frankfurt", "IsCorrect": false },
+          { "Text": "Munich", "IsCorrect": false },
+          { "Text": "Berlin", "IsCorrect": true },
+          { "Text": "Hamburg", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Italy?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Florence", "IsCorrect": false },
+          { "Text": "Rome", "IsCorrect": true },
+          { "Text": "Venice", "IsCorrect": false },
+          { "Text": "Milan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Spain?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Barcelona", "IsCorrect": false },
+          { "Text": "Madrid", "IsCorrect": true },
+          { "Text": "Seville", "IsCorrect": false },
+          { "Text": "Valencia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Portugal?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Porto", "IsCorrect": false },
+          { "Text": "Braga", "IsCorrect": false },
+          { "Text": "Lisbon", "IsCorrect": true },
+          { "Text": "Faro", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Greece?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Rhodes", "IsCorrect": false },
+          { "Text": "Athens", "IsCorrect": true },
+          { "Text": "Patras", "IsCorrect": false },
+          { "Text": "Thessaloniki", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Norway?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Trondheim", "IsCorrect": false },
+          { "Text": "Oslo", "IsCorrect": true },
+          { "Text": "Bergen", "IsCorrect": false },
+          { "Text": "Stavanger", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Sweden?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Malmö", "IsCorrect": false },
+          { "Text": "Gothenburg", "IsCorrect": false },
+          { "Text": "Uppsala", "IsCorrect": false },
+          { "Text": "Stockholm", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What is the capital of Poland?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Krakow", "IsCorrect": false },
+          { "Text": "Warsaw", "IsCorrect": true },
+          { "Text": "Gdansk", "IsCorrect": false },
+          { "Text": "Poznan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Austria?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Innsbruck", "IsCorrect": false },
+          { "Text": "Graz", "IsCorrect": false },
+          { "Text": "Vienna", "IsCorrect": true },
+          { "Text": "Salzburg", "IsCorrect": false }
         ]
       }
     ],
@@ -37,32 +142,137 @@
   },
   {
     "Title": "Capitals of Asia",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Challenge yourself with this quiz about the capitals of Asian countries. From the Middle East to the Far East, how well do you know them?",
+    "MediaUrl": "https://images.unsplash.com/photo-1612383401582-e96cc0bc83d2?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw3fHxhc2lhJTIwbWFwfGVufDB8fHx8MTc1NzUzMzQwNXww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the capital of Japan?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Nagoya", "IsCorrect": false },
+          { "Text": "Tokyo", "IsCorrect": true },
+          { "Text": "Kyoto", "IsCorrect": false },
+          { "Text": "Osaka", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of China?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Shanghai", "IsCorrect": false },
+          { "Text": "Guangzhou", "IsCorrect": false },
+          { "Text": "Beijing", "IsCorrect": true },
+          { "Text": "Shenzhen", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of India?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Mumbai", "IsCorrect": false },
+          { "Text": "Kolkata", "IsCorrect": false },
+          { "Text": "New Delhi", "IsCorrect": true },
+          { "Text": "Bangalore", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of South Korea?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Busan", "IsCorrect": false },
+          { "Text": "Seoul", "IsCorrect": true },
+          { "Text": "Incheon", "IsCorrect": false },
+          { "Text": "Daegu", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Thailand?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Chiang Mai", "IsCorrect": false },
+          { "Text": "Bangkok", "IsCorrect": true },
+          { "Text": "Pattaya", "IsCorrect": false },
+          { "Text": "Phuket", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Indonesia?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Surabaya", "IsCorrect": false },
+          { "Text": "Jakarta", "IsCorrect": true },
+          { "Text": "Bali", "IsCorrect": false },
+          { "Text": "Bandung", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Saudi Arabia?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Jeddah", "IsCorrect": false },
+          { "Text": "Mecca", "IsCorrect": false },
+          { "Text": "Riyadh", "IsCorrect": true },
+          { "Text": "Medina", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of the Philippines?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cebu", "IsCorrect": false },
+          { "Text": "Quezon City", "IsCorrect": false },
+          { "Text": "Manila", "IsCorrect": true },
+          { "Text": "Davao", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Turkey?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Istanbul", "IsCorrect": false },
+          { "Text": "Ankara", "IsCorrect": true },
+          { "Text": "Izmir", "IsCorrect": false },
+          { "Text": "Antalya", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Vietnam?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Ho Chi Minh City", "IsCorrect": false },
+          { "Text": "Hue", "IsCorrect": false },
+          { "Text": "Da Nang", "IsCorrect": false },
+          { "Text": "Hanoi", "IsCorrect": true }
         ]
       }
     ],
@@ -73,32 +283,137 @@
   },
   {
     "Title": "Capitals of Africa",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Test your knowledge of the capitals of African countries, from the north of the Sahara to the southernmost nations.",
+    "MediaUrl": "https://images.unsplash.com/photo-1626695436755-3e288720849c?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxhZnJpY2ElMjBtYXB8ZW58MHx8fHwxNzU3NTMzOTkxfDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the capital of Egypt?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Luxor", "IsCorrect": false },
+          { "Text": "Alexandria", "IsCorrect": false },
+          { "Text": "Cairo", "IsCorrect": true },
+          { "Text": "Giza", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Nigeria?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Port Harcourt", "IsCorrect": false },
+          { "Text": "Ibadan", "IsCorrect": false },
+          { "Text": "Abuja", "IsCorrect": true },
+          { "Text": "Lagos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of South Africa?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Johannesburg", "IsCorrect": false },
+          { "Text": "Pretoria (administrative)", "IsCorrect": true },
+          { "Text": "Cape Town (legislative)", "IsCorrect": true },
+          { "Text": "Bloemfontein (judicial)", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What is the capital of Kenya?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Eldoret", "IsCorrect": false },
+          { "Text": "Nairobi", "IsCorrect": true },
+          { "Text": "Mombasa", "IsCorrect": false },
+          { "Text": "Kisumu", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Ethiopia?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Dire Dawa", "IsCorrect": false },
+          { "Text": "Addis Ababa", "IsCorrect": true },
+          { "Text": "Mekelle", "IsCorrect": false },
+          { "Text": "Gondar", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Morocco?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Casablanca", "IsCorrect": false },
+          { "Text": "Rabat", "IsCorrect": true },
+          { "Text": "Fes", "IsCorrect": false },
+          { "Text": "Marrakesh", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Ghana?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Tamale", "IsCorrect": false },
+          { "Text": "Accra", "IsCorrect": true },
+          { "Text": "Takoradi", "IsCorrect": false },
+          { "Text": "Kumasi", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Tanzania?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Arusha", "IsCorrect": false },
+          { "Text": "Dodoma", "IsCorrect": true },
+          { "Text": "Dar es Salaam", "IsCorrect": false },
+          { "Text": "Zanzibar City", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Uganda?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Entebbe", "IsCorrect": false },
+          { "Text": "Jinja", "IsCorrect": false },
+          { "Text": "Kampala", "IsCorrect": true },
+          { "Text": "Gulu", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Algeria?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Oran", "IsCorrect": false },
+          { "Text": "Algiers", "IsCorrect": true },
+          { "Text": "Annaba", "IsCorrect": false },
+          { "Text": "Constantine", "IsCorrect": false }
         ]
       }
     ],
@@ -109,32 +424,137 @@
   },
   {
     "Title": "Capitals of the Americas",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "From Canada to Argentina, test your knowledge of the capitals across North, Central, South America and the Caribbean.",
+    "MediaUrl": "https://images.pexels.com/photos/8923953/pexels-photo-8923953.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the capital of Canada?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Toronto", "IsCorrect": false },
+          { "Text": "Montreal", "IsCorrect": false },
+          { "Text": "Ottawa", "IsCorrect": true },
+          { "Text": "Vancouver", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of the United States?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "New York City", "IsCorrect": false },
+          { "Text": "Washington, D.C.", "IsCorrect": true },
+          { "Text": "Chicago", "IsCorrect": false },
+          { "Text": "Los Angeles", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Mexico?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Monterrey", "IsCorrect": false },
+          { "Text": "Mexico City", "IsCorrect": true },
+          { "Text": "Guadalajara", "IsCorrect": false },
+          { "Text": "Puebla", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Brazil?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Rio de Janeiro", "IsCorrect": false },
+          { "Text": "São Paulo", "IsCorrect": false },
+          { "Text": "Brasília", "IsCorrect": true },
+          { "Text": "Salvador", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Argentina?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Rosario", "IsCorrect": false },
+          { "Text": "Córdoba", "IsCorrect": false },
+          { "Text": "Mendoza", "IsCorrect": false },
+          { "Text": "Buenos Aires", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What is the capital of Chile?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Valparaíso", "IsCorrect": false },
+          { "Text": "Santiago", "IsCorrect": true },
+          { "Text": "Concepción", "IsCorrect": false },
+          { "Text": "La Serena", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Colombia?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Bogotá", "IsCorrect": true },
+          { "Text": "Cartagena", "IsCorrect": false },
+          { "Text": "Cali", "IsCorrect": false },
+          { "Text": "Medellín", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Peru?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cusco", "IsCorrect": false },
+          { "Text": "Arequipa", "IsCorrect": false },
+          { "Text": "Lima", "IsCorrect": true },
+          { "Text": "Trujillo", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Cuba?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Santiago de Cuba", "IsCorrect": false },
+          { "Text": "Havana", "IsCorrect": true },
+          { "Text": "Holguín", "IsCorrect": false },
+          { "Text": "Camagüey", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Costa Rica?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cartago", "IsCorrect": false },
+          { "Text": "Alajuela", "IsCorrect": false },
+          { "Text": "San José", "IsCorrect": true },
+          { "Text": "Liberia", "IsCorrect": false }
         ]
       }
     ],
@@ -145,32 +565,137 @@
   },
   {
     "Title": "Capitals of Oceania",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "From Australia and New Zealand to the Pacific Islands, test your knowledge of the capitals across Oceania.",
+    "MediaUrl": "https://images.pexels.com/photos/19963845/pexels-photo-19963845.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the capital of Australia?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Sydney", "IsCorrect": false },
+          { "Text": "Canberra", "IsCorrect": true },
+          { "Text": "Brisbane", "IsCorrect": false },
+          { "Text": "Melbourne", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of New Zealand?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Auckland", "IsCorrect": false },
+          { "Text": "Christchurch", "IsCorrect": false },
+          { "Text": "Wellington", "IsCorrect": true },
+          { "Text": "Hamilton", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Fiji?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Lautoka", "IsCorrect": false },
+          { "Text": "Nadi", "IsCorrect": false },
+          { "Text": "Suva", "IsCorrect": true },
+          { "Text": "Labasa", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Papua New Guinea?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Lae", "IsCorrect": false },
+          { "Text": "Port Moresby", "IsCorrect": true },
+          { "Text": "Goroka", "IsCorrect": false },
+          { "Text": "Madang", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Samoa?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Salelologa", "IsCorrect": false },
+          { "Text": "Apia", "IsCorrect": true },
+          { "Text": "Pago Pago", "IsCorrect": false },
+          { "Text": "Faleula", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Tonga?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Neiafu", "IsCorrect": false },
+          { "Text": "Pangai", "IsCorrect": false },
+          { "Text": "Nukuʻalofa", "IsCorrect": true },
+          { "Text": "Haveluloto", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Solomon Islands?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Buala", "IsCorrect": false },
+          { "Text": "Auki", "IsCorrect": false },
+          { "Text": "Gizo", "IsCorrect": false },
+          { "Text": "Honiara", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What is the capital of Vanuatu?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Luganville", "IsCorrect": false },
+          { "Text": "Port Vila", "IsCorrect": true },
+          { "Text": "Sola", "IsCorrect": false },
+          { "Text": "Isangel", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Palau?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Melekeok", "IsCorrect": false },
+          { "Text": "Ngerulmud", "IsCorrect": true },
+          { "Text": "Airai", "IsCorrect": false },
+          { "Text": "Koror", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Micronesia (Federated States of)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Weno", "IsCorrect": false },
+          { "Text": "Tofol", "IsCorrect": false },
+          { "Text": "Palikir", "IsCorrect": true },
+          { "Text": "Kolonia", "IsCorrect": false }
         ]
       }
     ],
@@ -181,32 +706,137 @@
   },
   {
     "Title": "World capitals mixed challenge",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "A global challenge! Capitals from every continent are mixed here. Can you identify them all?",
+    "MediaUrl": "https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the capital of Canada?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Toronto", "IsCorrect": false },
+          { "Text": "Ottawa", "IsCorrect": true },
+          { "Text": "Vancouver", "IsCorrect": false },
+          { "Text": "Montreal", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Egypt?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Giza", "IsCorrect": false },
+          { "Text": "Luxor", "IsCorrect": false },
+          { "Text": "Cairo", "IsCorrect": true },
+          { "Text": "Alexandria", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Japan?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Kyoto", "IsCorrect": false },
+          { "Text": "Tokyo", "IsCorrect": true },
+          { "Text": "Osaka", "IsCorrect": false },
+          { "Text": "Nagoya", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Brazil?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "São Paulo", "IsCorrect": false },
+          { "Text": "Brasília", "IsCorrect": true },
+          { "Text": "Salvador", "IsCorrect": false },
+          { "Text": "Rio de Janeiro", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Australia?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Sydney", "IsCorrect": false },
+          { "Text": "Melbourne", "IsCorrect": false },
+          { "Text": "Canberra", "IsCorrect": true },
+          { "Text": "Brisbane", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of France?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Lyon", "IsCorrect": false },
+          { "Text": "Nice", "IsCorrect": false },
+          { "Text": "Paris", "IsCorrect": true },
+          { "Text": "Marseille", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Argentina?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Rosario", "IsCorrect": false },
+          { "Text": "Buenos Aires", "IsCorrect": true },
+          { "Text": "Mendoza", "IsCorrect": false },
+          { "Text": "Córdoba", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Turkey?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Istanbul", "IsCorrect": false },
+          { "Text": "Ankara", "IsCorrect": true },
+          { "Text": "Izmir", "IsCorrect": false },
+          { "Text": "Antalya", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of South Africa?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Bloemfontein (judicial)", "IsCorrect": true },
+          { "Text": "Cape Town (legislative)", "IsCorrect": true },
+          { "Text": "Pretoria (administrative)", "IsCorrect": true },
+          { "Text": "Johannesburg", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the capital of Russia?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Saint Petersburg", "IsCorrect": false },
+          { "Text": "Kazan", "IsCorrect": false },
+          { "Text": "Moscow", "IsCorrect": true },
+          { "Text": "Novosibirsk", "IsCorrect": false }
         ]
       }
     ],
@@ -217,32 +847,137 @@
   },
   {
     "Title": "Flags of Europe",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Can you identify the flags of European countries? Choose the correct country for each flag.",
+    "MediaUrl": "https://images.unsplash.com/photo-1625440153141-1ae4c27ff33b?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw1fHxGbGFncyUyMEV1cm9wZXxlbnwwfHx8fDE3NTc2MjgzNTh8MA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1663493955721-110e7e1ae36c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxnZXJtYW55JTIwZmxhZ3xlbnwwfHx8fDE3NTc1MzU0MDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Ireland", "IsCorrect": true },
+          { "Text": "Italy", "IsCorrect": false },
+          { "Text": "France", "IsCorrect": false },
+          { "Text": "Hungary", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1708693108809-11075c301a68?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwzfHxJcmVsYW5kJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzM4NTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Belgium", "IsCorrect": false },
+          { "Text": "Germany", "IsCorrect": true },
+          { "Text": "Austria", "IsCorrect": false },
+          { "Text": "Netherlands", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1710803135809-55a1a607155f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHxzcGFpbiUyMGZsYWd8ZW58MHx8fHwxNzU3NjMzNjY3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Andorra", "IsCorrect": false },
+          { "Text": "Romania", "IsCorrect": false },
+          { "Text": "Spain", "IsCorrect": true },
+          { "Text": "Portugal", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1645286636903-890ce32aa287?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxzd2VkZW4lMjBmbGFnfGVufDB8fHx8MTc1NzYzMzY4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Finland", "IsCorrect": false },
+          { "Text": "Sweden", "IsCorrect": true },
+          { "Text": "Norway", "IsCorrect": false },
+          { "Text": "Denmark", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
-        "MediaUrl": "",
+        "MediaUrl": "https://images.unsplash.com/photo-1631356394592-6da1b5f8d3dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxncmVlY2UlMjBmbGFnfGVufDB8fHx8MTc1NzYzMzY5Mnww&ixlib=rb-4.1.0&q=80&w=1080",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Croatia", "IsCorrect": false },
+          { "Text": "Slovenia", "IsCorrect": false },
+          { "Text": "Cyprus", "IsCorrect": false },
+          { "Text": "Greece", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1698337977626-a13f2f66246e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxNnx8dW5pdGVkJTIwa2luZ2RvbSUyMGZsYWd8ZW58MHx8fHwxNzU3NjMzNzA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Scotland", "IsCorrect": false },
+          { "Text": "United Kingdom", "IsCorrect": true },
+          { "Text": "Iceland", "IsCorrect": false },
+          { "Text": "Norway", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1618493075021-1bbe5deebedf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwyfHxTd2l0emVybGFuZCUyMGZsYWd8ZW58MHx8fHwxNzU3NjMzNzQwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Switzerland", "IsCorrect": true },
+          { "Text": "Denmark", "IsCorrect": false },
+          { "Text": "Malta", "IsCorrect": false },
+          { "Text": "Austria", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/5611/sky-blue-flag-poland.jpg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Czech Republic", "IsCorrect": false },
+          { "Text": "Monaco", "IsCorrect": false },
+          { "Text": "Latvia", "IsCorrect": false },
+          { "Text": "Poland", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1598284252498-999b7bbe8e90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxQb3J0dWdhbCUyMGZsYWd8ZW58MHx8fHwxNzU3NjMzNzc3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Spain", "IsCorrect": false },
+          { "Text": "Romania", "IsCorrect": false },
+          { "Text": "Portugal", "IsCorrect": true },
+          { "Text": "Italy", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1599999268882-78ef52790bd6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHxOb3J3YXklMjBmbGFnfGVufDB8fHx8MTc1NzYzMzc5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Sweden", "IsCorrect": false },
+          { "Text": "Norway", "IsCorrect": true },
+          { "Text": "Iceland", "IsCorrect": false },
+          { "Text": "Denmark", "IsCorrect": false }
         ]
       }
     ],
@@ -253,32 +988,137 @@
   },
   {
     "Title": "Flags of Africa",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Test your knowledge of African countries by identifying their national flags. Select the correct country among four options.",
+    "MediaUrl": "https://images.pexels.com/photos/8828328/pexels-photo-8828328.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/16033965/pexels-photo-16033965.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Kenya", "IsCorrect": false },
+          { "Text": "Ethiopia", "IsCorrect": false },
+          { "Text": "South Africa", "IsCorrect": false },
+          { "Text": "Nigeria", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1633781916093-90596d2deca1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw3fHxlZ3lwdCUyMGZsYWd8ZW58MHx8fHwxNzU3NjM1MzkzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Libya", "IsCorrect": false },
+          { "Text": "Morocco", "IsCorrect": false },
+          { "Text": "Egypt", "IsCorrect": true },
+          { "Text": "Sudan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/15483543/pexels-photo-15483543.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Uganda", "IsCorrect": false },
+          { "Text": "Kenya", "IsCorrect": true },
+          { "Text": "Tanzania", "IsCorrect": false },
+          { "Text": "Rwanda", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1698594576842-2c52cad09e0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxzb3V0aCUyMGFmcmljYSUyMGZsYWd8ZW58MHx8fHwxNzU3NjM1NDY3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "South Africa", "IsCorrect": true },
+          { "Text": "Zimbabwe", "IsCorrect": false },
+          { "Text": "Botswana", "IsCorrect": false },
+          { "Text": "Namibia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
-        "MediaUrl": "",
+        "MediaUrl": "https://images.unsplash.com/photo-1675855509809-5dfcbf7cff32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwyfHxnaGFuYSUyMGZsYWd8ZW58MHx8fHwxNzU3NjM1NDgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Mali", "IsCorrect": false },
+          { "Text": "Senegal", "IsCorrect": false },
+          { "Text": "Cameroon", "IsCorrect": false },
+          { "Text": "Ghana", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1679480120958-870d83a90614?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHxtb3JvY2NvJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzU1MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Algeria", "IsCorrect": false },
+          { "Text": "Egypt", "IsCorrect": false },
+          { "Text": "Morocco", "IsCorrect": true },
+          { "Text": "Tunisia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/15651836/pexels-photo-15651836.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Djibouti", "IsCorrect": false },
+          { "Text": "Somalia", "IsCorrect": false },
+          { "Text": "Ethiopia", "IsCorrect": true },
+          { "Text": "Eritrea", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/12371836/pexels-photo-12371836.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Angola", "IsCorrect": false },
+          { "Text": "Zambia", "IsCorrect": true },
+          { "Text": "Mozambique", "IsCorrect": false },
+          { "Text": "Congo", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/28811768/pexels-photo-28811768.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Libya", "IsCorrect": false },
+          { "Text": "Tunisia", "IsCorrect": true },
+          { "Text": "Morocco", "IsCorrect": false },
+          { "Text": "Algeria", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/14434229/pexels-photo-14434229.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Cameroon", "IsCorrect": false },
+          { "Text": "Mali", "IsCorrect": false },
+          { "Text": "Senegal", "IsCorrect": true },
+          { "Text": "Ghana", "IsCorrect": false }
         ]
       }
     ],
@@ -289,32 +1129,137 @@
   },
   {
     "Title": "Flags of Asia",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Test your knowledge of Asian countries by identifying their national flags. Select the correct country among four options.",
+    "MediaUrl": "https://images.unsplash.com/photo-1643611159961-95e59698de60?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxM3x8amFwYW4lMjBmbGFnfGVufDB8fHx8MTc1NzYyODU4Mnww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1535924206889-040a0b50a723?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxMXx8amFwYW4lMjBmbGFnfGVufDB8fHx8MTc1NzYyODU4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Japan", "IsCorrect": true },
+          { "Text": "South Korea", "IsCorrect": false },
+          { "Text": "China", "IsCorrect": false },
+          { "Text": "Thailand", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/31555750/pexels-photo-31555750.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Vietnam", "IsCorrect": false },
+          { "Text": "Singapore", "IsCorrect": true },
+          { "Text": "Indonesia", "IsCorrect": false },
+          { "Text": "Malaysia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1676899127445-b5aa21feafda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw0fHxTb3V0aCUyMEtvcmVhJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzU5ODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "China", "IsCorrect": false },
+          { "Text": "Taiwan", "IsCorrect": false },
+          { "Text": "North Korea", "IsCorrect": false },
+          { "Text": "South Korea", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
-        "MediaUrl": "",
+        "MediaUrl": "https://images.unsplash.com/photo-1731021988029-16abdab34bd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw3fHxOZXBhbCUyMGZsYWd8ZW58MHx8fHwxNzU3NjM2MDU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Nepal", "IsCorrect": true },
+          { "Text": "Bhutan", "IsCorrect": false },
+          { "Text": "Mongolia", "IsCorrect": false },
+          { "Text": "Sri Lanka", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1722871514484-0dc5ef084ecc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw1fHxCYW5nbGFkZXNoJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzYwOTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Pakistan", "IsCorrect": false },
+          { "Text": "Bangladesh", "IsCorrect": true },
+          { "Text": "India", "IsCorrect": false },
+          { "Text": "Afghanistan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1597058712635-3182d1eacc1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw0fHxJbmRpYSUyMGZsYWd8ZW58MHx8fHwxNzU3NjM2MTE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "India", "IsCorrect": true },
+          { "Text": "Sri Lanka", "IsCorrect": false },
+          { "Text": "Pakistan", "IsCorrect": false },
+          { "Text": "Nepal", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1633165206122-ab14dc6d995b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw3fHxNYWxheXNpYSUyMGZsYWd8ZW58MHx8fHwxNzU3NjM2MTIzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Malaysia", "IsCorrect": true },
+          { "Text": "Philippines", "IsCorrect": false },
+          { "Text": "Thailand", "IsCorrect": false },
+          { "Text": "Laos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1674810038664-03aca7d78036?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw1fHxTcmklMjBMYW5rYSUyMGZsYWd8ZW58MHx8fHwxNzU3NjM2MTM2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Sri Lanka", "IsCorrect": true },
+          { "Text": "India", "IsCorrect": false },
+          { "Text": "Myanmar", "IsCorrect": false },
+          { "Text": "Bangladesh", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1679480117053-5548aa9bced4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw0fHxLYXpha2hzdGFuJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzYxOTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Mongolia", "IsCorrect": false },
+          { "Text": "Kazakhstan", "IsCorrect": true },
+          { "Text": "Uzbekistan", "IsCorrect": false },
+          { "Text": "Kyrgyzstan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1544562258-d7a25aa0e669?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwzfHxWaWV0bmFtJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzYyNDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Thailand", "IsCorrect": false },
+          { "Text": "Vietnam", "IsCorrect": true },
+          { "Text": "Cambodia", "IsCorrect": false },
+          { "Text": "Laos", "IsCorrect": false }
         ]
       }
     ],
@@ -325,32 +1270,137 @@
   },
   {
     "Title": "Flags of the Americas",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Can you identify the national flags of the Americas? From North to South, test your flag knowledge!",
+    "MediaUrl": "https://images.pexels.com/photos/8828446/pexels-photo-8828446.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/1618423/pexels-photo-1618423.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Mexico", "IsCorrect": true },
+          { "Text": "Canada", "IsCorrect": false },
+          { "Text": "Brazil", "IsCorrect": false },
+          { "Text": "United States", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/21404692/pexels-photo-21404692.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Argentina", "IsCorrect": false },
+          { "Text": "Uruguay", "IsCorrect": true },
+          { "Text": "Paraguay", "IsCorrect": false },
+          { "Text": "Chile", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/32429348/pexels-photo-32429348.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Colombia", "IsCorrect": true },
+          { "Text": "Ecuador", "IsCorrect": false },
+          { "Text": "Venezuela", "IsCorrect": false },
+          { "Text": "Peru", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
-        "MediaUrl": "",
+        "MediaUrl": "https://images.pexels.com/photos/3744699/pexels-photo-3744699.jpeg?auto=compress&cs=tinysrgb&h=350",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Mexico", "IsCorrect": false },
+          { "Text": "Brazil", "IsCorrect": false },
+          { "Text": "Canada", "IsCorrect": true },
+          { "Text": "Chile", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1605990786731-181f1f8a091f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxQYW5hbWElMjBmbGFnfGVufDB8fHx8MTc1NzYzNjUyMHww&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Costa Rica", "IsCorrect": false },
+          { "Text": "Honduras", "IsCorrect": false },
+          { "Text": "Panama", "IsCorrect": true },
+          { "Text": "Guatemala", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/19063936/pexels-photo-19063936.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Bolivia", "IsCorrect": false },
+          { "Text": "Ecuador", "IsCorrect": true },
+          { "Text": "Colombia", "IsCorrect": false },
+          { "Text": "Venezuela", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/5794641/pexels-photo-5794641.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Chile", "IsCorrect": true },
+          { "Text": "Peru", "IsCorrect": false },
+          { "Text": "Paraguay", "IsCorrect": false },
+          { "Text": "Argentina", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1647551226093-2f015910d3ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxHdXlhbmElMjBmbGFnfGVufDB8fHx8MTc1NzYzNjU4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Brazil", "IsCorrect": false },
+          { "Text": "Guyana", "IsCorrect": true },
+          { "Text": "Suriname", "IsCorrect": false },
+          { "Text": "Trinidad and Tobago", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1605537473246-d5c3bb177b45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw0fHxQZXJ1JTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzY1ODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Peru", "IsCorrect": true },
+          { "Text": "Chile", "IsCorrect": false },
+          { "Text": "Paraguay", "IsCorrect": false },
+          { "Text": "Ecuador", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1551108438-faebcff6789a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwyfHxDdWJhJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzY2NDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Haiti", "IsCorrect": false },
+          { "Text": "Puerto Rico", "IsCorrect": false },
+          { "Text": "Dominican Republic", "IsCorrect": false },
+          { "Text": "Cuba", "IsCorrect": true }
         ]
       }
     ],
@@ -361,32 +1411,72 @@
   },
   {
     "Title": "Flags of Oceania",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "From Australia to the Pacific islands, test your knowledge of the flags of Oceania.",
+    "MediaUrl": "https://images.pexels.com/photos/8828315/pexels-photo-8828315.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/968311/pexels-photo-968311.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Australia", "IsCorrect": true },
+          { "Text": "New Zealand", "IsCorrect": false },
+          { "Text": "Fiji", "IsCorrect": false },
+          { "Text": "Papua New Guinea", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1659596185510-4c159b17c29a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxOZXclMjBaZWFsYW5kJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzY4NTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Samoa", "IsCorrect": false },
+          { "Text": "New Zealand", "IsCorrect": true },
+          { "Text": "Solomon Islands", "IsCorrect": false },
+          { "Text": "Vanuatu", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1663697709280-57667469e1f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxGaWppJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzY4NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Fiji", "IsCorrect": true },
+          { "Text": "Tonga", "IsCorrect": false },
+          { "Text": "Kiribati", "IsCorrect": false },
+          { "Text": "Nauru", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
-        "MediaUrl": "",
+        "MediaUrl": "https://images.unsplash.com/photo-1666052396658-d708d801dbd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxQYXB1YSUyME5ldyUyMEd1aW5lYSUyMGZsYWd8ZW58MHx8fHwxNzU3NjM2ODkxfDA&ixlib=rb-4.1.0&q=80&w=1080",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Papua New Guinea", "IsCorrect": true },
+          { "Text": "Tuvalu", "IsCorrect": false },
+          { "Text": "Fiji", "IsCorrect": false },
+          { "Text": "Palau", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1664333396238-f65941151477?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw0fHxNYXJzaGFsbCUyMElzbGFuZHMlMjBmbGFnfGVufDB8fHx8MTc1NzYzNzEyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Palau", "IsCorrect": false },
+          { "Text": "Nauru", "IsCorrect": false },
+          { "Text": "Marshall Islands", "IsCorrect": true },
+          { "Text": "Micronesia", "IsCorrect": false }
         ]
       }
     ],
@@ -397,32 +1487,137 @@
   },
   {
     "Title": "Flags quiz: mixed continents",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "A global flag challenge! Identify flags from countries across all continents.",
+    "MediaUrl": "https://images.pexels.com/photos/6281880/pexels-photo-6281880.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1725772387482-12261dbaa091?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw0fHxNZXhpY28lMjBmbGFnfGVufDB8fHx8MTc1NzYzNzQ3OHww&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "United States", "IsCorrect": false },
+          { "Text": "Mexico", "IsCorrect": true },
+          { "Text": "United Kingdom", "IsCorrect": false },
+          { "Text": "New Zealand", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1671398456904-3f88138b157f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwzfHxBcmdlbnRpbmElMjBmbGFnfGVufDB8fHx8MTc1NzYzNzMyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Argentina", "IsCorrect": true },
+          { "Text": "Uruguay", "IsCorrect": false },
+          { "Text": "Paraguay", "IsCorrect": false },
+          { "Text": "Chile", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1717885844192-8d883eee8f4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw5fHxDaGluYSUyMGZsYWd8ZW58MHx8fHwxNzU3NjM3MzM3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Japan", "IsCorrect": false },
+          { "Text": "South Korea", "IsCorrect": false },
+          { "Text": "China", "IsCorrect": true },
+          { "Text": "Vietnam", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
-        "MediaUrl": "",
+        "MediaUrl": "https://images.unsplash.com/photo-1590197794698-1f4e1ac3d496?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwyfHxDYW5hZGElMjBmbGFnfGVufDB8fHx8MTc1NzYzNzM1Mnww&ixlib=rb-4.1.0&q=80&w=1080",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Canada", "IsCorrect": true },
+          { "Text": "United States", "IsCorrect": false },
+          { "Text": "Switzerland", "IsCorrect": false },
+          { "Text": "Denmark", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1679480120958-870d83a90614?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHxNb3JvY2NvJTIwZmxhZ3xlbnwwfHx8fDE3NTc2MzczNjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Egypt", "IsCorrect": false },
+          { "Text": "Morocco", "IsCorrect": true },
+          { "Text": "Tunisia", "IsCorrect": false },
+          { "Text": "Algeria", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1556958540-2378bacb6f59?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxJdGFseSUyMGZsYWd8ZW58MHx8fHwxNzU3NjM3Mzc3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "France", "IsCorrect": false },
+          { "Text": "Germany", "IsCorrect": false },
+          { "Text": "Italy", "IsCorrect": true },
+          { "Text": "Ireland", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/15483709/pexels-photo-15483709.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Brazil", "IsCorrect": true },
+          { "Text": "Colombia", "IsCorrect": false },
+          { "Text": "Mexico", "IsCorrect": false },
+          { "Text": "Peru", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/15483543/pexels-photo-15483543.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Kenya", "IsCorrect": true },
+          { "Text": "Nigeria", "IsCorrect": false },
+          { "Text": "South Africa", "IsCorrect": false },
+          { "Text": "Ethiopia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/3476860/pexels-photo-3476860.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Turkey", "IsCorrect": false },
+          { "Text": "Pakistan", "IsCorrect": false },
+          { "Text": "Saudi Arabia", "IsCorrect": false },
+          { "Text": "India", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which flag is this one?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1645286636903-890ce32aa287?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxTd2VkZW4lMjBmbGFnfGVufDB8fHx8MTc1NzYzNzQ2MXww&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Finland", "IsCorrect": false },
+          { "Text": "Norway", "IsCorrect": false },
+          { "Text": "Sweden", "IsCorrect": true },
+          { "Text": "Iceland", "IsCorrect": false }
         ]
       }
     ],
@@ -433,32 +1628,137 @@
   },
   {
     "Title": "Famous world cities",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Test your knowledge of famous cities around the world, known for their culture, history, and landmarks.",
+    "MediaUrl": "https://images.pexels.com/photos/161251/senso-ji-temple-japan-kyoto-landmark-161251.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which city is home to the Eiffel Tower?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Paris", "IsCorrect": true },
+          { "Text": "London", "IsCorrect": false },
+          { "Text": "Rome", "IsCorrect": false },
+          { "Text": "Berlin", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city is famous for the Colosseum?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Athens", "IsCorrect": false },
+          { "Text": "Rome", "IsCorrect": true },
+          { "Text": "Florence", "IsCorrect": false },
+          { "Text": "Venice", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city is known as the Big Apple?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Los Angeles", "IsCorrect": false },
+          { "Text": "Chicago", "IsCorrect": false },
+          { "Text": "New York City", "IsCorrect": true },
+          { "Text": "Boston", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city is the capital of Japan?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Kyoto", "IsCorrect": false },
+          { "Text": "Seoul", "IsCorrect": false },
+          { "Text": "Tokyo", "IsCorrect": true },
+          { "Text": "Osaka", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city is located on two continents, Europe and Asia?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Istanbul", "IsCorrect": true },
+          { "Text": "Moscow", "IsCorrect": false },
+          { "Text": "Ankara", "IsCorrect": false },
+          { "Text": "Athens", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city is known for the Opera House and Harbour Bridge?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Melbourne", "IsCorrect": false },
+          { "Text": "Auckland", "IsCorrect": false },
+          { "Text": "Sydney", "IsCorrect": true },
+          { "Text": "Brisbane", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city hosts the Christ the Redeemer statue?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Buenos Aires", "IsCorrect": false },
+          { "Text": "Rio de Janeiro", "IsCorrect": true },
+          { "Text": "São Paulo", "IsCorrect": false },
+          { "Text": "Lima", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city is famous for the Kremlin and Red Square?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "St. Petersburg", "IsCorrect": false },
+          { "Text": "Moscow", "IsCorrect": true },
+          { "Text": "Warsaw", "IsCorrect": false },
+          { "Text": "Kiev", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city is the capital of Egypt?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cairo", "IsCorrect": true },
+          { "Text": "Alexandria", "IsCorrect": false },
+          { "Text": "Luxor", "IsCorrect": false },
+          { "Text": "Giza", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city is known for Times Square and Broadway?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "London", "IsCorrect": false },
+          { "Text": "New York City", "IsCorrect": true },
+          { "Text": "Los Angeles", "IsCorrect": false },
+          { "Text": "Las Vegas", "IsCorrect": false }
         ]
       }
     ],
@@ -469,32 +1769,137 @@
   },
   {
     "Title": "Landmarks of Europe",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Test your knowledge of famous European landmarks. Can you match each landmark with its city or country?",
+    "MediaUrl": "https://images.unsplash.com/photo-1581473483413-313a5afffb08?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxMZWFuaW5nJTIwVG93ZXJ8ZW58MHx8fHwxNzU3NjI4NzY0fDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "In which city can you find the Eiffel Tower?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Rome", "IsCorrect": false },
+          { "Text": "Paris", "IsCorrect": true },
+          { "Text": "London", "IsCorrect": false },
+          { "Text": "Berlin", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Colosseum is located in which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Venice", "IsCorrect": false },
+          { "Text": "Athens", "IsCorrect": false },
+          { "Text": "Rome", "IsCorrect": true },
+          { "Text": "Milan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Where is the Parthenon located?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Athens", "IsCorrect": true },
+          { "Text": "Istanbul", "IsCorrect": false },
+          { "Text": "Rome", "IsCorrect": false },
+          { "Text": "Sofia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Stonehenge can be found in which country?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Ireland", "IsCorrect": false },
+          { "Text": "Scotland", "IsCorrect": false },
+          { "Text": "England", "IsCorrect": true },
+          { "Text": "Wales", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Acropolis is located in which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Thessaloniki", "IsCorrect": false },
+          { "Text": "Athens", "IsCorrect": true },
+          { "Text": "Rome", "IsCorrect": false },
+          { "Text": "Naples", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Where is the Sagrada Família located?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Madrid", "IsCorrect": false },
+          { "Text": "Barcelona", "IsCorrect": true },
+          { "Text": "Lisbon", "IsCorrect": false },
+          { "Text": "Seville", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which country can you visit Neuschwanstein Castle?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Austria", "IsCorrect": false },
+          { "Text": "Germany", "IsCorrect": true },
+          { "Text": "Switzerland", "IsCorrect": false },
+          { "Text": "France", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Brandenburg Gate is located in which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Berlin", "IsCorrect": true },
+          { "Text": "Munich", "IsCorrect": false },
+          { "Text": "Hamburg", "IsCorrect": false },
+          { "Text": "Frankfurt", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Leaning Tower is found in which Italian city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Florence", "IsCorrect": false },
+          { "Text": "Venice", "IsCorrect": false },
+          { "Text": "Pisa", "IsCorrect": true },
+          { "Text": "Milan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which city can you find the Louvre Museum?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Brussels", "IsCorrect": false },
+          { "Text": "Paris", "IsCorrect": true },
+          { "Text": "London", "IsCorrect": false },
+          { "Text": "Amsterdam", "IsCorrect": false }
         ]
       }
     ],
@@ -505,32 +1910,137 @@
   },
   {
     "Title": "Landmarks of Asia",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "From ancient temples to modern wonders, test your knowledge of Asia's most famous landmarks.",
+    "MediaUrl": "https://images.pexels.com/photos/1603650/pexels-photo-1603650.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "The Taj Mahal is located in which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "New Delhi", "IsCorrect": false },
+          { "Text": "Agra", "IsCorrect": true },
+          { "Text": "Mumbai", "IsCorrect": false },
+          { "Text": "Jaipur", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Great Wall of China is mainly associated with which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Shanghai", "IsCorrect": false },
+          { "Text": "Beijing", "IsCorrect": true },
+          { "Text": "Guangzhou", "IsCorrect": false },
+          { "Text": "Xi'an", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Angkor Wat is located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Thailand", "IsCorrect": false },
+          { "Text": "Cambodia", "IsCorrect": true },
+          { "Text": "Laos", "IsCorrect": false },
+          { "Text": "Vietnam", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which city can you visit the Petronas Towers?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Kuala Lumpur", "IsCorrect": true },
+          { "Text": "Jakarta", "IsCorrect": false },
+          { "Text": "Singapore", "IsCorrect": false },
+          { "Text": "Bangkok", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Borobudur Temple is located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Indonesia", "IsCorrect": true },
+          { "Text": "Malaysia", "IsCorrect": false },
+          { "Text": "Thailand", "IsCorrect": false },
+          { "Text": "Philippines", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which city can you find the Marina Bay Sands hotel?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Kuala Lumpur", "IsCorrect": false },
+          { "Text": "Singapore", "IsCorrect": true },
+          { "Text": "Bangkok", "IsCorrect": false },
+          { "Text": "Hong Kong", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Shwedagon Pagoda is located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Myanmar", "IsCorrect": true },
+          { "Text": "Thailand", "IsCorrect": false },
+          { "Text": "Cambodia", "IsCorrect": false },
+          { "Text": "Vietnam", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Mount Fuji is the iconic landmark of which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "China", "IsCorrect": false },
+          { "Text": "South Korea", "IsCorrect": false },
+          { "Text": "Japan", "IsCorrect": true },
+          { "Text": "Taiwan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Burj Khalifa, the tallest building in the world, is in which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Dubai", "IsCorrect": true },
+          { "Text": "Abu Dhabi", "IsCorrect": false },
+          { "Text": "Doha", "IsCorrect": false },
+          { "Text": "Kuwait City", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which city is the Golden Temple located?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Varanasi", "IsCorrect": false },
+          { "Text": "Amritsar", "IsCorrect": true },
+          { "Text": "New Delhi", "IsCorrect": false },
+          { "Text": "Mumbai", "IsCorrect": false }
         ]
       }
     ],
@@ -541,32 +2051,137 @@
   },
   {
     "Title": "Landmarks of the Americas",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "From North to South America, test your knowledge of the continent's most iconic landmarks.",
+    "MediaUrl": "https://images.pexels.com/photos/64271/queen-of-liberty-statue-of-liberty-new-york-liberty-statue-64271.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Machu Picchu is located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Peru", "IsCorrect": true },
+          { "Text": "Chile", "IsCorrect": false },
+          { "Text": "Ecuador", "IsCorrect": false },
+          { "Text": "Bolivia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Statue of Liberty is located in which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Boston", "IsCorrect": false },
+          { "Text": "New York City", "IsCorrect": true },
+          { "Text": "Philadelphia", "IsCorrect": false },
+          { "Text": "Washington, D.C.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Christ the Redeemer is a landmark of which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "São Paulo", "IsCorrect": false },
+          { "Text": "Buenos Aires", "IsCorrect": false },
+          { "Text": "Rio de Janeiro", "IsCorrect": true },
+          { "Text": "Lima", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Chichen Itza is located in which country?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Guatemala", "IsCorrect": false },
+          { "Text": "Mexico", "IsCorrect": true },
+          { "Text": "Honduras", "IsCorrect": false },
+          { "Text": "Belize", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which country can you visit Iguazu Falls?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Argentina", "IsCorrect": true },
+          { "Text": "Chile", "IsCorrect": false },
+          { "Text": "Peru", "IsCorrect": false },
+          { "Text": "Uruguay", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Mount Rushmore is located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "United States", "IsCorrect": true },
+          { "Text": "Canada", "IsCorrect": false },
+          { "Text": "Mexico", "IsCorrect": false },
+          { "Text": "Panama", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The CN Tower is a landmark of which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Toronto", "IsCorrect": true },
+          { "Text": "Vancouver", "IsCorrect": false },
+          { "Text": "Montreal", "IsCorrect": false },
+          { "Text": "Ottawa", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Moai statues are found on Easter Island, part of which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Peru", "IsCorrect": false },
+          { "Text": "Chile", "IsCorrect": true },
+          { "Text": "Colombia", "IsCorrect": false },
+          { "Text": "Ecuador", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Teotihuacan is an archaeological site in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Mexico", "IsCorrect": true },
+          { "Text": "Peru", "IsCorrect": false },
+          { "Text": "Guatemala", "IsCorrect": false },
+          { "Text": "Brazil", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Panama Canal connects the Atlantic and Pacific Oceans. In which country is it located?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Costa Rica", "IsCorrect": false },
+          { "Text": "Nicaragua", "IsCorrect": false },
+          { "Text": "Panama", "IsCorrect": true },
+          { "Text": "Colombia", "IsCorrect": false }
         ]
       }
     ],
@@ -577,32 +2192,137 @@
   },
   {
     "Title": "Landmarks of Africa",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "From pyramids to waterfalls, test your knowledge of Africa's most iconic landmarks.",
+    "MediaUrl": "https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "The Pyramids of Giza are located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Sudan", "IsCorrect": false },
+          { "Text": "Egypt", "IsCorrect": true },
+          { "Text": "Morocco", "IsCorrect": false },
+          { "Text": "Ethiopia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Table Mountain overlooks which city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cape Town", "IsCorrect": true },
+          { "Text": "Johannesburg", "IsCorrect": false },
+          { "Text": "Durban", "IsCorrect": false },
+          { "Text": "Pretoria", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Victoria Falls is located on the border of which two countries?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Zambia and Zimbabwe", "IsCorrect": true },
+          { "Text": "South Africa and Botswana", "IsCorrect": false },
+          { "Text": "Kenya and Tanzania", "IsCorrect": false },
+          { "Text": "Nigeria and Cameroon", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Great Sphinx is found near which city?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Cairo", "IsCorrect": true },
+          { "Text": "Luxor", "IsCorrect": false },
+          { "Text": "Alexandria", "IsCorrect": false },
+          { "Text": "Aswan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Rock-Hewn Churches of Lalibela are in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Ethiopia", "IsCorrect": true },
+          { "Text": "Kenya", "IsCorrect": false },
+          { "Text": "Uganda", "IsCorrect": false },
+          { "Text": "Tanzania", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Mount Kilimanjaro is located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Kenya", "IsCorrect": false },
+          { "Text": "Tanzania", "IsCorrect": true },
+          { "Text": "Ethiopia", "IsCorrect": false },
+          { "Text": "Uganda", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which city is home to the Hassan II Mosque?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Casablanca", "IsCorrect": true },
+          { "Text": "Rabat", "IsCorrect": false },
+          { "Text": "Marrakesh", "IsCorrect": false },
+          { "Text": "Tangier", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The ruins of Carthage are located near which modern city?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Tunis", "IsCorrect": true },
+          { "Text": "Tripoli", "IsCorrect": false },
+          { "Text": "Algiers", "IsCorrect": false },
+          { "Text": "Cairo", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Fish River Canyon, one of the largest canyons in the world, is located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Botswana", "IsCorrect": false },
+          { "Text": "Namibia", "IsCorrect": true },
+          { "Text": "South Africa", "IsCorrect": false },
+          { "Text": "Zimbabwe", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Mosque of Djenné, the largest mud-brick building in the world, is located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Mali", "IsCorrect": true },
+          { "Text": "Niger", "IsCorrect": false },
+          { "Text": "Senegal", "IsCorrect": false },
+          { "Text": "Chad", "IsCorrect": false }
         ]
       }
     ],
@@ -613,32 +2333,137 @@
   },
   {
     "Title": "UNESCO World Heritage Sites",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Test your knowledge of UNESCO World Heritage Sites around the world, from ancient ruins to natural wonders.",
+    "MediaUrl": "https://images.pexels.com/photos/4445240/pexels-photo-4445240.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Machu Picchu is a UNESCO World Heritage Site in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Peru", "IsCorrect": true },
+          { "Text": "Chile", "IsCorrect": false },
+          { "Text": "Colombia", "IsCorrect": false },
+          { "Text": "Ecuador", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Great Wall is a UNESCO site located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "China", "IsCorrect": true },
+          { "Text": "Japan", "IsCorrect": false },
+          { "Text": "Mongolia", "IsCorrect": false },
+          { "Text": "South Korea", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Petra, a famous archaeological city, is a UNESCO site in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Jordan", "IsCorrect": true },
+          { "Text": "Egypt", "IsCorrect": false },
+          { "Text": "Lebanon", "IsCorrect": false },
+          { "Text": "Syria", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Historic Centre of Florence is a UNESCO site in which country?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Spain", "IsCorrect": false },
+          { "Text": "France", "IsCorrect": false },
+          { "Text": "Italy", "IsCorrect": true },
+          { "Text": "Portugal", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Galápagos Islands are UNESCO sites belonging to which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Ecuador", "IsCorrect": true },
+          { "Text": "Peru", "IsCorrect": false },
+          { "Text": "Colombia", "IsCorrect": false },
+          { "Text": "Panama", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Acropolis of Athens is a UNESCO World Heritage Site in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Italy", "IsCorrect": false },
+          { "Text": "Turkey", "IsCorrect": false },
+          { "Text": "Greece", "IsCorrect": true },
+          { "Text": "Cyprus", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Angkor Wat is a UNESCO site located in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Vietnam", "IsCorrect": false },
+          { "Text": "Thailand", "IsCorrect": false },
+          { "Text": "Cambodia", "IsCorrect": true },
+          { "Text": "Laos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Serengeti National Park, known for its wildlife, is a UNESCO site in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Kenya", "IsCorrect": false },
+          { "Text": "Tanzania", "IsCorrect": true },
+          { "Text": "Uganda", "IsCorrect": false },
+          { "Text": "Zambia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Historic Sanctuary of Carthage is located in which modern country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Tunisia", "IsCorrect": true },
+          { "Text": "Morocco", "IsCorrect": false },
+          { "Text": "Libya", "IsCorrect": false },
+          { "Text": "Algeria", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Old City of Jerusalem is a UNESCO World Heritage Site in which country?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Israel", "IsCorrect": true },
+          { "Text": "Jordan", "IsCorrect": false },
+          { "Text": "Lebanon", "IsCorrect": false },
+          { "Text": "Egypt", "IsCorrect": false }
         ]
       }
     ],
