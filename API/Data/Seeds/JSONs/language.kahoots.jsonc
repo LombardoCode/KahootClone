@@ -1,32 +1,109 @@
 [
   {
     "Title": "Common Spanish words and their meaning in English",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Test your basic vocabulary with essential Spanish words and their English translations.",
+    "MediaUrl": "https://images.unsplash.com/photo-1614368741109-4aee24d0e226?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw0fHxzcGFuaXNoJTIwZmxhZ3N8ZW58MHx8fHwxNzU3NzE4MjAwfDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the English translation of 'hola'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 10,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Goodbye", "IsCorrect": false },
+          { "Text": "Hello", "IsCorrect": true },
+          { "Text": "Please", "IsCorrect": false },
+          { "Text": "Thank you", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does 'gracias' mean in English?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Please", "IsCorrect": false },
+          { "Text": "You're welcome", "IsCorrect": false },
+          { "Text": "Thank you", "IsCorrect": true },
+          { "Text": "Excuse me", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The Spanish word 'sí' means 'no' in English.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What is the English translation of 'adiós'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Hello", "IsCorrect": false },
+          { "Text": "Goodbye", "IsCorrect": true },
+          { "Text": "See you later", "IsCorrect": false },
+          { "Text": "Good night", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does 'por favor' mean?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Thank you", "IsCorrect": false },
+          { "Text": "You're welcome", "IsCorrect": false },
+          { "Text": "Please", "IsCorrect": true },
+          { "Text": "Excuse me", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which English word corresponds to 'familia'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Friends", "IsCorrect": false },
+          { "Text": "Home", "IsCorrect": false },
+          { "Text": "Family", "IsCorrect": true },
+          { "Text": "Parents", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the meaning of 'casa' in English?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Car", "IsCorrect": false },
+          { "Text": "House", "IsCorrect": true },
+          { "Text": "Room", "IsCorrect": false },
+          { "Text": "Building", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which of these is the correct translation for 'amigo'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Friend", "IsCorrect": true },
+          { "Text": "Enemy", "IsCorrect": false },
+          { "Text": "Family", "IsCorrect": false },
+          { "Text": "Stranger", "IsCorrect": false }
         ]
       }
     ],
@@ -37,32 +114,109 @@
   },
   {
     "Title": "Numbers in Spanish",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Learn to count and master numerical expressions in Spanish from cero to millones.",
+    "MediaUrl": "https://images.pexels.com/photos/1314543/pexels-photo-1314543.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "How do you say the number 5 in Spanish?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 10,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Cinco", "IsCorrect": true },
+          { "Text": "Cuatro", "IsCorrect": false },
+          { "Text": "Seis", "IsCorrect": false },
+          { "Text": "Siete", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the Spanish word for the number 12?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Once", "IsCorrect": false },
+          { "Text": "Doce", "IsCorrect": true },
+          { "Text": "Trece", "IsCorrect": false },
+          { "Text": "Catorce", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The number 20 in Spanish is 'veinte'.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you say 100 in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cien", "IsCorrect": true },
+          { "Text": "Ciento", "IsCorrect": false },
+          { "Text": "Mil", "IsCorrect": false },
+          { "Text": "Diez", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What number does 'treinta y cinco' represent?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "25", "IsCorrect": false },
+          { "Text": "35", "IsCorrect": true },
+          { "Text": "53", "IsCorrect": false },
+          { "Text": "15", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How is the number 1,000 written in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cien", "IsCorrect": false },
+          { "Text": "Mil", "IsCorrect": true },
+          { "Text": "Millón", "IsCorrect": false },
+          { "Text": "Diez mil", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the correct Spanish for the number 77?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Setenta y siete", "IsCorrect": true },
+          { "Text": "Sesenta y siete", "IsCorrect": false },
+          { "Text": "Ochenta y siete", "IsCorrect": false },
+          { "Text": "Noventa y siete", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which of these means '500' in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Quinientos", "IsCorrect": true },
+          { "Text": "Cincuenta", "IsCorrect": false },
+          { "Text": "Cincocientos", "IsCorrect": false },
+          { "Text": "Quince", "IsCorrect": false }
         ]
       }
     ],
@@ -73,32 +227,98 @@
   },
   {
     "Title": "Colors in Spanish",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Identify and name all colors in Spanish with this vibrant vocabulary challenge.",
+    "MediaUrl": "https://images.pexels.com/photos/1148496/pexels-photo-1148496.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is this color?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 10,
         "PointsMultiplier": 1,
-        "MediaUrl": "",
+        "MediaUrl": "https://images.unsplash.com/photo-1568535904307-f48b760a39f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxyZWQlMjBjb2xvcnxlbnwwfHx8fDE3NTc3MTcxNTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Azul", "IsCorrect": false },
+          { "Text": "Rojo", "IsCorrect": true },
+          { "Text": "Verde", "IsCorrect": false },
+          { "Text": "Amarillo", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is this color?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1589859762194-eaae75c61f64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxibHVlJTIwY29sb3J8ZW58MHx8fHwxNzU3NzE3MTY1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Blanco", "IsCorrect": false },
+          { "Text": "Negro", "IsCorrect": false },
+          { "Text": "Azul", "IsCorrect": true },
+          { "Text": "Gris", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is this color?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/flagged/photo-1593005510329-8a4035a7238f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHx5ZWxsb3clMjBjb2xvcnxlbnwwfHx8fDE3NTc3MTcyMDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Amarillo", "IsCorrect": true },
+          { "Text": "Anaranjado", "IsCorrect": false },
+          { "Text": "Rosa", "IsCorrect": false },
+          { "Text": "Morado", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is this color?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1530982011887-3cc11cc85693?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwzfHxvcmFuZ2UlMjBjb2xvcnxlbnwwfHx8fDE3NTc3MTcyMTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Amarillo", "IsCorrect": false },
+          { "Text": "Rojo", "IsCorrect": false },
+          { "Text": "Naranja", "IsCorrect": true },
+          { "Text": "Rosa", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is this color?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.unsplash.com/photo-1575318080244-dd217d9db1e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwyfHxwdXJwbGUlMjBjb2xvcnxlbnwwfHx8fDE3NTc3MTcyMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Rosa", "IsCorrect": false },
+          { "Text": "Morado", "IsCorrect": true },
+          { "Text": "Marrón", "IsCorrect": false },
+          { "Text": "Gris", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is this color?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "https://images.pexels.com/photos/950241/pexels-photo-950241.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "Answers": [
+          { "Text": "Blanco", "IsCorrect": true },
+          { "Text": "Negro", "IsCorrect": false },
+          { "Text": "Gris", "IsCorrect": false },
+          { "Text": "Plateado", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is this color?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 2,
+        "MediaUrl": "https://images.unsplash.com/photo-1571829604981-ea159f94e5ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwyfHxicm93bnxlbnwwfHx8fDE3NTc3MTczODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "Answers": [
+          { "Text": "Marrón", "IsCorrect": true },
+          { "Text": "Negro", "IsCorrect": false },
+          { "Text": "Gris", "IsCorrect": false },
+          { "Text": "Beige", "IsCorrect": false }
         ]
       }
     ],
@@ -109,32 +329,109 @@
   },
   {
     "Title": "Guess the gender of nouns",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Can you determine if Spanish nouns are masculine or feminine? Test your grammatical intuition.",
+    "MediaUrl": "https://images.pexels.com/photos/1722196/pexels-photo-1722196.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the gender of the noun 'libro' (book)?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 10,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Masculine", "IsCorrect": true },
+          { "Text": "Feminine", "IsCorrect": false },
+          { "Text": "Both", "IsCorrect": false },
+          { "Text": "Neuter", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the gender of the noun 'casa' (house)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Masculine", "IsCorrect": false },
+          { "Text": "Feminine", "IsCorrect": true },
+          { "Text": "Both", "IsCorrect": false },
+          { "Text": "Neuter", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The noun 'problema' (problem) is feminine in Spanish.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What is the gender of the noun 'árbol' (tree)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Masculine", "IsCorrect": true },
+          { "Text": "Feminine", "IsCorrect": false },
+          { "Text": "Both", "IsCorrect": false },
+          { "Text": "Neuter", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the gender of the noun 'ciudad' (city)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Masculine", "IsCorrect": false },
+          { "Text": "Feminine", "IsCorrect": true },
+          { "Text": "Both", "IsCorrect": false },
+          { "Text": "Neuter", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the gender of the noun 'día' (day)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Masculine", "IsCorrect": true },
+          { "Text": "Feminine", "IsCorrect": false },
+          { "Text": "Both", "IsCorrect": false },
+          { "Text": "Neuter", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the gender of the noun 'mano' (hand)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Masculine", "IsCorrect": false },
+          { "Text": "Feminine", "IsCorrect": true },
+          { "Text": "Both", "IsCorrect": false },
+          { "Text": "Neuter", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the gender of the noun 'mapa' (map)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Masculine", "IsCorrect": true },
+          { "Text": "Feminine", "IsCorrect": false },
+          { "Text": "Both", "IsCorrect": false },
+          { "Text": "Neuter", "IsCorrect": false }
         ]
       }
     ],
@@ -145,32 +442,109 @@
   },
   {
     "Title": "Spanish synonyms and antonyms",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Expand your vocabulary by finding words with similar and opposite meanings in Spanish.",
+    "MediaUrl": "https://images.pexels.com/photos/3182824/pexels-photo-3182824.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which word is a synonym of 'alegre'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 15,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Triste", "IsCorrect": false },
+          { "Text": "Contento", "IsCorrect": true },
+          { "Text": "Enojado", "IsCorrect": false },
+          { "Text": "Cansado", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is an antonym of 'grande'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Enorme", "IsCorrect": false },
+          { "Text": "Pequeño", "IsCorrect": true },
+          { "Text": "Alto", "IsCorrect": false },
+          { "Text": "Largo", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "'Rápido' and 'veloz' are synonyms.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which word is an antonym of 'amor'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cariño", "IsCorrect": false },
+          { "Text": "Odio", "IsCorrect": true },
+          { "Text": "Paz", "IsCorrect": false },
+          { "Text": "Alegría", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is a synonym of 'inteligente'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Tonto", "IsCorrect": false },
+          { "Text": "Listo", "IsCorrect": true },
+          { "Text": "Lento", "IsCorrect": false },
+          { "Text": "Débil", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which pair are antonyms?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Hermoso - Bonito", "IsCorrect": false },
+          { "Text": "Joven - Viejo", "IsCorrect": true },
+          { "Text": "Feliz - Contento", "IsCorrect": false },
+          { "Text": "Rico - Adinerado", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is an antonym of 'ganar'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Competir", "IsCorrect": false },
+          { "Text": "Perder", "IsCorrect": true },
+          { "Text": "Jugar", "IsCorrect": false },
+          { "Text": "Gritar", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which word is a synonym of 'valiente'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cobarde", "IsCorrect": false },
+          { "Text": "Miedoso", "IsCorrect": false },
+          { "Text": "Audaz", "IsCorrect": true },
+          { "Text": "Débil", "IsCorrect": false }
         ]
       }
     ],
@@ -180,33 +554,110 @@
     ]
   },
   {
-    "Title": "Complete the phrase (fill-in-the-blank)",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Complete the phrase",
+    "Description": "Fill in the missing words to complete common Spanish expressions and sentences.",
+    "MediaUrl": "https://images.pexels.com/photos/2989397/pexels-photo-2989397.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Complete the phrase: 'Buenos _____' (Good morning)",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 10,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "noches", "IsCorrect": false },
+          { "Text": "tardes", "IsCorrect": false },
+          { "Text": "días", "IsCorrect": true },
+          { "Text": "sueños", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Complete the phrase: 'Mucho _____' (Nice to meet you)",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "gracias", "IsCorrect": false },
+          { "Text": "gusto", "IsCorrect": true },
+          { "Text": "tiempo", "IsCorrect": false },
+          { "Text": "amor", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The correct completion is: 'Hace buen _____' (The weather is good)",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Complete the phrase: '¿Cómo te _____?' (What's your name?)",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "llamas", "IsCorrect": true },
+          { "Text": "llamo", "IsCorrect": false },
+          { "Text": "llaman", "IsCorrect": false },
+          { "Text": "llamamos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Complete the phrase: 'Me _____ bien' (I feel good)",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "siento", "IsCorrect": true },
+          { "Text": "siente", "IsCorrect": false },
+          { "Text": "sentimos", "IsCorrect": false },
+          { "Text": "sienten", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Complete the phrase: '¿Qué _____ es?' (What time is it?)",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "día", "IsCorrect": false },
+          { "Text": "hora", "IsCorrect": true },
+          { "Text": "fecha", "IsCorrect": false },
+          { "Text": "momento", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Complete the phrase: 'Tengo _____' (I'm hungry)",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "sueño", "IsCorrect": false },
+          { "Text": "sed", "IsCorrect": false },
+          { "Text": "hambre", "IsCorrect": true },
+          { "Text": "frío", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Complete the phrase: '¿Dónde _____ el baño?' (Where is the bathroom?)",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "está", "IsCorrect": true },
+          { "Text": "es", "IsCorrect": false },
+          { "Text": "están", "IsCorrect": false },
+          { "Text": "somos", "IsCorrect": false }
         ]
       }
     ],
@@ -217,32 +668,109 @@
   },
   {
     "Title": "Present, past and future in Spanish",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Master the three fundamental tenses in Spanish conjugation and usage.",
+    "MediaUrl": "https://images.unsplash.com/photo-1623417933535-e3adacb8711c?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxzcGFuaXNoJTIwdGV4dHxlbnwwfHx8fDE3NTc3MTc1MTJ8MA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which ending is correct for the present tense 'yo' form of regular -AR verbs?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 15,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "-o", "IsCorrect": true },
+          { "Text": "-as", "IsCorrect": false },
+          { "Text": "-a", "IsCorrect": false },
+          { "Text": "-amos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you say 'I ate' in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Yo como", "IsCorrect": false },
+          { "Text": "Yo comí", "IsCorrect": true },
+          { "Text": "Yo comeré", "IsCorrect": false },
+          { "Text": "Yo comía", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The future tense in Spanish is formed by adding endings to the infinitive verb.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the 'ellos/ellas' ending for regular -ER verbs in the past tense (pretérito)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "-ieron", "IsCorrect": true },
+          { "Text": "-aron", "IsCorrect": false },
+          { "Text": "-isteis", "IsCorrect": false },
+          { "Text": "-imos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you say 'We will travel' in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Nosotros viajamos", "IsCorrect": false },
+          { "Text": "Nosotros viajábamos", "IsCorrect": false },
+          { "Text": "Nosotros viajaremos", "IsCorrect": true },
+          { "Text": "Nosotros viajamos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which verb form is in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "hablé", "IsCorrect": false },
+          { "Text": "hablaré", "IsCorrect": false },
+          { "Text": "hablo", "IsCorrect": true },
+          { "Text": "hablaba", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the 'tú' form of 'comer' in the future tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "comerás", "IsCorrect": true },
+          { "Text": "comeré", "IsCorrect": false },
+          { "Text": "comerá", "IsCorrect": false },
+          { "Text": "comerán", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which phrase means 'She was studying'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Ella estudia", "IsCorrect": false },
+          { "Text": "Ella estudió", "IsCorrect": false },
+          { "Text": "Ella estudiará", "IsCorrect": false },
+          { "Text": "Ella estudiaba", "IsCorrect": true }
         ]
       }
     ],
@@ -253,32 +781,109 @@
   },
   {
     "Title": "Common irregular verbs in Spanish",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Tackle the trickiest verbs that don't follow regular conjugation patterns.",
+    "MediaUrl": "https://images.pexels.com/photos/1383782/pexels-photo-1383782.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the 'yo' form of the verb 'ser' in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 15,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "soy", "IsCorrect": true },
+          { "Text": "eres", "IsCorrect": false },
+          { "Text": "es", "IsCorrect": false },
+          { "Text": "somos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you say 'I have' in Spanish using the irregular verb?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "yo tengo", "IsCorrect": true },
+          { "Text": "yo tiene", "IsCorrect": false },
+          { "Text": "yo teno", "IsCorrect": false },
+          { "Text": "yo tení", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The verb 'ir' (to go) is regular in the present tense.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What is the 'él/ella' form of 'querer' in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "quiero", "IsCorrect": false },
+          { "Text": "quieres", "IsCorrect": false },
+          { "Text": "quiere", "IsCorrect": true },
+          { "Text": "queremos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you conjugate 'venir' for 'nosotros' in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "venimos", "IsCorrect": true },
+          { "Text": "venemos", "IsCorrect": false },
+          { "Text": "venimos", "IsCorrect": false },
+          { "Text": "venimos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the stem change for 'poder' in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "o to ue", "IsCorrect": true },
+          { "Text": "e to ie", "IsCorrect": false },
+          { "Text": "e to i", "IsCorrect": false },
+          { "Text": "u to ue", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which is the correct 'tú' form of 'decir' in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "dices", "IsCorrect": true },
+          { "Text": "deces", "IsCorrect": false },
+          { "Text": "dicís", "IsCorrect": false },
+          { "Text": "decies", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the 'yo' form of 'saber' in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "sabo", "IsCorrect": false },
+          { "Text": "sé", "IsCorrect": true },
+          { "Text": "sepo", "IsCorrect": false },
+          { "Text": "sabe", "IsCorrect": false }
         ]
       }
     ],
@@ -289,32 +894,109 @@
   },
   {
     "Title": "Accent marks in Spanish",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Learn the rules and exceptions of Spanish accentuation and pronunciation.",
+    "MediaUrl": "https://images.unsplash.com/photo-1612624867797-9706fb7efee5?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw3fHxzcGFuaXNoJTIwdGV4dHxlbnwwfHx8fDE3NTc3MTc1MTJ8MA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which word requires an accent mark?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 15,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "casa", "IsCorrect": false },
+          { "Text": "arbol", "IsCorrect": false },
+          { "Text": "árbol", "IsCorrect": true },
+          { "Text": "mesa", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which word does the accent mark change the meaning?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "sí (yes) vs si (if)", "IsCorrect": true },
+          { "Text": "mesa (table) vs mesá", "IsCorrect": false },
+          { "Text": "casa (house) vs casá", "IsCorrect": false },
+          { "Text": "libro (book) vs libró", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "All words that end in a vowel, 'n', or 's' are always stressed on the penultimate syllable.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which word is correctly accented?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "telefóno", "IsCorrect": false },
+          { "Text": "teléfono", "IsCorrect": true },
+          { "Text": "telefono", "IsCorrect": false },
+          { "Text": "telefonó", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What type of word typically carries a written accent on the stressed syllable when it breaks the general pronunciation rules?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Aguda", "IsCorrect": false },
+          { "Text": "Llana", "IsCorrect": false },
+          { "Text": "Esdrújula", "IsCorrect": true },
+          { "Text": "Sobresdrújula", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which interrogative word requires an accent mark?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "que", "IsCorrect": false },
+          { "Text": "cual", "IsCorrect": false },
+          { "Text": "quién", "IsCorrect": true },
+          { "Text": "como", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Where should the accent mark be placed in the word 'examen' to indicate the plural form 'exámenes'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "On the 'e' (exámenes)", "IsCorrect": true },
+          { "Text": "On the first 'e' (éxamenes)", "IsCorrect": false },
+          { "Text": "On the 'a' (examénes)", "IsCorrect": false },
+          { "Text": "No accent mark needed", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which word does NOT need an accent mark?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "jamás", "IsCorrect": false },
+          { "Text": "azúcar", "IsCorrect": false },
+          { "Text": "lapiz", "IsCorrect": false },
+          { "Text": "corazon", "IsCorrect": true }
         ]
       }
     ],
@@ -325,32 +1007,109 @@
   },
   {
     "Title": "Sentence grammar check",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Identify grammatical errors and improve your Spanish writing skills.",
+    "MediaUrl": "https://images.pexels.com/photos/6502823/pexels-photo-6502823.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which sentence is grammatically correct?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "El libro es de la María.", "IsCorrect": false },
+          { "Text": "El libro es de María.", "IsCorrect": true },
+          { "Text": "El libro es de el María.", "IsCorrect": false },
+          { "Text": "El libro es de la María's.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Identify the error: 'Yo gusto el chocolate.'",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Should be 'gusta'", "IsCorrect": true },
+          { "Text": "Should be 'gusto'", "IsCorrect": false },
+          { "Text": "Should be 'gustan'", "IsCorrect": false },
+          { "Text": "No error", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The sentence 'Ellos son mis amigo.' is grammatically correct.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which sentence uses the correct gender agreement?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "La casa blanco", "IsCorrect": false },
+          { "Text": "El casa blanca", "IsCorrect": false },
+          { "Text": "La casa blanca", "IsCorrect": true },
+          { "Text": "El casa blanco", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the correct way to say 'I am 20 years old'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Yo soy veinte años.", "IsCorrect": false },
+          { "Text": "Yo tengo veinte años.", "IsCorrect": true },
+          { "Text": "Yo estoy veinte años.", "IsCorrect": false },
+          { "Text": "Yo hago veinte años.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Identify the error: 'Voy a la escuela en coche de mi padre.'",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Should be 'en el coche'", "IsCorrect": true },
+          { "Text": "Should be 'al escuela'", "IsCorrect": false },
+          { "Text": "Should be 'voy al'", "IsCorrect": false },
+          { "Text": "No error", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which sentence has correct verb conjugation?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Nosotros hablamos español.", "IsCorrect": true },
+          { "Text": "Nosotros hablo español.", "IsCorrect": false },
+          { "Text": "Nosotros habla español.", "IsCorrect": false },
+          { "Text": "Nosotros hablan español.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the correct question form for 'You have the book.'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "¿Tienes el libro?", "IsCorrect": true },
+          { "Text": "¿Tiene el libro?", "IsCorrect": false },
+          { "Text": "¿Tienen el libro?", "IsCorrect": false },
+          { "Text": "¿Tenéis el libro?", "IsCorrect": false }
         ]
       }
     ],
@@ -361,32 +1120,109 @@
   },
   {
     "Title": "Spanish homophones",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Distinguish between words that sound the same but have different meanings and spellings.",
+    "MediaUrl": "https://images.unsplash.com/photo-1652954884281-8fb97179c4f9?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxNXx8U3BhbmlzaCUyMGhvbW9waG9uZXN8ZW58MHx8fHwxNzU3NzE3NzcwfDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which word means 'there' as in a place?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 15,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "ay", "IsCorrect": false },
+          { "Text": "ahí", "IsCorrect": true },
+          { "Text": "hay", "IsCorrect": false },
+          { "Text": "allí", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which homophone means 'to have' (auxiliary verb)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "a", "IsCorrect": false },
+          { "Text": "ha", "IsCorrect": true },
+          { "Text": "ah", "IsCorrect": false },
+          { "Text": "ha'", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "'Valla' (fence) and 'vaya' (go) are homophones.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which word means 'berry'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "baya", "IsCorrect": true },
+          { "Text": "valla", "IsCorrect": false },
+          { "Text": "vaya", "IsCorrect": false },
+          { "Text": "balla", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which homophone means 'I know' (from saber)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "se", "IsCorrect": false },
+          { "Text": "sé", "IsCorrect": true },
+          { "Text": "ce", "IsCorrect": false },
+          { "Text": "see", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which word means 'time' as in number of times?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "vez", "IsCorrect": true },
+          { "Text": "ves", "IsCorrect": false },
+          { "Text": "tiempo", "IsCorrect": false },
+          { "Text": "bes", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which homophone means 'wave' (as in ocean wave)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "ola", "IsCorrect": true },
+          { "Text": "hola", "IsCorrect": false },
+          { "Text": "olla", "IsCorrect": false },
+          { "Text": "holla", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which word means 'he/she/it was' (from ser)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "fue", "IsCorrect": true },
+          { "Text": "hue", "IsCorrect": false },
+          { "Text": "fwe", "IsCorrect": false },
+          { "Text": "fué", "IsCorrect": false }
         ]
       }
     ],
@@ -397,32 +1233,109 @@
   },
   {
     "Title": "Gender and number agreement",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Make adjectives, articles, and nouns agree in gender and number like a native speaker.",
+    "MediaUrl": "https://images.pexels.com/photos/1722196/pexels-photo-1722196.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which phrase has correct gender and number agreement?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 15,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "los casas grandes", "IsCorrect": false },
+          { "Text": "las casas grandes", "IsCorrect": true },
+          { "Text": "el casas grande", "IsCorrect": false },
+          { "Text": "la casa grandes", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Complete the phrase: '___ libros interesantes' (the interesting books)",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "El", "IsCorrect": false },
+          { "Text": "La", "IsCorrect": false },
+          { "Text": "Los", "IsCorrect": true },
+          { "Text": "Las", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The phrase 'unos amigos buenos' has correct gender and number agreement.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which adjective correctly modifies 'flores' (feminine plural)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "bonito", "IsCorrect": false },
+          { "Text": "bonita", "IsCorrect": false },
+          { "Text": "bonitos", "IsCorrect": false },
+          { "Text": "bonitas", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Choose the correct phrase:",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "el agua frío", "IsCorrect": false },
+          { "Text": "la agua fría", "IsCorrect": false },
+          { "Text": "el agua fría", "IsCorrect": true },
+          { "Text": "la agua frío", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which sentence has correct agreement?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Esos perros son muy leales.", "IsCorrect": true },
+          { "Text": "Eses perros son muy leal.", "IsCorrect": false },
+          { "Text": "Eso perros son muy leales.", "IsCorrect": false },
+          { "Text": "Esos perro son muy leales.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Complete the phrase: '___ estudiantes inteligentes' (the intelligent students - mixed gender group)",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Los", "IsCorrect": true },
+          { "Text": "Las", "IsCorrect": false },
+          { "Text": "El", "IsCorrect": false },
+          { "Text": "La", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which phrase demonstrates correct agreement with the noun 'problemas'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "muchos problemas difíciles", "IsCorrect": true },
+          { "Text": "muchas problemas difícil", "IsCorrect": false },
+          { "Text": "mucho problemas difíciles", "IsCorrect": false },
+          { "Text": "muchos problema difícil", "IsCorrect": false }
         ]
       }
     ],
@@ -433,32 +1346,109 @@
   },
   {
     "Title": "Colors and numbers",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Combine your knowledge of colors and numbers in practical Spanish contexts.",
+    "MediaUrl": "https://images.pexels.com/photos/1314541/pexels-photo-1314541.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "How do you say 'three red apples' in Spanish?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "tres manzanas rojas", "IsCorrect": true },
+          { "Text": "tres manzanas rojo", "IsCorrect": false },
+          { "Text": "tres manzana rojas", "IsCorrect": false },
+          { "Text": "tres manzana rojo", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How would you describe 'five blue cars' in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "cinco coches azules", "IsCorrect": true },
+          { "Text": "cinco coches azul", "IsCorrect": false },
+          { "Text": "cinco coche azules", "IsCorrect": false },
+          { "Text": "cinco coche azul", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "'Dos gatos negros' means 'two black cats' in Spanish and has correct agreement.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which phrase means 'seven yellow pencils'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "siete lápices amarillos", "IsCorrect": true },
+          { "Text": "siete lápices amarillo", "IsCorrect": false },
+          { "Text": "siete lápiz amarillos", "IsCorrect": false },
+          { "Text": "siete lápiz amarillo", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you say 'ten white houses' in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "diez casas blancas", "IsCorrect": true },
+          { "Text": "diez casas blanco", "IsCorrect": false },
+          { "Text": "diez casa blancas", "IsCorrect": false },
+          { "Text": "diez casa blanco", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which is the correct translation for 'eight green books'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "ocho libros verdes", "IsCorrect": true },
+          { "Text": "ocho libros verde", "IsCorrect": false },
+          { "Text": "ocho libro verdes", "IsCorrect": false },
+          { "Text": "ocho libro verde", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How would you say 'six orange flowers' in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "seis flores anaranjadas", "IsCorrect": true },
+          { "Text": "seis flores anaranjado", "IsCorrect": false },
+          { "Text": "seis flor anaranjadas", "IsCorrect": false },
+          { "Text": "seis flor anaranjado", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which phrase correctly describes 'four brown dogs'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "cuatro perros marrones", "IsCorrect": true },
+          { "Text": "cuatro perros marrón", "IsCorrect": false },
+          { "Text": "cuatro perro marrones", "IsCorrect": false },
+          { "Text": "cuatro perro marrón", "IsCorrect": false }
         ]
       }
     ],
@@ -469,32 +1459,109 @@
   },
   {
     "Title": "Days of the week and months",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Master temporal vocabulary including days, months, and related expressions.",
+    "MediaUrl": "https://images.unsplash.com/photo-1633526543814-9718c8922b7a?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxkYXlzJTIwb2YlMjB0aGUlMjB3ZWVrfGVufDB8fHx8MTc1NzcxODI3MHww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the Spanish word for 'Monday'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 10,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Martes", "IsCorrect": false },
+          { "Text": "Miércoles", "IsCorrect": false },
+          { "Text": "Lunes", "IsCorrect": true },
+          { "Text": "Viernes", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which month comes after 'septiembre'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Octubre", "IsCorrect": true },
+          { "Text": "Noviembre", "IsCorrect": false },
+          { "Text": "Agosto", "IsCorrect": false },
+          { "Text": "Diciembre", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The days of the week in Spanish are not capitalized unless they start a sentence.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you say 'Wednesday' in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Martes", "IsCorrect": false },
+          { "Text": "Jueves", "IsCorrect": false },
+          { "Text": "Miércoles", "IsCorrect": true },
+          { "Text": "Sábado", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which month is known as 'the month of flowers' in many Spanish-speaking countries?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Abril", "IsCorrect": false },
+          { "Text": "Mayo", "IsCorrect": true },
+          { "Text": "Junio", "IsCorrect": false },
+          { "Text": "Julio", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the correct way to say 'the weekend' in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "el fin de semana", "IsCorrect": true },
+          { "Text": "la semana final", "IsCorrect": false },
+          { "Text": "el último de semana", "IsCorrect": false },
+          { "Text": "la fin semana", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which expression means 'see you tomorrow'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Hasta luego", "IsCorrect": false },
+          { "Text": "Hasta mañana", "IsCorrect": true },
+          { "Text": "Hasta pronto", "IsCorrect": false },
+          { "Text": "Hasta la vista", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you say 'January' in Spanish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Enero", "IsCorrect": true },
+          { "Text": "Febrero", "IsCorrect": false },
+          { "Text": "Junio", "IsCorrect": false },
+          { "Text": "Julio", "IsCorrect": false }
         ]
       }
     ],
@@ -505,32 +1572,109 @@
   },
   {
     "Title": "Common irregular verbs",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Focus on the most frequently used irregular verbs in everyday Spanish conversation.",
+    "MediaUrl": "https://images.unsplash.com/photo-1590650046871-92c887180603?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw4fHxwZW9wbGUlMjB0YWxraW5nfGVufDB8fHx8MTc1NzcxODg0OHww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the 'yo' form of the verb 'ir' (to go) in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 15,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "voy", "IsCorrect": true },
+          { "Text": "vas", "IsCorrect": false },
+          { "Text": "va", "IsCorrect": false },
+          { "Text": "vamos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you say 'I do' or 'I make' using the irregular verb?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "yo hago", "IsCorrect": true },
+          { "Text": "yo hace", "IsCorrect": false },
+          { "Text": "yo haco", "IsCorrect": false },
+          { "Text": "yo haz", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The verb 'ser' (to be) is regular in the present tense.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What is the 'tú' form of 'tener' (to have) in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "tengo", "IsCorrect": false },
+          { "Text": "tienes", "IsCorrect": true },
+          { "Text": "tiene", "IsCorrect": false },
+          { "Text": "tenéis", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How do you conjugate 'venir' (to come) for 'él/ella' in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "viene", "IsCorrect": true },
+          { "Text": "veno", "IsCorrect": false },
+          { "Text": "vieno", "IsCorrect": false },
+          { "Text": "venimos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the stem change for 'poder' (to be able to) in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "o to ue", "IsCorrect": true },
+          { "Text": "e to ie", "IsCorrect": false },
+          { "Text": "e to i", "IsCorrect": false },
+          { "Text": "u to ue", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which is the correct 'nosotros' form of 'decir' (to say/tell) in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "decimos", "IsCorrect": true },
+          { "Text": "dice", "IsCorrect": false },
+          { "Text": "dicen", "IsCorrect": false },
+          { "Text": "decimos", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the 'yo' form of 'saber' (to know) in the present tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "sabo", "IsCorrect": false },
+          { "Text": "sé", "IsCorrect": true },
+          { "Text": "sepo", "IsCorrect": false },
+          { "Text": "sabe", "IsCorrect": false }
         ]
       }
     ],
@@ -540,33 +1684,110 @@
     ]
   },
   {
-    "Title": "Opposites in English (big/small, hot/cold)",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Opposites in English",
+    "Description": "Learn adjective pairs and expand your descriptive vocabulary in English.",
+    "MediaUrl": "https://images.unsplash.com/photo-1611090285001-86450e05822e?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxvcHBvc2l0ZXxlbnwwfHx8fDE3NTc3MTg5MDh8MA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the opposite of 'big'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 10,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Large", "IsCorrect": false },
+          { "Text": "Small", "IsCorrect": true },
+          { "Text": "Tall", "IsCorrect": false },
+          { "Text": "Short", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the opposite of 'hot'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Warm", "IsCorrect": false },
+          { "Text": "Cold", "IsCorrect": true },
+          { "Text": "Cool", "IsCorrect": false },
+          { "Text": "Freezing", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "'Fast' and 'slow' are opposites.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the opposite of 'young'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "New", "IsCorrect": false },
+          { "Text": "Old", "IsCorrect": true },
+          { "Text": "Ancient", "IsCorrect": false },
+          { "Text": "Fresh", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the opposite of 'happy'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Sad", "IsCorrect": true },
+          { "Text": "Angry", "IsCorrect": false },
+          { "Text": "Tired", "IsCorrect": false },
+          { "Text": "Bored", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the opposite of 'light' (in weight)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Dark", "IsCorrect": false },
+          { "Text": "Heavy", "IsCorrect": true },
+          { "Text": "Strong", "IsCorrect": false },
+          { "Text": "Hard", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the opposite of 'full'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Empty", "IsCorrect": true },
+          { "Text": "Half", "IsCorrect": false },
+          { "Text": "Overflowing", "IsCorrect": false },
+          { "Text": "Plenty", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the opposite of 'expensive'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cheap", "IsCorrect": true },
+          { "Text": "Costly", "IsCorrect": false },
+          { "Text": "Valuable", "IsCorrect": false },
+          { "Text": "Worthless", "IsCorrect": false }
         ]
       }
     ],
@@ -576,33 +1797,110 @@
     ]
   },
   {
-    "Title": "Prepositions of place (in, on, under)",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Prepositions of place",
+    "Description": "Master spatial relationships and location descriptions in English.",
+    "MediaUrl": "https://images.pexels.com/photos/7629982/pexels-photo-7629982.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which preposition describes something contained within a space, like a toy _____ a box?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 15,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "on", "IsCorrect": false },
+          { "Text": "in", "IsCorrect": true },
+          { "Text": "under", "IsCorrect": false },
+          { "Text": "next to", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which preposition describes surface contact, like a book _____ a table?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "in", "IsCorrect": false },
+          { "Text": "on", "IsCorrect": true },
+          { "Text": "under", "IsCorrect": false },
+          { "Text": "behind", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The preposition 'under' can mean directly below or beneath something.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which preposition describes a lower level than something else, like a cat _____ the chair?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "over", "IsCorrect": false },
+          { "Text": "on", "IsCorrect": false },
+          { "Text": "under", "IsCorrect": true },
+          { "Text": "in", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which preposition means 'at the back of' or 'on the other side of', like standing _____ the door?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "in front of", "IsCorrect": false },
+          { "Text": "next to", "IsCorrect": false },
+          { "Text": "behind", "IsCorrect": true },
+          { "Text": "between", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which preposition describes something at a higher level than something else, like a picture _____ the sofa?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "under", "IsCorrect": false },
+          { "Text": "on", "IsCorrect": false },
+          { "Text": "above", "IsCorrect": true },
+          { "Text": "below", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which preposition describes proximity, like a tree _____ the house?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "in", "IsCorrect": false },
+          { "Text": "on", "IsCorrect": false },
+          { "Text": "next to", "IsCorrect": true },
+          { "Text": "under", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which preposition means 'in the middle of' two things, like a ball _____ two chairs?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "behind", "IsCorrect": false },
+          { "Text": "in front of", "IsCorrect": false },
+          { "Text": "between", "IsCorrect": true },
+          { "Text": "among", "IsCorrect": false }
         ]
       }
     ],
@@ -613,32 +1911,109 @@
   },
   {
     "Title": "Simple present vs present continuous",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Distinguish between habitual actions and ongoing activities in English grammar.",
+    "MediaUrl": "https://images.pexels.com/photos/1925536/pexels-photo-1925536.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which sentence is in the simple present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 15,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "She is reading a book.", "IsCorrect": false },
+          { "Text": "She reads a book every day.", "IsCorrect": true },
+          { "Text": "She has read a book.", "IsCorrect": false },
+          { "Text": "She was reading a book.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which sentence describes an action happening right now?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "I work at a school.", "IsCorrect": false },
+          { "Text": "I am working on a project.", "IsCorrect": true },
+          { "Text": "I worked yesterday.", "IsCorrect": false },
+          { "Text": "I will work tomorrow.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The present continuous tense is formed with am/is/are + verb + -ing.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which sentence expresses a habitual action?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "They are playing soccer now.", "IsCorrect": false },
+          { "Text": "They play soccer every weekend.", "IsCorrect": true },
+          { "Text": "They were playing soccer.", "IsCorrect": false },
+          { "Text": "They will play soccer.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which sentence is grammatically correct for a temporary situation?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "He lives in Paris.", "IsCorrect": false },
+          { "Text": "He is living in Paris for the summer.", "IsCorrect": true },
+          { "Text": "He lived in Paris.", "IsCorrect": false },
+          { "Text": "He will live in Paris.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which sentence uses the present continuous tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "We study English.", "IsCorrect": false },
+          { "Text": "We are studying English.", "IsCorrect": true },
+          { "Text": "We studied English.", "IsCorrect": false },
+          { "Text": "We will study English.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which sentence describes a fact or general truth?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 15,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Water is boiling at 100 degrees Celsius.", "IsCorrect": false },
+          { "Text": "Water boils at 100 degrees Celsius.", "IsCorrect": true },
+          { "Text": "Water was boiling.", "IsCorrect": false },
+          { "Text": "Water has boiled.", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which sentence is NOT correct for the present continuous tense?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "She is understanding the lesson.", "IsCorrect": true },
+          { "Text": "She is reading the lesson.", "IsCorrect": false },
+          { "Text": "She is learning the lesson.", "IsCorrect": false },
+          { "Text": "She is studying the lesson.", "IsCorrect": false }
         ]
       }
     ],
