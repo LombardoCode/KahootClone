@@ -1,650 +1,1802 @@
 [
   {
-    "Title": "Amazing animals",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Amazing animal facts and adaptations",
+    "Description": "Discover fascinating animal abilities and adaptations that help creatures survive in the wild.",
+    "MediaUrl": "https://images.unsplash.com/flagged/photo-1591475791029-f9efe6297456?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHxQb2xhciUyMGJlYXJ8ZW58MHx8fHwxNzU3OTIwMDI3fDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which animal can change color to blend in?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Penguin", "IsCorrect": false },
+          { "Text": "Chameleon", "IsCorrect": true },
+          { "Text": "Polar bear", "IsCorrect": false },
+          { "Text": "Cheetah", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What helps bats navigate in the dark?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Echolocation", "IsCorrect": true },
+          { "Text": "Night vision", "IsCorrect": false },
+          { "Text": "Infrared sensing", "IsCorrect": false },
+          { "Text": "Strong smell", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which animal has the longest neck?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Ostrich", "IsCorrect": false },
+          { "Text": "Giraffe", "IsCorrect": true },
+          { "Text": "Flamingo", "IsCorrect": false },
+          { "Text": "Swan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Octopuses have three hearts.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What adaptation helps penguins stay warm?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Thin feathers", "IsCorrect": false },
+          { "Text": "Blubber layer", "IsCorrect": true },
+          { "Text": "Scales", "IsCorrect": false },
+          { "Text": "Fur coat", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which animal can regrow its tail?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Lizard", "IsCorrect": true },
+          { "Text": "Snake", "IsCorrect": false },
+          { "Text": "Turtle", "IsCorrect": false },
+          { "Text": "Crocodile", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What allows cheetahs to run so fast?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Large lungs", "IsCorrect": false },
+          { "Text": "Flexible spine", "IsCorrect": true },
+          { "Text": "Heavy bones", "IsCorrect": false },
+          { "Text": "Short legs", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Natural wonders"
+      "Natural Wonders & Science"
     ]
   },
   {
-    "Title": "Oceans and seas",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Ocean mysteries and marine life",
+    "Description": "Dive into the deep sea to uncover incredible facts about marine animals and ocean mysteries.",
+    "MediaUrl": "https://images.pexels.com/photos/1350197/pexels-photo-1350197.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which is the largest animal in the ocean?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Great white shark", "IsCorrect": false },
+          { "Text": "Blue whale", "IsCorrect": true },
+          { "Text": "Giant squid", "IsCorrect": false },
+          { "Text": "Killer whale", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the deepest part of the ocean?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Bermuda Triangle", "IsCorrect": false },
+          { "Text": "Mariana Trench", "IsCorrect": true },
+          { "Text": "Great Barrier Reef", "IsCorrect": false },
+          { "Text": "Mid-Atlantic Ridge", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which creature glows in the deep sea?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Anglerfish", "IsCorrect": true },
+          { "Text": "Clownfish", "IsCorrect": false },
+          { "Text": "Sea turtle", "IsCorrect": false },
+          { "Text": "Dolphin", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Coral reefs are living organisms.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What animal has the longest migration?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Humpback whale", "IsCorrect": true },
+          { "Text": "Great white shark", "IsCorrect": false },
+          { "Text": "Sea turtle", "IsCorrect": false },
+          { "Text": "Penguin", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which fish can puff up to scare predators?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Clownfish", "IsCorrect": false },
+          { "Text": "Pufferfish", "IsCorrect": true },
+          { "Text": "Angelfish", "IsCorrect": false },
+          { "Text": "Tuna", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the largest coral reef system?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Great Barrier Reef", "IsCorrect": true },
+          { "Text": "Red Sea Coral Reef", "IsCorrect": false },
+          { "Text": "Belize Barrier Reef", "IsCorrect": false },
+          { "Text": "Maldives Coral Reef", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Natural wonders"
+      "Natural Wonders & Science"
     ]
   },
   {
-    "Title": "Weird science facts",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Weird science phenomena explained",
+    "Description": "Explore unusual and surprising scientific phenomena that seem almost unbelievable.",
+    "MediaUrl": "https://images.pexels.com/photos/41004/alaska-wilderness-sky-aurora-borealis-41004.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What causes the Northern Lights?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Solar wind particles", "IsCorrect": true },
+          { "Text": "Moonlight reflection", "IsCorrect": false },
+          { "Text": "Ocean waves", "IsCorrect": false },
+          { "Text": "Cloud formations", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What makes a mirage in the desert?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Light refraction", "IsCorrect": true },
+          { "Text": "Magnetic fields", "IsCorrect": false },
+          { "Text": "Sand vibration", "IsCorrect": false },
+          { "Text": "Wind patterns", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What causes ball lightning?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Static electricity", "IsCorrect": false },
+          { "Text": "Unknown phenomena", "IsCorrect": true },
+          { "Text": "Solar flares", "IsCorrect": false },
+          { "Text": "Thunder vibrations", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Fireflies glow due to chemical reactions.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What causes the Bermuda Triangle mystery?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Magnetic anomalies", "IsCorrect": false },
+          { "Text": "Unexplained factors", "IsCorrect": true },
+          { "Text": "Alien activity", "IsCorrect": false },
+          { "Text": "Underwater volcanoes", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What makes rainbows appear?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Light refraction", "IsCorrect": true },
+          { "Text": "Cloud shadows", "IsCorrect": false },
+          { "Text": "Wind patterns", "IsCorrect": false },
+          { "Text": "Dust particles", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What causes a sonic boom?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Breaking sound barrier", "IsCorrect": true },
+          { "Text": "Lightning strike", "IsCorrect": false },
+          { "Text": "Earthquake", "IsCorrect": false },
+          { "Text": "Volcanic eruption", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Natural wonders"
+      "Natural Wonders & Science"
     ]
   },
   {
-    "Title": "Endangered species facts",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Endangered species and conservation",
+    "Description": "Learn about animals at risk of extinction and the efforts being made to protect them.",
+    "MediaUrl": "https://images.pexels.com/photos/33879392/pexels-photo-33879392.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which animal is critically endangered?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Bald eagle", "IsCorrect": false },
+          { "Text": "Amur leopard", "IsCorrect": true },
+          { "Text": "African elephant", "IsCorrect": false },
+          { "Text": "Giant panda", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What threatens the black rhinoceros?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Poaching", "IsCorrect": true },
+          { "Text": "Climate change", "IsCorrect": false },
+          { "Text": "Overfishing", "IsCorrect": false },
+          { "Text": "Deforestation", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which species was saved from extinction?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Dodo bird", "IsCorrect": false },
+          { "Text": "Bald eagle", "IsCorrect": true },
+          { "Text": "Passenger pigeon", "IsCorrect": false },
+          { "Text": "Tasmanian tiger", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "All pandas are now safe from extinction.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What protects endangered species globally?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "CITES treaty", "IsCorrect": true },
+          { "Text": "Kyoto Protocol", "IsCorrect": false },
+          { "Text": "Paris Agreement", "IsCorrect": false },
+          { "Text": "Geneva Convention", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which habitat loss affects orangutans?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Deforestation", "IsCorrect": true },
+          { "Text": "Ocean pollution", "IsCorrect": false },
+          { "Text": "Desertification", "IsCorrect": false },
+          { "Text": "Urbanization", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which animal is a conservation success?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Mountain gorilla", "IsCorrect": true },
+          { "Text": "Javan rhinoceros", "IsCorrect": false },
+          { "Text": "Saola", "IsCorrect": false },
+          { "Text": "Yangtze finless porpoise", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Natural wonders"
+      "Natural Wonders & Science"
     ]
   },
   {
-    "Title": "Human body facts",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Weather and natural disasters",
+    "Description": "Test your knowledge of storms, earthquakes, hurricanes, and other powerful forces of nature.",
+    "MediaUrl": "https://images.unsplash.com/photo-1693711836001-99859bb7185a?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw2fHx0b3JuYWRvfGVufDB8fHx8MTc1NzkxOTk3Nnww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What's the deadliest type of natural disaster?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Tornado", "IsCorrect": false },
+          { "Text": "Earthquake", "IsCorrect": true },
+          { "Text": "Volcano", "IsCorrect": false },
+          { "Text": "Blizzard", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which hurricane hit New Orleans in 2005?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Katrina", "IsCorrect": true },
+          { "Text": "Sandy", "IsCorrect": false },
+          { "Text": "Irma", "IsCorrect": false },
+          { "Text": "Andrew", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the fastest wind speed recorded?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "254 mph", "IsCorrect": true },
+          { "Text": "150 mph", "IsCorrect": false },
+          { "Text": "300 mph", "IsCorrect": false },
+          { "Text": "100 mph", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Tsunamis are caused by hurricanes.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which volcano erupted in 79 AD?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Mount Vesuvius", "IsCorrect": true },
+          { "Text": "Mount Etna", "IsCorrect": false },
+          { "Text": "Krakatoa", "IsCorrect": false },
+          { "Text": "Mount Fuji", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What disaster caused the 2004 Indian Ocean tragedy?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Earthquake", "IsCorrect": false },
+          { "Text": "Tsunami", "IsCorrect": true },
+          { "Text": "Hurricane", "IsCorrect": false },
+          { "Text": "Volcano", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which scale rates tornado intensity?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Fujita", "IsCorrect": true },
+          { "Text": "Richter", "IsCorrect": false },
+          { "Text": "Saffir-Simpson", "IsCorrect": false },
+          { "Text": "Beaufort", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Human body trivia"
+      "Natural Wonders & Science"
     ]
   },
   {
-    "Title": "World records by humans",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Plant kingdom curiosities",
+    "Description": "From carnivorous plants to giant trees, explore surprising facts about the plant world.",
+    "MediaUrl": "https://images.unsplash.com/photo-1751445384135-259bb6c385af?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw4fHxQbGFudCUyMEtpbmdkb218ZW58MHx8fHwxNzU3OTE5Nzg4fDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which plant traps and eats insects?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Venus flytrap", "IsCorrect": true },
+          { "Text": "Sunflower", "IsCorrect": false },
+          { "Text": "Oak tree", "IsCorrect": false },
+          { "Text": "Cactus", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the largest type of tree in the world?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Sequoia", "IsCorrect": true },
+          { "Text": "Pine", "IsCorrect": false },
+          { "Text": "Bamboo", "IsCorrect": false },
+          { "Text": "Baobab", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which plant can live over 5,000 years?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Bristlecone pine", "IsCorrect": true },
+          { "Text": "Palm tree", "IsCorrect": false },
+          { "Text": "Rose bush", "IsCorrect": false },
+          { "Text": "Fern", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "All plants need sunlight to survive.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What plant is known as the ‘corpse flower'?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Rafflesia", "IsCorrect": true },
+          { "Text": "Orchid", "IsCorrect": false },
+          { "Text": "Lily", "IsCorrect": false },
+          { "Text": "Tulip", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which plant grows the fastest?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Bamboo", "IsCorrect": true },
+          { "Text": "Cactus", "IsCorrect": false },
+          { "Text": "Maple tree", "IsCorrect": false },
+          { "Text": "Fern", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What plant stores water in its leaves?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Succulent", "IsCorrect": true },
+          { "Text": "Pine tree", "IsCorrect": false },
+          { "Text": "Grass", "IsCorrect": false },
+          { "Text": "Vine", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Human body trivia"
+      "Natural Wonders & Science"
     ]
   },
   {
-    "Title": "Surprising medical facts",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Incredible human body facts",
+    "Description": "Uncover amazing details about the human body and its extraordinary capabilities.",
+    "MediaUrl": "https://images.unsplash.com/photo-1567607673554-2048def2c6b4?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw4fHxodW1hbiUyMGJvZHl8ZW58MHx8fHwxNzU3OTIwMDY0fDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "How many bones are in a human baby?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "300", "IsCorrect": true },
+          { "Text": "206", "IsCorrect": false },
+          { "Text": "150", "IsCorrect": false },
+          { "Text": "250", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the strongest muscle by weight?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Biceps", "IsCorrect": false },
+          { "Text": "Masseter", "IsCorrect": true },
+          { "Text": "Quadriceps", "IsCorrect": false },
+          { "Text": "Heart", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How fast can a sneeze travel?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "100 mph", "IsCorrect": true },
+          { "Text": "10 mph", "IsCorrect": false },
+          { "Text": "50 mph", "IsCorrect": false },
+          { "Text": "200 mph", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Your stomach produces new lining weekly.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How many taste buds are on the tongue?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "10,000", "IsCorrect": true },
+          { "Text": "1,000", "IsCorrect": false },
+          { "Text": "100,000", "IsCorrect": false },
+          { "Text": "500", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What organ holds 25% of your blood?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Liver", "IsCorrect": true },
+          { "Text": "Brain", "IsCorrect": false },
+          { "Text": "Lungs", "IsCorrect": false },
+          { "Text": "Kidneys", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "How long is your DNA if stretched out?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "2 meters", "IsCorrect": false },
+          { "Text": "6 billion miles", "IsCorrect": true },
+          { "Text": "100 meters", "IsCorrect": false },
+          { "Text": "1 mile", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Human body trivia"
+      "Human Body & Achievements"
     ]
   },
   {
-    "Title": "Fun with numbers (height, speed, strength)",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Extraordinary world records by humans",
+    "Description": "Challenge yourself with trivia about record-breaking human achievements across history.",
+    "MediaUrl": "https://images.pexels.com/photos/11114516/pexels-photo-11114516.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Who ran 100 meters in 9.58 seconds?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Usain Bolt", "IsCorrect": true },
+          { "Text": "Carl Lewis", "IsCorrect": false },
+          { "Text": "Jesse Owens", "IsCorrect": false },
+          { "Text": "Mo Farah", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the longest breath-hold record?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "24 minutes", "IsCorrect": true },
+          { "Text": "10 minutes", "IsCorrect": false },
+          { "Text": "5 minutes", "IsCorrect": false },
+          { "Text": "15 minutes", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Who climbed Everest without oxygen in 1978?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Reinhold Messner", "IsCorrect": true },
+          { "Text": "Edmund Hillary", "IsCorrect": false },
+          { "Text": "Tenzing Norgay", "IsCorrect": false },
+          { "Text": "Junko Tabei", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The longest marathon was 54 years long.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the record for most push-ups in 24 hours?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "46,001", "IsCorrect": true },
+          { "Text": "10,000", "IsCorrect": false },
+          { "Text": "25,000", "IsCorrect": false },
+          { "Text": "5,000", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Who swam the English Channel fastest?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Trent Grimsey", "IsCorrect": true },
+          { "Text": "Michael Phelps", "IsCorrect": false },
+          { "Text": "Diana Nyad", "IsCorrect": false },
+          { "Text": "Gertrude Ederle", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the highest skydive record?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "135,889 feet", "IsCorrect": true },
+          { "Text": "50,000 feet", "IsCorrect": false },
+          { "Text": "80,000 feet", "IsCorrect": false },
+          { "Text": "10,000 feet", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Human body trivia"
+      "Human Body & Achievements"
     ]
   },
   {
-    "Title": "Weird phobias",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Surprising medical discoveries",
+    "Description": "Learn about groundbreaking medical breakthroughs and odd discoveries in health science.",
+    "MediaUrl": "https://images.pexels.com/photos/6941098/pexels-photo-6941098.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Who discovered penicillin in 1928?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Alexander Fleming", "IsCorrect": true },
+          { "Text": "Louis Pasteur", "IsCorrect": false },
+          { "Text": "Jonas Salk", "IsCorrect": false },
+          { "Text": "Marie Curie", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What was discovered using X-rays in 1895?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "DNA structure", "IsCorrect": false },
+          { "Text": "Bone imaging", "IsCorrect": true },
+          { "Text": "Blood types", "IsCorrect": false },
+          { "Text": "Vaccines", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Who found the polio vaccine in 1955?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Jonas Salk", "IsCorrect": true },
+          { "Text": "Edward Jenner", "IsCorrect": false },
+          { "Text": "Robert Koch", "IsCorrect": false },
+          { "Text": "Paul Ehrlich", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Insulin was discovered in 1921.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What organ was first transplanted in 1954?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Heart", "IsCorrect": false },
+          { "Text": "Kidney", "IsCorrect": true },
+          { "Text": "Liver", "IsCorrect": false },
+          { "Text": "Lung", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What did Wilhelm Roentgen discover?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "X-rays", "IsCorrect": true },
+          { "Text": "Antibiotics", "IsCorrect": false },
+          { "Text": "Vaccines", "IsCorrect": false },
+          { "Text": "Anesthesia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What breakthrough mapped human genes?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Human Genome Project", "IsCorrect": true },
+          { "Text": "CRISPR", "IsCorrect": false },
+          { "Text": "Stem cell therapy", "IsCorrect": false },
+          { "Text": "MRI scanning", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Human behavior"
+      "Human Body & Achievements"
     ]
   },
   {
-    "Title": "Habits across cultures",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Human capabilities: height, speed, strength",
+    "Description": "Test your knowledge of extreme human limits, from the tallest to the fastest and strongest.",
+    "MediaUrl": "https://images.pexels.com/photos/3764011/pexels-photo-3764011.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Who is the tallest recorded person?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Robert Wadlow", "IsCorrect": true },
+          { "Text": "Yao Ming", "IsCorrect": false },
+          { "Text": "Sultan Kösen", "IsCorrect": false },
+          { "Text": "Shaquille O'Neal", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the fastest human running speed?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "27.8 mph", "IsCorrect": true },
+          { "Text": "15 mph", "IsCorrect": false },
+          { "Text": "40 mph", "IsCorrect": false },
+          { "Text": "10 mph", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Who lifted 1,200 pounds in a deadlift?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Hafþór Björnsson", "IsCorrect": true },
+          { "Text": "Eddie Hall", "IsCorrect": false },
+          { "Text": "Arnold Schwarzenegger", "IsCorrect": false },
+          { "Text": "Ronnie Coleman", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Humans can lift 10 times their weight.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "How tall was the tallest person ever?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "8 feet 11 inches", "IsCorrect": true },
+          { "Text": "7 feet 6 inches", "IsCorrect": false },
+          { "Text": "9 feet 2 inches", "IsCorrect": false },
+          { "Text": "6 feet 10 inches", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the fastest swim speed by a human?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "5.05 mph", "IsCorrect": true },
+          { "Text": "10 mph", "IsCorrect": false },
+          { "Text": "2 mph", "IsCorrect": false },
+          { "Text": "15 mph", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Who ran a marathon under 2 hours?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Eliud Kipchoge", "IsCorrect": true },
+          { "Text": "Kenenisa Bekele", "IsCorrect": false },
+          { "Text": "Mo Farah", "IsCorrect": false },
+          { "Text": "Usain Bolt", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Human behavior"
+      "Human Body & Achievements"
     ]
   },
   {
-    "Title": "Curiosities about our solar system",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Cultural habits and traditions worldwide",
+    "Description": "Travel the globe through trivia about unique traditions, customs, and cultural practices.",
+    "MediaUrl": "https://images.pexels.com/photos/18950636/pexels-photo-18950636.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which country celebrates Diwali?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "India", "IsCorrect": true },
+          { "Text": "Brazil", "IsCorrect": false },
+          { "Text": "Japan", "IsCorrect": false },
+          { "Text": "Egypt", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's a traditional Japanese tea ceremony?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Chanoyu", "IsCorrect": true },
+          { "Text": "Onigiri", "IsCorrect": false },
+          { "Text": "Kabuki", "IsCorrect": false },
+          { "Text": "Sumo", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which culture throws tomatoes at La Tomatina?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Spain", "IsCorrect": true },
+          { "Text": "Italy", "IsCorrect": false },
+          { "Text": "Mexico", "IsCorrect": false },
+          { "Text": "Greece", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "All cultures celebrate New Year on Jan 1.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What's worn during Scotland's Highland Games?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Kilt", "IsCorrect": true },
+          { "Text": "Toga", "IsCorrect": false },
+          { "Text": "Kimono", "IsCorrect": false },
+          { "Text": "Sari", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which country has a Day of the Dead?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Mexico", "IsCorrect": true },
+          { "Text": "China", "IsCorrect": false },
+          { "Text": "India", "IsCorrect": false },
+          { "Text": "Russia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What dance is traditional in Brazil?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Samba", "IsCorrect": true },
+          { "Text": "Flamenco", "IsCorrect": false },
+          { "Text": "Tango", "IsCorrect": false },
+          { "Text": "Ballet", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Space curiosities"
+      "Human Body & Achievements"
     ]
   },
   {
-    "Title": "Space exploration milestones",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Unique phobias and their origins",
+    "Description": "Explore unusual fears, their names, and where they come from.",
+    "MediaUrl": "https://images.unsplash.com/photo-1514879664436-94ab508287a1?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxMnx8U3BpZGVyc3xlbnwwfHx8fDE3NTc5MjAyMjR8MA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What's the fear of spiders called?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Arachnophobia", "IsCorrect": true },
+          { "Text": "Claustrophobia", "IsCorrect": false },
+          { "Text": "Acrophobia", "IsCorrect": false },
+          { "Text": "Trypophobia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What phobia is fear of confined spaces?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Agoraphobia", "IsCorrect": false },
+          { "Text": "Claustrophobia", "IsCorrect": true },
+          { "Text": "Hydrophobia", "IsCorrect": false },
+          { "Text": "Aerophobia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the fear of the number 13 called?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Triskaidekaphobia", "IsCorrect": true },
+          { "Text": "Numerophobia", "IsCorrect": false },
+          { "Text": "Hexakosioihexekontahexaphobia", "IsCorrect": false },
+          { "Text": "Tetraphobia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Fear of clowns is called coulrophobia.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the fear of heights?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Acrophobia", "IsCorrect": true },
+          { "Text": "Arachnophobia", "IsCorrect": false },
+          { "Text": "Thalassophobia", "IsCorrect": false },
+          { "Text": "Nyctophobia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What phobia fears irregular hole patterns?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Trypophobia", "IsCorrect": true },
+          { "Text": "Claustrophobia", "IsCorrect": false },
+          { "Text": "Agoraphobia", "IsCorrect": false },
+          { "Text": "Ophidiophobia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the fear of the ocean?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Thalassophobia", "IsCorrect": true },
+          { "Text": "Hydrophobia", "IsCorrect": false },
+          { "Text": "Aerophobia", "IsCorrect": false },
+          { "Text": "Pyrophobia", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Space curiosities"
+      "Human Body & Achievements"
     ]
   },
   {
-    "Title": "Fun facts about astronauts",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Unique foods from around the world",
+    "Description": "Discover exotic and surprising dishes that people enjoy across different cultures.",
+    "MediaUrl": "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which country is known for sushi?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Japan", "IsCorrect": true },
+          { "Text": "China", "IsCorrect": false },
+          { "Text": "Thailand", "IsCorrect": false },
+          { "Text": "Vietnam", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's a fermented shark dish from Iceland?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Hákarl", "IsCorrect": true },
+          { "Text": "Sushi", "IsCorrect": false },
+          { "Text": "Kimchi", "IsCorrect": false },
+          { "Text": "Ceviche", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which dish is fried tarantula from Cambodia?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "A-Ping", "IsCorrect": true },
+          { "Text": "Balut", "IsCorrect": false },
+          { "Text": "Escamoles", "IsCorrect": false },
+          { "Text": "Casu Marzu", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "All cultures eat insects as food.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What's a fermented cabbage dish from Korea?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Kimchi", "IsCorrect": true },
+          { "Text": "Sauerkraut", "IsCorrect": false },
+          { "Text": "Miso", "IsCorrect": false },
+          { "Text": "Natto", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's a sheep's head dish from Norway?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Smalahove", "IsCorrect": true },
+          { "Text": "Lutefisk", "IsCorrect": false },
+          { "Text": "Rakfisk", "IsCorrect": false },
+          { "Text": "Fårikål", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which country eats live octopus as a dish?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "South Korea", "IsCorrect": true },
+          { "Text": "Brazil", "IsCorrect": false },
+          { "Text": "Italy", "IsCorrect": false },
+          { "Text": "Australia", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Space curiosities"
+      "Global Culture & Games"
     ]
   },
   {
-    "Title": "Foods around the world",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Amazing sports records and facts",
+    "Description": "Learn about incredible athletic achievements and fascinating trivia from the world of sports.",
+    "MediaUrl": "https://images.pexels.com/photos/6573247/pexels-photo-6573247.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Who holds the most Olympic gold medals?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Michael Phelps", "IsCorrect": true },
+          { "Text": "Usain Bolt", "IsCorrect": false },
+          { "Text": "Simone Biles", "IsCorrect": false },
+          { "Text": "Carl Lewis", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the longest tennis match in history?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "11 hours 5 minutes", "IsCorrect": true },
+          { "Text": "5 hours", "IsCorrect": false },
+          { "Text": "8 hours", "IsCorrect": false },
+          { "Text": "3 hours", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Who scored 100 points in an NBA game?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Wilt Chamberlain", "IsCorrect": true },
+          { "Text": "Kobe Bryant", "IsCorrect": false },
+          { "Text": "LeBron James", "IsCorrect": false },
+          { "Text": "Michael Jordan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Golf's Masters is played annually.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the fastest soccer goal scored?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "2.1 seconds", "IsCorrect": true },
+          { "Text": "10 seconds", "IsCorrect": false },
+          { "Text": "30 seconds", "IsCorrect": false },
+          { "Text": "1 minute", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Who won 7 Formula 1 championships?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Lewis Hamilton", "IsCorrect": true },
+          { "Text": "Ayrton Senna", "IsCorrect": false },
+          { "Text": "Michael Schumacher", "IsCorrect": false },
+          { "Text": "Sebastian Vettel", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the longest golf putt recorded?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "375 feet", "IsCorrect": true },
+          { "Text": "100 feet", "IsCorrect": false },
+          { "Text": "200 feet", "IsCorrect": false },
+          { "Text": "50 feet", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "General trivia"
+      "Global Culture & Games"
     ]
   },
   {
-    "Title": "Sports records",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Famous toys and games through history",
+    "Description": "From ancient games to modern toys, explore fun facts about playthings loved worldwide.",
+    "MediaUrl": "https://images.pexels.com/photos/1500610/pexels-photo-1500610.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which toy was invented in 1958?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "LEGO", "IsCorrect": true },
+          { "Text": "Barbie", "IsCorrect": false },
+          { "Text": "Yo-yo", "IsCorrect": false },
+          { "Text": "Slinky", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What game uses a 64-square board?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Chess", "IsCorrect": true },
+          { "Text": "Checkers", "IsCorrect": false },
+          { "Text": "Monopoly", "IsCorrect": false },
+          { "Text": "Scrabble", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which toy spins on its axis?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Yo-yo", "IsCorrect": false },
+          { "Text": "Top", "IsCorrect": true },
+          { "Text": "Rubik's Cube", "IsCorrect": false },
+          { "Text": "Hula hoop", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Monopoly was invented in the 1800s.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What doll debuted in 1959?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Barbie", "IsCorrect": true },
+          { "Text": "Cabbage Patch Kids", "IsCorrect": false },
+          { "Text": "American Girl", "IsCorrect": false },
+          { "Text": "Bratz", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What puzzle cube was big in the 1980s?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Rubik's Cube", "IsCorrect": true },
+          { "Text": "Soma Cube", "IsCorrect": false },
+          { "Text": "Tangram", "IsCorrect": false },
+          { "Text": "Jigsaw puzzle", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which ancient game used knucklebones?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Jacks", "IsCorrect": true },
+          { "Text": "Marbles", "IsCorrect": false },
+          { "Text": "Dice", "IsCorrect": false },
+          { "Text": "Dominoes", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "General trivia"
+      "Global Culture & Games"
     ]
   },
   {
-    "Title": "Riddles and brain teasers",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Funny and bizarre world records",
+    "Description": "Get amazed by the strangest and most entertaining records ever set by humans.",
+    "MediaUrl": "https://images.unsplash.com/photo-1565225945512-1aa5e39ad5f9?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxidWJibGVndW18ZW58MHx8fHwxNzU3OTIwNjEzfDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What's the record for most socks worn?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "257 pairs", "IsCorrect": true },
+          { "Text": "50 pairs", "IsCorrect": false },
+          { "Text": "100 pairs", "IsCorrect": false },
+          { "Text": "10 pairs", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Who ate 72 hot dogs in 10 minutes?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Joey Chestnut", "IsCorrect": true },
+          { "Text": "Takeru Kobayashi", "IsCorrect": false },
+          { "Text": "Matt Stonie", "IsCorrect": false },
+          { "Text": "Miki Sudo", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the largest bubblegum bubble?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "20 inches", "IsCorrect": true },
+          { "Text": "10 inches", "IsCorrect": false },
+          { "Text": "5 inches", "IsCorrect": false },
+          { "Text": "50 inches", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Someone balanced 88 spoons on their face.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the record for most T-shirts worn?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "260", "IsCorrect": true },
+          { "Text": "50", "IsCorrect": false },
+          { "Text": "100", "IsCorrect": false },
+          { "Text": "25", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the fastest time to peel an orange?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "17.15 seconds", "IsCorrect": true },
+          { "Text": "1 minute", "IsCorrect": false },
+          { "Text": "5 seconds", "IsCorrect": false },
+          { "Text": "30 seconds", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's the most jelly eaten with chopsticks?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "2.99 pounds", "IsCorrect": true },
+          { "Text": "1 pound", "IsCorrect": false },
+          { "Text": "5 pounds", "IsCorrect": false },
+          { "Text": "0.5 pounds", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "General trivia"
+      "Global Culture & Games"
     ]
   },
   {
-    "Title": "Funny world records",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Riddles and brain teasers challenge",
+    "Description": "Put your mind to the test with tricky riddles and clever puzzles.",
+    "MediaUrl": "https://images.unsplash.com/photo-1617791160536-598cf32026fb?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxicmFpbiUyMHRyYWluaW5nfGVufDB8fHx8MTc1NzkyMDU2M3ww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What has keys but can't open locks?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "A piano", "IsCorrect": true },
+          { "Text": "A car", "IsCorrect": false },
+          { "Text": "A safe", "IsCorrect": false },
+          { "Text": "A door", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What gets wetter the more it dries?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "A towel", "IsCorrect": true },
+          { "Text": "A sponge", "IsCorrect": false },
+          { "Text": "A shirt", "IsCorrect": false },
+          { "Text": "A cloud", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What has a neck but no head?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "A shirt", "IsCorrect": true },
+          { "Text": "A bottle", "IsCorrect": false },
+          { "Text": "A guitar", "IsCorrect": false },
+          { "Text": "A snake", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "All riddles have only one correct answer.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What has cities but no houses?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "A map", "IsCorrect": true },
+          { "Text": "A book", "IsCorrect": false },
+          { "Text": "A globe", "IsCorrect": false },
+          { "Text": "A painting", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What runs but never walks?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Water", "IsCorrect": true },
+          { "Text": "Wind", "IsCorrect": false },
+          { "Text": "A car", "IsCorrect": false },
+          { "Text": "A clock", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's full of holes but holds water?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "A sponge", "IsCorrect": true },
+          { "Text": "A net", "IsCorrect": false },
+          { "Text": "A bucket", "IsCorrect": false },
+          { "Text": "A sieve", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Fun records & games"
+      "Global Culture & Games"
     ]
   },
   {
-    "Title": "Famous toys and games",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Festivals and celebrations globally",
+    "Description": "Celebrate diversity by learning about colorful festivals and traditions around the world.",
+    "MediaUrl": "https://images.pexels.com/photos/9827/pexels-photo-9827.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which festival is known as the Festival of Lights?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Diwali", "IsCorrect": true },
+          { "Text": "Carnival", "IsCorrect": false },
+          { "Text": "Oktoberfest", "IsCorrect": false },
+          { "Text": "Songkran", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Where is Carnival celebrated with parades?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Brazil", "IsCorrect": true },
+          { "Text": "India", "IsCorrect": false },
+          { "Text": "Germany", "IsCorrect": false },
+          { "Text": "Thailand", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What festival involves throwing colored powder?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Holi", "IsCorrect": true },
+          { "Text": "La Tomatina", "IsCorrect": false },
+          { "Text": "Mardi Gras", "IsCorrect": false },
+          { "Text": "Songkran", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Oktoberfest is held in Germany.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's Thailand's water festival called?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Songkran", "IsCorrect": true },
+          { "Text": "Loi Krathong", "IsCorrect": false },
+          { "Text": "Chiang Mai", "IsCorrect": false },
+          { "Text": "Phi Ta Khon", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which festival honors the dead in Mexico?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Día de los Muertos", "IsCorrect": true },
+          { "Text": "Cinco de Mayo", "IsCorrect": false },
+          { "Text": "Las Posadas", "IsCorrect": false },
+          { "Text": "Fiesta de Santa Cecilia", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What's China's lantern festival called?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Yuanxiao", "IsCorrect": true },
+          { "Text": "Qingming", "IsCorrect": false },
+          { "Text": "Mid-Autumn", "IsCorrect": false },
+          { "Text": "Dragon Boat", "IsCorrect": false }
         ]
       }
     ],
     "Category": "trivia",
     "Subsections": [
-      "Fun records & games"
+      "Global Culture & Games"
     ]
   }
 ]

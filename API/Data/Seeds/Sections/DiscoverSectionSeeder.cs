@@ -156,39 +156,20 @@ namespace API.Data.Seeds.Sections
       {
         {
           new DiscoverSection {
-            Title = "Science & nature",
+            Title = "Science & Nature",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Natural wonders", CategoryId = categoryTrivia }
+              new DiscoverSubsection { Title = "Natural Wonders & Science", CategoryId = categoryTrivia }
             }
           }
         },
         {
           new DiscoverSection {
-            Title = "Human curiosities",
+            Title = "Human World",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Human body trivia", CategoryId = categoryTrivia },
-              new DiscoverSubsection { Title = "Human behavior", CategoryId = categoryTrivia },
-            }
-          }
-        },
-        {
-          new DiscoverSection {
-            Title = "Space trivia",
-            Subsections = new List<DiscoverSubsection>()
-            {
-              new DiscoverSubsection { Title = "Space curiosities", CategoryId = categoryTrivia }
-            }
-          }
-        },
-        {
-          new DiscoverSection {
-            Title = "Random fun facts",
-            Subsections = new List<DiscoverSubsection>()
-            {
-              new DiscoverSubsection { Title = "General trivia", CategoryId = categoryTrivia },
-              new DiscoverSubsection { Title = "Fun records & games", CategoryId = categoryTrivia }
+              new DiscoverSubsection { Title = "Human Body & Achievements", CategoryId = categoryTrivia },
+              new DiscoverSubsection { Title = "Global Culture & Games", CategoryId = categoryTrivia },
             }
           }
         }
