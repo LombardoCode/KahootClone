@@ -112,6 +112,8 @@ namespace API.Controllers
 
     private async Task<List<DiscoverFeaturedCardInfoDTO>> getFeaturedKahootsFromSpecificCategoryId(int categoryId)
     {
+      const int FIXED_AMOUNT_OF_KAHOOT_TO_RETRIEVE = 9;
+
       var query = from kahoot in _dbContext.Kahoots
                   join kahootCategory in _dbContext.KahootCategories
                     on kahoot.Id equals kahootCategory.KahootId
@@ -129,7 +131,9 @@ namespace API.Controllers
                     NumberOfQuestions = kahoot.Questions.Count()
                   };
 
-      return await query.ToListAsync();
+      return await query
+                      .Take(FIXED_AMOUNT_OF_KAHOOT_TO_RETRIEVE)
+                      .ToListAsync();
     }
 
 
