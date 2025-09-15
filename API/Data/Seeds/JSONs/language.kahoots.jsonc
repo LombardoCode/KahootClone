@@ -70,7 +70,7 @@
       {
         "Title": "Which English word corresponds to 'familia'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -170,7 +170,7 @@
       {
         "Title": "What number does 'treinta y cinco' represent?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -209,7 +209,7 @@
       {
         "Title": "Which of these means '500' in Spanish?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -285,7 +285,7 @@
       {
         "Title": "What is this color?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "https://images.unsplash.com/photo-1575318080244-dd217d9db1e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwyfHxwdXJwbGUlMjBjb2xvcnxlbnwwfHx8fDE3NTc3MTcyMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
         "Answers": [
@@ -311,7 +311,7 @@
       {
         "Title": "What is this color?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 2,
         "MediaUrl": "https://images.unsplash.com/photo-1571829604981-ea159f94e5ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwyfHxicm93bnxlbnwwfHx8fDE3NTc3MTczODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
         "Answers": [
@@ -361,7 +361,7 @@
       {
         "Title": "The noun 'problema' (problem) is feminine in Spanish.",
         "Layout": "TRUE_OR_FALSE",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -398,7 +398,7 @@
       {
         "Title": "What is the gender of the noun 'día' (day)?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -424,7 +424,7 @@
       {
         "Title": "What is the gender of the noun 'mapa' (map)?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -448,7 +448,7 @@
       {
         "Title": "Which word is a synonym of 'alegre'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -485,7 +485,7 @@
       {
         "Title": "Which word is an antonym of 'amor'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -498,7 +498,7 @@
       {
         "Title": "What is a synonym of 'inteligente'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -524,7 +524,7 @@
       {
         "Title": "What is an antonym of 'ganar'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -537,7 +537,7 @@
       {
         "Title": "Which word is a synonym of 'valiente'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -574,7 +574,7 @@
       {
         "Title": "Complete the phrase: 'Mucho _____' (Nice to meet you)",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -587,7 +587,7 @@
       {
         "Title": "The correct completion is: 'Hace buen _____' (The weather is good)",
         "Layout": "TRUE_OR_FALSE",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -611,7 +611,7 @@
       {
         "Title": "Complete the phrase: 'Me _____ bien' (I feel good)",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -624,7 +624,7 @@
       {
         "Title": "Complete the phrase: '¿Qué _____ es?' (What time is it?)",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -650,7 +650,7 @@
       {
         "Title": "Complete the phrase: '¿Dónde _____ el baño?' (Where is the bathroom?)",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -674,7 +674,7 @@
       {
         "Title": "Which ending is correct for the present tense 'yo' form of regular -AR verbs?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -687,7 +687,7 @@
       {
         "Title": "How do you say 'I ate' in Spanish?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -724,7 +724,7 @@
       {
         "Title": "How do you say 'We will travel' in Spanish?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -737,7 +737,7 @@
       {
         "Title": "Which verb form is in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -787,7 +787,7 @@
       {
         "Title": "What is the 'yo' form of the verb 'ser' in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -800,7 +800,7 @@
       {
         "Title": "How do you say 'I have' in Spanish using the irregular verb?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -824,7 +824,7 @@
       {
         "Title": "What is the 'él/ella' form of 'querer' in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -863,7 +863,7 @@
       {
         "Title": "Which is the correct 'tú' form of 'decir' in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -876,7 +876,7 @@
       {
         "Title": "What is the 'yo' form of 'saber' in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -900,7 +900,7 @@
       {
         "Title": "Which word requires an accent mark?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -937,7 +937,7 @@
       {
         "Title": "Which word is correctly accented?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -963,7 +963,7 @@
       {
         "Title": "Which interrogative word requires an accent mark?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -989,7 +989,7 @@
       {
         "Title": "Which word does NOT need an accent mark?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1039,7 +1039,7 @@
       {
         "Title": "The sentence 'Ellos son mis amigo.' is grammatically correct.",
         "Layout": "TRUE_OR_FALSE",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1050,7 +1050,7 @@
       {
         "Title": "Which sentence uses the correct gender agreement?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1063,7 +1063,7 @@
       {
         "Title": "What is the correct way to say 'I am 20 years old'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1089,7 +1089,7 @@
       {
         "Title": "Which sentence has correct verb conjugation?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1126,7 +1126,7 @@
       {
         "Title": "Which word means 'there' as in a place?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1139,7 +1139,7 @@
       {
         "Title": "Which homophone means 'to have' (auxiliary verb)?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1163,7 +1163,7 @@
       {
         "Title": "Which word means 'berry'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1176,7 +1176,7 @@
       {
         "Title": "Which homophone means 'I know' (from saber)?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -1189,7 +1189,7 @@
       {
         "Title": "Which word means 'time' as in number of times?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1202,7 +1202,7 @@
       {
         "Title": "Which homophone means 'wave' (as in ocean wave)?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1239,7 +1239,7 @@
       {
         "Title": "Which phrase has correct gender and number agreement?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1252,7 +1252,7 @@
       {
         "Title": "Complete the phrase: '___ libros interesantes' (the interesting books)",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1276,7 +1276,7 @@
       {
         "Title": "Which adjective correctly modifies 'flores' (feminine plural)?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1315,7 +1315,7 @@
       {
         "Title": "Complete the phrase: '___ estudiantes inteligentes' (the intelligent students - mixed gender group)",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1378,7 +1378,7 @@
       {
         "Title": "'Dos gatos negros' means 'two black cats' in Spanish and has correct agreement.",
         "Layout": "TRUE_OR_FALSE",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1478,7 +1478,7 @@
       {
         "Title": "Which month comes after 'septiembre'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1528,7 +1528,7 @@
       {
         "Title": "What is the correct way to say 'the weekend' in Spanish?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1541,7 +1541,7 @@
       {
         "Title": "Which expression means 'see you tomorrow'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1578,7 +1578,7 @@
       {
         "Title": "What is the 'yo' form of the verb 'ir' (to go) in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1591,7 +1591,7 @@
       {
         "Title": "How do you say 'I do' or 'I make' using the irregular verb?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1615,7 +1615,7 @@
       {
         "Title": "What is the 'tú' form of 'tener' (to have) in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1667,7 +1667,7 @@
       {
         "Title": "What is the 'yo' form of 'saber' (to know) in the present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1754,7 +1754,7 @@
       {
         "Title": "What is the opposite of 'light' (in weight)?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -1804,7 +1804,7 @@
       {
         "Title": "Which preposition describes something contained within a space, like a toy _____ a box?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1817,7 +1817,7 @@
       {
         "Title": "Which preposition describes surface contact, like a book _____ a table?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1841,7 +1841,7 @@
       {
         "Title": "Which preposition describes a lower level than something else, like a cat _____ the chair?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1880,7 +1880,7 @@
       {
         "Title": "Which preposition describes proximity, like a tree _____ the house?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1917,7 +1917,7 @@
       {
         "Title": "Which sentence is in the simple present tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1930,7 +1930,7 @@
       {
         "Title": "Which sentence describes an action happening right now?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1954,7 +1954,7 @@
       {
         "Title": "Which sentence expresses a habitual action?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1980,7 +1980,7 @@
       {
         "Title": "Which sentence uses the present continuous tense?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1993,7 +1993,7 @@
       {
         "Title": "Which sentence describes a fact or general truth?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [

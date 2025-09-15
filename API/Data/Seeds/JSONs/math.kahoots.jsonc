@@ -44,7 +44,7 @@
       {
         "Title": "What is 367 + 189?",
         "Layout": "CLASSIC",
-        "TimeLimit": 25,
+        "TimeLimit": 30,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -57,7 +57,7 @@
       {
         "Title": "Subtract: 842 - 569",
         "Layout": "CLASSIC",
-        "TimeLimit": 25,
+        "TimeLimit": 30,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [

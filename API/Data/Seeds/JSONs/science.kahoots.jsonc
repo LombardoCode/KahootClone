@@ -101,7 +101,7 @@
   },
   {
     "Title": "Human body systems",
-    "Description": "From circulation to digestion — learn how the body’s systems work together in harmony.",
+    "Description": "From circulation to digestion — learn how the body's systems work together in harmony.",
     "MediaUrl": "https://images.unsplash.com/photo-1565090567123-922c648b1adf?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxN3x8SHVtYW4lMjBib2R5JTIwc3lzdGVtc3xlbnwwfHx8fDE3NTc3MTI4NzJ8MA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
@@ -181,7 +181,7 @@
         ]
       },
       {
-        "Title": "Which system supports the body’s structure?",
+        "Title": "Which system supports the body's structure?",
         "Layout": "CLASSIC",
         "TimeLimit": 20,
         "PointsMultiplier": 1,
@@ -889,7 +889,7 @@
         "Answers": [
           { "Text": "Ocean currents", "IsCorrect": false },
           { "Text": "Air pressure differences", "IsCorrect": true },
-          { "Text": "Earth’s rotation alone", "IsCorrect": false },
+          { "Text": "Earth's rotation alone", "IsCorrect": false },
           { "Text": "Temperature equality", "IsCorrect": false }
         ]
       },
@@ -927,7 +927,7 @@
   },
   {
     "Title": "Natural disasters",
-    "Description": "Earthquakes, volcanoes, tsunamis, and more — test your knowledge of nature’s power.",
+    "Description": "Earthquakes, volcanoes, tsunamis, and more — test your knowledge of nature's power.",
     "MediaUrl": "https://images.unsplash.com/photo-1552843933-189de544dbeb?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw0fHxUc3VuYW1pfGVufDB8fHx8MTc1NzcxMjkwOXww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
@@ -1215,7 +1215,7 @@
         "Answers": [
           { "Text": "Wind", "IsCorrect": false },
           { "Text": "Solar energy", "IsCorrect": true },
-          { "Text": "Earth’s rotation", "IsCorrect": false },
+          { "Text": "Earth's rotation", "IsCorrect": false },
           { "Text": "Ocean currents", "IsCorrect": false }
         ]
       }
@@ -1246,7 +1246,7 @@
       {
         "Title": "The Great Red Spot is a giant storm on which planet?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1296,7 +1296,7 @@
       {
         "Title": "Which planet has the most extensive ring system in our solar system?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1322,7 +1322,7 @@
       {
         "Title": "Which of these planets is considered an 'ice giant'?",
         "Layout": "CLASSIC",
-        "TimeLimit": 25,
+        "TimeLimit": 30,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -1359,7 +1359,7 @@
       {
         "Title": "How long does it take for the Moon to complete one full cycle of phases?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1383,7 +1383,7 @@
       {
         "Title": "Which phase occurs when the Moon is between Earth and the Sun?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1396,7 +1396,7 @@
       {
         "Title": "What is a 'waning gibbous' moon?",
         "Layout": "CLASSIC",
-        "TimeLimit": 25,
+        "TimeLimit": 30,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -1422,7 +1422,7 @@
       {
         "Title": "Which phase comes right after a new moon?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1459,7 +1459,7 @@
       {
         "Title": "What is a constellation?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1496,7 +1496,7 @@
       {
         "Title": "What is the brightest star in the night sky?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1522,7 +1522,7 @@
       {
         "Title": "What determines the color of a star?",
         "Layout": "CLASSIC",
-        "TimeLimit": 25,
+        "TimeLimit": 30,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -1572,7 +1572,7 @@
       {
         "Title": "What is a galaxy?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1609,7 +1609,7 @@
       {
         "Title": "What is the name of the closest major galaxy to the Milky Way?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1635,7 +1635,7 @@
       {
         "Title": "What is the primary shape of the Milky Way galaxy?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1648,7 +1648,7 @@
       {
         "Title": "What theory describes the origin and evolution of the universe?",
         "Layout": "CLASSIC",
-        "TimeLimit": 25,
+        "TimeLimit": 30,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -1679,13 +1679,13 @@
   },
   {
     "Title": "Space exploration history",
-    "Description": "Relive the key missions and milestones that shaped humanity’s journey into space.",
+    "Description": "Relive the key missions and milestones that shaped humanity's journey into space.",
     "MediaUrl": "https://images.pexels.com/photos/2159/flight-sky-earth-space.jpg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
         "Title": "In what year did the Soviet Union launch Sputnik 1, the first artificial satellite?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1722,7 +1722,7 @@
       {
         "Title": "Which space agency launched the Voyager 1 and 2 probes?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1761,7 +1761,7 @@
       {
         "Title": "The Hubble Space Telescope was launched and deployed by which Space Shuttle mission?",
         "Layout": "CLASSIC",
-        "TimeLimit": 25,
+        "TimeLimit": 30,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -1811,7 +1811,7 @@
       {
         "Title": "Which type of orbit is synchronized with the Earth's rotation, allowing a satellite to stay over the same point on the equator?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1824,7 +1824,7 @@
       {
         "Title": "The International Space Station (ISS) uses solar panels to convert sunlight directly into electricity.",
         "Layout": "TRUE_OR_FALSE",
-        "TimeLimit": 10,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1835,7 +1835,7 @@
       {
         "Title": "What is the main function of a heat shield on a spacecraft?",
         "Layout": "CLASSIC",
-        "TimeLimit": 15,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
@@ -1848,7 +1848,7 @@
       {
         "Title": "What is the name of the powerful camera on the Hubble Space Telescope that captures high-resolution images?",
         "Layout": "CLASSIC",
-        "TimeLimit": 25,
+        "TimeLimit": 30,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [
@@ -1874,7 +1874,7 @@
       {
         "Title": "Which technology is crucial for communicating with deep space probes like Voyager 1?",
         "Layout": "CLASSIC",
-        "TimeLimit": 25,
+        "TimeLimit": 30,
         "PointsMultiplier": 2,
         "MediaUrl": "",
         "Answers": [

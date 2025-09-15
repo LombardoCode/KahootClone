@@ -205,7 +205,7 @@ const ShowNoResultsMessage = () => {
         useCase={UseCases.BODY}
         className="text-2xl text-center w-1/5"
       >
-        Sorry, we couldn’t find any results matching your search.
+        Sorry, we couldn't find any results matching your search.
       </Text>
     </div>
   )
