@@ -39,19 +39,8 @@ namespace API.Data.Seeds.Sections
             Title = "Math games for the classroom",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Additions and subtractions", CategoryId = categoryMath },
-              new DiscoverSubsection { Title = "Multiplications and divisions", CategoryId = categoryMath },
-              new DiscoverSubsection { Title = "Reasoning with numbers", CategoryId = categoryMath }
-            }
-          }
-        },
-        {
-          new DiscoverSection {
-            Title = "Multiples and factors",
-            Subsections = new List<DiscoverSubsection>()
-            {
-              new DiscoverSubsection { Title = "Finding multiples", CategoryId = categoryMath },
-              new DiscoverSubsection { Title = "Factors and divisibility", CategoryId = categoryMath }
+              new DiscoverSubsection { Title = "Arithmetic operations", CategoryId = categoryMath },
+              new DiscoverSubsection { Title = "Factors, multiples, and divisibility", CategoryId = categoryMath }
             }
           }
         },
@@ -60,19 +49,7 @@ namespace API.Data.Seeds.Sections
             Title = "Geometry and measurements",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Shapes and figures", CategoryId = categoryMath },
-              new DiscoverSubsection { Title = "Angles and lines", CategoryId = categoryMath },
-              new DiscoverSubsection { Title = "Measurements and conversions", CategoryId = categoryMath }
-            }
-          }
-        },
-        {
-          new DiscoverSection {
-            Title = "Applied math",
-            Subsections = new List<DiscoverSubsection>()
-            {
-              new DiscoverSubsection { Title = "Time and calendars", CategoryId = categoryMath },
-              new DiscoverSubsection { Title = "Fractions", CategoryId = categoryMath }
+              new DiscoverSubsection { Title = "Shapes, angles, and measurements", CategoryId = categoryMath }
             }
           }
         }
