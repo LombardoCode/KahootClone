@@ -132,29 +132,20 @@ namespace API.Data.Seeds.Sections
       {
         {
           new DiscoverSection {
-            Title = "History of technology",
+            Title = "Digital technology fundamentals",
             Subsections = new List<DiscoverSubsection>()
             {
-              new DiscoverSubsection { Title = "Inventions that changed the world", CategoryId = categoryTechnology }
-            }
-          }
-        },
-        {
-          new DiscoverSection {
-            Title = "Everyday technology",
-            Subsections = new List<DiscoverSubsection>()
-            {
-              new DiscoverSubsection { Title = "Digital literacy", CategoryId = categoryTechnology },
-              new DiscoverSubsection { Title = "Software applications", CategoryId = categoryTechnology },
-            }
-          }
-        },
-        {
-          new DiscoverSection {
-            Title = "Operating systems",
-            Subsections = new List<DiscoverSubsection>()
-            {
+              new DiscoverSubsection { Title = "Internet & connectivity", CategoryId = categoryTechnology },
               new DiscoverSubsection { Title = "Desktop operating systems", CategoryId = categoryTechnology }
+            }
+          }
+        },
+        {
+          new DiscoverSection {
+            Title = "Technology in practice",
+            Subsections = new List<DiscoverSubsection>()
+            {
+              new DiscoverSubsection { Title = "Modern tech innovations", CategoryId = categoryTechnology }
             }
           }
         }

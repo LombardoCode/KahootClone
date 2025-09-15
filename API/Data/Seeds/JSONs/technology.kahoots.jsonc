@@ -1,428 +1,696 @@
 [
   {
-    "Title": "The printing press",
-    "Description": "",
-    "MediaUrl": "",
-    "Questions": [
-      {
-        "Title": "",
-        "Layout": "CLASSIC",
-        "TimeLimit": 30,
-        "PointsMultiplier": 1,
-        "MediaUrl": "",
-        "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
-        ]
-      }
-    ],
-    "Category": "technology",
-    "Subsections": [
-      "Inventions that changed the world"
-    ]
-  },
-  {
-    "Title": "Electricity and the light bulb",
-    "Description": "",
-    "MediaUrl": "",
-    "Questions": [
-      {
-        "Title": "",
-        "Layout": "CLASSIC",
-        "TimeLimit": 30,
-        "PointsMultiplier": 1,
-        "MediaUrl": "",
-        "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
-        ]
-      }
-    ],
-    "Category": "technology",
-    "Subsections": [
-      "Inventions that changed the world"
-    ]
-  },
-  {
-    "Title": "The telephone",
-    "Description": "",
-    "MediaUrl": "",
-    "Questions": [
-      {
-        "Title": "",
-        "Layout": "CLASSIC",
-        "TimeLimit": 30,
-        "PointsMultiplier": 1,
-        "MediaUrl": "",
-        "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
-        ]
-      }
-    ],
-    "Category": "technology",
-    "Subsections": [
-      "Inventions that changed the world"
-    ]
-  },
-  {
-    "Title": "The personal computer",
-    "Description": "",
-    "MediaUrl": "",
-    "Questions": [
-      {
-        "Title": "",
-        "Layout": "CLASSIC",
-        "TimeLimit": 30,
-        "PointsMultiplier": 1,
-        "MediaUrl": "",
-        "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
-        ]
-      }
-    ],
-    "Category": "technology",
-    "Subsections": [
-      "Inventions that changed the world"
-    ]
-  },
-  {
-    "Title": "The internet",
-    "Description": "",
-    "MediaUrl": "",
-    "Questions": [
-      {
-        "Title": "",
-        "Layout": "CLASSIC",
-        "TimeLimit": 30,
-        "PointsMultiplier": 1,
-        "MediaUrl": "",
-        "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
-        ]
-      }
-    ],
-    "Category": "technology",
-    "Subsections": [
-      "Inventions that changed the world"
-    ]
-  },
-  {
-    "Title": "Computer basics (input / output devices)",
-    "Description": "",
-    "MediaUrl": "",
-    "Questions": [
-      {
-        "Title": "",
-        "Layout": "CLASSIC",
-        "TimeLimit": 30,
-        "PointsMultiplier": 1,
-        "MediaUrl": "",
-        "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
-        ]
-      }
-    ],
-    "Category": "technology",
-    "Subsections": [
-      "Digital literacy"
-    ]
-  },
-  {
-    "Title": "File types and extensions",
-    "Description": "",
-    "MediaUrl": "",
-    "Questions": [
-      {
-        "Title": "",
-        "Layout": "CLASSIC",
-        "TimeLimit": 30,
-        "PointsMultiplier": 1,
-        "MediaUrl": "",
-        "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
-        ]
-      }
-    ],
-    "Category": "technology",
-    "Subsections": [
-      "Digital literacy"
-    ]
-  },
-  {
     "Title": "Internet browsers and search engines",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Learn how browsers and search engines work together to help us explore the web, from Google to Firefox and beyond.",
+    "MediaUrl": "https://images.pexels.com/photos/1181449/pexels-photo-1181449.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which software is used to access websites on the internet?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Text editor", "IsCorrect": false },
+          { "Text": "Web browser", "IsCorrect": true },
+          { "Text": "Search engine", "IsCorrect": false },
+          { "Text": "Operating system", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the primary function of a search engine?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Create websites", "IsCorrect": false },
+          { "Text": "Index and retrieve web content", "IsCorrect": true },
+          { "Text": "Store user data", "IsCorrect": false },
+          { "Text": "Run applications", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which of these is an example of a web browser?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Google", "IsCorrect": false },
+          { "Text": "Firefox", "IsCorrect": true },
+          { "Text": "Windows", "IsCorrect": false },
+          { "Text": "Python", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Google Chrome is both a browser and a search engine.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which search engine is known for prioritizing user privacy?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Bing", "IsCorrect": false },
+          { "Text": "DuckDuckGo", "IsCorrect": true },
+          { "Text": "Yahoo", "IsCorrect": false },
+          { "Text": "Google", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What protocol do browsers use to securely access websites?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "FTP", "IsCorrect": false },
+          { "Text": "HTTPS", "IsCorrect": true },
+          { "Text": "SMTP", "IsCorrect": false },
+          { "Text": "TCP", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which browser feature allows users to save frequently visited websites?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Cache", "IsCorrect": false },
+          { "Text": "Bookmarks", "IsCorrect": true },
+          { "Text": "Cookies", "IsCorrect": false },
+          { "Text": "History", "IsCorrect": false }
         ]
       }
     ],
     "Category": "technology",
     "Subsections": [
-      "Digital literacy"
+      "Internet & connectivity"
     ]
   },
   {
-    "Title": "Office productivity software",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "How the internet works",
+    "Description": "Discover the basics of how data travels across the internet, from servers to your device.",
+    "MediaUrl": "https://images.unsplash.com/photo-1597733336794-12d05021d510?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxJbnRlcm5ldHxlbnwwfHx8fDE3NTc5MDc5MDR8MA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is the global network of computers called?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Intranet", "IsCorrect": false },
+          { "Text": "Internet", "IsCorrect": true },
+          { "Text": "LAN", "IsCorrect": false },
+          { "Text": "Cloud", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which protocol is used to transfer web pages over the internet?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "HTTP", "IsCorrect": true },
+          { "Text": "FTP", "IsCorrect": false },
+          { "Text": "SMTP", "IsCorrect": false },
+          { "Text": "TCP", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does DNS stand for in the context of the internet?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Digital Network System", "IsCorrect": false },
+          { "Text": "Domain Name System", "IsCorrect": true },
+          { "Text": "Data Network Service", "IsCorrect": false },
+          { "Text": "Dynamic Name Server", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The internet relies solely on Wi-Fi to function.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What device directs data traffic between networks?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Router", "IsCorrect": true },
+          { "Text": "Modem", "IsCorrect": false },
+          { "Text": "Switch", "IsCorrect": false },
+          { "Text": "Firewall", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the term for the unique address assigned to devices on the internet?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "MAC address", "IsCorrect": false },
+          { "Text": "IP address", "IsCorrect": true },
+          { "Text": "URL", "IsCorrect": false },
+          { "Text": "SSID", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which layer of the internet model handles data packet routing?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Application layer", "IsCorrect": false },
+          { "Text": "Network layer", "IsCorrect": true },
+          { "Text": "Physical layer", "IsCorrect": false },
+          { "Text": "Transport layer", "IsCorrect": false }
         ]
       }
     ],
     "Category": "technology",
     "Subsections": [
-      "Software applications"
+      "Internet & connectivity"
     ]
   },
   {
-    "Title": "Database applications",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Website development basics",
+    "Description": "An introduction to building websites: HTML, CSS, and the fundamentals of creating pages online.",
+    "MediaUrl": "https://images.pexels.com/photos/270632/pexels-photo-270632.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which language is used to structure content on a webpage?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "CSS", "IsCorrect": false },
+          { "Text": "HTML", "IsCorrect": true },
+          { "Text": "JavaScript", "IsCorrect": false },
+          { "Text": "Python", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does CSS stand for in web development?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Computer Style Sheets", "IsCorrect": false },
+          { "Text": "Cascading Style Sheets", "IsCorrect": true },
+          { "Text": "Creative Style System", "IsCorrect": false },
+          { "Text": "Content Style Sheets", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which language adds interactivity to websites?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "HTML", "IsCorrect": false },
+          { "Text": "JavaScript", "IsCorrect": true },
+          { "Text": "CSS", "IsCorrect": false },
+          { "Text": "PHP", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "HTML stands for HyperText Markup Language.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which HTML tag is used to create a hyperlink?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "<img>", "IsCorrect": false },
+          { "Text": "<a>", "IsCorrect": true },
+          { "Text": "<div>", "IsCorrect": false },
+          { "Text": "<p>", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does CSS primarily control on a webpage?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Functionality", "IsCorrect": false },
+          { "Text": "Visual styling", "IsCorrect": true },
+          { "Text": "Database access", "IsCorrect": false },
+          { "Text": "Server logic", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which file extension is commonly used for a webpage?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": ".txt", "IsCorrect": false },
+          { "Text": ".html", "IsCorrect": true },
+          { "Text": ".exe", "IsCorrect": false },
+          { "Text": ".pdf", "IsCorrect": false }
         ]
       }
     ],
     "Category": "technology",
     "Subsections": [
-      "Software applications"
+      "Internet & connectivity"
     ]
   },
   {
-    "Title": "Educational software",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Cloud computing explained",
+    "Description": "Understand what the cloud is, how it works, and why services like Google Drive and iCloud are so powerful.",
+    "MediaUrl": "https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is cloud computing primarily based on?",
         "Layout": "CLASSIC",
-        "TimeLimit": 30,
+        "TimeLimit": 20,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Local storage", "IsCorrect": false },
+          { "Text": "Remote servers", "IsCorrect": true },
+          { "Text": "Personal devices", "IsCorrect": false },
+          { "Text": "Physical media", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which service is an example of cloud storage?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Microsoft Word", "IsCorrect": false },
+          { "Text": "Google Drive", "IsCorrect": true },
+          { "Text": "Notepad", "IsCorrect": false },
+          { "Text": "Firefox", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What type of cloud service provides virtual computing resources?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "SaaS", "IsCorrect": false },
+          { "Text": "IaaS", "IsCorrect": true },
+          { "Text": "PaaS", "IsCorrect": false },
+          { "Text": "DaaS", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Cloud computing requires users to manage physical servers.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which company is a major provider of cloud computing services?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Apple", "IsCorrect": false },
+          { "Text": "Amazon", "IsCorrect": true },
+          { "Text": "Adobe", "IsCorrect": false },
+          { "Text": "Intel", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does SaaS stand for in cloud computing?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Software as a Service", "IsCorrect": true },
+          { "Text": "System as a Service", "IsCorrect": false },
+          { "Text": "Storage as a Service", "IsCorrect": false },
+          { "Text": "Security as a Service", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which cloud model is shared across multiple organizations?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Private cloud", "IsCorrect": false },
+          { "Text": "Public cloud", "IsCorrect": true },
+          { "Text": "Hybrid cloud", "IsCorrect": false },
+          { "Text": "Local cloud", "IsCorrect": false }
         ]
       }
     ],
     "Category": "technology",
     "Subsections": [
-      "Software applications"
+      "Internet & connectivity"
+    ]
+  },
+  {
+    "Title": "Cybersecurity fundamentals",
+    "Description": "Explore key concepts of online safety, from strong passwords to firewalls and encryption.",
+    "MediaUrl": "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwyfHxjeWJlcnNlY3VyaXR5fGVufDB8fHx8MTc1NzkwODEzOXww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
+    "Questions": [
+      {
+        "Title": "What is a common method to secure online accounts?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Weak passwords", "IsCorrect": false },
+          { "Text": "Strong passwords", "IsCorrect": true },
+          { "Text": "Public Wi-Fi", "IsCorrect": false },
+          { "Text": "Single sign-on", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does a firewall do?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Encrypts data", "IsCorrect": false },
+          { "Text": "Monitors network traffic", "IsCorrect": true },
+          { "Text": "Stores passwords", "IsCorrect": false },
+          { "Text": "Runs antivirus scans", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is phishing?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "A type of software update", "IsCorrect": false },
+          { "Text": "A fraudulent attempt to steal information", "IsCorrect": true },
+          { "Text": "A network protocol", "IsCorrect": false },
+          { "Text": "A virus scan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Encryption converts data into an unreadable format to protect it.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is two-factor authentication (2FA)?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Using two passwords", "IsCorrect": false },
+          { "Text": "Requiring two forms of verification", "IsCorrect": true },
+          { "Text": "Encrypting data twice", "IsCorrect": false },
+          { "Text": "Scanning for viruses twice", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which type of malware spies on user activity?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Virus", "IsCorrect": false },
+          { "Text": "Spyware", "IsCorrect": true },
+          { "Text": "Worm", "IsCorrect": false },
+          { "Text": "Trojan", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does VPN stand for in cybersecurity?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Virtual Private Network", "IsCorrect": true },
+          { "Text": "Virus Protection Node", "IsCorrect": false },
+          { "Text": "Virtual Public Network", "IsCorrect": false },
+          { "Text": "Validated Private Node", "IsCorrect": false }
+        ]
+      }
+    ],
+    "Category": "technology",
+    "Subsections": [
+      "Internet & connectivity"
+    ]
+  },
+  {
+    "Title": "Email and online communication",
+    "Description": "Learn how email and messaging systems enable instant global communication and remain essential tools in the digital age.",
+    "MediaUrl": "https://images.pexels.com/photos/193003/pexels-photo-193003.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
+    "Questions": [
+      {
+        "Title": "Which protocol is commonly used for sending emails?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "HTTP", "IsCorrect": false },
+          { "Text": "SMTP", "IsCorrect": true },
+          { "Text": "FTP", "IsCorrect": false },
+          { "Text": "TCP", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does CC stand for in an email?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Copy Content", "IsCorrect": false },
+          { "Text": "Carbon Copy", "IsCorrect": true },
+          { "Text": "Certified Copy", "IsCorrect": false },
+          { "Text": "Clear Content", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which service is an example of an email provider?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "WhatsApp", "IsCorrect": false },
+          { "Text": "Gmail", "IsCorrect": true },
+          { "Text": "Skype", "IsCorrect": false },
+          { "Text": "Zoom", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Email attachments can contain viruses.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What does BCC stand for in an email?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Blind Carbon Copy", "IsCorrect": true },
+          { "Text": "Backup Carbon Copy", "IsCorrect": false },
+          { "Text": "Basic Content Copy", "IsCorrect": false },
+          { "Text": "Bold Carbon Copy", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which protocol is used to retrieve emails from a server?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "IMAP", "IsCorrect": true },
+          { "Text": "HTTP", "IsCorrect": false },
+          { "Text": "FTP", "IsCorrect": false },
+          { "Text": "SMTP", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What feature allows email users to organize messages into categories?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Filters", "IsCorrect": true },
+          { "Text": "Themes", "IsCorrect": false },
+          { "Text": "Signatures", "IsCorrect": false },
+          { "Text": "Templates", "IsCorrect": false }
+        ]
+      }
+    ],
+    "Category": "technology",
+    "Subsections": [
+      "Internet & connectivity"
     ]
   },
   {
     "Title": "History of Windows",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Trace the evolution of Microsoft Windows from its early versions to the modern operating system.",
+    "MediaUrl": "https://images.unsplash.com/photo-1662947036644-ecfde1221ac7?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxXaW5kb3dzJTIwbG9nb3xlbnwwfHx8fDE3NTc5MDg1NDN8MA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "In which year was Windows 1.0 released?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "1983", "IsCorrect": false },
+          { "Text": "1985", "IsCorrect": true },
+          { "Text": "1987", "IsCorrect": false },
+          { "Text": "1990", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which Windows version introduced the Start menu?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Windows 3.1", "IsCorrect": false },
+          { "Text": "Windows 95", "IsCorrect": true },
+          { "Text": "Windows XP", "IsCorrect": false },
+          { "Text": "Windows 98", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What was a key feature of Windows XP?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Touch interface", "IsCorrect": false },
+          { "Text": "Improved stability", "IsCorrect": true },
+          { "Text": "Cloud integration", "IsCorrect": false },
+          { "Text": "Voice assistant", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Windows Vista was known for its strong security features.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which Windows version introduced the Metro interface?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Windows 7", "IsCorrect": false },
+          { "Text": "Windows 8", "IsCorrect": true },
+          { "Text": "Windows 10", "IsCorrect": false },
+          { "Text": "Windows XP", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the name of the virtual assistant in Windows 10?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Siri", "IsCorrect": false },
+          { "Text": "Cortana", "IsCorrect": true },
+          { "Text": "Alexa", "IsCorrect": false },
+          { "Text": "Google Assistant", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which Windows version was designed for both PCs and tablets?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Windows XP", "IsCorrect": false },
+          { "Text": "Windows 10", "IsCorrect": true },
+          { "Text": "Windows 95", "IsCorrect": false },
+          { "Text": "Windows Vista", "IsCorrect": false }
         ]
       }
     ],
@@ -433,32 +701,96 @@
   },
   {
     "Title": "History of macOS",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Learn how Apple's macOS has developed over the decades, shaping the user experience for millions.",
+    "MediaUrl": "https://images.pexels.com/photos/9365238/pexels-photo-9365238.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What was the first macOS version called?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "System 1", "IsCorrect": true },
+          { "Text": "macOS X", "IsCorrect": false },
+          { "Text": "OS 9", "IsCorrect": false },
+          { "Text": "Cheetah", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which year was Mac OS X 10.0 released?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "1998", "IsCorrect": false },
+          { "Text": "2001", "IsCorrect": true },
+          { "Text": "2004", "IsCorrect": false },
+          { "Text": "1995", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which macOS version introduced the Aqua interface?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "System 7", "IsCorrect": false },
+          { "Text": "Mac OS X", "IsCorrect": true },
+          { "Text": "OS 9", "IsCorrect": false },
+          { "Text": "macOS Sierra", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "macOS is based on a Unix-like operating system.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the name of Apple’s virtual assistant introduced in macOS?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Cortana", "IsCorrect": false },
+          { "Text": "Siri", "IsCorrect": true },
+          { "Text": "Alexa", "IsCorrect": false },
+          { "Text": "Google Assistant", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which macOS version was named after a California landmark?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Tiger", "IsCorrect": false },
+          { "Text": "Yosemite", "IsCorrect": true },
+          { "Text": "Leopard", "IsCorrect": false },
+          { "Text": "Panther", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which feature allows macOS and iOS devices to work seamlessly together?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "AirDrop", "IsCorrect": false },
+          { "Text": "Continuity", "IsCorrect": true },
+          { "Text": "Time Machine", "IsCorrect": false },
+          { "Text": "iCloud", "IsCorrect": false }
         ]
       }
     ],
@@ -469,32 +801,96 @@
   },
   {
     "Title": "History of Linux",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Discover the story of Linux, the open-source operating system that powers servers, desktops, and Android devices.",
+    "MediaUrl": "https://images.pexels.com/photos/11034131/pexels-photo-11034131.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Who created the Linux kernel?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Bill Gates", "IsCorrect": false },
+          { "Text": "Linus Torvalds", "IsCorrect": true },
+          { "Text": "Steve Jobs", "IsCorrect": false },
+          { "Text": "Tim Berners-Lee", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which year was the Linux kernel first released?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "1989", "IsCorrect": false },
+          { "Text": "1991", "IsCorrect": true },
+          { "Text": "1993", "IsCorrect": false },
+          { "Text": "1995", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What type of software is Linux?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Proprietary", "IsCorrect": false },
+          { "Text": "Open-source", "IsCorrect": true },
+          { "Text": "Commercial", "IsCorrect": false },
+          { "Text": "Subscription-based", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Linux is only used on desktop computers.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which Linux distribution is known for its stability?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Ubuntu", "IsCorrect": false },
+          { "Text": "Debian", "IsCorrect": true },
+          { "Text": "Fedora", "IsCorrect": false },
+          { "Text": "Arch Linux", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the name of the Linux mascot?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Tux", "IsCorrect": true },
+          { "Text": "Gnu", "IsCorrect": false },
+          { "Text": "Pengy", "IsCorrect": false },
+          { "Text": "Linx", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which operating system is based on the Linux kernel?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Windows", "IsCorrect": false },
+          { "Text": "Android", "IsCorrect": true },
+          { "Text": "macOS", "IsCorrect": false },
+          { "Text": "iOS", "IsCorrect": false }
         ]
       }
     ],
@@ -505,32 +901,96 @@
   },
   {
     "Title": "Comparing Windows, macOS & Linux",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "A side-by-side look at the strengths and weaknesses of the three major operating systems.",
+    "MediaUrl": "https://images.unsplash.com/photo-1649877508777-1554357604eb?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxjb21wdXRlciUyMGJvb3Rpbmd8ZW58MHx8fHwxNzU3OTA4NDI0fDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "Which operating system is open-source?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Windows", "IsCorrect": false },
+          { "Text": "Linux", "IsCorrect": true },
+          { "Text": "macOS", "IsCorrect": false },
+          { "Text": "All of them", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which OS is developed by Microsoft?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "macOS", "IsCorrect": false },
+          { "Text": "Windows", "IsCorrect": true },
+          { "Text": "Linux", "IsCorrect": false },
+          { "Text": "Unix", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which OS is known for its integration with Apple hardware?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Linux", "IsCorrect": false },
+          { "Text": "macOS", "IsCorrect": true },
+          { "Text": "Windows", "IsCorrect": false },
+          { "Text": "Ubuntu", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Windows has better support for gaming than Linux or macOS.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which OS is most commonly used on servers?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "Windows", "IsCorrect": false },
+          { "Text": "Linux", "IsCorrect": true },
+          { "Text": "macOS", "IsCorrect": false },
+          { "Text": "iOS", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which OS uses the Aqua interface?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Windows", "IsCorrect": false },
+          { "Text": "macOS", "IsCorrect": true },
+          { "Text": "Linux", "IsCorrect": false },
+          { "Text": "Android", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which OS offers the most customization for advanced users?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Windows", "IsCorrect": false },
+          { "Text": "Linux", "IsCorrect": true },
+          { "Text": "macOS", "IsCorrect": false },
+          { "Text": "All equally", "IsCorrect": false }
         ]
       }
     ],
@@ -541,32 +1001,96 @@
   },
   {
     "Title": "Command line basics",
-    "Description": "",
-    "MediaUrl": "",
+    "Description": "Get started with the command line: a powerful tool for controlling computers beyond graphical interfaces.",
+    "MediaUrl": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxMHx8dGVybWluYWwlMjBsaW51eHxlbnwwfHx8fDE3NTc5MDgyMTB8MA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What command displays the current directory in Linux?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "ls", "IsCorrect": false },
+          { "Text": "pwd", "IsCorrect": true },
+          { "Text": "cd", "IsCorrect": false },
+          { "Text": "dir", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which command lists files in a directory?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "cd", "IsCorrect": false },
+          { "Text": "ls", "IsCorrect": true },
+          { "Text": "mkdir", "IsCorrect": false },
+          { "Text": "rm", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What command changes the current directory?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "pwd", "IsCorrect": false },
+          { "Text": "cd", "IsCorrect": true },
+          { "Text": "ls", "IsCorrect": false },
+          { "Text": "rmdir", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The command 'rm' is used to create a new file.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which command creates a new directory?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "mkdir", "IsCorrect": true },
+          { "Text": "rmdir", "IsCorrect": false },
+          { "Text": "touch", "IsCorrect": false },
+          { "Text": "cd", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What command removes a file in Linux?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "rm", "IsCorrect": true },
+          { "Text": "del", "IsCorrect": false },
+          { "Text": "erase", "IsCorrect": false },
+          { "Text": "remove", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which command displays the contents of a text file?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "cat", "IsCorrect": true },
+          { "Text": "ls", "IsCorrect": false },
+          { "Text": "cd", "IsCorrect": false },
+          { "Text": "touch", "IsCorrect": false }
         ]
       }
     ],
@@ -576,39 +1100,703 @@
     ]
   },
   {
-    "Title": "Open-source vs proprietary",
-    "Description": "",
-    "MediaUrl": "",
+    "Title": "Open-source vs proprietary software",
+    "Description": "Understand the differences between free, community-driven software and commercial, closed-source alternatives.",
+    "MediaUrl": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwxfHxwcm9ncmFtbWluZyUyMGNvZGV8ZW58MHx8fHwxNzU3OTA4NTg0fDA&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
     "Questions": [
       {
-        "Title": "",
+        "Title": "What is a characteristic of open-source software?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Closed code", "IsCorrect": false },
+          { "Text": "Freely modifiable code", "IsCorrect": true },
+          { "Text": "Expensive licensing", "IsCorrect": false },
+          { "Text": "Restricted distribution", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which software is an example of proprietary software?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Linux", "IsCorrect": false },
+          { "Text": "Microsoft Windows", "IsCorrect": true },
+          { "Text": "Apache", "IsCorrect": false },
+          { "Text": "Firefox", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is a benefit of open-source software?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "High cost", "IsCorrect": false },
+          { "Text": "Community-driven development", "IsCorrect": true },
+          { "Text": "Limited customization", "IsCorrect": false },
+          { "Text": "Restricted updates", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Proprietary software allows users to modify its source code.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which license is commonly associated with open-source software?",
         "Layout": "CLASSIC",
         "TimeLimit": 30,
         "PointsMultiplier": 1,
         "MediaUrl": "",
         "Answers": [
-          {
-            "Text": "",
-            "IsCorrect": true
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          },
-          {
-            "Text": "",
-            "IsCorrect": false
-          }
+          { "Text": "GPL", "IsCorrect": true },
+          { "Text": "EULA", "IsCorrect": false },
+          { "Text": "SLA", "IsCorrect": false },
+          { "Text": "NDA", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which software is an example of open-source software?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Microsoft Office", "IsCorrect": false },
+          { "Text": "LibreOffice", "IsCorrect": true },
+          { "Text": "Adobe Photoshop", "IsCorrect": false },
+          { "Text": "Windows Media Player", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is a common drawback of proprietary software?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Free access", "IsCorrect": false },
+          { "Text": "Vendor lock-in", "IsCorrect": true },
+          { "Text": "Community support", "IsCorrect": false },
+          { "Text": "Open code", "IsCorrect": false }
         ]
       }
     ],
     "Category": "technology",
     "Subsections": [
       "Desktop operating systems"
+    ]
+  },
+  {
+    "Title": "The printing press revolution",
+    "Description": "Learn how Gutenberg's invention transformed knowledge sharing and started a new era in history.",
+    "MediaUrl": "https://images.unsplash.com/photo-1562155695-fb6e1f95fcfd?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHw1fHxwcmludGluZyUyMHByZXNzfGVufDB8fHx8MTc1NzkwODY5OHww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
+    "Questions": [
+      {
+        "Title": "Who invented the movable type printing press?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Thomas Edison", "IsCorrect": false },
+          { "Text": "Johannes Gutenberg", "IsCorrect": true },
+          { "Text": "Alexander Graham Bell", "IsCorrect": false },
+          { "Text": "Leonardo da Vinci", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which century was the printing press invented?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "13th century", "IsCorrect": false },
+          { "Text": "15th century", "IsCorrect": true },
+          { "Text": "17th century", "IsCorrect": false },
+          { "Text": "19th century", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What was a major impact of the printing press?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Increased illiteracy", "IsCorrect": false },
+          { "Text": "Widespread knowledge sharing", "IsCorrect": true },
+          { "Text": "Reduced book production", "IsCorrect": false },
+          { "Text": "Slower communication", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The printing press made books more expensive.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What material was commonly used for early printed books?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Plastic", "IsCorrect": false },
+          { "Text": "Paper", "IsCorrect": true },
+          { "Text": "Metal", "IsCorrect": false },
+          { "Text": "Glass", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which historical event was influenced by the printing press?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "The Renaissance", "IsCorrect": true },
+          { "Text": "The Industrial Revolution", "IsCorrect": false },
+          { "Text": "The American Revolution", "IsCorrect": false },
+          { "Text": "World War I", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What was a key feature of Gutenberg’s printing press?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Digital printing", "IsCorrect": false },
+          { "Text": "Movable type", "IsCorrect": true },
+          { "Text": "Laser printing", "IsCorrect": false },
+          { "Text": "3D printing", "IsCorrect": false }
+        ]
+      }
+    ],
+    "Category": "technology",
+    "Subsections": [
+      "Modern tech innovations"
+    ]
+  },
+  {
+    "Title": "Electricity and the light bulb",
+    "Description": "Discover how electricity and Edison's light bulb changed the world forever.",
+    "MediaUrl": "https://images.pexels.com/photos/577514/pexels-photo-577514.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
+    "Questions": [
+      {
+        "Title": "Who is credited with inventing the incandescent light bulb?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Nikola Tesla", "IsCorrect": false },
+          { "Text": "Thomas Edison", "IsCorrect": true },
+          { "Text": "Alexander Graham Bell", "IsCorrect": false },
+          { "Text": "Guglielmo Marconi", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which century was the light bulb invented?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "17th century", "IsCorrect": false },
+          { "Text": "19th century", "IsCorrect": true },
+          { "Text": "18th century", "IsCorrect": false },
+          { "Text": "20th century", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is the primary source of power for a light bulb?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Gas", "IsCorrect": false },
+          { "Text": "Electricity", "IsCorrect": true },
+          { "Text": "Solar", "IsCorrect": false },
+          { "Text": "Wind", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The light bulb was the first invention to use electricity.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What gas is commonly used in modern incandescent bulbs?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Oxygen", "IsCorrect": false },
+          { "Text": "Argon", "IsCorrect": true },
+          { "Text": "Hydrogen", "IsCorrect": false },
+          { "Text": "Nitrogen", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What material was used for the filament in early light bulbs?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Copper", "IsCorrect": false },
+          { "Text": "Tungsten", "IsCorrect": true },
+          { "Text": "Iron", "IsCorrect": false },
+          { "Text": "Aluminum", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What was a major societal impact of the light bulb?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Reduced literacy", "IsCorrect": false },
+          { "Text": "Extended work hours", "IsCorrect": true },
+          { "Text": "Slower communication", "IsCorrect": false },
+          { "Text": "Decreased productivity", "IsCorrect": false }
+        ]
+      }
+    ],
+    "Category": "technology",
+    "Subsections": [
+      "Modern tech innovations"
+    ]
+  },
+  {
+    "Title": "The telephone evolution",
+    "Description": "Trace the development of the telephone, from Alexander Graham Bell's invention to today's smartphones.",
+    "MediaUrl": "https://images.pexels.com/photos/163007/phone-old-year-built-1955-bakelite-163007.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
+    "Questions": [
+      {
+        "Title": "Who invented the telephone?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Thomas Edison", "IsCorrect": false },
+          { "Text": "Alexander Graham Bell", "IsCorrect": true },
+          { "Text": "Nikola Tesla", "IsCorrect": false },
+          { "Text": "Guglielmo Marconi", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which year was the telephone patented?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "1876", "IsCorrect": true },
+          { "Text": "1886", "IsCorrect": false },
+          { "Text": "1896", "IsCorrect": false },
+          { "Text": "1866", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What technology replaced rotary dial phones?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Push-button phones", "IsCorrect": true },
+          { "Text": "Cordless phones", "IsCorrect": false },
+          { "Text": "Smartphones", "IsCorrect": false },
+          { "Text": "Satellite phones", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The first telephones could send text messages.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What was the first smartphone introduced by Apple?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "iPhone", "IsCorrect": true },
+          { "Text": "iPod", "IsCorrect": false },
+          { "Text": "iPad", "IsCorrect": false },
+          { "Text": "MacBook", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which decade did mobile phones become widely available?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "1970s", "IsCorrect": false },
+          { "Text": "1980s", "IsCorrect": true },
+          { "Text": "1990s", "IsCorrect": false },
+          { "Text": "2000s", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What technology commonly enables wireless internet access on mobile phones?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Wi-Fi", "IsCorrect": true },
+          { "Text": "Bluetooth", "IsCorrect": false },
+          { "Text": "Infrared", "IsCorrect": false },
+          { "Text": "FM radio", "IsCorrect": false }
+        ]
+      }
+    ],
+    "Category": "technology",
+    "Subsections": [
+      "Modern tech innovations"
+    ]
+  },
+  {
+    "Title": "The personal computer revolution",
+    "Description": "See how personal computers transformed homes, schools, and workplaces across the globe.",
+    "MediaUrl": "https://images.pexels.com/photos/5054208/pexels-photo-5054208.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
+    "Questions": [
+      {
+        "Title": "What was one of the first personal computers released by Apple?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "MacBook", "IsCorrect": false },
+          { "Text": "Apple II", "IsCorrect": true },
+          { "Text": "iMac", "IsCorrect": false },
+          { "Text": "iPad", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which decade did personal computers become popular?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "1960s", "IsCorrect": false },
+          { "Text": "1970s", "IsCorrect": true },
+          { "Text": "1980s", "IsCorrect": false },
+          { "Text": "1990s", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What company released the first IBM PC?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Apple", "IsCorrect": false },
+          { "Text": "IBM", "IsCorrect": true },
+          { "Text": "Microsoft", "IsCorrect": false },
+          { "Text": "Dell", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Personal computers were initially designed for business use only.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "What was a key feature of early personal computers?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Touchscreens", "IsCorrect": false },
+          { "Text": "Graphical user interface", "IsCorrect": true },
+          { "Text": "Voice control", "IsCorrect": false },
+          { "Text": "Cloud storage", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which company developed the Windows operating system for PCs?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Apple", "IsCorrect": false },
+          { "Text": "Microsoft", "IsCorrect": true },
+          { "Text": "IBM", "IsCorrect": false },
+          { "Text": "Linux", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What was a major impact of the personal computer revolution?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Reduced connectivity", "IsCorrect": false },
+          { "Text": "Increased accessibility to computing", "IsCorrect": true },
+          { "Text": "Decreased productivity", "IsCorrect": false },
+          { "Text": "Limited software development", "IsCorrect": false }
+        ]
+      }
+    ],
+    "Category": "technology",
+    "Subsections": [
+      "Modern tech innovations"
+    ]
+  },
+  {
+    "Title": "The internet: From ARPANET to WWW",
+    "Description": "Follow the journey of the internet, from military research to the worldwide web we use today.",
+    "MediaUrl": "https://images.pexels.com/photos/159304/network-cable-ethernet-computer-159304.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=350&h=233.33",
+    "Questions": [
+      {
+        "Title": "What was the precursor to the modern internet?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "World Wide Web", "IsCorrect": false },
+          { "Text": "ARPANET", "IsCorrect": true },
+          { "Text": "Intranet", "IsCorrect": false },
+          { "Text": "Ethernet", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which decade was ARPANET developed?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "1950s", "IsCorrect": false },
+          { "Text": "1960s", "IsCorrect": true },
+          { "Text": "1970s", "IsCorrect": false },
+          { "Text": "1980s", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Who is credited with inventing the World Wide Web?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Bill Gates", "IsCorrect": false },
+          { "Text": "Tim Berners-Lee", "IsCorrect": true },
+          { "Text": "Steve Jobs", "IsCorrect": false },
+          { "Text": "Linus Torvalds", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "The World Wide Web was introduced in the 1990s.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": true },
+          { "Text": "False", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What protocol is used for accessing the World Wide Web?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "FTP", "IsCorrect": false },
+          { "Text": "HTTP", "IsCorrect": true },
+          { "Text": "SMTP", "IsCorrect": false },
+          { "Text": "TCP", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Which organization developed the first web browser?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Microsoft", "IsCorrect": false },
+          { "Text": "CERN", "IsCorrect": true },
+          { "Text": "Apple", "IsCorrect": false },
+          { "Text": "Google", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What was a major impact of the World Wide Web?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Reduced global connectivity", "IsCorrect": false },
+          { "Text": "Global information sharing", "IsCorrect": true },
+          { "Text": "Decreased internet usage", "IsCorrect": false },
+          { "Text": "Limited access to data", "IsCorrect": false }
+        ]
+      }
+    ],
+    "Category": "technology",
+    "Subsections": [
+      "Modern tech innovations"
+    ]
+  },
+  {
+    "Title": "The smartphone revolution",
+    "Description": "Explore how smartphones combined communication, computing, and apps into one essential device.",
+    "MediaUrl": "https://images.unsplash.com/photo-1598965402089-897ce52e8355?ixid=M3w3ODI4NjV8MHwxfHNlYXJjaHwzfHxzbWFydHBob25lfGVufDB8fHx8MTc1NzkwODgwM3ww&ixlib=rb-4.1.0&fit=crop&w=350&h=233.33",
+    "Questions": [
+      {
+        "Title": "Which company released the first iPhone?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Samsung", "IsCorrect": false },
+          { "Text": "Apple", "IsCorrect": true },
+          { "Text": "Nokia", "IsCorrect": false },
+          { "Text": "BlackBerry", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "In which year was the first iPhone released?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "2005", "IsCorrect": false },
+          { "Text": "2007", "IsCorrect": true },
+          { "Text": "2009", "IsCorrect": false },
+          { "Text": "2011", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What feature distinguishes smartphones from earlier mobile phones?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 20,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Text messaging", "IsCorrect": false },
+          { "Text": "Touchscreen and apps", "IsCorrect": true },
+          { "Text": "Physical keyboard", "IsCorrect": false },
+          { "Text": "Basic calling", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "Smartphones rely solely on cellular networks for internet access.",
+        "Layout": "TRUE_OR_FALSE",
+        "TimeLimit": 10,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "True", "IsCorrect": false },
+          { "Text": "False", "IsCorrect": true }
+        ]
+      },
+      {
+        "Title": "Which operating system powers most Samsung smartphones?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "iOS", "IsCorrect": false },
+          { "Text": "Android", "IsCorrect": true },
+          { "Text": "Windows", "IsCorrect": false },
+          { "Text": "macOS", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What is a common feature of smartphone apps?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 30,
+        "PointsMultiplier": 1,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Physical buttons", "IsCorrect": false },
+          { "Text": "User interactivity", "IsCorrect": true },
+          { "Text": "Fixed functionality", "IsCorrect": false },
+          { "Text": "Manual updates", "IsCorrect": false }
+        ]
+      },
+      {
+        "Title": "What technology allows smartphones to run multiple apps?",
+        "Layout": "CLASSIC",
+        "TimeLimit": 40,
+        "PointsMultiplier": 2,
+        "MediaUrl": "",
+        "Answers": [
+          { "Text": "Single-tasking OS", "IsCorrect": false },
+          { "Text": "Multitasking OS", "IsCorrect": true },
+          { "Text": "Basic firmware", "IsCorrect": false },
+          { "Text": "Hardware switch", "IsCorrect": false }
+        ]
+      }
+    ],
+    "Category": "technology",
+    "Subsections": [
+      "Modern tech innovations"
     ]
   }
 ]
