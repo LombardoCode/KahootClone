@@ -30,8 +30,13 @@ namespace API.Services
       return Id;
     }
 
-    public async Task<AppUser> GetCurrentUserAsync()
+    public async Task<AppUser?> GetCurrentUserAsync()
     {
+      if (_httpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated == false)
+      {
+        return null;
+      }
+
       string username = await GetUserName();
       AppUser user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == username);
       return user;

@@ -1,4 +1,5 @@
 import Text from "@/app/components/UIComponents/Text";
+import DisplayUsersPhoto from "@/app/components/utils/General/DisplayUsersPhoto";
 import PodiumPlaceIcon, { PodiumPlaceIconSize } from "@/app/components/utils/Podium/PodiumPlace/PodiumPlaceIcon";
 import { Player } from "@/app/interfaces/Play/Player.interface";
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
@@ -19,6 +20,7 @@ const PodiumPlace = ({ place, playerInfo, className = '' }: PodiumPlaceProps) =>
           place={place}
           playerName={playerInfo?.name}
           playerPoints={playerInfo?.earnedPoints}
+          playerMediaUrl={playerInfo?.mediaUrl}
           className="z-20"
         />
       )}
@@ -28,6 +30,7 @@ const PodiumPlace = ({ place, playerInfo, className = '' }: PodiumPlaceProps) =>
           place={place}
           playerName={playerInfo?.name}
           playerPoints={playerInfo?.earnedPoints}
+          playerMediaUrl={playerInfo?.mediaUrl}
           className="z-10 translate-x-3"
         />
       )}
@@ -37,6 +40,7 @@ const PodiumPlace = ({ place, playerInfo, className = '' }: PodiumPlaceProps) =>
           place={place}
           playerName={playerInfo?.name}
           playerPoints={playerInfo?.earnedPoints}
+          playerMediaUrl={playerInfo?.mediaUrl}
           className="z-0 -translate-x-3"
         />
       )}
@@ -48,16 +52,17 @@ interface PodiumPlaceIndividualProps {
   place: number;
   playerName: string | null | undefined;
   playerPoints: number | undefined;
+  playerMediaUrl: string | null | undefined;
   className?: string;
 }
 
-const PodiumPlaceIndividual = ({ place = 0, playerName = "Unknown", playerPoints = 0, className = "" }: PodiumPlaceIndividualProps) => {
+const PodiumPlaceIndividual = ({ place = 0, playerName = "Unknown", playerPoints = 0, playerMediaUrl, className = "" }: PodiumPlaceIndividualProps) => {
   const podiumBarHeightsClasses: any = {
     1: 'h-[36rem]',
     2: 'h-[32rem]',
     3: 'h-[28rem]'
   };
-  
+
   const podiumBarHeight = podiumBarHeightsClasses[place] || null;
 
   if (podiumBarHeight === null) {
@@ -70,15 +75,17 @@ const PodiumPlaceIndividual = ({ place = 0, playerName = "Unknown", playerPoints
         id="podium-place-individual-profile-picture-wrapper"
         className="flex justify-center mb-3 w-full top-0"
       >
-        <div
-          id="podium-place-individual-profile-picture-content"
-          className="flex justify-center items-center bg-gray-500 w-28 h-28 rounded-full"
-        >
-          <FontAwesomeIcon
-            icon={faUser}
-            color="white"
-            size="3x"
-          />
+        <div id="podium-place-individual-profile-picture-content">
+          {!!playerMediaUrl
+            ? <DisplayUsersPhoto photo={playerMediaUrl} size={"medium"} />
+            : <div className="flex justify-center items-center bg-gray-500 w-28 h-28 rounded-full">
+              <FontAwesomeIcon
+                icon={faUser}
+                color="white"
+                size="3x"
+              />
+            </div>
+          }
         </div>
       </div>
 

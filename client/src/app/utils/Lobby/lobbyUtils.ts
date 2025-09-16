@@ -50,6 +50,7 @@ export const createBaseNewPlayer = async (connection: signalR.HubConnection, nic
   let newPlayer: Player = {
     connectionId: connection.connectionId,
     userId: null,
+    mediaUrl: null,
     name: nickName,
     earnedPoints: 0
   };

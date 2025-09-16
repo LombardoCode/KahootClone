@@ -68,6 +68,7 @@ interface InGameStore {
 interface Player {
   connectionId: string | null | undefined;
   userId: string | null;
+  mediaUrl: string | null;
   name: string;
   earnedPoints: number;
 }
@@ -248,6 +249,7 @@ const useInGameStore = create<InGameStore>()((set, get) => ({
       let finalPlayerStat: FinalPlayerStats = {
         connectionId: player.connectionId,
         userId: null,
+        mediaUrl: player.mediaUrl,
         name: player.name,
         earnedPoints: player.earnedPoints,
         place: index + 1

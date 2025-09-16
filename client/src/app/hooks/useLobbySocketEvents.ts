@@ -66,10 +66,11 @@ const useLobbySocketEvents = () => {
 
     debugLog("%cRegistering SignalR events for Host", "color: green;");
 
-    signalRConnection.on('AddNewPlayer', (newPlayer) => {
+    signalRConnection.on('AddNewPlayer', (newPlayer: Player) => {
       addPlayer({
         connectionId: newPlayer.connectionId,
         userId: newPlayer.userId,
+        mediaUrl: newPlayer.mediaUrl,
         name: newPlayer.name,
         earnedPoints: newPlayer.earnedPoints
       });

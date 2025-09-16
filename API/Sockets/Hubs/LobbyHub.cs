@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Services;
+using API.Models;
 
 namespace API.Sockets.Hubs
 {
@@ -154,13 +155,14 @@ namespace API.Sockets.Hubs
 
     public async Task PutGuestInLobbyQueue(string lobbyId, Player newPlayerData)
     {
-      var userId = await _userService.GetUserId();
+      AppUser? user = await _userService.GetCurrentUserAsync();
 
       // First, we create our player
       var newPlayer = new Player
       {
         ConnectionId = Context.ConnectionId,
-        UserId = string.IsNullOrEmpty(userId) ? null : userId,
+        UserId = user?.Id,
+        MediaUrl = user?.MediaUrl,
         Name = newPlayerData.Name,
         EarnedPoints = 0
       };
@@ -367,6 +369,7 @@ namespace API.Sockets.Hubs
   {
     public string ConnectionId { get; set; }
     public string? UserId { get; set; }
+    public string? MediaUrl { get; set; }
     public string Name { get; set; }
     public int EarnedPoints { get; set; } = 0;
   }

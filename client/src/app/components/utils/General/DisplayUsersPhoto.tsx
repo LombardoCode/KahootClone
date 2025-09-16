@@ -2,7 +2,7 @@ import Logo, { LogoColors, LogoSize } from "../Logo";
 
 interface DisplayUsersPhotoProps {
   photo: string | null;
-  size: "extra_small" | "small" | "medium";
+  size: "extra_small" | "small" | "medium" | "large";
 }
 
 const DisplayUsersPhoto = ({ photo, size = "small" }: DisplayUsersPhotoProps) => {
@@ -17,6 +17,9 @@ const DisplayUsersPhoto = ({ photo, size = "small" }: DisplayUsersPhotoProps) =>
         break;
       case "medium":
         photoSize = "min-w-24 max-w-24 min-h-24 max-h-24"
+        break;
+      case "large":
+        photoSize = "min-w-28 max-w-28 min-h-28 max-h-28"
         break;
     }
 
