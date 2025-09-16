@@ -145,6 +145,7 @@ namespace API.Controllers.Play
             TimeLimit = q.TimeLimit,
             PointsMultiplier = q.PointsMultiplier,
             MediaUrl = q.MediaUrl,
+            HideTitleUntilAnswer = q.HideTitleUntilAnswer,
             Answers = q.Answers.Select(a => new AnswerPlayClient
             {
               Id = a.Id,

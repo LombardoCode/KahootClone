@@ -10,6 +10,7 @@ namespace API.Data.ForClient.Play
     public TimeLimits TimeLimit { get; set; }
     public PointsMultiplier PointsMultiplier { get; set; }
     public string MediaUrl { get; set; }
+    public bool HideTitleUntilAnswer { get; set; }
     public List<AnswerPlayClient> Answers { get; set; }
   }
 }

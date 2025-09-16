@@ -16,6 +16,18 @@ const ShowingQuestionTitleAndProgressBarCountdown = () => {
     }
   }, [questionIndex]);
 
+  const renderQuestionsTitle = (): string | undefined => {
+    if (!question) {
+      return;
+    }
+    
+    if (question.hideTitleUntilAnswer) {
+      return `Question no.${questionIndex + 1}`;
+    }
+    
+    return question.title;
+  }
+
   return (
     <div className="absolute flex flex-col items-center top-0 h-full w-full">
       <motion.div
@@ -39,7 +51,7 @@ const ShowingQuestionTitleAndProgressBarCountdown = () => {
           fontWeight={FontWeights.BOLD}
           className="text-4xl"
         >
-          {question?.title}
+          {renderQuestionsTitle()}
         </Text>
       </motion.div>
 

@@ -40,6 +40,7 @@ export interface QuestionPlay {
   timeLimit: TimeLimits;
   pointsMultiplier: PointsMultiplier;
   mediaUrl?: string | null;
+  hideTitleUntilAnswer: boolean;
   answers: AnswerPlay[];
 }
 
