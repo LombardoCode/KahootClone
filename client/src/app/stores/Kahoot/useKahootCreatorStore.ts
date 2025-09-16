@@ -37,6 +37,7 @@ interface KahootCreatorStore {
   updateQuestionLayout: (questionIndex: number, questionLayout: QuizQuestionLayoutTypes) => void;
   updateQuestionTimeLimit: (questionIndex: number, questionTimeLimit: TimeLimits) => void;
   updateQuestionPoints: (questionIndex: number, questionPoints: PointsMultiplier) => void;
+  updateQuestionHideTitle: (questionIndex: number, isChecked: boolean) => void;
   deleteQuestion: (questionId: number | null) => void;
   getKahootPlayabilityStatus: () => void;
   updateTitleAndDescription: (headerInfo: KahootHeaderInfo) => void;
@@ -62,6 +63,7 @@ const createNewQuestion = (quizQuestionLayoutType: QuizQuestionLayoutTypes): Que
     layout: quizQuestionLayoutType,
     timeLimit: TimeLimits.THIRTY_S,
     pointsMultiplier: PointsMultiplier.STANDARD,
+    hideTitleUntilAnswer: false,
     mediaUrl: "",
     answers
   }
@@ -214,6 +216,16 @@ const useKahootCreatorStore = create<KahootCreatorStore>((set, get) => ({
         state.isKahootFormDirty = true;
       }
     }
+    return { kahoot };
+  }),
+  updateQuestionHideTitle: (questionIndex: number, isChecked: boolean) => set((state) => {
+    const kahoot = state.kahoot;
+
+    if (kahoot) {
+      kahoot.questions[questionIndex].hideTitleUntilAnswer = isChecked;
+      state.isKahootFormDirty = true;
+    }
+
     return { kahoot };
   }),
   deleteQuestion: (questionId: number | null) => set((state) => {

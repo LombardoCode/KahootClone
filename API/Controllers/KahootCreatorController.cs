@@ -145,6 +145,7 @@ namespace API.Controllers
             TimeLimit = updatedQuestion.TimeLimit,
             PointsMultiplier = updatedQuestion.PointsMultiplier,
             MediaUrl = updatedQuestion.MediaUrl,
+            HideTitleUntilAnswer = false,
             Answers = updatedQuestion.Answers.Select(a => new Answer
             {
               Text = a.Text,
@@ -169,6 +170,7 @@ namespace API.Controllers
           existingQuestion.TimeLimit = updatedQuestion.TimeLimit;
           existingQuestion.PointsMultiplier = updatedQuestion.PointsMultiplier;
           existingQuestion.MediaUrl = updatedQuestion.MediaUrl;
+          existingQuestion.HideTitleUntilAnswer = updatedQuestion.HideTitleUntilAnswer;
 
           bool allTheAnswersAreNew = updatedQuestion.Answers.All(a => a.Id == 0);
 

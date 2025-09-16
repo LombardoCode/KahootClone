@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { PointsMultiplier, QuizQuestionLayoutTypes, TimeLimits } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { getTextContentForLayout, getTextContentForPoints } from "../Quizes/KahootQuestion.utills";
+import CheckBox from "../../UIComponents/CheckBox";
+import Label from "../../UIComponents/Label";
 
 interface CreatorQuestionSettingsProps {
   className?: string;
@@ -14,12 +16,13 @@ interface CreatorQuestionSettingsProps {
 
 const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) => {
   // Global store
-  const { kahoot, questionIndex, updateQuestionLayout, updateQuestionTimeLimit, updateQuestionPoints } = useKahootCreatorStore();
+  const { kahoot, questionIndex, updateQuestionLayout, updateQuestionTimeLimit, updateQuestionPoints, updateQuestionHideTitle } = useKahootCreatorStore();
 
   // Local component
   const [questionLayout, setQuestionLayout] = useState<ComboBoxStateProps>({ textContent: "Classic", valueContent: QuizQuestionLayoutTypes.CLASSIC });
   const [timeLimit, setTimeLimit] = useState<ComboBoxStateProps>({ textContent: "10 seconds", valueContent: TimeLimits.TEN_S });
   const [points, setPoints] = useState<ComboBoxStateProps>({ textContent: "Standard", valueContent: PointsMultiplier.STANDARD });
+  const [isHideQuestionTitle, setIsHideQuestionTitle] = useState<boolean>(false);
 
   // Update local state when questionIndex changes
   useEffect(() => {
@@ -28,6 +31,7 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
       setQuestionLayout({ textContent: getTextContentForLayout(currentQuestion.layout), valueContent: currentQuestion.layout })
       setTimeLimit({ textContent: `${currentQuestion.timeLimit} seconds`, valueContent: currentQuestion.timeLimit });
       setPoints({ textContent: getTextContentForPoints(currentQuestion.pointsMultiplier), valueContent: currentQuestion.pointsMultiplier });
+      setIsHideQuestionTitle(currentQuestion.hideTitleUntilAnswer);
     }
   }, [kahoot, questionIndex]);
 
@@ -44,6 +48,12 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
   const handleQuestionPointsChange = (questionPoints: ComboBoxStateProps) => {
     setPoints(questionPoints);
     updateQuestionPoints(questionIndex, questionPoints.valueContent);
+  }
+
+  const onHideQuestionHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked: boolean = e?.target.checked;
+    setIsHideQuestionTitle(isChecked);
+    updateQuestionHideTitle(questionIndex, isChecked);
   }
 
   return (
@@ -140,7 +150,7 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
         </ComboBox>
       </div>
 
-      <div id="points">
+      <div id="points" className="mb-8">
         <div className="flex items-center mb-2">
           <FontAwesomeIcon
             icon={faMedal}
@@ -179,6 +189,28 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
             onClick={() => handleQuestionPointsChange({ textContent: "No points", valueContent: PointsMultiplier.NO_POINTS })}
           ></ComboBoxOption>
         </ComboBox>
+      </div>
+
+      <div
+        id="hide-question-title-until-answer-wrapper"
+        className="flex items-start"
+      >
+        <CheckBox
+          id="hide-question"
+          name="hide-question"
+          className="mr-2"
+          onChange={onHideQuestionHandler}
+          checked={isHideQuestionTitle}
+        />
+
+        <Label
+          fontWeight={FontWeights.REGULAR}
+          textColor={TextColors.BLACK}
+          htmlFor="hide-question"
+          className="select-none text-md flex-1"
+        >
+          Hide question text until answering
+        </Label>
       </div>
     </div>
   )

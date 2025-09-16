@@ -10,6 +10,7 @@ namespace API.Data.Server.KahootCreator
     public TimeLimits TimeLimit { get; set; }
     public PointsMultiplier PointsMultiplier { get; set; }
     public string MediaUrl { get; set; }
+    public bool HideTitleUntilAnswer { get; set; }
     public List<AnswerClient> Answers { get; set; }
   }
 }

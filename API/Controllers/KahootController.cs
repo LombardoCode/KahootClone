@@ -182,6 +182,7 @@ namespace API.Controllers
           TimeLimit = q.TimeLimit,
           PointsMultiplier = q.PointsMultiplier,
           MediaUrl = q.MediaUrl,
+          HideTitleUntilAnswer = q.HideTitleUntilAnswer,
           Answers = q.Answers.Select(a => new AnswerClient
           {
             Id = a.Id,

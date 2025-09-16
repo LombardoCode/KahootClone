@@ -11,6 +11,7 @@ namespace API.Models.Creator
     public TimeLimits TimeLimit { get; set; }
     public PointsMultiplier PointsMultiplier { get; set; }
     public string? MediaUrl { get; set; }
+    public bool HideTitleUntilAnswer { get; set; } = false;
 
     // Navigation properties
     public Kahoot Kahoot { get; set; }

@@ -10,6 +10,7 @@ namespace API.DTOs.Kahoot.Creator.FormDraft
     public TimeLimits TimeLimit { get; set; }
     public PointsMultiplier PointsMultiplier { get; set; }
     public string MediaUrl { get; set; }
+    public bool HideTitleUntilAnswer { get; set; }
     
     // Navigation properties
     public List<KahootCreatorFormAnswer> Answers { get; set; }
