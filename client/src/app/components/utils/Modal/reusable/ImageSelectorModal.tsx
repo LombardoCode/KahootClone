@@ -47,17 +47,18 @@ const ImageSelectorModal = ({
   const { search: searchPexels } = usePexelsSearch();
   const [pexelsResults, setPexelsResults] = useState<any[]>([]);
   const [pexelsLoading, setPexelsLoading] = useState<boolean>(false);
+  const [pexelsSearchWasDoneAtLeastOnce, setPexelsSearchWasDoneAtLeastOnce] = useState<boolean>(false);
 
   // Unsplash
   const { search: searchUnsplash } = useUnsplashSearch();
   const [unsplashResults, setUnsplashResults] = useState<any[]>([]);
   const [unsplashLoading, setUnsplashLoading] = useState<boolean>(false);
+  const [unsplashSearchWasDoneAtLeastOnce, setUnsplashSearchWasDoneAtLeastOnce] = useState<boolean>(false);
 
   const determineWhichQualityToSaveImage = (photoResolutions: any) => {
     let mediaUrl: string = "";
-    
-    switch (selectedExternalImageService)
-    {
+
+    switch (selectedExternalImageService) {
       case ExternalImageService.Pexels:
         if (imagePurpose === ExternalImagePurpose.KAHOOT_THUMBNAIL) {
           // Original photo from API
@@ -85,7 +86,7 @@ const ImageSelectorModal = ({
         }
 
         break;
-      
+
       case ExternalImageService.Unsplash:
         if (imagePurpose === ExternalImagePurpose.KAHOOT_THUMBNAIL) {
           // Original photo from API
@@ -131,11 +132,16 @@ const ImageSelectorModal = ({
       return;
     }
 
+    selectedExternalImageService === ExternalImageService.Pexels
+      ? setPexelsSearchWasDoneAtLeastOnce(false)
+      : setUnsplashSearchWasDoneAtLeastOnce(false)
+
     const performImageSearch = debounce(() => {
       if (selectedExternalImageService === ExternalImageService.Pexels) {
         setPexelsLoading(true);
         searchPexels(imageQueryText, 1000, 30).then(results => {
           setPexelsResults(results);
+          setPexelsSearchWasDoneAtLeastOnce(true);
           setPexelsLoading(false);
           setLastQueryByService(prev => ({
             ...prev,
@@ -146,6 +152,7 @@ const ImageSelectorModal = ({
         setUnsplashLoading(true);
         searchUnsplash(imageQueryText, 1000, 30).then(results => {
           setUnsplashResults(results);
+          setUnsplashSearchWasDoneAtLeastOnce(true);
           setUnsplashLoading(false);
           setLastQueryByService(prev => ({
             ...prev,
@@ -232,23 +239,19 @@ const ImageSelectorModal = ({
                   id="service-image-images-preview"
                   className="grid grid-cols-3 gap-3 mt-4 h-full overflow-y-auto px-10 py-6"
                 >
-                  {selectedExternalImageService === ExternalImageService.Pexels
-                    ? (
-                      <PexelsImagePreviewer
-                        images={pexelsResults}
-                        loading={pexelsLoading}
-                        onImageSelect={determineWhichQualityToSaveImage}
-                        onClose={onClose}
-                      />
-                    )
-                    : (
-                      <UnsplashImagePreviewer
-                        images={unsplashResults}
-                        loading={unsplashLoading}
-                        onImageSelect={determineWhichQualityToSaveImage}
-                        onClose={onClose}
-                      />
-                    )}
+                  <RenderPhotosRetrievedFromAPI
+                    pexelsResults={pexelsResults}
+                    pexelsLoading={pexelsLoading}
+                    pexelsSearchWasDoneAtLeastOnce={pexelsSearchWasDoneAtLeastOnce}
+
+                    unsplashResults={unsplashResults}
+                    unsplashLoading={unsplashLoading}
+                    unsplashSearchWasDoneAtLeastOnce={unsplashSearchWasDoneAtLeastOnce}
+
+                    selectedExternalImageService={selectedExternalImageService}
+                    determineWhichQualityToSaveImage={determineWhichQualityToSaveImage}
+                    onClose={onClose}
+                  />
                 </div>
               </div>
             </div>
@@ -272,84 +275,163 @@ const ImageSelectorModal = ({
   )
 }
 
+interface RenderPhotosRetrievedFromAPIProps {
+  // Pexels
+  pexelsResults: any[];
+  pexelsLoading: boolean;
+  pexelsSearchWasDoneAtLeastOnce: boolean;
+
+  // Unsplash
+  unsplashResults: any[];
+  unsplashLoading: boolean;
+  unsplashSearchWasDoneAtLeastOnce: boolean;
+
+  // Both
+  selectedExternalImageService: ExternalImageService;
+  determineWhichQualityToSaveImage: (photoResolutions: any) => void;
+  onClose: () => void;
+}
+
+const RenderPhotosRetrievedFromAPI = ({ selectedExternalImageService, pexelsResults, pexelsLoading, pexelsSearchWasDoneAtLeastOnce, unsplashResults, unsplashLoading, unsplashSearchWasDoneAtLeastOnce, determineWhichQualityToSaveImage, onClose }: RenderPhotosRetrievedFromAPIProps) => {
+  return (
+    <>
+      {selectedExternalImageService === ExternalImageService.Pexels
+        ? (
+          <PexelsImagePreviewer
+            searchWasDoneAtLeastOnce={pexelsSearchWasDoneAtLeastOnce}
+            images={pexelsResults}
+            loading={pexelsLoading}
+            onImageSelect={determineWhichQualityToSaveImage}
+            onClose={onClose}
+          />
+        )
+        : (
+          <UnsplashImagePreviewer
+            searchWasDoneAtLeastOnce={unsplashSearchWasDoneAtLeastOnce}
+            images={unsplashResults}
+            loading={unsplashLoading}
+            onImageSelect={determineWhichQualityToSaveImage}
+            onClose={onClose}
+          />
+        )}
+    </>
+  )
+}
+
 interface PexelsImagePreviewerProps {
+  searchWasDoneAtLeastOnce: boolean;
   images: any[];
   loading: boolean;
   onImageSelect: (photoResolutions: any) => void;
   onClose: () => void;
 }
 
-const PexelsImagePreviewer = ({ images, loading, onImageSelect, onClose }: PexelsImagePreviewerProps) => {
+const PexelsImagePreviewer = ({ searchWasDoneAtLeastOnce, images, loading, onImageSelect, onClose }: PexelsImagePreviewerProps) => {
+  const noResultsMessage: string = "No results were found.";
+
+  if (loading) {
+    return (
+      <Text
+        fontWeight={FontWeights.REGULAR}
+        textColor={TextColors.GRAY}
+        useCase={UseCases.LONGTEXT}
+        className="text-sm col-span-3 text-center"
+      >
+        Loading...
+      </Text>
+    )
+  }
+
+  if (!loading && images.length <= 0 && searchWasDoneAtLeastOnce) {
+    return (
+      <Text
+        fontWeight={FontWeights.BOLD}
+        textColor={TextColors.GRAY}
+        useCase={UseCases.BODY}
+        className="col-span-3 text-center"
+      >
+        {noResultsMessage}
+      </Text>
+    )
+  }
+
   return (
     <>
-      {loading ? (
-        <Text
-          fontWeight={FontWeights.REGULAR}
-          textColor={TextColors.GRAY}
-          useCase={UseCases.LONGTEXT}
-          className="text-sm col-span-3 text-center"
+      {images.map((photo: any) => (
+        <div
+          key={photo.id}
+          className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/30"
+          onClick={() => {
+            onImageSelect(photo.src);
+            onClose();
+          }}
         >
-          Loading...
-        </Text>
-      ) : (
-        images.map((photo: any) => (
-          <div
-            key={photo.id}
-            className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/30"
-            onClick={() => {
-              onImageSelect(photo.src);
-              onClose();
-            }}
-          >
-            <img
-              src={photo.src.medium}
-              alt={photo.alt || "pexels image"}
-              className="w-full aspect-[4/3] object-cover"
-            />
-          </div>
-        ))
-      )}
+          <img
+            src={photo.src.medium}
+            alt={photo.alt || "pexels image"}
+            className="w-full aspect-[4/3] object-cover"
+          />
+        </div>
+      ))}
     </>
   )
 }
 
 interface UnsplashImagePreviewerProps {
+  searchWasDoneAtLeastOnce: boolean;
   images: any[];
   loading: boolean;
   onImageSelect: (photoResolutions: any) => void;
   onClose: () => void;
 }
 
-const UnsplashImagePreviewer = ({ images, loading, onImageSelect, onClose }: UnsplashImagePreviewerProps) => {
+const UnsplashImagePreviewer = ({ searchWasDoneAtLeastOnce, images, loading, onImageSelect, onClose }: UnsplashImagePreviewerProps) => {
+  const noResultsMessage: string = "No results were found.";
+
+  if (loading) {
+    return (
+      <Text
+        fontWeight={FontWeights.REGULAR}
+        textColor={TextColors.GRAY}
+        useCase={UseCases.LONGTEXT}
+        className="text-sm col-span-3 text-center"
+      >
+        Loading...
+      </Text>
+    )
+  }
+
+  if (!loading && images.length <= 0 && searchWasDoneAtLeastOnce) {
+    return (
+      <Text
+        fontWeight={FontWeights.BOLD}
+        textColor={TextColors.GRAY}
+        useCase={UseCases.BODY}
+        className="col-span-3 text-center"
+      >
+        {noResultsMessage}
+      </Text>
+    )
+  }
+
   return (
     <>
-      {loading ? (
-        <Text
-          fontWeight={FontWeights.REGULAR}
-          textColor={TextColors.GRAY}
-          useCase={UseCases.LONGTEXT}
-          className="text-sm col-span-3 text-center"
+      {images.map((photo: any) => (
+        <div
+          key={photo.id}
+          className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/30"
+          onClick={() => {
+            onImageSelect(photo.urls);
+            onClose();
+          }}
         >
-          Loading...
-        </Text>
-      ) : (
-        images.map((photo: any) => (
-          <div
-            key={photo.id}
-            className="cursor-pointer rounded-md overflow-hidden transition duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/30"
-            onClick={() => {
-              onImageSelect(photo.urls);
-              onClose();
-            }}
-          >
-            <img
-              src={photo.urls.small}
-              alt={`Image by ${photo.user?.name || "Unsplash"}: ${photo.alt_description || "photo"}`}
-              className="w-full aspect-[4/3] object-cover"
-            />
-          </div>
-        ))
-      )}
+          <img
+            src={photo.urls.small}
+            alt={`Image by ${photo.user?.name || "Unsplash"}: ${photo.alt_description || "photo"}`}
+            className="w-full aspect-[4/3] object-cover"
+          />
+        </div>
+      ))}
     </>
   )
 }
