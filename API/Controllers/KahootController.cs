@@ -350,6 +350,13 @@ namespace API.Controllers
     {
       string userId = await _userService.GetUserId();
 
+      bool exists = await _dbContext.Kahoots.AnyAsync(k => k.Id == kahootId);
+
+      if (!exists)
+      {
+        return NotFound();
+      }
+
       var kahootMetadata = await _dbContext.Kahoots
                                     .Where(k => k.Id == kahootId)
                                     .Select(k => new KahootMetadataClient
