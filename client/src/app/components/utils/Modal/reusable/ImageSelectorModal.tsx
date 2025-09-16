@@ -203,7 +203,7 @@ const ImageSelectorModal = ({
           >
             <div
               id="external-image-services-selector"
-              className="col-span-3"
+              className="col-span-3 sticky top-[4.6rem] h-fit"
             >
               <SidebarTab
                 text={'Pexels'}
@@ -216,9 +216,10 @@ const ImageSelectorModal = ({
                 selected={selectedExternalImageService === ExternalImageService.Unsplash}
               />
             </div>
+            
             <div
               id="external-image-services-preview"
-              className="col-span-9 px-3"
+              className="col-span-9 px-3 overflow-y-auto"
             >
               <div>
                 <div
