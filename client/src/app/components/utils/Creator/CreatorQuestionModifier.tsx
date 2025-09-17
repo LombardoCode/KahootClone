@@ -3,7 +3,7 @@ import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import Text from "../../UIComponents/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
-import KahootAnswerContainer from "../Quizes/KahootAnswerContainer";
+import KahootAnswerGridWrapper from "../Quizes/KahootAnswerGridWrapper";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { useEffect, useState } from "react";
@@ -126,7 +126,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
           </div>
 
           <div id="answers">
-            <KahootAnswerContainer>
+            <KahootAnswerGridWrapper>
               {kahoot?.questions[questionIndex]?.answers.map((answer: Answer, index: number) => (
                 <KahootAnswerTextBox
                   key={index}
@@ -134,7 +134,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                   answer={answer}
                 />
               ))}
-            </KahootAnswerContainer>
+            </KahootAnswerGridWrapper>
           </div>
         </div>
       </div>

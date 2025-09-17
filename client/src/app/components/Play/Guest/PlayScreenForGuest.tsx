@@ -2,9 +2,9 @@ import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interfa
 import Text from "../../UIComponents/Text";
 import Spinner from "../../UIComponents/Spinners/Spinner";
 import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
-import KahootAnswerContainer from "../../utils/Quizes/KahootAnswerContainer";
+import KahootAnswerGridWrapper from "../../utils/Quizes/KahootAnswerGridWrapper";
 import { AnswerPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
-import KahootAnswerDisplay from "../../utils/Quizes/KahootAnswerDisplay";
+import KahootAnswerGuestCard from "../../utils/Quizes/KahootAnswerGuestCard";
 import { getTextContentForLayout } from "../../utils/Quizes/KahootQuestion.utills";
 
 const PlayScreenForGuest = () => {
@@ -55,16 +55,15 @@ const ShowAnswersToGuests = () => {
 
       {!didUserProvidedAnAnswerToTheQuestion()
         ? (
-          <KahootAnswerContainer>
+          <KahootAnswerGridWrapper>
             {kahoot?.questions[questionIndex].answers.map((answer: AnswerPlay, index: number) => (
-              <KahootAnswerDisplay
+              <KahootAnswerGuestCard
                 key={index}
                 index={index}
-                answer={answer}
-                showText={false}
+                answerId={answer.id}
               />
             ))}
-          </KahootAnswerContainer>
+          </KahootAnswerGridWrapper>
         )
         : (
           <>

@@ -1,3 +1,13 @@
+/**
+ * Purpose:
+ * This component will show a mini answer wrapper containing
+ * 1.- The icon.
+ * 2.- The answer
+ * 3.- And a check-mark if it's correct, otherwise it will show a cross-mark.
+ * 
+ * This component is meant to be shown after all guests have answered the current question. The opacity of the component will vary if the answer is correct or not. (opacity-100 = correct answer, opacity-70 = incorrect answer).
+ */
+
 import Text from "@/app/components/UIComponents/Text";
 import IconForKahootAnswer from "@/app/components/utils/Quizes/IconForKahootAnswer";
 import { getBackgroundColor } from "@/app/components/utils/Quizes/KahootAnswerFuncs";
@@ -23,6 +33,7 @@ const ShowKahootAnswerAsFinalStat = ({ index, answer }: ShowKahootAnswerAsFinalS
             index={index}
             size={30}
           />
+
           <Text
             fontWeight={FontWeights.BOLD}
             textColor={TextColors.WHITE}

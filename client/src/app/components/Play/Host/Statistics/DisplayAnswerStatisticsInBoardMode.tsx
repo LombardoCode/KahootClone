@@ -1,4 +1,4 @@
-import KahootAnswerContainer from "@/app/components/utils/Quizes/KahootAnswerContainer";
+import KahootAnswerGridWrapper from "@/app/components/utils/Quizes/KahootAnswerGridWrapper";
 import { AnswerPlay } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import ShowKahootAnswerAsFinalStat from "./ShowKahootAnswerAsFinalStat";
 
@@ -11,7 +11,7 @@ const DisplayAnswerStatisticsInBoardMode = ({ answers, className = ''
  }: DisplayAnswerStatisticsInBoardModeProps) => {
   return (
     <div className={`${className}`}>
-      <KahootAnswerContainer>
+      <KahootAnswerGridWrapper>
         {answers?.map((answer: AnswerPlay, index: number) => (
           <ShowKahootAnswerAsFinalStat
             key={index}
@@ -19,7 +19,7 @@ const DisplayAnswerStatisticsInBoardMode = ({ answers, className = ''
             answer={answer}
           />
         ))}
-      </KahootAnswerContainer>
+      </KahootAnswerGridWrapper>
     </div>
   )
 }

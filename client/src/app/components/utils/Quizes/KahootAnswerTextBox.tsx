@@ -1,11 +1,31 @@
-import React, { useEffect, useState } from "react";
+/**
+ * Purpose:
+ * This component will show the Kahoot Answer represented as an editable text-box.
+ * 
+ * This component is meant to be rendered on the Kahoot Creator page (the page where
+ * users can create and edit their own Kahoots).
+ * 
+ * This component will display:
+ * 
+ * 1.- The Kahoot Answer Tile (with its unique background color assigned, thanks
+ * to the <KahootAnswerBackgroundColorWrapper /> component).
+ * 
+ * 2.- The icon for the Kahoot Answer tile (thanks to the <IconForKahootAnswer /> component)
+ * 
+ * 3.- The editable text-box, so the Kahoot owner can assign an answer for the current
+ * question that they are working on.
+ * 
+ * 4.- A rounded check-box to determine the correctness of the answer.
+ */
+
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
 import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import KahootAnswerBase from "./KahootAnswerBase";
+import KahootAnswerBackgroundColorWrapper from "./KahootAnswerBackgroundColorWrapper";
 import { Answer, QuizQuestionLayoutTypes } from "@/app/interfaces/Kahoot/Kahoot.interface";
+import IconForKahootAnswer from "./IconForKahootAnswer";
 
 interface KahootAnswerTextboxProps {
   className?: string;
@@ -16,7 +36,7 @@ interface KahootAnswerTextboxProps {
 const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTextboxProps) => {
   // Store
   const { kahoot, questionIndex, updateAnswerText, updateAnswerCorrectness } = useKahootCreatorStore();
-  
+
   // Local component
   const answerText = kahoot?.questions[questionIndex].answers[answerIndex].text || "";
   const isTheQuestionTrueOrFalse: boolean = kahoot?.questions[questionIndex].layout === QuizQuestionLayoutTypes.TRUE_OR_FALSE;
@@ -32,11 +52,17 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
 
   return (
     <>
-      <KahootAnswerBase
-        index={answerIndex}
-        className={`${className}`}
+      <KahootAnswerBackgroundColorWrapper
+        colorIndex={answerIndex}
+        className={`flex items-center ${className}`}
       >
-        <div className="flex items-center">
+        <IconForKahootAnswer
+          index={answerIndex}
+          size={48}
+          className="py-10 mr-2"
+        />
+
+        <div className="flex-1 flex items-center">
           <InputForm
             type={InputFormTypes.TEXT}
             textColor={TextColors.WHITE}
@@ -49,7 +75,7 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
             onChange={handleAnswerTextChange}
             disabled={isTheQuestionTrueOrFalse}
           />
-          
+
           <div>
             {answerText.length > 0 && (
               <div
@@ -68,7 +94,7 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
             )}
           </div>
         </div>
-      </KahootAnswerBase>
+      </KahootAnswerBackgroundColorWrapper>
     </>
   )
 }
