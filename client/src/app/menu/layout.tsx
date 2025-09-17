@@ -110,7 +110,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     <div className="flex flex-col h-screen overflow-hidden">
       <MainContent
         topSpacing={false}
-        className={`flex flex-col h-full ${!isKahootSearchWindowOpen ? "overflow-y-scroll" : "overflow-hidden"}`}
+        className={`flex flex-col h-full`}
       >
         <DashboardOutletNavbar
           setIsKahootSearchWindowOpen={() => setIsKahootSearchWindowOpen(true)}
