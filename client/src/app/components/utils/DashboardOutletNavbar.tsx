@@ -4,7 +4,7 @@ import useUserStore from "@/app/stores/useUserStore";
 import React, { useEffect, useRef, useState } from "react";
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faRightFromBracket, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { DropDownContainer, DropDownItem } from "./Navbar";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { useRouter } from "next/navigation";
@@ -69,7 +69,7 @@ const DashboardOutletNavbar = ({
   };
 
   return (
-    <nav className={`flex justify-between items-center bg-white px-4 w-full sticky top-0 shadow-sm shadow-zinc-300 z-30 ${className}`}>
+    <nav className={`flex justify-between items-center bg-white px-4 w-full sticky top-0 z-30 border-b-1 border-b-zinc-300 ${className}`}>
       <div
         id="dashboard-outlet-navbar-logo"
         className="flex justify-start"
@@ -91,13 +91,19 @@ const DashboardOutletNavbar = ({
           <InputForm
             type={InputFormTypes.TEXT}
             textColor={TextColors.BLACK}
-            fontWeight={FontWeights.LIGHT}
+            fontWeight={FontWeights.REGULAR}
             name="image-query"
             id="image-query"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setKahootSearchQuery(e.target.value)}
             value={kahootSearchQuery}
-            className="w-full px-4 py-2"
+            className={`w-full px-4 py-2 ${TextColors.GRAY}`}
             placeholder="Search public content"
+            leftElement={
+              <FontAwesomeIcon
+                icon={faSearch}
+                className={`${TextColors.GRAY}`}
+              />
+            }
             borderSize={BorderSize.SMALL}
             onEnterPress={() => executeKahootSearch()}
           />
@@ -111,16 +117,16 @@ const DashboardOutletNavbar = ({
         >
           <div id="create-kahoot-button">
             <Button
-              backgroundColor={BackgroundColors.GREEN}
+              backgroundColor={BackgroundColors.BLUE}
               fontWeight={FontWeights.BOLD}
               size={ButtonSize.SMALL}
               textColor={TextColors.WHITE}
-              className="mr-2"
+              className="mr-2 text-lg w-32"
               onClick={() => setIsCreateKahootModalOpen(true)}
               perspective={PerspectiveSize.MEDIUM}
               animateOnHover={false}
             >
-              Create a Kahoot!
+              Create
             </Button>
           </div>
 

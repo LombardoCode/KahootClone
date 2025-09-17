@@ -15,6 +15,7 @@ export interface InputFormProps {
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  leftElement?: React.ReactNode;
   rightElement?: React.ReactNode;
   onEnterPress?: () => void;
   autoComplete?: boolean;
@@ -56,6 +57,7 @@ const InputForm = ({
   placeholder = '',
   onChange,
   disabled = false,
+  leftElement,
   rightElement,
   onEnterPress,
   autoComplete = false,
@@ -86,7 +88,7 @@ const InputForm = ({
           ${roundness}
           ${borderSize}
           ${focusBorderColor}
-          px-2 outline-none transition-all duration-300 placeholder-gray-500 w-full`}
+          ${!leftElement ? 'pl-2' : 'pl-10'}  pr-2 outline-none transition-all duration-300 placeholder-gray-500 w-full`}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
@@ -94,6 +96,12 @@ const InputForm = ({
         onKeyDown={onKeyDownHandler}
         autoComplete={autoComplete ? "on" : "off"}
       />
+
+      {leftElement && (
+        <div className="absolute left-0 px-3 top-0 flex items-center h-full">
+          {leftElement}
+        </div>
+      )}
 
       {rightElement && (
         <div className="absolute right-0 top-0 flex items-center h-full cursor-pointer">

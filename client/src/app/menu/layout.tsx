@@ -121,7 +121,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         />
 
         <div className="flex flex-1 overflow-hidden">
-          <SidebarNav className="min-w-60 flex flex-col justify-between" />
+          <SidebarNav className="min-w-[14.5rem] flex flex-col justify-between" />
 
           <DashboardOutletContainer className="flex-1 overflow-y-auto">
             <>
