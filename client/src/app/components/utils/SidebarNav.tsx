@@ -3,7 +3,7 @@ import Text from "../UIComponents/Text";
 import Logo, { LogoColors, LogoSize } from "./Logo";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCompass, faList } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faCompass, faList } from "@fortawesome/free-solid-svg-icons";
 import { usePathname, useRouter } from "next/navigation";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import Link from "next/link";
@@ -23,20 +23,15 @@ const SidebarNav = ({ className }: SidebarNavProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const sidebarMenuItems: SidebarMenuItemProps[] = [
+  const sidebarPrimaryMenuItems: SidebarMenuItemProps[] = [
     { name: "Discover", pathname: ROUTES.MENU.DISCOVER, icon: faCompass },
     { name: "Library", pathname: ROUTES.MENU.LIBRARY, icon: faList }
   ];
 
   return (
-    <div className={`${className} px-2 shadow-[inset_0_0px_4px_rgba(0,0,0,0.25)]`}>
-      <div className="flex justify-start">
-        <Link href={ROUTES.MENU.DISCOVER}>
-          <Logo size={LogoSize.REGULAR} color={LogoColors.VIOLET} />
-        </Link>
-      </div>
-      <div id="sidebar-nav-items" className="px-1">
-        {sidebarMenuItems.map((item: SidebarMenuItemProps, key: number) => (
+    <div className={`${className} px-0.5 py-2 shadow-[inset_0_0px_4px_rgba(0,0,0,0.25)]`}>
+      <div id="sidebar-primary-nav-items" className="px-1">
+        {sidebarPrimaryMenuItems.map((item: SidebarMenuItemProps, key: number) => (
           <SidebarNavItem
             key={key}
             name={item.name}
@@ -47,6 +42,17 @@ const SidebarNav = ({ className }: SidebarNavProps) => {
             {item.name}
           </SidebarNavItem>
         ))}
+      </div>
+
+      <div id="secondary-nav-items">
+        <SidebarNavItem
+          name={"Other option"}
+          selected={false}
+          icon={<FontAwesomeIcon icon={faCircleInfo} />}
+          onClick={() => {}}
+        >
+          Credits
+        </SidebarNavItem>
       </div>
     </div>
   )

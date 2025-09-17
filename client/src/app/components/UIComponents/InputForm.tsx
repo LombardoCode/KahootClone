@@ -86,7 +86,7 @@ const InputForm = ({
           ${roundness}
           ${borderSize}
           ${focusBorderColor}
-          px-2 py-1 outline-none transition-all duration-300 placeholder-gray-500 w-full`}
+          px-2 outline-none transition-all duration-300 placeholder-gray-500 w-full`}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

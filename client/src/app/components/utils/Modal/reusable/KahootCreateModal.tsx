@@ -69,6 +69,7 @@ const KahootCreateModal = ({ isOpen, onClose }: KahootCreateModalProps) => {
             fontWeight={FontWeights.LIGHT}
             name="newKahootName"
             id="newKahootName"
+            className="py-1"
             value={formData.newKahootName}
             onChange={handleFormChange}
             onEnterPress={() => createKahoot()}

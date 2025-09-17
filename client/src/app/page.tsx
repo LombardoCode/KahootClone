@@ -80,7 +80,7 @@ const Home = () => {
               )}
             </Card>
           </div>
-          <footer className="text-center relative z-10 py-5">
+          <footer className="text-center relative z-10 pb-12">
             <Text
               useCase={UseCases.LONGTEXT}
               textColor={TextColors.WHITE}

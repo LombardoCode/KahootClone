@@ -19,7 +19,7 @@ export enum LogoColors {
 const sizeMap = {
   [LogoSize.EXTRA_SMALL]: { width: 40, height: 40 },
   [LogoSize.SMALL]: { width: 80, height: 100 },
-  [LogoSize.REGULAR]: { width: 180, height: 68 },
+  [LogoSize.REGULAR]: { width: 150, height: 68 },
   [LogoSize.LARGE]: { width: 250, height: 100 },
 }
 

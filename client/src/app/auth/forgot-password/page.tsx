@@ -75,6 +75,7 @@ const EnterYourEmailForm = ({ setEmailWasSent }: EnterYourEmailFormProps) => {
                 fontWeight={FontWeights.LIGHT}
                 name="email"
                 id="email"
+                className="py-1"
                 placeholder="Enter email address..."
                 value={formData.email}
                 onChange={handleFormChange}

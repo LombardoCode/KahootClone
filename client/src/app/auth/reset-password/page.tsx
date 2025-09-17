@@ -171,7 +171,7 @@ const TokenIsValid = () => {
                 fontWeight={FontWeights.BLACK}
                 name="newPassword"
                 id="newPassword"
-                className="tracking-widest"
+                className="py-1 tracking-widest"
                 value={formData.newPassword}
                 onChange={handleFormChange}
               />
@@ -191,7 +191,7 @@ const TokenIsValid = () => {
                 fontWeight={FontWeights.BLACK}
                 name="newPasswordConfirm"
                 id="newPasswordConfirm"
-                className="tracking-widest"
+                className="py-1 tracking-widest"
                 value={formData.newPasswordConfirm}
                 onChange={handleFormChange}
               />

@@ -107,11 +107,10 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   )
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      <SidebarNav className="min-w-60 bg-white h-full" />
+    <div className="flex flex-col h-screen overflow-hidden">
       <MainContent
         topSpacing={false}
-        className={`flex-1 ${!isKahootSearchWindowOpen ? "overflow-y-scroll" : "overflow-hidden"}`}
+        className={`flex flex-col h-full ${!isKahootSearchWindowOpen ? "overflow-y-scroll" : "overflow-hidden"}`}
       >
         <DashboardOutletNavbar
           setIsKahootSearchWindowOpen={() => setIsKahootSearchWindowOpen(true)}
@@ -120,28 +119,33 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           executeKahootSearch={async () => await searchKahoots(kahootSearchQuery)}
           navbarRef={navbarRef}
         />
-        <DashboardOutletContainer>
-          <>
-            <div className={`${isKahootSearchWindowOpen ? "hidden" : ""}`}>
-              {children}
-            </div>
 
-            <KahootSearchWindow
-              visible={isKahootSearchWindowOpen}
-              setIsKahootSearchWindowOpen={(isOpen: boolean) => setIsKahootSearchWindowOpen(isOpen)}
-              isLoading={loading}
-              searchedKahootsMetadata={searchedKahootsMetadata}
-              pageSize={pageSize}
-              currentPage={currentPage}
-              setCurrentPage={(page: number) => setCurrentPage(page)}
-              setSelectedPage={(page: number) => setCurrentPage(page)}
-              hasSearched={hasSearched}
-              kahootSearchWindowRef={kahootSearchWindowRef}
-              fillSearchBoxAndSearch={fillSearchBoxAndSearch}
-              onClose={clearSearchQueryAndResults}
-            />
-          </>
-        </DashboardOutletContainer>
+        <div className="flex flex-1 overflow-hidden">
+          <SidebarNav className="min-w-60 flex flex-col justify-between" />
+
+          <DashboardOutletContainer className="flex-1 overflow-y-auto">
+            <>
+              <div className={`${isKahootSearchWindowOpen ? "hidden" : ""}`}>
+                {children}
+              </div>
+
+              <KahootSearchWindow
+                visible={isKahootSearchWindowOpen}
+                setIsKahootSearchWindowOpen={(isOpen: boolean) => setIsKahootSearchWindowOpen(isOpen)}
+                isLoading={loading}
+                searchedKahootsMetadata={searchedKahootsMetadata}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                setCurrentPage={(page: number) => setCurrentPage(page)}
+                setSelectedPage={(page: number) => setCurrentPage(page)}
+                hasSearched={hasSearched}
+                kahootSearchWindowRef={kahootSearchWindowRef}
+                fillSearchBoxAndSearch={fillSearchBoxAndSearch}
+                onClose={clearSearchQueryAndResults}
+              />
+            </>
+          </DashboardOutletContainer>
+        </div>
       </MainContent>
     </div>
   )

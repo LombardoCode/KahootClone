@@ -99,6 +99,7 @@ const Signup = () => {
                 fontWeight={FontWeights.LIGHT}
                 name="username"
                 id="username"
+                className="py-1"
                 value={formData.username}
                 onChange={handleFormChange}
               />
@@ -118,6 +119,7 @@ const Signup = () => {
                 fontWeight={FontWeights.LIGHT}
                 name="email"
                 id="email"
+                className="py-1"
                 value={formData.email}
                 onChange={handleFormChange}
               />
@@ -137,7 +139,7 @@ const Signup = () => {
                 fontWeight={FontWeights.BLACK}
                 name="password"
                 id="password"
-                className="tracking-widest"
+                className="py-1 tracking-widest"
                 value={formData.password}
                 onChange={handleFormChange}
               />

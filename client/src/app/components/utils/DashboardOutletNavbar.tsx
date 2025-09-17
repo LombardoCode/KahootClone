@@ -11,10 +11,12 @@ import { useRouter } from "next/navigation";
 import Button, { ButtonSize, PerspectiveSize } from "../UIComponents/Button";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import KahootCreateModal from "./Modal/reusable/KahootCreateModal";
-import InputForm, { InputFormTypes } from "../UIComponents/InputForm";
+import InputForm, { BorderSize, InputFormTypes } from "../UIComponents/InputForm";
 import axiosInstance from "@/app/utils/axiosConfig";
 import DisplayUsersPhoto from "./General/DisplayUsersPhoto";
 import DisplayUsersUsername from "./General/DisplayUsersUsername";
+import Link from "next/link";
+import Logo, { LogoColors, LogoSize } from "./Logo";
 
 interface DashboardOutletNavbarProps {
   fixed?: boolean;
@@ -67,8 +69,20 @@ const DashboardOutletNavbar = ({
   };
 
   return (
-    <nav className={`bg-white py-3 px-4 w-full sticky top-0 shadow-sm shadow-zinc-300 z-30 ${className}`}>
-      <div className="relative flex items-center justify-between" ref={dropdownRef}>
+    <nav className={`flex justify-between items-center bg-white px-4 w-full sticky top-0 shadow-sm shadow-zinc-300 z-30 ${className}`}>
+      <div
+        id="dashboard-outlet-navbar-logo"
+        className="flex justify-start"
+      >
+        <Link href={ROUTES.MENU.DISCOVER}>
+          <Logo size={LogoSize.REGULAR} color={LogoColors.VIOLET} />
+        </Link>
+      </div>
+
+      <div
+        id="dashboard-outlet-navbar-searchbox"
+        className="relative flex items-center justify-between min-w-[50rem]" ref={dropdownRef}
+      >
         <div
           className="w-full"
           ref={activatorRef}
@@ -82,12 +96,15 @@ const DashboardOutletNavbar = ({
             id="image-query"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setKahootSearchQuery(e.target.value)}
             value={kahootSearchQuery}
-            className="w-full px-4 py-3"
+            className="w-full px-4 py-2"
             placeholder="Search public content"
+            borderSize={BorderSize.SMALL}
             onEnterPress={() => executeKahootSearch()}
           />
         </div>
+      </div>
 
+      <div id="dashboard-outlet-navbar-buttons-and-user-options-wrapper">
         <div
           id="create-kahoot-button-and-user-card-wrapper"
           className="flex items-center whitespace-nowrap ml-4"
