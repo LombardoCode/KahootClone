@@ -2,87 +2,102 @@ import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interfa
 import Text from "../UIComponents/Text";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faCompass, faList } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faCompass, faList, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { usePathname, useRouter } from "next/navigation";
 import { IconDefinition, IconProp } from "@fortawesome/fontawesome-svg-core";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 
 interface SidebarNavProps {
   className?: string;
+  isMobileBarOpen: boolean;
+  setIsMobileBarOpen: (isOpen: boolean) => void;
 }
 
 interface SidebarMenuItemProps {
-  name: string;
+  text: string;
   pathname: string;
   icon: IconDefinition;
 }
 
-const SidebarNav = ({ className }: SidebarNavProps) => {
+const SidebarNav = ({ className, isMobileBarOpen, setIsMobileBarOpen }: SidebarNavProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
   const sidebarPrimaryMenuItems: SidebarMenuItemProps[] = [
-    { name: "Discover", pathname: ROUTES.MENU.DISCOVER, icon: faCompass },
-    { name: "Library", pathname: ROUTES.MENU.LIBRARY, icon: faList }
+    { text: "Discover", pathname: ROUTES.MENU.DISCOVER, icon: faCompass },
+    { text: "Library", pathname: ROUTES.MENU.LIBRARY, icon: faList }
   ];
 
   return (
-    <div className={`${className} px-0.5 py-2 select-none`}>
-      <div id="sidebar-primary-nav-items" className="px-1">
-        {sidebarPrimaryMenuItems.map((item: SidebarMenuItemProps, key: number) => (
-          <SidebarNavItem
-            key={key}
-            name={item.name}
-            selected={item.pathname === pathname}
-            icon={item.icon}
-            onClick={() => router.push(item.pathname)}
-          >
-            {item.name}
-          </SidebarNavItem>
-        ))}
+    <div className={`fixed inset-0 z-50 bg-white w-full h-full
+      ${isMobileBarOpen ? "translate-x-0" : "-translate-x-full"}
+      sm:static sm:translate-x-0 sm:z-auto sm:min-h-full sm:min-w-[6rem] sm:w-[6rem]
+      md:min-w-[14.5rem] md:w-[14.5rem]
+      px-0.5 py-2 select-none flex flex-col ${className}`}>
+      <div
+        id="mobile-close-sidebar"
+        className="sm:hidden flex justify-end px-2 mb-4"
+      >
+        <FontAwesomeIcon
+          icon={faXmark}
+          size={'2xl'}
+          className={`${TextColors.GRAY} w-min px-4 py-3 cursor-pointer hover:bg-slate-300 rounded-md`}
+          onClick={() => setIsMobileBarOpen(false)}
+        />
       </div>
 
-      <div id="secondary-nav-items">
-        <SidebarNavItem
-          name={"Other option"}
-          selected={false}
-          icon={faCircleInfo}
-          onClick={() => {}}
-        >
-          Credits
-        </SidebarNavItem>
+      <div id="sidebar-items" className="flex-1 flex flex-col justify-between">
+        <div id="sidebar-primary-nav-items" className="px-1">
+          {sidebarPrimaryMenuItems.map((item: SidebarMenuItemProps, key: number) => (
+            <SidebarNavItem
+              key={key}
+              text={item.text}
+              selected={item.pathname === pathname}
+              icon={item.icon}
+              onClick={() => router.push(item.pathname)}
+            />
+          ))}
+        </div>
+
+        <div id="secondary-nav-items">
+          <SidebarNavItem
+            text={"Credits"}
+            selected={false}
+            icon={faCircleInfo}
+            onClick={() => {}}
+          />
+        </div>
       </div>
     </div>
   )
 }
 
 interface SidebarNavItemProps {
-  children: React.ReactNode;
-  name: string;
+  text: string;
   icon: IconDefinition;
   selected: boolean;
-  onClick?: (i?: string) => void;
+  onClick?: () => void;
 }
 
-const SidebarNavItem = ({ children, icon, selected = false, onClick, name }: SidebarNavItemProps) => {
+const SidebarNavItem = ({ text, icon, selected = false, onClick }: SidebarNavItemProps) => {
   return (
     <div
-      className={`flex items-center rounded-md px-3 mb-1 cursor-pointer ${selected ? 'bg-violet-900' : 'hover:bg-zinc-300'}`}
-      onClick={() => onClick && onClick(name)}
+      className={`flex flex-row sm:flex-col md:flex-row items-center rounded-md px-3 mb-1 cursor-pointer py-2.5 ${selected ? 'bg-violet-900' : 'hover:bg-zinc-300 transition-all duration-150'}`}
+      onClick={() => onClick?.()}
     >
       <FontAwesomeIcon
         icon={icon}
         size={'lg'}
-        className={`${selected ? 'text-white' : 'text-black'}`}
+        className={`mb-0 sm:mb-2 md:mb-0 ${selected ? 'text-white' : 'text-black'}`}
       />
 
       <Text
         fontWeight={FontWeights.BOLD}
         useCase={UseCases.LONGTEXT}
         textColor={selected ? TextColors.WHITE : TextColors.BLACK}
-        className="px-3 py-2.5"
+        className="px-3 text-base sm:text-xs md:md:text-base"
       >
-        {children}
+        {text}
       </Text>
     </div>
   )

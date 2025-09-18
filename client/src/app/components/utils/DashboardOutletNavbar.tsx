@@ -4,7 +4,7 @@ import useUserStore from "@/app/stores/useUserStore";
 import React, { useEffect, useRef, useState } from "react";
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faRightFromBracket, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faGear, faPlus, faRightFromBracket, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { DropDownContainer, DropDownItem } from "./Navbar";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { useRouter } from "next/navigation";
@@ -26,6 +26,8 @@ interface DashboardOutletNavbarProps {
   setKahootSearchQuery: (queryText: string) => void;
   executeKahootSearch: () => void;
   navbarRef?: React.RefObject<HTMLDivElement>;
+  isMobileBarOpen: boolean;
+  setIsMobileBarOpen: (isOpen: boolean) => void;
 }
 
 const DashboardOutletNavbar = ({
@@ -35,7 +37,9 @@ const DashboardOutletNavbar = ({
   kahootSearchQuery,
   setKahootSearchQuery,
   executeKahootSearch,
-  navbarRef: activatorRef
+  navbarRef: activatorRef,
+  isMobileBarOpen,
+  setIsMobileBarOpen
 }: DashboardOutletNavbarProps) => {
   const router = useRouter();
   const { user, clearUser } = useUserStore();
@@ -69,11 +73,23 @@ const DashboardOutletNavbar = ({
   };
 
   return (
-    <nav className={`flex justify-between items-center bg-white px-4 w-full sticky top-0 z-30 border-b-1 border-b-zinc-300 ${className}`}>
+    <nav className={`flex justify-between items-center bg-white sm:bg-red-500 md:bg-purple-500 lg:bg-cyan-500 xl:bg-zinc-500 2xl:bg-pink-500 px-4 w-full sticky top-0 z-30 border-b-1 border-b-zinc-300 ${className}`}>
       <div
         id="dashboard-outlet-navbar-logo"
-        className="flex justify-start"
+        className="flex items-center justify-start"
       >
+        <div
+          id="menu-bars"
+          className="sm:hidden mr-3 hover:bg-slate-300 px-3 py-3 rounded-md cursor-pointer"
+          onClick={() => setIsMobileBarOpen(!isMobileBarOpen)}
+        >
+          <FontAwesomeIcon
+            icon={faBars}
+            size={'xl'}
+            className={`${TextColors.PURPLE_VARIANT_4}`}
+          />
+        </div>
+
         <Link href={ROUTES.MENU.DISCOVER}>
           <Logo size={LogoSize.REGULAR} color={LogoColors.VIOLET} />
         </Link>
@@ -81,7 +97,8 @@ const DashboardOutletNavbar = ({
 
       <div
         id="dashboard-outlet-navbar-searchbox"
-        className="relative flex items-center justify-between min-w-[50rem]" ref={dropdownRef}
+        className="relative hidden sm:flex sm:items-center sm:justify-between sm:min-w-[30rem] lg:min-w-[36rem] xl:min-w-[50rem]"
+        ref={dropdownRef}
       >
         <div
           className="w-full"
@@ -121,12 +138,16 @@ const DashboardOutletNavbar = ({
               fontWeight={FontWeights.BOLD}
               size={ButtonSize.SMALL}
               textColor={TextColors.WHITE}
-              className="mr-2 text-lg w-32"
+              className="mr-2 text-lg w-min lg:w-32"
               onClick={() => setIsCreateKahootModalOpen(true)}
               perspective={PerspectiveSize.MEDIUM}
               animateOnHover={false}
             >
-              Create
+              <span className="hidden lg:block">Create</span>
+
+              <span className="lg:hidden px-0.5">
+                <FontAwesomeIcon icon={faPlus} size="sm" />
+              </span>
             </Button>
           </div>
 

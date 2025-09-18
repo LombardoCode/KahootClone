@@ -33,6 +33,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     total: 0
   });
 
+  // Mobile screen variables
+  const [isMobileBarOpen, setIsMobileBarOpen] = useState<boolean>(false);
+
   // Pagination
   const [pageSize] = useState<number>(21);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -118,10 +121,15 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           setKahootSearchQuery={(queryText: string) => setKahootSearchQuery(queryText)}
           executeKahootSearch={async () => await searchKahoots(kahootSearchQuery)}
           navbarRef={navbarRef}
+          isMobileBarOpen={isMobileBarOpen}
+          setIsMobileBarOpen={(isOpen: boolean) => setIsMobileBarOpen(isOpen)}
         />
 
         <div className="flex flex-1 overflow-hidden">
-          <SidebarNav className="min-w-[14.5rem] flex flex-col justify-between" />
+          <SidebarNav
+            isMobileBarOpen={isMobileBarOpen}
+            setIsMobileBarOpen={(isOpen: boolean) => setIsMobileBarOpen(isOpen)}
+          />
 
           <DashboardOutletContainer className="flex-1 overflow-y-auto">
             <>
