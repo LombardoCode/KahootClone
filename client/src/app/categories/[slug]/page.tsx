@@ -173,6 +173,7 @@ const PageContent = ({ categorySlug }: PageContentProps) => {
               {featuredKahoots.map((featuredKahoot: DiscoverFeaturedCardInfo, i: number) => (
                 <DiscoverFeaturedCard
                   key={i}
+                  itemNumber={i}
                   cardSize={DiscoverFeaturedCardSize.MEDIUM}
                   featuredKahoot={featuredKahoot}
                   onClick={handleKahootCardClick}

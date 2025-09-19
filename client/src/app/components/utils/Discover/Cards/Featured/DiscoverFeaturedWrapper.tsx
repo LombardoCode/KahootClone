@@ -4,7 +4,7 @@ interface DiscoverFeaturedWrapperProps {
 
 const DiscoverFeaturedWrapper = ({ children }: DiscoverFeaturedWrapperProps) => {
   return (
-    <div className={`grid 2xl:grid-cols-12 lg:grid-cols-12 md:grid-cols-12 gap-y-5 gap-x-28 mt-2 mb-8`}>
+    <div className={`grid grid-flow-col grid-rows-12 xl:grid-rows-6 2xl:grid-rows-3 auto-cols-fr gap-x-2 gap-y-4 mt-2 mb-8`}>
       {children}
     </div>
   )
