@@ -73,7 +73,7 @@ const UserSettingsChangePasswordTab = () => {
 
   return (
     <>
-      <div className="px-3 pt-5 w-[1000px] max-w-[90vw]">
+      <div className="px-3 pt-5 w-full xl:w-[1000px]">
         <div id="change-password-wrapper">
           <div id="change-password-header">
             <Text
@@ -123,8 +123,8 @@ const UserSettingsChangePasswordTab = () => {
             />
           </div>
 
-          <div id="new-passwords-wrapper" className="grid grid-cols-12 gap-4 mb-1">
-            <div id="new-password-content" className="col-span-6">
+          <div id="new-passwords-wrapper" className="grid grid-cols-12 gap-y-2 xl:gap-4 mb-1">
+            <div id="new-password-content" className="col-span-12 xl:col-span-6">
               <Label
                 fontWeight={FontWeights.BOLD}
                 textColor={TextColors.BLACK}
@@ -155,7 +155,7 @@ const UserSettingsChangePasswordTab = () => {
               />
             </div>
 
-            <div id="repeat-new-password-content" className="col-span-6">
+            <div id="repeat-new-password-content" className="col-span-12 xl:col-span-6">
               <Label
                 fontWeight={FontWeights.BOLD}
                 textColor={TextColors.BLACK}
@@ -187,16 +187,16 @@ const UserSettingsChangePasswordTab = () => {
             </div>
           </div>
 
-          <div id="passwords-save-button" className="grid grid-cols-12">
+          <div id="passwords-save-button" className="grid grid-cols-12 mt-4 sm:mt-3">
             <Button
               backgroundColor={BackgroundColors.BLUE}
-              size={ButtonSize.SMALL}
+              size={ButtonSize.NO_SIZE}
               perspective={PerspectiveSize.MEDIUM}
               textColor={TextColors.WHITE}
               fontWeight={FontWeights.BOLD}
               animateOnHover={false}
               onClick={() => saveNewPassword()}
-              className="mr-3 w-full py-3 col-span-2"
+              className="mr-3 w-full py-5 sm:py-3 col-span-12 sm:col-span-4 md:col-span-5 lg:col-span-3"
             >
               Save
             </Button>

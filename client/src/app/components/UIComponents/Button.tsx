@@ -19,6 +19,7 @@ interface ButtonProps {
 };
 
 export enum ButtonSize {
+  NO_SIZE = "",
   EXTRA_SMALL = "px-2 py-1",
   SMALL = "px-3 py-2",
   MEDIUM = "px-5 py-3",

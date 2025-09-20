@@ -129,7 +129,7 @@ const UserSettingsProfileTab = () => {
 
   return (
     <>
-      <div className="px-3 pt-5 w-[1000px] max-w-[90vw]">
+      <div className="px-3 pt-5 w-full xl:w-[1000px]">
         <div id="user-information-wrapper">
           <div id="user-information-header">
             <Text
@@ -142,24 +142,21 @@ const UserSettingsProfileTab = () => {
             </Text>
           </div>
 
-          <div id="user-information-content" className="grid grid-cols-12 gap-6 mt-6">
-            <div id="user-information-content-image-wrapper" className="col-span-3">
-              <div id="user-information-content-image-content" className="flex flex-col items-center">
-                <div className="w-full h-40">
-                  <MediaSelector
-                    doesItContainsAnImage={userData.mediaUrl !== null}
-                    imageSrc={userData?.mediaUrl ?? ""}
-                    removeImageActions={() => {
-                      removeUserMediaUrl();
-                    }}
-                    clickedOnTheEmptyImage={(open) => {
-                      setIsMediaSelectorModalOpen(open);
-                    }}
-                  />
-                </div>
+          <div id="user-information-content" className="grid grid-cols-12 gap-x-0 lg:gap-x-4 gap-y-4 lg:gap-y-0 mt-6">
+            <div id="user-information-content-image-wrapper" className="col-span-12 lg:col-span-4 bg-red-500">
+              <div id="user-information-content-image-content" className="flex justify-center items-start w-full bg-purple-500">
+                <MediaSelector
+                  imageSrc={userData?.mediaUrl ?? ""}
+                  removeImageActions={() => {
+                    removeUserMediaUrl();
+                  }}
+                  clickedOnTheEmptyImage={(open) => {
+                    setIsMediaSelectorModalOpen(open);
+                  }}
+                />
               </div>
             </div>
-            <div id="user-information-content-information-fields-wrapper" className="col-span-9">
+            <div id="user-information-content-information-fields-wrapper" className="col-span-12 lg:col-span-8">
               <div id="information-fields-username" className="flex flex-col mb-5">
                 <Label
                   fontWeight={FontWeights.BOLD}

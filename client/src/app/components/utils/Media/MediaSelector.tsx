@@ -5,24 +5,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 interface MediaSelectorProps {
-  doesItContainsAnImage: boolean;
   imageSrc: string;
   removeImageActions: () => void;
   clickedOnTheEmptyImage: (open: boolean) => void;
 }
 
-const MediaSelector = ({ doesItContainsAnImage, imageSrc, removeImageActions, clickedOnTheEmptyImage }: MediaSelectorProps) => {
+enum MediaSelectorImageSize {
+  SMALL = "w-56 min-h-36"
+}
+
+const MediaSelector = ({ imageSrc, removeImageActions, clickedOnTheEmptyImage }: MediaSelectorProps) => {
+  const doesItContainsAnImage: boolean = !!imageSrc;
+
   return (
     <div
       id="image-preview-wrapper"
-      className="mt-3"
+      className={`w-56 min-h-36`}
     >
       {doesItContainsAnImage ? (
-        <div className="flex flex-col items-center">
+        <div className={`flex flex-col items-center h-full max-w-80 max-h-min`}>
           <img
             src={imageSrc}
             alt="Kahoot cover"
-            className="w-64 h-auto object-cover rounded-md"
+            className={`object-cover rounded-md`}
           />
           <Button
             backgroundColor={BackgroundColors.GRAY}
@@ -42,7 +47,7 @@ const MediaSelector = ({ doesItContainsAnImage, imageSrc, removeImageActions, cl
       ) : (
         <div
           id="image-preview-content"
-          className="flex justify-center items-center w-40 h-24 rounded-md bg-slate-400/50 hover:bg-slate-400/80 cursor-pointer transition duration-300"
+          className={`flex justify-center items-center rounded-md bg-slate-400/50 hover:bg-slate-400/80 cursor-pointer transition duration-300 h-full ${MediaSelectorImageSize.SMALL}`}
           onClick={() => clickedOnTheEmptyImage(true)}
         >
           <FontAwesomeIcon

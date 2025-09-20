@@ -278,12 +278,13 @@ const EditKahootMetadataModal = ({ isOpen, onClose }: EditKahootMetadataModalPro
                   Add a cover image to make your kahoot stand out.
                 </Text>
 
-                <MediaSelector
-                  doesItContainsAnImage={doesThisKahootHasAnImage}
-                  imageSrc={kahoot?.mediaUrl ?? ""}
-                  removeImageActions={removeKahootMediaUrl}
-                  clickedOnTheEmptyImage={(open) => setIsImageSelectorModalOpen(open)}
-                />
+                <div className="flex justify-center mt-3">
+                  <MediaSelector
+                    imageSrc={kahoot?.mediaUrl ?? ""}
+                    removeImageActions={removeKahootMediaUrl}
+                    clickedOnTheEmptyImage={(open) => setIsImageSelectorModalOpen(open)}
+                  />
+                </div>
               </div>
             </div>
           </div>

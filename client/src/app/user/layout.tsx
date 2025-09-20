@@ -6,6 +6,7 @@ import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface"
 import DashboardLayout from "../menu/layout"
 import { usePathname, useRouter } from "next/navigation";
 import { ROUTES } from "../utils/Routes/routesUtils";
+import { ComboBox, ComboBoxOption } from "../components/UIComponents/ComboBox";
 
 interface UserSettingsLayoutProps {
   children: React.ReactNode;
@@ -55,16 +56,40 @@ const UserSettingsLayout = ({ children }: UserSettingsLayoutProps) => {
         Settings
       </Text>
 
-      <SettingsTabOptionsContainer>
-        {settingsTabOptions.map((tabOption: SettingsTabOption, index: number) => (
-          <SettingsTabOption
-            id={tabOption.id}
-            text={tabOption.text}
-            selected={selectedTabOptionId === tabOption.id}
-            onSelect={handleSelect}
-          />
-        ))}
-      </SettingsTabOptionsContainer>
+      {/* Mobile: ComboBox */}
+      <div className="block sm:hidden mb-4">
+        <ComboBox
+          textColor={TextColors.BLACK}
+          fontWeight={FontWeights.BOLD}
+          textContent={settingsTabOptions.find(opt => opt.id === selectedTabOptionId)?.text || ""}
+          setTextContent={(value) => handleSelect(value.valueContent)}
+          className="w-full"
+        >
+          {settingsTabOptions.map(settingsTabOpt => (
+            <ComboBoxOption
+              key={settingsTabOpt.id}
+              textContent={settingsTabOpt.text}
+              valueContent={settingsTabOpt.id}
+              onClick={() => handleSelect(settingsTabOpt.id)}
+            />
+          ))}
+        </ComboBox>
+      </div>
+
+      {/* Desktop: Tab strip */}
+      <div className="hidden sm:block">
+        <SettingsTabOptionsContainer>
+          {settingsTabOptions.map((tabOption: SettingsTabOption) => (
+            <SettingsTabOption
+              key={tabOption.id}
+              id={tabOption.id}
+              text={tabOption.text}
+              selected={selectedTabOptionId === tabOption.id}
+              onSelect={handleSelect}
+            />
+          ))}
+        </SettingsTabOptionsContainer>
+      </div>
 
       <div id="selectedTabContent">
         {children}
