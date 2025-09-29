@@ -9,7 +9,7 @@ import BackgroundShapes, { ShapeColor } from "./components/utils/BackgroundShape
 import Card, { CardBackgroundColors } from "./components/UIComponents/Card";
 import { BackgroundColors } from "./interfaces/Colors.interface";
 import InputForm, { BorderSize, FocusBorderColor, InputFormTypes, Roundness } from "./components/UIComponents/InputForm";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createBaseNewPlayer, getOrCreateSignalRConnection, putTheGuestInTheLobbyQueue, validateIfLobbyExists } from "./utils/Lobby/lobbyUtils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +19,17 @@ import useInGameStore from "./stores/Kahoot/useInGameStore";
 import { HubConnection } from "@microsoft/signalr";
 import LoadingFullScreen from "./components/UIComponents/Loading/LoadingFullScreen";
 
-const Home = () => {
+const HomePage = () => {
+  return (
+    <>
+      <Suspense fallback={<></>}>
+        <HomeContent />
+      </Suspense>
+    </>
+  );
+}
+
+const HomeContent = () => {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -328,4 +338,4 @@ const ErrorNotifier = ({ error, setError }: ErrorNotifierProps) => {
   )
 }
 
-export default Home;
+export default HomePage;

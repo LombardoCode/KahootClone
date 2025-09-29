@@ -7,6 +7,10 @@
 const key: string = "recent_searches";
 
 export const saveKahootSearch = (recentSearch: string) => {
+  if (typeof window === "undefined"){
+    return;
+  }
+
   const desiredRecentSearchesNum: number = 5;
   recentSearch = recentSearch.trim().toLowerCase();
 
@@ -38,6 +42,10 @@ export const saveKahootSearch = (recentSearch: string) => {
 }
 
 export const getRecentSearches = (): string[] => {
+  if (typeof window === "undefined"){
+    return [];
+  }
+
   let stored: string | null = localStorage.getItem(key);
 
   if (stored === null || stored === "") {

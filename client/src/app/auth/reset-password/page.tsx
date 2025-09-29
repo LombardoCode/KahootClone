@@ -14,9 +14,17 @@ import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interfa
 import axiosInstance from "@/app/utils/axiosConfig";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const ResetPasswordPage = () => {
+  return (
+    <Suspense fallback={<></>}>
+      <ResetPasswordContent />
+    </Suspense>
+  )
+}
+
+const ResetPasswordContent = () => {
   const searchParams = useSearchParams();
   const email: string | null = searchParams.get("email");
   const token: string | null = searchParams.get("token");

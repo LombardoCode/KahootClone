@@ -49,6 +49,7 @@ const KahootSearchWindow = ({ visible, setIsKahootSearchWindowOpen, isLoading, s
 
   useEffect(() => {
     const initialization = async () => {
+      retrieveRecentSearchesFromLocalStorage();
       await getCategories();
     }
 
@@ -56,7 +57,12 @@ const KahootSearchWindow = ({ visible, setIsKahootSearchWindowOpen, isLoading, s
   }, []);
 
   // Local component state
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [categories, setCategories] = useState<DiscoverCategoryCardInfo[]>([]);
+
+  const retrieveRecentSearchesFromLocalStorage = () => {
+    setRecentSearches(getRecentSearches());
+  }
 
   const getCategories = async () => {
     await axiosInstance.get('/kahoot/getCategories')
@@ -108,7 +114,7 @@ const KahootSearchWindow = ({ visible, setIsKahootSearchWindowOpen, isLoading, s
           </div>
 
           {/* Recent searches */}
-          {getRecentSearches().length > 0 && (
+          {recentSearches.length > 0 && (
             <div id="recent-searches-wrapper" className="mb-4">
               <SectionTitle
                 size={SectionTitleSizes.SMALL}
@@ -118,7 +124,7 @@ const KahootSearchWindow = ({ visible, setIsKahootSearchWindowOpen, isLoading, s
               </SectionTitle>
 
               <div id="recent-searches-content" className="flex">
-                {getRecentSearches().map((search: string, index: number) => (
+                {recentSearches.map((search: string, index: number) => (
                   <div
                     key={index}
                     className="border-1 border-gray-500 bg-white hover:bg-gray-300 rounded-sm px-3 py-1.5 mr-2 cursor-pointer select-none"
