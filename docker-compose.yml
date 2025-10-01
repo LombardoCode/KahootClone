@@ -1,0 +1,42 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: kahootclone-db
+    ports:
+      - "3306:3306"
+    volumes:
+      - kahootclone_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+      interval: 5s
+    networks:
+      - proxy_network
+
+  api:
+    container_name: kahootclone-api
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
+    networks:
+      - proxy_network
+
+  client:
+    container_name: kahootclone-client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    networks:
+      - proxy_network
+
+volumes:
+  kahootclone_db_data:
+
+networks:
+  proxy_network:
+    external: true

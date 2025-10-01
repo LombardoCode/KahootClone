@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { getServerApiUrl } from './domainUtils';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: getServerApiUrl(),
   withCredentials: true // send cookies
 });
 

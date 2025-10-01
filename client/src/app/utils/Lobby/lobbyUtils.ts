@@ -5,6 +5,7 @@ import { ROUTES } from "../Routes/routesUtils";
 import { Player } from "@/app/interfaces/Play/Player.interface";
 import useInGameStore from "@/app/stores/Kahoot/useInGameStore";
 import * as signalR from "@microsoft/signalr";
+import { getServerHubsUrl, SignalRServerHubs } from "../domainUtils";
 
 export const isInLobbyRoute = (pathname: string): boolean => {
   return pathname.startsWith('/lobby'); // The URL path for guests to join a lobby is as follows: /lobby/123456
@@ -66,7 +67,7 @@ export const getOrCreateSignalRConnection = async(): Promise<signalR.HubConnecti
   }
 
   const connection = new signalR.HubConnectionBuilder()
-    .withUrl('http://localhost:5000/hubs/lobbyhub')
+    .withUrl(getServerHubsUrl(SignalRServerHubs.LOBBY))
     .configureLogging(signalR.LogLevel.Information)
     .withAutomaticReconnect()
     .build();

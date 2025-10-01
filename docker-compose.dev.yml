@@ -1,0 +1,26 @@
+services:
+  db:
+    env_file:
+      - ./DevOps/environment/mysql.dev.env
+
+  api:
+    build:
+      context: .
+      dockerfile: ./DevOps/dockerfiles/api.dev.dockerfile
+    env_file:
+      - ./DevOps/environment/api.dev.env
+    volumes:
+      - ./API:/src/API:delegated
+      - /src/API/bin
+      - /src/API/obj
+
+  client:
+    build:
+      context: .
+      dockerfile: ./DevOps/dockerfiles/client.dev.dockerfile
+    env_file:
+      - ./DevOps/environment/client.dev.env
+    volumes:
+      - ./client:/app:delegated
+      - /app/node_modules
+      - /app/.next
