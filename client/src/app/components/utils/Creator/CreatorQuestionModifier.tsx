@@ -2,7 +2,7 @@ import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/
 import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import Text from "../../UIComponents/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import KahootAnswerGridWrapper from "../Quizes/KahootAnswerGridWrapper";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
@@ -13,6 +13,9 @@ import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { doesThisQuestionHasAnImage } from "@/app/utils/kahootUtils";
 import ImageSelectorModal, { ExternalImagePurpose } from "../Modal/reusable/ImageSelectorModal";
 import TextAreaForm from "../../UIComponents/TextAreaForm";
+import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import DeleteQuestionModal from "../Modal/reusable/DeleteQuestionModal";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -25,6 +28,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
   // Local component
   const [title, setTitle] = useState<string>(kahoot?.questions[questionIndex]?.title || "");
   const [isMediaSelectorModalOpen, setIsMediaSelectorModalOpen] = useState<boolean>(false);
+  const [isDeleteQuestionModalOpen, setIsDeleteQuestionModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setTitle(kahoot?.questions[questionIndex]?.title || "");
@@ -42,6 +46,10 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
   const deleteImageFromCurrentQuestion = () => {
     removeQuestionMediaUrl(questionIndex);
+  }
+
+  const handleDeleteQuestionClick = () => {
+    setIsDeleteQuestionModalOpen(true);
   }
 
   return (
@@ -65,16 +73,48 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
             />
 
             {/* Mobile */}
-            <TextAreaForm
-              id={`question-text-mobile`}
-              name={`question`}
-              textColor={TextColors.GRAY}
-              fontWeight={FontWeights.BOLD}
-              value={title}
-              className="xl:hidden w-full text-2xl text-center py-3 break-words whitespace-pre-wrap leading-normal min-h-[4rem] [field-sizing:content]"
-              placeholder={`The question goes here`}
-              onChange={handleTitleChange}
-            />
+            <div className="xl:hidden flex items-center gap-2">
+              <TextAreaForm
+                id={`question-text-mobile`}
+                name={`question`}
+                textColor={TextColors.GRAY}
+                fontWeight={FontWeights.BOLD}
+                value={title}
+                className="flex-1 w-full text-2xl text-center py-3 break-words whitespace-pre-wrap leading-normal min-h-[4rem] [field-sizing:content]"
+                placeholder={`The question goes here`}
+                onChange={handleTitleChange}
+              />
+              <Menu
+                align="end"
+                direction="bottom"
+                menuButton={
+                  <MenuButton className="cursor-pointer rounded-full bg-white/50 hover:bg-white/70 backdrop-blur-md p-3 h-12 w-12 flex items-center justify-center transition">
+                    <FontAwesomeIcon
+                      icon={faEllipsisVertical}
+                      size="lg"
+                      className={TextColors.GRAY}
+                    />
+                  </MenuButton>
+                }
+              >
+                <MenuItem
+                  className="bg-white hover:bg-slate-300 px-4 py-3 cursor-pointer"
+                  onClick={handleDeleteQuestionClick}
+                >
+                  <div className="flex items-center">
+                    <FontAwesomeIcon icon={faTrash} className="mr-2" />
+                    <Text
+                      fontWeight={FontWeights.BOLD}
+                      textColor={TextColors.GRAY}
+                      useCase={UseCases.LONGTEXT}
+                      className="text-sm"
+                    >
+                      Delete question
+                    </Text>
+                  </div>
+                </MenuItem>
+              </Menu>
+            </div>
           </div>
 
           <div
@@ -163,6 +203,15 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
           setIsMediaSelectorModalOpen(false);
         }}
       />
+
+      {/* Delete question modal */}
+      {kahoot?.questions[questionIndex] && (
+        <DeleteQuestionModal
+          isOpen={isDeleteQuestionModalOpen}
+          onClose={() => setIsDeleteQuestionModalOpen(false)}
+          question={kahoot.questions[questionIndex]}
+        />
+      )}
     </>
   )
 }
