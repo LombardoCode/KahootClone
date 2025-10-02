@@ -1,5 +1,6 @@
 export enum BackgroundColors {
   WHITE = 'bg-white hover:bg-gray-300 border-gray-400',
+  ZINC = 'bg-zinc-200 hover:bg-zinc-300 border-zinc-300',
   GRAY = 'bg-gray-700 hover:bg-gray-800 border-gray-800',
   GREEN = 'bg-green-600 hover:bg-green-700 border-green-700',
   RED = 'bg-red-600 hover:bg-red-700 border-red-800',

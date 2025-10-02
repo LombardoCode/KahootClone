@@ -57,7 +57,7 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
   }
 
   return (
-    <div className={`px-4 py-3 ${className}`}>
+    <div className={`hidden xl:block px-4 py-3 ${className}`}>
       <div id="question-type" className="mb-8">
         <div className="flex items-center mb-2">
           <FontAwesomeIcon

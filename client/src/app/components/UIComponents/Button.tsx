@@ -68,7 +68,7 @@ const Button = ({
         ${borderColor}
         ${className}
         ${animateOnHover ? 'hover:translate-y-0.5 hover:border-b-2' : ''}
-        outline-none my-2`
+        outline-none`
       }
       onClick={onClick}
     >

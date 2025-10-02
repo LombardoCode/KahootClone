@@ -19,13 +19,13 @@
  */
 
 import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
-import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import KahootAnswerBackgroundColorWrapper from "./KahootAnswerBackgroundColorWrapper";
 import { Answer, QuizQuestionLayoutTypes } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import IconForKahootAnswer from "./IconForKahootAnswer";
+import TextAreaForm from "../../UIComponents/TextAreaForm";
 
 interface KahootAnswerTextboxProps {
   className?: string;
@@ -41,7 +41,7 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
   const answerText = kahoot?.questions[questionIndex].answers[answerIndex].text || "";
   const isTheQuestionTrueOrFalse: boolean = kahoot?.questions[questionIndex].layout === QuizQuestionLayoutTypes.TRUE_OR_FALSE;
 
-  const handleAnswerTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAnswerTextChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     const newAnswer = e.target.value;
     updateAnswerText(questionIndex, answerIndex, newAnswer);
   }
@@ -54,40 +54,72 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
     <>
       <KahootAnswerBackgroundColorWrapper
         colorIndex={answerIndex}
-        className={`flex items-center ${className}`}
+        className={`relative flex items-center min-h-24 overflow-hidden ${className}`}
       >
+        {/* Mobile */}
+        <IconForKahootAnswer
+          index={answerIndex}
+          size={12}
+          className="absolute top-0 left-0 block md:hidden py-2"
+        />
+
+        {/* Tablets */}
+        <IconForKahootAnswer
+          index={answerIndex}
+          size={25}
+          className="hidden md:block xl:hidden py-10 mr-2"
+        />
+
+        {/* Desktop */}
         <IconForKahootAnswer
           index={answerIndex}
           size={48}
-          className="py-10 mr-2"
+          className="hidden xl:block py-10 mr-2"
         />
 
         <div className="flex-1 flex items-center">
-          <InputForm
-            type={InputFormTypes.TEXT}
-            textColor={TextColors.WHITE}
-            fontWeight={FontWeights.BOLD}
-            name="email"
-            id="email"
-            value={answerText}
-            className={`flex-1 h-24 border-none rounded-none bg-transparent transition-all duration-0 placeholder:text-white/80 ${answerText.length === 0 ? 'italic' : ''}`}
-            placeholder={`Add answer ${answerIndex + 1}`}
-            onChange={handleAnswerTextChange}
-            disabled={isTheQuestionTrueOrFalse}
-          />
+          {/* Desktop */}
+          <div className="hidden lg:block lg:flex-1">
+            <TextAreaForm
+              textColor={TextColors.WHITE}
+              fontWeight={FontWeights.BOLD}
+              name="email"
+              id="email"
+              value={answerText}
+              className={`w-full border-none rounded-none bg-transparent transition-all duration-0 placeholder:text-white/80 [field-sizing:content] ${answerText.length === 0 ? 'italic' : ''}`}
+              placeholder={`Add answer ${answerIndex + 1}`}
+              onChange={handleAnswerTextChange}
+              disabled={isTheQuestionTrueOrFalse}
+            />
+          </div>
 
-          <div>
+          {/* Mobile */}
+          <div className="flex-1 flex items-center lg:hidden">
+            <TextAreaForm
+              textColor={TextColors.WHITE}
+              fontWeight={FontWeights.BOLD}
+              name="email"
+              id="email"
+              value={answerText}
+              className={`w-full border-none rounded-none bg-transparent transition-all duration-0 placeholder:text-white/80 text-sm text-center [field-sizing:content] ${answerText.length === 0 ? 'italic' : ''}`}
+              placeholder={`Add answer ${answerIndex + 1}`}
+              onChange={handleAnswerTextChange}
+              disabled={isTheQuestionTrueOrFalse}
+            />
+          </div>
+
+          <div className="absolute top-0 right-0 px-1 py-1 block xl:relative xl:top-auto xl:right-auto xl:px-0 xl:py-0">
             {answerText.length > 0 && (
               <div
-                className="min-w-12 min-h-12 border-4 border-white rounded-full group cursor-pointer"
+                className="min-w-5 min-h-5 md:min-w-6 md:min-h-6 xl:min-w-10 xl:min-h-10 border-2 md:border-[3px] xl:border-4 border-white rounded-full group cursor-pointer"
                 onClick={() => handleAnwserCorrectnessChange(!answer.isCorrect)}
               >
-                <div className={`min-w-12 min-h-12 rounded-full flex justify-center items-center ${answer.isCorrect ? 'bg-green-600' : 'bg-gray-400'}`}>
+                <div className={`min-w-5 min-h-5 md:min-w-6 md:min-h-6 xl:min-w-10 xl:min-h-10 rounded-full flex justify-center items-center ${answer.isCorrect ? 'bg-green-600' : 'bg-gray-400'}`}>
                   <FontAwesomeIcon
                     icon={faCheck}
                     size={"lg"}
                     color={"white"}
-                    className={`${!answer.isCorrect ? 'opacity-0 group-hover:opacity-100' : ''}`}
+                    className={`scale-75 md:scale-100 ${!answer.isCorrect ? 'opacity-0 group-hover:opacity-100' : ''}`}
                   />
                 </div>
               </div>

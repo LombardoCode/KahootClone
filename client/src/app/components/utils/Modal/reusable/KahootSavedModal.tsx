@@ -7,7 +7,7 @@ import Text from "@/app/components/UIComponents/Text";
 import useKahootCreatorStore, { KahootQuestionValidation } from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faCircleExclamation, faPlay, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { ROUTES } from "@/app/utils/Routes/routesUtils";
 
 
@@ -40,26 +40,20 @@ const KahootSavedModal = ({ isOpen, onClose }: KahootSavedModalProps) => {
       }
       bodyContent={(
         kahootValidationStatus.isPlayable
-          ?
-          <>
-            <div>You can host it and play it</div>
-            <Button
-              backgroundColor={BackgroundColors.BLUE}
-              fontWeight={FontWeights.BOLD}
-              textColor={TextColors.WHITE}
-              className="text-sm"
-              size={ButtonSize.MEDIUM}
-              perspective={PerspectiveSize.MEDIUM}
-              animateOnHover={false}
-              onClick={() => {
-                if (kahoot?.id) {
-                  createLobby(kahoot.id, router)
-                }
-              }}
-            >
-              Host
-            </Button>
-          </>
+          ? (
+            <div className="mb-3">
+              <ListableItem
+                title={`Host live`}
+                description={`Display on a big screen.`}
+                icon={faPlay}
+                onClick={() => {
+                  if (kahoot?.id) {
+                    createLobby(kahoot.id, router)
+                  }
+                }}
+              />
+            </div>
+          )
           :
           <>
             <Text
@@ -219,6 +213,49 @@ const KahootSavedModal = ({ isOpen, onClose }: KahootSavedModalProps) => {
       )}
       onClose={() => onClose()}
     />
+  )
+}
+
+interface ListableItemProps {
+  title: string;
+  description: string;
+  icon: IconDefinition;
+  onClick: () => void;
+}
+
+const ListableItem = ({ title, description, icon, onClick }: ListableItemProps) => {
+  return (
+    <div
+      className="flex items-center bg-zinc-200 hover:bg-zinc-300 py-2 rounded-md border-b-2 border-b-zinc-300 select-none cursor-pointer"
+      onClick={onClick}
+    >
+      <div className="px-5">
+        <FontAwesomeIcon
+          icon={icon}
+          size={`lg`}
+          className={`${TextColors.GRAY}`}
+        />
+      </div>
+      <div>
+        <Text
+          fontWeight={FontWeights.BOLD}
+          textColor={TextColors.GRAY}
+          useCase={UseCases.LONGTEXT}
+          className="text-lg"
+        >
+          {title}
+        </Text>
+
+        <Text
+          fontWeight={FontWeights.REGULAR}
+          textColor={TextColors.GRAY}
+          useCase={UseCases.LONGTEXT}
+          className="text-sm"
+        >
+          {description}
+        </Text>
+      </div>
+    </div>
   )
 }
 

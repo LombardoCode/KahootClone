@@ -1,11 +1,11 @@
 import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/Text.interface";
 import Text from "../../UIComponents/Text";
-import Button from "../../UIComponents/Button";
+import Button, { ButtonSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Question } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { getTextContentForLayout } from "../Quizes/KahootQuestion.utills";
 import DeleteQuestionModal from "../Modal/reusable/DeleteQuestionModal";
@@ -21,8 +21,8 @@ const CreatorSliderOfQuestions = ({ className }: CreatorSliderOfQuestionsProps) 
 
   return (
     <>
-      <div className={`relative ${className} h-full flex flex-col`}>
-        <div className="flex-1 overflow-y-auto px-3 py-4">
+      <div className={`fixed xl:relative bottom-0 left-0 right-0 xl:w-48 h-[4.6rem] xl:h-full flex flex-row justify-between xl:flex-col bg-yellow-700 z-50 ${className}`}>
+        <div className="flex-1 flex flex-row xl:flex-col overflow-x-auto xl:overflow-x-hidden xl:overflow-y-auto px-3 py-2 xl:py-4 bg-cyan-300">
           {getKahootQuestions().map((question: Question, index: number) => (
             <SliderItem
               question={question}
@@ -32,15 +32,20 @@ const CreatorSliderOfQuestions = ({ className }: CreatorSliderOfQuestionsProps) 
           ))}
         </div>
 
-        <div id="add-question" className="w-full flex justify-center px-2 py-1 ">
+        <div id="add-question" className="xl:w-full flex justify-center px-2 py-1 bg-purple-500">
           <Button
             backgroundColor={BackgroundColors.BLUE}
             fontWeight={FontWeights.BOLD}
             textColor={TextColors.WHITE}
             onClick={() => setIsKahootLayoutSelectorModalOpen(true)}
-            className="w-full max-w-sm"
+            size={ButtonSize.NO_SIZE}
+            className="w-full max-w-sm px-3 xl:px-5 xl:py-3"
           >
-            Add question
+            <span className="hidden xl:block">Add question</span>
+
+            <span className="block xl:hidden">
+              <FontAwesomeIcon icon={faPlus} size="lg" />
+            </span>
           </Button>
         </div>
       </div>
@@ -64,8 +69,8 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
   const [isDeleteQuestionModalOpen, setIsDeleteQuestionModalOpen] = useState<boolean>(false);
 
   return (
-    <div className="flex mb-3">
-      <div id="slider-item-options" className="self-end mr-1 h-5">
+    <div className="flex mr-5 xl:mr-0 xl:mb-3">
+      <div id="slider-item-options" className="hidden xl:block self-end mr-1 h-5">
         <FontAwesomeIcon
           icon={faTrashCan}
           size="xs"
@@ -78,8 +83,8 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
           }}
         />
       </div>
-      <div id="slider-item-title-and-box" className="flex-1">
-        <div id="slider-item-title" className="mb-1">
+      <div id="slider-item-title-and-box" className="flex-1 flex flex-row items-start xl:flex-col">
+        <div id="slider-item-title" className="flex items-center mb-1 select-none">
           <Text
             fontWeight={FontWeights.BOLD}
             textColor={TextColors.BLACK}
@@ -88,13 +93,22 @@ const SliderItem = ({ question, index }: SliderItemsProps) => {
             className="text-sm"
           >
             <span className="mr-2">{index + 1}</span>
+          </Text>
+
+          <Text
+            fontWeight={FontWeights.BOLD}
+            textColor={TextColors.BLACK}
+            useCase={UseCases.LONGTEXT}
+            textStyle={TextStyles.NORMAL}
+            className="hidden xl:block text-sm"
+          >
             <span>{getTextContentForLayout(question.layout)}</span>
           </Text>
         </div>
 
         <div
           id="slider-item-box"
-          className={`ring-3 rounded-sm h-24 cursor-pointer ${index === questionIndex ? 'ring-blue-500' : 'ring-slate-300 hover:ring-slate-400'}`}
+          className={`ring-3 rounded-sm w-20 xl:w-36 h-14 xl:h-24 cursor-pointer ${index === questionIndex ? 'ring-blue-500' : 'ring-slate-300 hover:ring-slate-400'}`}
           onClick={() => setKahootsQuestionIndex(index)}
         >
         </div>

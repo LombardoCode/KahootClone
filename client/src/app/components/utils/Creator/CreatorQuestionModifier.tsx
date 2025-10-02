@@ -12,6 +12,7 @@ import Button, { ButtonSize, PerspectiveSize } from "../../UIComponents/Button";
 import { BackgroundColors } from "@/app/interfaces/Colors.interface";
 import { doesThisQuestionHasAnImage } from "@/app/utils/kahootUtils";
 import ImageSelectorModal, { ExternalImagePurpose } from "../Modal/reusable/ImageSelectorModal";
+import TextAreaForm from "../../UIComponents/TextAreaForm";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -29,7 +30,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
     setTitle(kahoot?.questions[questionIndex]?.title || "");
   }, [kahoot, questionIndex]);
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     const newTitle = e.target.value;
     setTitle(newTitle);
     updateQuestionTitle(questionIndex, newTitle);
@@ -45,19 +46,32 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
   return (
     <>
-      <div className={`relative px-6 py-8 ${className} bg-creator-classroom bg-center bg-cover bg-no-repeat`}>
+      <div className={`relative h-auto overflow-y-auto px-6 py-8 pb-32 xl:pb-8 bg-creator-classroom bg-center bg-cover bg-no-repeat ${className}`}>
         <div className="absolute inset-0 bg-black opacity-5"></div>
 
         <div className="relative z-10">
           <div id="question-title">
+            {/* Desktop */}
             <InputForm
-              id={`question`}
+              id={`question-text-desktop`}
               name={`question`}
               textColor={TextColors.GRAY}
               type={InputFormTypes.TEXT}
               fontWeight={FontWeights.BOLD}
               value={title}
-              className="w-full text-center py-3"
+              className="hidden xl:block w-full text-md text-center py-3"
+              placeholder={`The question goes here`}
+              onChange={handleTitleChange}
+            />
+
+            {/* Mobile */}
+            <TextAreaForm
+              id={`question-text-mobile`}
+              name={`question`}
+              textColor={TextColors.GRAY}
+              fontWeight={FontWeights.BOLD}
+              value={title}
+              className="xl:hidden w-full text-2xl text-center py-3 break-words whitespace-pre-wrap leading-normal min-h-[4rem] [field-sizing:content]"
               placeholder={`The question goes here`}
               onChange={handleTitleChange}
             />
@@ -65,14 +79,14 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
           <div
             id="question-file-media"
-            className="my-6 mx-auto w-96 bg-white/50 hover:bg-white/35 transition inset-0 backdrop-blur-md rounded-md"
+            className="my-6 mx-auto w-full max-w-96 bg-white/50 hover:bg-white/35 transition inset-0 backdrop-blur-md rounded-md"
           >
             <div className="relative">
               {doesThisQuestionHasAnImage(kahoot?.questions[questionIndex].mediaUrl ?? null)
                 ? (
                   <div
                     id="question-media-preview-and-media-options-wrapper"
-                    className="mx-auto w-96"
+                    className="mx-auto w-full max-w-96"
                   >
                     <div id="question-media-preview" className="pt-4 pb-1">
                       <img
