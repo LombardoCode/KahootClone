@@ -199,11 +199,20 @@ const ImageSelectorModal = ({
 
           <div
             id="external-image-services-wrapper"
-            className="grid grid-cols-12"
+            className="grid grid-cols-1 lg:grid-cols-12"
           >
+            {/* Mobile: Horizontal tabs */}
+            <div className="lg:hidden mb-4">
+              <MobileServiceTabs
+                selectedService={selectedExternalImageService}
+                onServiceChange={setSelectedExternalImageService}
+              />
+            </div>
+
+            {/* Desktop: Sidebar */}
             <div
               id="external-image-services-selector"
-              className="col-span-3 sticky top-[4.6rem] h-fit"
+              className="hidden lg:block lg:col-span-3 sticky top-[4.6rem] h-fit"
             >
               <SidebarTab
                 text={'Pexels'}
@@ -216,10 +225,10 @@ const ImageSelectorModal = ({
                 selected={selectedExternalImageService === ExternalImageService.Unsplash}
               />
             </div>
-            
+
             <div
               id="external-image-services-preview"
-              className="col-span-9 px-3 overflow-y-auto"
+              className="lg:col-span-9 px-3 overflow-y-auto"
             >
               <div>
                 <div
@@ -238,7 +247,7 @@ const ImageSelectorModal = ({
 
                 <div
                   id="service-image-images-preview"
-                  className="grid grid-cols-3 gap-3 mt-4 h-full overflow-y-auto px-10 py-6"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-4 h-full overflow-y-auto px-4 sm:px-10 py-6"
                 >
                   <RenderPhotosRetrievedFromAPI
                     pexelsResults={pexelsResults}
@@ -435,6 +444,38 @@ const UnsplashImagePreviewer = ({ searchWasDoneAtLeastOnce, images, loading, onI
       ))}
     </>
   )
+}
+
+interface MobileServiceTabsProps {
+  selectedService: ExternalImageService;
+  onServiceChange: (service: ExternalImageService) => void;
+}
+
+const MobileServiceTabs = ({ selectedService, onServiceChange }: MobileServiceTabsProps) => {
+  return (
+    <div className="flex gap-2">
+      <div
+        className={`flex-1 px-4 py-3 rounded-lg font-bold transition cursor-pointer text-center ${
+          selectedService === ExternalImageService.Pexels
+            ? 'bg-slate-400/60 text-black'
+            : 'bg-slate-200 text-gray-600 hover:bg-slate-300'
+        }`}
+        onClick={() => onServiceChange(ExternalImageService.Pexels)}
+      >
+        Pexels
+      </div>
+      <div
+        className={`flex-1 px-4 py-3 rounded-lg font-bold transition cursor-pointer text-center ${
+          selectedService === ExternalImageService.Unsplash
+            ? 'bg-slate-400/60 text-black'
+            : 'bg-slate-200 text-gray-600 hover:bg-slate-300'
+        }`}
+        onClick={() => onServiceChange(ExternalImageService.Unsplash)}
+      >
+        Unsplash
+      </div>
+    </div>
+  );
 }
 
 export default ImageSelectorModal;
