@@ -29,11 +29,12 @@ const MediaSelector = ({ imageSrc, removeImageActions, clickedOnTheEmptyImage }:
             alt="Kahoot cover"
             className={`object-cover rounded-md`}
           />
+
           <Button
             backgroundColor={BackgroundColors.GRAY}
             fontWeight={FontWeights.BOLD}
             textColor={TextColors.WHITE}
-            className="text-sm mr-2"
+            className="text-sm mr-2 my-2"
             size={ButtonSize.MEDIUM}
             perspective={PerspectiveSize.MEDIUM}
             animateOnHover={false}

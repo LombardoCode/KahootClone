@@ -27,8 +27,6 @@ const EditKahootMetadataModal = ({ isOpen, onClose }: EditKahootMetadataModalPro
   // Local component state
   const [selectedVisibilityOption, setSelectedVisibilityOption] = useState<KahootVisibilityOption>(KahootVisibilityOption.PRIVATE);
   
-  const doesThisKahootHasAnImage: boolean = kahoot?.mediaUrl !== null;
-
   const [kahootHeaderInfo, setKahootHeaderInfo] = useState<KahootHeaderInfo>({
     title: kahoot?.title || "",
     description: kahoot?.description || ""
@@ -101,7 +99,7 @@ const EditKahootMetadataModal = ({ isOpen, onClose }: EditKahootMetadataModalPro
         bodyContent={(
           <div
             id="modal-to-display-basic-information-about-kahoot"
-            className="grid grid-cols-12 gap-10"
+            className="grid grid-cols-12 gap-4 xl:gap-10"
           >
             <div className="col-span-12 xl:col-span-7">
               <div id="basic-info-title" className="mb-4">
