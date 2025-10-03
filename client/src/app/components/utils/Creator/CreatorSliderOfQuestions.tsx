@@ -21,7 +21,7 @@ const CreatorSliderOfQuestions = ({ className }: CreatorSliderOfQuestionsProps) 
 
   return (
     <>
-      <div className={`fixed xl:relative bottom-0 left-0 right-0 xl:w-48 h-[4.6rem] xl:h-full flex flex-row justify-between xl:flex-col bg-yellow-700 z-50 ${className}`}>
+      <div className={`fixed xl:relative bottom-0 left-0 right-0 xl:w-48 h-[4.6rem] xl:h-full flex flex-row justify-between xl:flex-col bg-yellow-700 z-10 ${className}`}>
         <div className="flex-1 flex flex-row xl:flex-col overflow-x-auto xl:overflow-x-hidden xl:overflow-y-auto px-3 py-2 xl:py-4 bg-cyan-300">
           {getKahootQuestions().map((question: Question, index: number) => (
             <SliderItem
