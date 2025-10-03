@@ -26,6 +26,8 @@ import KahootAnswerBackgroundColorWrapper from "./KahootAnswerBackgroundColorWra
 import { Answer, QuizQuestionLayoutTypes } from "@/app/interfaces/Kahoot/Kahoot.interface";
 import IconForKahootAnswer from "./IconForKahootAnswer";
 import TextAreaForm from "../../UIComponents/TextAreaForm";
+import { useState, useRef } from "react";
+import EditAnswerModal from "../Modal/reusable/mobile/EditAnswerModal";
 
 interface KahootAnswerTextboxProps {
   className?: string;
@@ -38,6 +40,8 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
   const { kahoot, questionIndex, updateAnswerText, updateAnswerCorrectness } = useKahootCreatorStore();
 
   // Local component
+  const [isEditAnswerModalOpen, setIsEditAnswerModalOpen] = useState<boolean>(false);
+  const correctnessButtonRef = useRef<HTMLDivElement>(null);
   const answerText = kahoot?.questions[questionIndex].answers[answerIndex].text || "";
   const isTheQuestionTrueOrFalse: boolean = kahoot?.questions[questionIndex].layout === QuizQuestionLayoutTypes.TRUE_OR_FALSE;
 
@@ -46,39 +50,54 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
     updateAnswerText(questionIndex, answerIndex, newAnswer);
   }
 
-  const handleAnwserCorrectnessChange = (isCorrect: boolean) => {
+  const handleAnwserCorrectnessChange = (e: React.MouseEvent, isCorrect: boolean) => {
     updateAnswerCorrectness(questionIndex, answerIndex, isCorrect);
+  }
+
+  const handleMobileCardClick = (e: React.MouseEvent) => {
+    // Check if the click is on the correctness button or its children
+    if (correctnessButtonRef.current && (correctnessButtonRef.current === e.target || correctnessButtonRef.current.contains(e.target as Node))) {
+      return; // Don't open modal if clicking on correctness button
+    }
+
+    if (!isTheQuestionTrueOrFalse) {
+      setIsEditAnswerModalOpen(true);
+    }
   }
 
   return (
     <>
       <KahootAnswerBackgroundColorWrapper
         colorIndex={answerIndex}
-        className={`relative flex items-center min-h-24 overflow-hidden ${className}`}
+        className={`relative flex items-center min-h-24 overflow-hidden lg:cursor-default cursor-pointer ${className}`}
       >
-        {/* Mobile */}
-        <IconForKahootAnswer
-          index={answerIndex}
-          size={12}
-          className="absolute top-0 left-0 block md:hidden py-2"
-        />
+        {/* Icons */}
+        <div>
+          {/* Mobile */}
+          <IconForKahootAnswer
+            index={answerIndex}
+            size={12}
+            className="absolute top-0 left-0 block md:hidden py-2"
+          />
 
-        {/* Tablets */}
-        <IconForKahootAnswer
-          index={answerIndex}
-          size={25}
-          className="hidden md:block xl:hidden py-10 mr-2"
-        />
+          {/* Tablets */}
+          <IconForKahootAnswer
+            index={answerIndex}
+            size={25}
+            className="hidden md:block xl:hidden py-10 mr-2"
+          />
 
-        {/* Desktop */}
-        <IconForKahootAnswer
-          index={answerIndex}
-          size={48}
-          className="hidden xl:block py-10 mr-2"
-        />
-
-        <div className="flex-1 flex items-center">
           {/* Desktop */}
+          <IconForKahootAnswer
+            index={answerIndex}
+            size={48}
+            className="hidden xl:block py-10 mr-2"
+          />
+        </div>
+
+        {/* Answer inputs */}
+        <div className="flex-1 flex items-center h-full bg-cyan-500">
+          {/* Desktop input */}
           <div className="hidden lg:block lg:flex-1">
             <TextAreaForm
               textColor={TextColors.WHITE}
@@ -93,40 +112,54 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
             />
           </div>
 
-          {/* Mobile */}
-          <div className="flex-1 flex items-center lg:hidden">
+          {/* Mobile input */}
+          <div
+            className="flex-1 flex items-center lg:hidden bg-purple-500 py-6"
+            onClick={handleMobileCardClick}
+          >
             <TextAreaForm
               textColor={TextColors.WHITE}
               fontWeight={FontWeights.BOLD}
               name="email"
               id="email"
               value={answerText}
-              className={`w-full border-none rounded-none bg-transparent transition-all duration-0 placeholder:text-white/80 text-sm text-center [field-sizing:content] ${answerText.length === 0 ? 'italic' : ''}`}
+              className={`w-full h-full border-none rounded-none bg-transparent transition-all duration-0 placeholder:text-white/80 text-sm text-center [field-sizing:content] pointer-events-none ${answerText.length === 0 ? 'italic' : ''}`}
               placeholder={`Add answer ${answerIndex + 1}`}
               onChange={handleAnswerTextChange}
               disabled={isTheQuestionTrueOrFalse}
             />
           </div>
+        </div>
 
-          <div className="absolute top-0 right-0 px-1 py-1 block xl:relative xl:top-auto xl:right-auto xl:px-0 xl:py-0">
-            {answerText.length > 0 && (
-              <div
-                className="min-w-5 min-h-5 md:min-w-6 md:min-h-6 xl:min-w-10 xl:min-h-10 border-2 md:border-[3px] xl:border-4 border-white rounded-full group cursor-pointer"
-                onClick={() => handleAnwserCorrectnessChange(!answer.isCorrect)}
-              >
-                <div className={`min-w-5 min-h-5 md:min-w-6 md:min-h-6 xl:min-w-10 xl:min-h-10 rounded-full flex justify-center items-center ${answer.isCorrect ? 'bg-green-600' : 'bg-gray-400'}`}>
-                  <FontAwesomeIcon
-                    icon={faCheck}
-                    size={"lg"}
-                    color={"white"}
-                    className={`scale-75 md:scale-100 ${!answer.isCorrect ? 'opacity-0 group-hover:opacity-100' : ''}`}
-                  />
-                </div>
+        {/* Answer correctness button */}
+        <div
+          ref={correctnessButtonRef}
+          className="absolute top-0 right-0 px-1 py-1 block xl:relative xl:top-auto xl:right-auto xl:px-0 xl:py-0 z-10"
+        >
+          {answerText.length > 0 && (
+            <div
+              className="min-w-5 min-h-5 md:min-w-6 md:min-h-6 xl:min-w-10 xl:min-h-10 border-2 md:border-[3px] xl:border-4 border-white rounded-full group cursor-pointer"
+              onClick={(e) => handleAnwserCorrectnessChange(e, !answer.isCorrect)}
+            >
+              <div className={`min-w-5 min-h-5 md:min-w-6 md:min-h-6 xl:min-w-10 xl:min-h-10 rounded-full flex justify-center items-center ${answer.isCorrect ? 'bg-green-600' : 'bg-gray-400'}`}>
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  size={"lg"}
+                  color={"white"}
+                  className={`scale-75 md:scale-100 ${!answer.isCorrect ? 'opacity-0 group-hover:opacity-100' : ''}`}
+                />
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </KahootAnswerBackgroundColorWrapper>
+
+      {/* Edit Answer Modal (Mobile only) */}
+      <EditAnswerModal
+        isOpen={isEditAnswerModalOpen}
+        onClose={() => setIsEditAnswerModalOpen(false)}
+        answerIndex={answerIndex}
+      />
     </>
   )
 }
