@@ -24,7 +24,7 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
   const [points, setPoints] = useState<ComboBoxStateProps>({ textContent: "Standard", valueContent: PointsMultiplier.STANDARD });
   const [isHideQuestionTitle, setIsHideQuestionTitle] = useState<boolean>(false);
 
-  // Update local state when questionIndex changes
+  // Update local state when questionIndex changes or question properties change
   useEffect(() => {
     if (kahoot && kahoot.questions[questionIndex]) {
       const currentQuestion = kahoot.questions[questionIndex];
@@ -33,7 +33,7 @@ const CreatorQuestionSettings = ({ className }: CreatorQuestionSettingsProps) =>
       setPoints({ textContent: getTextContentForPoints(currentQuestion.pointsMultiplier), valueContent: currentQuestion.pointsMultiplier });
       setIsHideQuestionTitle(currentQuestion.hideTitleUntilAnswer);
     }
-  }, [kahoot, questionIndex]);
+  }, [kahoot, questionIndex, kahoot?.questions[questionIndex]?.layout, kahoot?.questions[questionIndex]?.timeLimit, kahoot?.questions[questionIndex]?.pointsMultiplier, kahoot?.questions[questionIndex]?.hideTitleUntilAnswer]);
 
   const handleQuestionLayoutChange = (questionLayout: ComboBoxStateProps) => {
     setQuestionLayout(questionLayout);
