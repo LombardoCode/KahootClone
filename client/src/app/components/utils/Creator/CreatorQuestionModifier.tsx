@@ -2,7 +2,7 @@ import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/
 import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import Text from "../../UIComponents/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCommentDots, faEllipsisVertical, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import KahootAnswerGridWrapper from "../Quizes/KahootAnswerGridWrapper";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
@@ -16,6 +16,7 @@ import TextAreaForm from "../../UIComponents/TextAreaForm";
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import DeleteQuestionModal from "../Modal/reusable/DeleteQuestionModal";
+import ChangeQuestionTypeModal from "../Modal/reusable/mobile/ChangeQuestionTypeModal";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -29,6 +30,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
   const [title, setTitle] = useState<string>(kahoot?.questions[questionIndex]?.title || "");
   const [isMediaSelectorModalOpen, setIsMediaSelectorModalOpen] = useState<boolean>(false);
   const [isDeleteQuestionModalOpen, setIsDeleteQuestionModalOpen] = useState<boolean>(false);
+  const [isChangeQuestionTypeModalOpen, setIsChangeQuestionTypeModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setTitle(kahoot?.questions[questionIndex]?.title || "");
@@ -50,6 +52,10 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
   const handleDeleteQuestionClick = () => {
     setIsDeleteQuestionModalOpen(true);
+  }
+
+  const handleChangeQuestionTypeClick = () => {
+    setIsChangeQuestionTypeModalOpen(true);
   }
 
   return (
@@ -98,11 +104,35 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                 }
               >
                 <MenuItem
-                  className="bg-white hover:bg-slate-300 px-4 py-3 cursor-pointer"
+                  className="bg-white hover:bg-slate-300 cursor-pointer"
+                  onClick={handleChangeQuestionTypeClick}
+                >
+                  <div className="flex items-center py-2">
+                    <FontAwesomeIcon
+                      icon={faCommentDots}
+                      className="mr-2"
+                    />
+
+                    <Text
+                      fontWeight={FontWeights.BOLD}
+                      textColor={TextColors.GRAY}
+                      useCase={UseCases.LONGTEXT}
+                      className="text-sm"
+                    >
+                      Change question type
+                    </Text>
+                  </div>
+                </MenuItem>
+                <MenuItem
+                  className="bg-white hover:bg-slate-300 cursor-pointer"
                   onClick={handleDeleteQuestionClick}
                 >
-                  <div className="flex items-center">
-                    <FontAwesomeIcon icon={faTrash} className="mr-2" />
+                  <div className="flex items-center py-2">
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      className="mr-2"
+                    />
+
                     <Text
                       fontWeight={FontWeights.BOLD}
                       textColor={TextColors.GRAY}
@@ -212,6 +242,12 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
           question={kahoot.questions[questionIndex]}
         />
       )}
+
+      {/* Change question type modal */}
+      <ChangeQuestionTypeModal
+        isOpen={isChangeQuestionTypeModalOpen}
+        onClose={() => setIsChangeQuestionTypeModalOpen(false)}
+      />
     </>
   )
 }
