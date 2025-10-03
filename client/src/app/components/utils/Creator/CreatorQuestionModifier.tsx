@@ -2,7 +2,7 @@ import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/
 import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import Text from "../../UIComponents/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCommentDots, faEllipsisVertical, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faCommentDots, faEllipsisVertical, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import KahootAnswerGridWrapper from "../Quizes/KahootAnswerGridWrapper";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
@@ -17,6 +17,7 @@ import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import DeleteQuestionModal from "../Modal/reusable/DeleteQuestionModal";
 import ChangeQuestionTypeModal from "../Modal/reusable/mobile/ChangeQuestionTypeModal";
+import ChangeTimeLimitModal from "../Modal/reusable/mobile/ChangeTimeLimitModal";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -31,6 +32,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
   const [isMediaSelectorModalOpen, setIsMediaSelectorModalOpen] = useState<boolean>(false);
   const [isDeleteQuestionModalOpen, setIsDeleteQuestionModalOpen] = useState<boolean>(false);
   const [isChangeQuestionTypeModalOpen, setIsChangeQuestionTypeModalOpen] = useState<boolean>(false);
+  const [isChangeTimeLimitModalOpen, setIsChangeTimeLimitModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setTitle(kahoot?.questions[questionIndex]?.title || "");
@@ -56,6 +58,10 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
   const handleChangeQuestionTypeClick = () => {
     setIsChangeQuestionTypeModalOpen(true);
+  }
+
+  const handleChangeTimeLimitClick = () => {
+    setIsChangeTimeLimitModalOpen(true);
   }
 
   return (
@@ -120,6 +126,26 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                       className="text-sm"
                     >
                       Change question type
+                    </Text>
+                  </div>
+                </MenuItem>
+                <MenuItem
+                  className="bg-white hover:bg-slate-300 cursor-pointer"
+                  onClick={handleChangeTimeLimitClick}
+                >
+                  <div className="flex items-center py-2">
+                    <FontAwesomeIcon
+                      icon={faClock}
+                      className="mr-2"
+                    />
+
+                    <Text
+                      fontWeight={FontWeights.BOLD}
+                      textColor={TextColors.GRAY}
+                      useCase={UseCases.LONGTEXT}
+                      className="text-sm"
+                    >
+                      Change time limit
                     </Text>
                   </div>
                 </MenuItem>
@@ -247,6 +273,12 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
       <ChangeQuestionTypeModal
         isOpen={isChangeQuestionTypeModalOpen}
         onClose={() => setIsChangeQuestionTypeModalOpen(false)}
+      />
+
+      {/* Change time limit modal */}
+      <ChangeTimeLimitModal
+        isOpen={isChangeTimeLimitModalOpen}
+        onClose={() => setIsChangeTimeLimitModalOpen(false)}
       />
     </>
   )
