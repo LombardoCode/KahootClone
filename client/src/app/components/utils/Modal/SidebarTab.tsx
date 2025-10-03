@@ -1,6 +1,4 @@
 import { FontWeights, TextColors, UseCases } from "@/app/interfaces/Text.interface";
-import { faGamepad } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Text from "../../UIComponents/Text";
 
 interface SidebarTabProps {
@@ -8,16 +6,21 @@ interface SidebarTabProps {
   onHover?: () => void;
   onClick: () => void;
   selected?: boolean;
+  icon?: React.ReactNode;
 }
 
-const SidebarTab = ({ text, onHover, onClick, selected = false }: SidebarTabProps) => {
+const SidebarTab = ({ text, onHover, onClick, selected = false, icon }: SidebarTabProps) => {
   return (
     <div
       className={`layout-option flex items-center px-3 py-3 cursor-pointer ${selected ? 'bg-slate-400/60' : 'hover:bg-slate-300'}`}
       onMouseEnter={onHover}
       onClick={onClick}
     >
-      <FontAwesomeIcon icon={faGamepad} className={`${TextColors.GRAY} mr-2`} />
+      {icon ? (
+        <div className="ml-2 mr-6">
+          {icon}
+        </div>
+      ) : null}
       <Text
         fontWeight={FontWeights.BOLD}
         textColor={TextColors.BLACK}
