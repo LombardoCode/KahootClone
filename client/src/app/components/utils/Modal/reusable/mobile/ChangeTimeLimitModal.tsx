@@ -37,7 +37,7 @@ const ChangeTimeLimitModal = ({ isOpen, onClose }: ChangeTimeLimitModalProps) =>
     <Modal
       modalType={ModalTypes.INPUT}
       isOpen={isOpen}
-      title="Change time limit"
+      title="Set time limit"
       onClose={() => onClose()}
       className="w-[500px] max-w-[90vw]"
       bodyContent={(

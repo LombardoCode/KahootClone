@@ -151,7 +151,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                       useCase={UseCases.LONGTEXT}
                       className="text-sm"
                     >
-                      Change time limit
+                      Set time limit
                     </Text>
                   </div>
                 </MenuItem>
