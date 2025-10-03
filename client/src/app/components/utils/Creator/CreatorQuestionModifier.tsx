@@ -98,7 +98,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                 textColor={TextColors.GRAY}
                 fontWeight={FontWeights.BOLD}
                 value={title}
-                className="flex-1 w-full text-2xl text-center py-3 break-words whitespace-pre-wrap leading-normal min-h-[4rem] [field-sizing:content]"
+                className="flex-1 w-full text-xl text-center py-3 break-words whitespace-pre-wrap leading-normal min-h-[4rem] [field-sizing:content]"
                 placeholder={`The question goes here`}
                 onChange={handleTitleChange}
               />
@@ -106,7 +106,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                 align="end"
                 direction="bottom"
                 menuButton={
-                  <MenuButton className="cursor-pointer rounded-full bg-white/50 hover:bg-white/70 backdrop-blur-md p-3 h-12 w-12 flex items-center justify-center transition">
+                  <MenuButton className="cursor-pointer rounded-full bg-white/50 hover:bg-white/70 backdrop-blur-md p-3 h-11 w-11 flex items-center justify-center transition">
                     <FontAwesomeIcon
                       icon={faEllipsisVertical}
                       size="lg"
@@ -201,7 +201,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
           <div
             id="question-file-media"
-            className="my-6 mx-auto w-full max-w-96 bg-white/50 hover:bg-white/35 transition inset-0 backdrop-blur-md rounded-md"
+            className="my-4 lg:my-6 mx-auto w-full max-w-96 bg-white/50 hover:bg-white/35 transition inset-0 backdrop-blur-md rounded-md"
           >
             <div className="relative">
               {doesThisQuestionHasAnImage(kahoot?.questions[questionIndex].mediaUrl ?? null)
@@ -240,7 +240,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                     className="py-4 cursor-pointer"
                     onClick={handleImageClick}
                   >
-                    <div id="icon-plus" className="flex justify-center px-3 py-3">
+                    <div id="icon-plus" className="flex justify-center px-3 py-0 mb-2 xl:py-3">
                       <FontAwesomeIcon
                         icon={faPlus}
                         className="bg-white px-3 py-3 shadow-md"
@@ -252,7 +252,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                       textColor={TextColors.GRAY}
                       useCase={UseCases.LONGTEXT}
                       textStyle={TextStyles.NORMAL}
-                      className="text-xl text-center"
+                      className="text-lg xl:text-xl text-center"
                     >
                       Find and insert media
                     </Text>
