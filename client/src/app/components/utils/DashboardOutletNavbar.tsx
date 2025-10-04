@@ -97,7 +97,7 @@ const DashboardOutletNavbar = ({
 
       <div
         id="dashboard-outlet-navbar-searchbox"
-        className="relative hidden sm:flex sm:items-center sm:justify-between sm:min-w-[30rem] lg:min-w-[36rem] xl:min-w-[50rem]"
+        className="relative hidden lg:flex lg:items-center lg:justify-between lg:min-w-[36rem] xl:min-w-[50rem]"
         ref={dropdownRef}
       >
         <div
