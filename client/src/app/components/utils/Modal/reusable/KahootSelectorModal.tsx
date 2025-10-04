@@ -100,10 +100,20 @@ const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelect
                   className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8"
                 >
                   <div id="image-wrapper" className="col-span-1 md:col-span-4">
-                    <img
-                      src={kahootMetadata?.mediaUrl}
-                      className="rounded-xl w-full h-48 md:h-40 object-cover"
-                    />
+                    {kahootMetadata?.mediaUrl ? (
+                      <img
+                        src={kahootMetadata.mediaUrl}
+                        className="rounded-xl w-full h-48 md:h-40 object-cover"
+                      />
+                    ) : (
+                      <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full h-48 md:h-40 rounded-xl">
+                        <Logo
+                          id="logo-kahoot-selector-modal-kahoot-picture"
+                          size={LogoSize.REGULAR}
+                          color={LogoColors.WHITE}
+                        />
+                      </div>
+                    )}
                   </div>
                   <div id="kahoot-metadata-wrapper" className="col-span-1 md:col-span-8 flex items-center">
                     <div id="kahoot-metadata-content" className="w-full">
