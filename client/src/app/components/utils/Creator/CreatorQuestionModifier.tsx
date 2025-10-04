@@ -2,7 +2,7 @@ import { FontWeights, TextColors, TextStyles, UseCases } from "@/app/interfaces/
 import InputForm, { InputFormTypes } from "../../UIComponents/InputForm";
 import Text from "../../UIComponents/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faCommentDots, faEllipsisVertical, faMedal, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faCommentDots, faEllipsisVertical, faEyeSlash, faMedal, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import KahootAnswerGridWrapper from "../Quizes/KahootAnswerGridWrapper";
 import useKahootCreatorStore from "@/app/stores/Kahoot/useKahootCreatorStore";
 import { Answer } from "@/app/interfaces/Kahoot/Kahoot.interface";
@@ -19,6 +19,7 @@ import DeleteQuestionModal from "../Modal/reusable/DeleteQuestionModal";
 import ChangeQuestionTypeModal from "../Modal/reusable/mobile/ChangeQuestionTypeModal";
 import ChangeTimeLimitModal from "../Modal/reusable/mobile/ChangeTimeLimitModal";
 import ChangePointsModal from "../Modal/reusable/mobile/ChangePointsModal";
+import HideQuestionTextModal from "../Modal/reusable/mobile/HideQuestionTextModal";
 
 interface CreatorQuestionModifierProps {
   className?: string;
@@ -35,6 +36,7 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
   const [isChangeQuestionTypeModalOpen, setIsChangeQuestionTypeModalOpen] = useState<boolean>(false);
   const [isChangeTimeLimitModalOpen, setIsChangeTimeLimitModalOpen] = useState<boolean>(false);
   const [isChangePointsModalOpen, setIsChangePointsModalOpen] = useState<boolean>(false);
+  const [isHideQuestionTextModalOpen, setIsHideQuestionTextModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setTitle(kahoot?.questions[questionIndex]?.title || "");
@@ -68,6 +70,10 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
 
   const handleChangePointsClick = () => {
     setIsChangePointsModalOpen(true);
+  }
+
+  const handleHideQuestionTextClick = () => {
+    setIsHideQuestionTextModalOpen(true);
   }
 
   return (
@@ -172,6 +178,26 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
                       className="text-sm"
                     >
                       Points
+                    </Text>
+                  </div>
+                </MenuItem>
+                <MenuItem
+                  className="bg-white hover:bg-slate-300 cursor-pointer"
+                  onClick={handleHideQuestionTextClick}
+                >
+                  <div className="flex items-center py-2">
+                    <FontAwesomeIcon
+                      icon={faEyeSlash}
+                      className="mr-2"
+                    />
+
+                    <Text
+                      fontWeight={FontWeights.BOLD}
+                      textColor={TextColors.GRAY}
+                      useCase={UseCases.LONGTEXT}
+                      className="text-sm"
+                    >
+                      Hide question text
                     </Text>
                   </div>
                 </MenuItem>
@@ -311,6 +337,12 @@ const CreatorQuestionModifier = ({ className }: CreatorQuestionModifierProps) =>
       <ChangePointsModal
         isOpen={isChangePointsModalOpen}
         onClose={() => setIsChangePointsModalOpen(false)}
+      />
+
+      {/* Hide question text modal */}
+      <HideQuestionTextModal
+        isOpen={isHideQuestionTextModalOpen}
+        onClose={() => setIsHideQuestionTextModalOpen(false)}
       />
     </>
   )
