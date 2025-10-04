@@ -99,7 +99,6 @@ const DashboardOutletNavbar = ({
       <div
         id="dashboard-outlet-navbar-searchbox"
         className={`relative ${isMobileSearchActive ? 'flex' : 'hidden'} lg:flex lg:items-center lg:justify-between ${isMobileSearchActive ? 'w-full' : 'lg:min-w-[36rem] xl:min-w-[50rem]'}`}
-        ref={dropdownRef}
       >
         <div
           className="w-full"
@@ -188,48 +187,50 @@ const DashboardOutletNavbar = ({
             </span>
           </Button>
 
-          <div
-            id="user-data"
-            className="flex items-center px-3 py-2 select-none cursor-pointer"
-            onClick={() => setToggleAccountDropdown(!toggleAccountDropdown)}
-          >
-            <div id="user-data-photo">
-              <DisplayUsersPhoto photo={user.mediaUrl} size={"small"} />
+          <div className="relative" ref={dropdownRef}>
+            <div
+              id="user-data"
+              className="flex items-center px-3 py-2 select-none cursor-pointer"
+              onClick={() => setToggleAccountDropdown(!toggleAccountDropdown)}
+            >
+              <div id="user-data-photo">
+                <DisplayUsersPhoto photo={user.mediaUrl} size={"small"} />
+              </div>
             </div>
+
+            {toggleAccountDropdown && (
+              <DropDownContainer>
+                <div
+                  id="users-photo-and-username-wrapper"
+                  className="flex flex-col items-center py-4"
+                >
+                  <div id="users-photo-and-username-content-photo" className="mb-3">
+                    <DisplayUsersPhoto photo={user.mediaUrl} size={"medium"} />
+                  </div>
+                  <div id="users-photo-and-username-content-username">
+                    <DisplayUsersUsername username={user.userName} />
+                  </div>
+                </div>
+
+                <DropDownItem
+                  icon={<FontAwesomeIcon icon={faGear} />}
+                  onClick={() => router.push(ROUTES.ADMINISTRATION.SETTINGS.PROFILE)}
+                >
+                  Settings
+                </DropDownItem>
+
+                <DropDownItem
+                  icon={<FontAwesomeIcon icon={faRightFromBracket} />}
+                  backgroundColor={BackgroundColors.RED}
+                  textColors={TextColors.WHITE}
+                  onClick={() => signOut()}
+                >
+                  Sign out
+                </DropDownItem>
+              </DropDownContainer>
+            )}
           </div>
         </div>
-
-        {toggleAccountDropdown && (
-          <DropDownContainer>
-            <div
-              id="users-photo-and-username-wrapper"
-              className="flex flex-col items-center py-4"
-            >
-              <div id="users-photo-and-username-content-photo" className="mb-3">
-                <DisplayUsersPhoto photo={user.mediaUrl} size={"medium"} />
-              </div>
-              <div id="users-photo-and-username-content-username">
-                <DisplayUsersUsername username={user.userName} />
-              </div>
-            </div>
-
-            <DropDownItem
-              icon={<FontAwesomeIcon icon={faGear} />}
-              onClick={() => router.push(ROUTES.ADMINISTRATION.SETTINGS.PROFILE)}
-            >
-              Settings
-            </DropDownItem>
-
-            <DropDownItem
-              icon={<FontAwesomeIcon icon={faRightFromBracket} />}
-              backgroundColor={BackgroundColors.RED}
-              textColors={TextColors.WHITE}
-              onClick={() => signOut()}
-            >
-              Sign out
-            </DropDownItem>
-          </DropDownContainer>
-        )}
       </div>
 
       <KahootCreateModal
