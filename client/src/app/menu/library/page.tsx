@@ -109,6 +109,12 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
   const router = useRouter();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [selectedKahootId, setSelectedKahootId] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const handleDelete = (kahootId: string) => {
+    setSelectedKahootId(kahootId);
+    setIsDeleteModalOpen(true);
+  };
 
   return (
     <>
@@ -126,7 +132,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                 Title
               </Text>
             </th>
-            <th className="py-2 px-10 whitespace-nowrap">
+            <th className="py-2 px-10 whitespace-nowrap hidden lg:table-cell">
               <Text
                 fontWeight={FontWeights.BOLD}
                 textColor={TextColors.GRAY}
@@ -161,7 +167,6 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                     className="w-24 h-14 rounded-md object-cover"
                   />
                 )}
-
               </td>
               <td
                 className="py-2 px-3 cursor-pointer"
@@ -185,7 +190,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                 </Text>
               </td>
 
-              <td className="py-2 px-3 text-center">
+              <td className="py-2 px-3 text-center hidden lg:table-cell">
                 <Text
                   fontWeight={FontWeights.REGULAR}
                   textColor={TextColors.GRAY}
@@ -217,7 +222,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                         className={`${TextColors.RED} mr-2`}
                       />
                       <Text
-                        fontWeight={FontWeights.REGULAR}
+                        fontWeight={FontWeights.BOLD}
                         textColor={TextColors.RED}
                         useCase={UseCases.LONGTEXT}
                         className="mt-1 text-sm whitespace-nowrap"
@@ -228,59 +233,14 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                   )}
               </td>
               <td className="px-3">
-                <Menu
-                  align="end"
-                  direction="bottom"
-                  menuButton={
-                    <MenuButton className="cursor-pointer h-full px-6 py-3">
-                      <FontAwesomeIcon
-                        icon={faEllipsisVertical}
-                        size="lg"
-                        className={TextColors.LIGHT_GRAY}
-                      />
-                    </MenuButton>
-                  }
-                >
-                  <MenuItem
-                    className="bg-white hover:bg-slate-300 px-4 py-3 cursor-pointer w-36 shadow-md shadow-slate-400/60"
-                    onClick={() => {
-                      if (kahoot.isPlayable) {
-                        createLobby(kahoot.id, router)
-                      }
-                    }}
-                  >
-                    <div className={`flex items-center ${kahoot.isPlayable ? 'opacity-100' : 'opacity-45'}`}>
-                      <FontAwesomeIcon icon={faServer} className="mr-2" />
-                      <Text
-                        fontWeight={FontWeights.BOLD}
-                        textColor={TextColors.GRAY}
-                        useCase={UseCases.LONGTEXT}
-                        className="text-sm"
-                      >
-                        Host
-                      </Text>
-                    </div>
-                  </MenuItem>
-                  <MenuItem
-                    className="bg-white hover:bg-slate-300 px-4 py-3 cursor-pointer w-36 shadow-md shadow-slate-400/60"
-                    onClick={() => {
-                      setSelectedKahootId(kahoot.id)
-                      setIsDeleteModalOpen(true)
-                    }}
-                  >
-                    <div className="flex items-center">
-                      <FontAwesomeIcon icon={faTrash} className="mr-2" />
-                      <Text
-                        fontWeight={FontWeights.BOLD}
-                        textColor={TextColors.GRAY}
-                        useCase={UseCases.LONGTEXT}
-                        className="text-sm"
-                      >
-                        Delete
-                      </Text>
-                    </div>
-                  </MenuItem>
-                </Menu>
+                <KahootContextMenu
+                  kahoot={kahoot}
+                  router={router}
+                  onDelete={handleDelete}
+                  onMenuChange={setIsMenuOpen}
+                  isMenuOpen={isMenuOpen}
+                  setIsMenuOpen={setIsMenuOpen}
+                />
               </td>
             </tr>
           ))}
@@ -296,5 +256,85 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
     </>
   )
 }
+
+interface KahootContextMenuProps {
+  kahoot: KahootDashboardList;
+  router: any;
+  onDelete: (kahootId: string) => void;
+  onMenuChange: (isOpen: boolean) => void;
+  isMenuOpen: boolean;
+  setIsMenuOpen: (open: boolean) => void;
+}
+
+const KahootContextMenu = ({ kahoot, router, onDelete, onMenuChange, isMenuOpen, setIsMenuOpen }: KahootContextMenuProps) => {
+  return (
+    <>
+      {/* UX: Placing a backdrop so the user cannot click on anything behind the menu until this menu closes */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 z-30"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+
+      <Menu
+        align="end"
+        direction="bottom"
+        onMenuChange={(e) => onMenuChange(e.open)}
+        className="z-40"
+        menuButton={
+          <MenuButton className="cursor-pointer h-full px-6 py-3">
+            <FontAwesomeIcon
+              icon={faEllipsisVertical}
+              size="lg"
+              className={TextColors.LIGHT_GRAY}
+            />
+          </MenuButton>
+        }
+      >
+        <MenuItem
+          className="bg-white hover:bg-slate-100 px-4 py-3 cursor-pointer"
+          onClick={() => {
+            if (kahoot.isPlayable && kahoot.id) {
+              createLobby(kahoot.id, router)
+            }
+          }}
+        >
+          <div className={`flex items-center py-2 w-44 ${kahoot.isPlayable ? 'opacity-100' : 'opacity-45'}`}>
+            <FontAwesomeIcon icon={faServer} className="mr-2" />
+            <Text
+              fontWeight={FontWeights.BOLD}
+              textColor={TextColors.GRAY}
+              useCase={UseCases.LONGTEXT}
+              className="text-sm"
+            >
+              Host
+            </Text>
+          </div>
+        </MenuItem>
+        <MenuItem
+          className="bg-white hover:bg-slate-100 px-4 py-3 cursor-pointer"
+          onClick={() => {
+            if (kahoot.id) {
+              onDelete(kahoot.id);
+            }
+          }}
+        >
+          <div className="flex items-center py-2 w-44">
+            <FontAwesomeIcon icon={faTrash} className="mr-2" />
+            <Text
+              fontWeight={FontWeights.BOLD}
+              textColor={TextColors.GRAY}
+              useCase={UseCases.LONGTEXT}
+              className="text-sm"
+            >
+              Delete
+            </Text>
+          </div>
+        </MenuItem>
+      </Menu>
+    </>
+  );
+};
 
 export default LibraryMenuPage;
