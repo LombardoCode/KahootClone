@@ -31,8 +31,8 @@ const SidebarNav = ({ className, isMobileBarOpen, setIsMobileBarOpen }: SidebarN
   return (
     <div className={`fixed inset-0 z-50 bg-white w-full h-full
       ${isMobileBarOpen ? "translate-x-0" : "-translate-x-full"}
-      sm:static sm:translate-x-0 sm:z-auto sm:min-h-full sm:min-w-[6rem] sm:w-[6rem]
-      md:min-w-[14.5rem] md:w-[14.5rem]
+      md:static md:translate-x-0 md:z-auto md:min-h-full md:min-w-[6rem] md:w-[6rem]
+      lg:min-w-[14.5rem] lg:w-[14.5rem]
       px-0.5 py-2 select-none flex flex-col ${className}`}>
       <div
         id="mobile-close-sidebar"
@@ -90,20 +90,20 @@ const SidebarNavItem = ({ text, icon, selected = false, onClick, setIsMobileBarO
 
   return (
     <div
-      className={`flex flex-row sm:flex-col md:flex-row items-center rounded-md px-3 mb-1 cursor-pointer py-2.5 ${selected ? 'bg-violet-900' : 'hover:bg-zinc-300 transition-all duration-150'}`}
+      className={`flex flex-row md:flex-col lg:flex-row items-center rounded-md px-3 mb-1 cursor-pointer py-2.5 ${selected ? 'bg-violet-900' : 'hover:bg-zinc-300 transition-all duration-150'}`}
       onClick={handleClick}
     >
       <FontAwesomeIcon
         icon={icon}
         size={'lg'}
-        className={`mb-0 sm:mb-2 md:mb-0 ${selected ? 'text-white' : 'text-black'}`}
+        className={`mb-0 md:mb-2 lg:mb-0 ${selected ? 'text-white' : 'text-black'}`}
       />
 
       <Text
         fontWeight={FontWeights.BOLD}
         useCase={UseCases.LONGTEXT}
         textColor={selected ? TextColors.WHITE : TextColors.BLACK}
-        className="px-3 text-base sm:text-xs md:md:text-base"
+        className="px-3 text-base md:text-xs lg:text-base"
       >
         {text}
       </Text>

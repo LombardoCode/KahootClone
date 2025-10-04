@@ -103,7 +103,7 @@ const KahootSearchWindow = ({ visible, setIsKahootSearchWindowOpen, isLoading, s
               </div>
             )}
 
-            <div id="search-close-button" className="bg-gray-300 hover:bg-gray-400 rounded-md">
+            <div id="search-close-button" className="hidden md:block bg-gray-300 hover:bg-gray-400 rounded-md">
               <FontAwesomeIcon
                 icon={faXmark}
                 size="lg"

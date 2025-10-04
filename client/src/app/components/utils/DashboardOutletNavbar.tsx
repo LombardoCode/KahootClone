@@ -45,6 +45,7 @@ const DashboardOutletNavbar = ({
   const { user, clearUser } = useUserStore();
   const [isCreateKahootModalOpen, setIsCreateKahootModalOpen] = useState<boolean>(false);
   const [toggleAccountDropdown, setToggleAccountDropdown] = useState<boolean>(false);
+  const [isMobileSearchActive, setIsMobileSearchActive] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -73,10 +74,10 @@ const DashboardOutletNavbar = ({
   };
 
   return (
-    <nav className={`flex justify-between items-center bg-white sm:bg-red-500 md:bg-purple-500 lg:bg-cyan-500 xl:bg-zinc-500 2xl:bg-pink-500 px-4 w-full sticky top-0 z-30 border-b-1 border-b-zinc-300 ${className}`}>
+    <nav className={`flex justify-between items-center bg-white sm:bg-red-500 md:bg-purple-500 lg:bg-cyan-500 xl:bg-zinc-500 2xl:bg-pink-500 px-4 w-full sticky top-0 z-30 border-b-1 border-b-zinc-300 h-14 lg:h-16 ${className}`}>
       <div
         id="dashboard-outlet-navbar-logo"
-        className="flex items-center justify-start"
+        className={`flex items-center justify-start ${isMobileSearchActive ? 'lg:flex hidden' : 'flex'}`}
       >
         <div
           id="menu-bars"
@@ -97,7 +98,7 @@ const DashboardOutletNavbar = ({
 
       <div
         id="dashboard-outlet-navbar-searchbox"
-        className="relative hidden lg:flex lg:items-center lg:justify-between lg:min-w-[36rem] xl:min-w-[50rem]"
+        className={`relative ${isMobileSearchActive ? 'flex' : 'hidden'} lg:flex lg:items-center lg:justify-between ${isMobileSearchActive ? 'w-full' : 'lg:min-w-[36rem] xl:min-w-[50rem]'}`}
         ref={dropdownRef}
       >
         <div
@@ -125,31 +126,67 @@ const DashboardOutletNavbar = ({
             onEnterPress={() => executeKahootSearch()}
           />
         </div>
+
+        {isMobileSearchActive && (
+          <Button
+            id="mobile-search-cancel-button"
+            backgroundColor={BackgroundColors.ZINC}
+            fontWeight={FontWeights.BOLD}
+            size={ButtonSize.SMALL}
+            textColor={TextColors.GRAY}
+            className="lg:hidden ml-2"
+            onClick={() => setIsMobileSearchActive(false)}
+            perspective={PerspectiveSize.NO_PERSPECTIVE}
+            animateOnHover={false}
+          >
+            Cancel
+          </Button>
+        )}
       </div>
 
       <div id="dashboard-outlet-navbar-buttons-and-user-options-wrapper">
         <div
           id="create-kahoot-button-and-user-card-wrapper"
-          className="flex items-center whitespace-nowrap ml-4"
+          className={`flex items-center whitespace-nowrap ml-4 ${isMobileSearchActive ? 'lg:flex hidden' : 'flex'}`}
         >
-          <div id="create-kahoot-button">
-            <Button
-              backgroundColor={BackgroundColors.BLUE}
-              fontWeight={FontWeights.BOLD}
-              size={ButtonSize.SMALL}
-              textColor={TextColors.WHITE}
-              className="mr-2 text-lg w-min lg:w-32"
-              onClick={() => setIsCreateKahootModalOpen(true)}
-              perspective={PerspectiveSize.MEDIUM}
-              animateOnHover={false}
-            >
-              <span className="hidden lg:block">Create</span>
+          <Button
+            id="mobile-search-button"
+            backgroundColor={BackgroundColors.ZINC}
+            fontWeight={FontWeights.BOLD}
+            size={ButtonSize.SMALL}
+            textColor={TextColors.GRAY}
+            className="lg:hidden mr-2"
+            onClick={() => {
+              setIsMobileSearchActive(true);
+              setIsKahootSearchWindowOpen(true);
+            }}
+            perspective={PerspectiveSize.MEDIUM}
+            animateOnHover={false}
+          >
+            <FontAwesomeIcon
+              icon={faSearch}
+              size={'sm'}
+              className={`${TextColors.PURPLE_VARIANT_4}`}
+            />
+          </Button>
 
-              <span className="lg:hidden px-0.5">
-                <FontAwesomeIcon icon={faPlus} size="sm" />
-              </span>
-            </Button>
-          </div>
+          <Button
+            id="create-kahoot-button"
+            backgroundColor={BackgroundColors.BLUE}
+            fontWeight={FontWeights.BOLD}
+            size={ButtonSize.SMALL}
+            textColor={TextColors.WHITE}
+            className="mr-2 w-min lg:w-32"
+            onClick={() => setIsCreateKahootModalOpen(true)}
+            perspective={PerspectiveSize.MEDIUM}
+            animateOnHover={false}
+          >
+            <span className="hidden lg:block text-lg">Create</span>
+
+            <span className="lg:hidden px-0.5">
+              <FontAwesomeIcon icon={faPlus} size="sm" />
+            </span>
+          </Button>
 
           <div
             id="user-data"

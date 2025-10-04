@@ -5,6 +5,7 @@ import { FontWeights, TextColors } from "@/app/interfaces/Text.interface";
 import montserrat from "@/app/utils/fontsConfig";
 
 interface ButtonProps {
+  id?: string;
   children: React.ReactNode;
   backgroundColor?: BackgroundColors | string;
   className?: string;
@@ -43,6 +44,7 @@ export enum ButtonRoundness {
 }
 
 const Button = ({
+  id,
   children,
   backgroundColor = "",
   className,
@@ -57,6 +59,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
+      id={id}
       className={`
         ${montserrat.className}
         ${size}
