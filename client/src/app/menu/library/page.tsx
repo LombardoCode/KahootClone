@@ -180,6 +180,23 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                   {kahoot.title}
                 </Text>
 
+                {!kahoot.isPlayable && (
+                  <div className="lg:hidden flex items-center gap-1 mt-1">
+                    <FontAwesomeIcon
+                      icon={faWarning}
+                      className="text-red-600 text-xs"
+                    />
+                    <Text
+                      fontWeight={FontWeights.BOLD}
+                      textColor={TextColors.RED}
+                      useCase={UseCases.LONGTEXT}
+                      className="text-xs"
+                    >
+                      Not playable
+                    </Text>
+                  </div>
+                )}
+
                 <Text
                   fontWeight={FontWeights.BOLD}
                   textColor={TextColors.LIGHT_GRAY}
