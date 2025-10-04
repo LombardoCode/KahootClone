@@ -97,15 +97,15 @@ const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelect
               ) : (
                 <div
                   id="image-and-kahoot-metadata-header-wrapper"
-                  className="grid grid-cols-12 gap-8"
+                  className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8"
                 >
-                  <div id="image-wrapper" className="col-span-4">
+                  <div id="image-wrapper" className="col-span-1 md:col-span-4">
                     <img
                       src={kahootMetadata?.mediaUrl}
-                      className="rounded-xl w-full h-40 object-cover"
+                      className="rounded-xl w-full h-48 md:h-40 object-cover"
                     />
                   </div>
-                  <div id="kahoot-metadata-wrapper" className="col-span-8 flex items-center">
+                  <div id="kahoot-metadata-wrapper" className="col-span-1 md:col-span-8 flex items-center">
                     <div id="kahoot-metadata-content" className="w-full">
                       <div id="kahoot-metadata-content-title" className="mb-2">
                         <Text
@@ -193,7 +193,7 @@ const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelect
                         </div>
                       </div>
 
-                      <div id="kahoot-action-buttons">
+                      <div id="kahoot-action-buttons" className="flex flex-col md:flex-row gap-2">
                         <div id="kahoot-action-buttons-host-button" className="flex-1">
                           <Button
                             backgroundColor={BackgroundColors.BLUE}
