@@ -36,7 +36,7 @@ const SidebarNav = ({ className, isMobileBarOpen, setIsMobileBarOpen }: SidebarN
       px-0.5 py-2 select-none flex flex-col ${className}`}>
       <div
         id="mobile-close-sidebar"
-        className="sm:hidden flex justify-end px-2 mb-4"
+        className="md:hidden flex justify-end px-2 mb-4"
       >
         <FontAwesomeIcon
           icon={faXmark}
@@ -90,7 +90,7 @@ const SidebarNavItem = ({ text, icon, selected = false, onClick, setIsMobileBarO
 
   return (
     <div
-      className={`flex flex-row md:flex-col lg:flex-row items-center rounded-md px-3 mb-1 cursor-pointer py-2.5 ${selected ? 'bg-violet-900' : 'hover:bg-zinc-300 transition-all duration-150'}`}
+      className={`flex flex-row md:flex-col lg:flex-row items-center rounded-md px-3 mb-1 cursor-pointer py-4 md:py-2.5 ${selected ? 'bg-violet-900' : 'hover:bg-zinc-300 transition-all duration-150'}`}
       onClick={handleClick}
     >
       <FontAwesomeIcon

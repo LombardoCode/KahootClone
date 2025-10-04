@@ -81,7 +81,7 @@ const DashboardOutletNavbar = ({
       >
         <div
           id="menu-bars"
-          className="sm:hidden mr-3 hover:bg-slate-300 px-3 py-3 rounded-md cursor-pointer"
+          className="md:hidden mr-3 hover:bg-slate-300 px-3 py-3 rounded-md cursor-pointer"
           onClick={() => setIsMobileBarOpen(!isMobileBarOpen)}
         >
           <FontAwesomeIcon
