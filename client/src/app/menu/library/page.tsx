@@ -109,7 +109,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
   const router = useRouter();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [selectedKahootId, setSelectedKahootId] = useState<string | null>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
 
   const handleDelete = (kahootId: string) => {
     setSelectedKahootId(kahootId);
@@ -237,9 +237,8 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                   kahoot={kahoot}
                   router={router}
                   onDelete={handleDelete}
-                  onMenuChange={setIsMenuOpen}
-                  isMenuOpen={isMenuOpen}
-                  setIsMenuOpen={setIsMenuOpen}
+                  isMenuOpen={openMenuIndex === index}
+                  setIsMenuOpen={(isOpen) => setOpenMenuIndex(isOpen ? index : null)}
                 />
               </td>
             </tr>
@@ -261,12 +260,11 @@ interface KahootContextMenuProps {
   kahoot: KahootDashboardList;
   router: any;
   onDelete: (kahootId: string) => void;
-  onMenuChange: (isOpen: boolean) => void;
   isMenuOpen: boolean;
   setIsMenuOpen: (open: boolean) => void;
 }
 
-const KahootContextMenu = ({ kahoot, router, onDelete, onMenuChange, isMenuOpen, setIsMenuOpen }: KahootContextMenuProps) => {
+const KahootContextMenu = ({ kahoot, router, onDelete, isMenuOpen, setIsMenuOpen }: KahootContextMenuProps) => {
   return (
     <>
       {/* UX: Placing a backdrop so the user cannot click on anything behind the menu until this menu closes */}
@@ -280,7 +278,7 @@ const KahootContextMenu = ({ kahoot, router, onDelete, onMenuChange, isMenuOpen,
       <Menu
         align="end"
         direction="bottom"
-        onMenuChange={(e) => onMenuChange(e.open)}
+        onMenuChange={(e) => setIsMenuOpen(e.open)}
         className="z-40"
         menuButton={
           <MenuButton className="cursor-pointer h-full px-6 py-3">
