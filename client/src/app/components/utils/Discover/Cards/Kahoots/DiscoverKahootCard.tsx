@@ -34,6 +34,7 @@ const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardPro
       ) : (
         <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full min-h-[10.5rem]">
           <Logo
+            id="logo-discover-kahoot-card"
             size={LogoSize.SMALL}
             color={LogoColors.WHITE}
           />

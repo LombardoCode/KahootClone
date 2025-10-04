@@ -28,7 +28,10 @@ const PodiumKahootLogoAndKahootTitle = ({ moveToTheTop, podiumHeaderDisappeared 
         }}
       >
         <div className="flex flex-col items-center">
-          <Logo size={LogoSize.REGULAR} />
+          <Logo
+            id="logo-podium"
+            size={LogoSize.REGULAR}
+          />
           <TitleCard className="mt-2 text-center w-full">
             {kahoot?.title}
           </TitleCard>

@@ -60,6 +60,7 @@ const DiscoverFeaturedCard = ({ itemNumber, cardSize, featuredKahoot, onClick }:
             ) : (
               <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full">
                 <Logo
+                  id="logo-discover-featured-kahoot-card"
                   size={LogoSize.SMALL}
                   color={LogoColors.WHITE}
                 />

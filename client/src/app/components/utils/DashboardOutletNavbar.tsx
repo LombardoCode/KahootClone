@@ -92,7 +92,11 @@ const DashboardOutletNavbar = ({
         </div>
 
         <Link href={ROUTES.MENU.DISCOVER}>
-          <Logo size={LogoSize.REGULAR} color={LogoColors.VIOLET} />
+          <Logo
+            id="logo-dashboard"
+            size={LogoSize.REGULAR}
+            color={LogoColors.VIOLET}
+          />
         </Link>
       </div>
 

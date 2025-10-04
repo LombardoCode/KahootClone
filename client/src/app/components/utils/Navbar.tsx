@@ -42,7 +42,10 @@ const Navbar = ({ hideLogo = false, fixed = true }: NavbarProps) => {
         <Container className={`flex items-center justify-between`}>
           {hideLogo === false && (
             <Link href={ROUTES.ROOT}>
-              <Logo size={LogoSize.REGULAR} />
+              <Logo
+                id="logo-navbar-for-guests"
+                size={LogoSize.REGULAR}
+              />
             </Link>
           )}
           <div className="relative" ref={dropdownRef}>

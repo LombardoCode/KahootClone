@@ -243,6 +243,7 @@ const LobbyPage = () => {
           <div id="lobby-kahoot-logo-and-host-buttons" className="relative flex justify-center items-center">
             <div id="lobby-kahoot-logo">
               <Logo
+                id="logo-lobby-page"
                 size={LogoSize.SMALL}
                 color={LogoColors.WHITE}
               />

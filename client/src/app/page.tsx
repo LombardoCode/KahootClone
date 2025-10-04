@@ -59,6 +59,7 @@ const HomeContent = () => {
         <div className="flex flex-col h-full">
           <div className="flex flex-1 justify-center items-center flex-col relative z-10">
             <Logo
+              id="logo-root-page"
               size={LogoSize.LARGE}
               className="mb-4"
             />

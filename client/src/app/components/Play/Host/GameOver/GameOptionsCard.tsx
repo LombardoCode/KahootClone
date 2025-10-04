@@ -48,6 +48,7 @@ const GameOptionsCard = ({ className }: GameOptionsCardProps) => {
     >
       <div className="flex flex-col items-center w-[calc(100%-2rem)]">
         <Logo
+          id="logo-game-options-card"
           color={LogoColors.WHITE}
           size={LogoSize.REGULAR}
         />

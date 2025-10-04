@@ -150,6 +150,7 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                 {kahoot.mediaUrl === null ? (
                   <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-24 h-14 rounded-md">
                     <Logo
+                      id="logo-library-page-table-of-kahoots"
                       size={LogoSize.EXTRA_SMALL}
                       color={LogoColors.WHITE}
                     />

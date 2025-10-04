@@ -37,6 +37,7 @@ const DisplayUsersPhoto = ({ photo, size = "small" }: DisplayUsersPhotoProps) =>
       ) : (
         <div className={`bg-kahoot-purple-variant-4 flex justify-center items-center w-full rounded-full ${determinePhotoSize()}`}>
           <Logo
+            id="logo-display-users-photo"
             size={LogoSize.SMALL}
             color={LogoColors.WHITE}
           />

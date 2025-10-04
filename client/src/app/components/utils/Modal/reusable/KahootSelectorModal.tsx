@@ -129,6 +129,7 @@ const KahootSelectorModal = ({ isOpen, onClose, selectedKahootId }: KahootSelect
                           ) : (
                             <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full min-w-7 max-w-7 min-h-7 max-h-7 rounded-full">
                               <Logo
+                                id="logo-kahoot-selector-modal-users-profile-picture"
                                 size={LogoSize.SMALL}
                                 color={LogoColors.WHITE}
                               />
