@@ -55,6 +55,7 @@ const SidebarNav = ({ className, isMobileBarOpen, setIsMobileBarOpen }: SidebarN
               selected={item.pathname === pathname}
               icon={item.icon}
               onClick={() => router.push(item.pathname)}
+              setIsMobileBarOpen={(isOpen: boolean) => setIsMobileBarOpen(isOpen)}
             />
           ))}
         </div>
@@ -65,6 +66,7 @@ const SidebarNav = ({ className, isMobileBarOpen, setIsMobileBarOpen }: SidebarN
             selected={false}
             icon={faCircleInfo}
             onClick={() => {}}
+            setIsMobileBarOpen={(isOpen: boolean) => setIsMobileBarOpen(isOpen)}
           />
         </div>
       </div>
@@ -77,13 +79,19 @@ interface SidebarNavItemProps {
   icon: IconDefinition;
   selected: boolean;
   onClick?: () => void;
+  setIsMobileBarOpen: (isOpen: boolean) => void;
 }
 
-const SidebarNavItem = ({ text, icon, selected = false, onClick }: SidebarNavItemProps) => {
+const SidebarNavItem = ({ text, icon, selected = false, onClick, setIsMobileBarOpen }: SidebarNavItemProps) => {
+  const handleClick = () => {
+    onClick?.();
+    setIsMobileBarOpen(false);
+  };
+
   return (
     <div
       className={`flex flex-row sm:flex-col md:flex-row items-center rounded-md px-3 mb-1 cursor-pointer py-2.5 ${selected ? 'bg-violet-900' : 'hover:bg-zinc-300 transition-all duration-150'}`}
-      onClick={() => onClick?.()}
+      onClick={handleClick}
     >
       <FontAwesomeIcon
         icon={icon}
