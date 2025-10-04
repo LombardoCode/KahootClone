@@ -163,7 +163,7 @@ const PaginationPageDisplayerInMobile = ({ currentPage, totalOfPages }: Paginati
       fontWeight={FontWeights.BOLD}
       textColor={TextColors.PURPLE_VARIANT_4}
       useCase={UseCases.BODY}
-      className="lg:hidden text-2xl"
+      className="w-full lg:hidden text-2xl text-center"
     >
       {currentPage} / {totalOfPages}
     </Text>
