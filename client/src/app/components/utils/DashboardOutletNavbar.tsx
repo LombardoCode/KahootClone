@@ -74,7 +74,7 @@ const DashboardOutletNavbar = ({
   };
 
   return (
-    <nav className={`flex justify-between items-center bg-white sm:bg-red-500 md:bg-purple-500 lg:bg-cyan-500 xl:bg-zinc-500 2xl:bg-pink-500 px-4 w-full sticky top-0 z-30 border-b-1 border-b-zinc-300 h-14 lg:h-16 ${className}`}>
+    <nav className={`flex justify-between items-center bg-white px-4 w-full sticky top-0 z-30 border-b-1 border-b-zinc-300 h-14 lg:h-16 ${className}`}>
       <div
         id="dashboard-outlet-navbar-logo"
         className={`flex items-center justify-start ${isMobileSearchActive ? 'lg:flex hidden' : 'flex'}`}

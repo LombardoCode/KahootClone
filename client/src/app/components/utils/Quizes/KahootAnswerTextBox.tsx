@@ -96,7 +96,7 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
         </div>
 
         {/* Answer inputs */}
-        <div className="flex-1 flex items-center h-full bg-cyan-500">
+        <div className="flex-1 flex items-center h-full">
           {/* Desktop input */}
           <div className="hidden lg:block lg:flex-1">
             <TextAreaForm
@@ -114,7 +114,7 @@ const KahootAnswerTextBox = ({ className, answerIndex, answer }: KahootAnswerTex
 
           {/* Mobile input */}
           <div
-            className="flex-1 flex items-center lg:hidden bg-purple-500 py-6"
+            className="flex-1 flex items-center lg:hidden py-6"
             onClick={handleMobileCardClick}
           >
             <TextAreaForm

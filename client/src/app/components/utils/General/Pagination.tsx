@@ -32,7 +32,7 @@ const Pagination = ({ currentPage, pageSize, totalOfResults, setSelectedPage }: 
   return (
     <div
       id="pagination"
-      className="flex justify-between lg:justify-center items-center select-none bg-red-500"
+      className="flex justify-between lg:justify-center items-center select-none"
     >
       {totalOfPages > maxNumOfPagesToShow && (
         <LeftButton

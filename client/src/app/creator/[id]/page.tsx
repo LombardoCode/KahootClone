@@ -102,7 +102,7 @@ const EditKahoot = () => {
       <div className="h-screen flex flex-col">
         <CreatorNavbar />
 
-        <div id="creator-body" className="flex-1 flex flex-col xl:flex-row xl:overflow-hidden bg-fuchsia-300">
+        <div id="creator-body" className="flex-1 flex flex-col xl:flex-row xl:overflow-hidden">
           <CreatorSliderOfQuestions
             className="order-2 xl:order-1"
           />

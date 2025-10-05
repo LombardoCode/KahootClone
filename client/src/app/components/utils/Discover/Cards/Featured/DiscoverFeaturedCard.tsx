@@ -21,7 +21,7 @@ const DiscoverFeaturedCard = ({ itemNumber, cardSize, featuredKahoot, onClick }:
 
   return (
     <div className="flex items-center">
-      <div className="min-w-12 max-w-12 md:min-w-14 md:max-w-14 lg:min-w-20 lg:max-w-20 flex justify-center bg-red-500">
+      <div className="min-w-12 max-w-12 md:min-w-14 md:max-w-14 lg:min-w-20 lg:max-w-20 flex justify-center">
         <Text
           fontWeight={FontWeights.BOLD}
           textColor={TextColors.GRAY}
