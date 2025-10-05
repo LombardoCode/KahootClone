@@ -49,7 +49,7 @@ const ShowingQuestionTitleAndProgressBarCountdown = () => {
           useCase={UseCases.LONGTEXT}
           textColor={TextColors.GRAY}
           fontWeight={FontWeights.BOLD}
-          className="text-2xl lg:text-4xl"
+          className="text-2xl lg:text-4xl text-center"
         >
           {renderQuestionsTitle()}
         </Text>

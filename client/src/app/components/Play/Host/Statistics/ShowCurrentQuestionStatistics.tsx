@@ -71,23 +71,29 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
     })
   }
 
+  const NextButton = (
+    <Button
+      className="z-10"
+      backgroundColor={BackgroundColors.WHITE}
+      fontWeight={FontWeights.BOLD}
+      textColor={TextColors.GRAY}
+      animateOnHover={false}
+      size={ButtonSize.MEDIUM}
+      onClick={() => setScreenType()}
+    >
+      Next
+    </Button>
+  );
+
   return (
     <>
-      <Button
-        className="absolute top-0 right-0 mr-2 z-10"
-        backgroundColor={BackgroundColors.WHITE}
-        fontWeight={FontWeights.BOLD}
-        textColor={TextColors.GRAY}
-        animateOnHover={false}
-        size={ButtonSize.MEDIUM}
-        onClick={() => setScreenType()}
-      >
-        Next
-      </Button>
-
       {screen === ScreenForFinalAnswerStatistics.STATISTICS && (
         <>
           <ShowingQuestionTitle questionTitle={questionTitle} />
+
+          <div className="flex justify-end mt-4">
+            {NextButton}
+          </div>
 
           <DisplayAnswerStatisticsInBarsMode
             answers={answers}
@@ -101,7 +107,7 @@ const ShowCurrentQuestionStatistics = ({ questionTitle }: ShowCurrentQuestionSta
       )}
 
       {screen === ScreenForFinalAnswerStatistics.SCOREBOARD && (
-        <DisplayScoreboard />
+        <DisplayScoreboard nextButton={NextButton} />
       )}
     </>
   )

@@ -7,10 +7,9 @@ interface DisplayAnswerStatisticsInBoardModeProps {
   className?: string;
 }
 
-const DisplayAnswerStatisticsInBoardMode = ({ answers, className = ''
- }: DisplayAnswerStatisticsInBoardModeProps) => {
+const DisplayAnswerStatisticsInBoardMode = ({ answers, className = '' }: DisplayAnswerStatisticsInBoardModeProps) => {
   return (
-    <div className={`${className}`}>
+    <div className={`${className} px-4`}>
       <KahootAnswerGridWrapper>
         {answers?.map((answer: AnswerPlay, index: number) => (
           <ShowKahootAnswerAsFinalStat

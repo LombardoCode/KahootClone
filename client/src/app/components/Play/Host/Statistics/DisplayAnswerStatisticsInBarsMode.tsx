@@ -10,8 +10,8 @@ const DisplayAnswerStatisticsInBarsMode = ({ answers }: DisplayAnswerStatisticsI
   const { answerStatsForCurrentQuestion } = useInGameStore();
 
   return (
-    <div className="w-full flex justify-center mt-20">
-      <div className="grid grid-cols-4 gap-10 max-w-max">
+    <div className="w-full flex justify-center mt-10 lg:mt-20 px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 lg:gap-10 max-w-max">
         {answers?.map((answer: AnswerPlay, index: number) => (
           <AnswerStatisticBarIndividual
             key={index}

@@ -26,40 +26,62 @@ const ShowKahootAnswerAsFinalStat = ({ index, answer }: ShowKahootAnswerAsFinalS
   const backgroundColor: KahootAnswerBackgroundColors | null = getBackgroundColor(index);
 
   return (
-    <div className={`px-2 rounded-md py-3 ${answer.isCorrect ? 'opacity-100' : 'opacity-70'} ${backgroundColor}`}>
-      <div className={`flex justify-between items-center`}>
-        <div className="flex items-center">
+    <div className={`rounded-md ${answer.isCorrect ? 'opacity-100' : 'opacity-70'} ${backgroundColor}`}>
+      <div className={`relative flex items-center min-h-20 sm:min-h-24`}>
+        <div>
+          {/* Mobile */}
+          <IconForKahootAnswer
+            index={index}
+            size={12}
+            className="block md:hidden py-2"
+          />
+
+          {/* Tablets */}
+          <IconForKahootAnswer
+            index={index}
+            size={25}
+            className="hidden md:block xl:hidden py-10 mr-2"
+          />
+
+          {/* Desktop */}
           <IconForKahootAnswer
             index={index}
             size={30}
+            className="hidden xl:block py-10 mr-2"
           />
+        </div>
 
+        <div className="flex-1 flex items-center py-3 pr-12">
           <Text
             fontWeight={FontWeights.BOLD}
             textColor={TextColors.WHITE}
             useCase={UseCases.LONGTEXT}
-            className="text-xl"
+            className="text-sm sm:text-base lg:text-xl text-center w-full"
           >
             {answer.text}
           </Text>
         </div>
 
-        {answer.isCorrect
-          ? (
-            <FontAwesomeIcon
-              icon={faCheck}
-              size={"lg"}
-              color="white"
-            />
-          )
-          : (
-            <FontAwesomeIcon
-              icon={faXmark}
-              size={"lg"}
-              color="white"
-            />
-          )
-        }
+        <div className="absolute top-2 right-2">
+          {answer.isCorrect
+            ? (
+              <FontAwesomeIcon
+                icon={faCheck}
+                size={"lg"}
+                color="white"
+                className="text-base sm:text-lg"
+              />
+            )
+            : (
+              <FontAwesomeIcon
+                icon={faXmark}
+                size={"lg"}
+                color="white"
+                className="text-base sm:text-lg"
+              />
+            )
+          }
+        </div>
       </div>
     </div>
   )

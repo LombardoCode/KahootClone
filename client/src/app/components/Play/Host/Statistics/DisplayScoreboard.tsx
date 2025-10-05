@@ -5,7 +5,11 @@ import useInGameStore from "@/app/stores/Kahoot/useInGameStore"
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const DisplayScoreboard = () => {
+interface DisplayScoreboardProps {
+  nextButton?: React.ReactNode;
+}
+
+const DisplayScoreboard = ({ nextButton }: DisplayScoreboardProps) => {
   const { players } = useInGameStore();
 
   return (
@@ -22,6 +26,12 @@ const DisplayScoreboard = () => {
           </Text>
         </div>
       </div>
+
+      {nextButton && (
+        <div className="flex justify-end mt-4 px-4">
+          {nextButton}
+        </div>
+      )}
 
       <div id="list-of-players-and-their-earned-points" className="mt-10">
         {/* Displaying the players in descending order based on their earned points */}

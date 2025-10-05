@@ -32,24 +32,41 @@ const KahootAnswerHostCard = ({ index, answer, className }: KahootAnswerHostCard
   return (
     <KahootAnswerBackgroundColorWrapper
       colorIndex={index}
-      className={`flex items-center ${className}`}
+      className={`flex items-center overflow-hidden ${className}`}
       onClick={() => {
         if (!isHost) {
           selectAnswer(answer.id);
         }
       }}
     >
-      <IconForKahootAnswer
-        index={index}
-        size={48}
-        className="py-10 mr-2"
-      />
+      <div>
+        {/* Mobile */}
+        <IconForKahootAnswer
+          index={index}
+          size={12}
+          className="block md:hidden py-2"
+        />
+
+        {/* Tablets */}
+        <IconForKahootAnswer
+          index={index}
+          size={25}
+          className="hidden md:block xl:hidden py-10 mr-2"
+        />
+
+        {/* Desktop */}
+        <IconForKahootAnswer
+          index={index}
+          size={48}
+          className="hidden xl:block py-10 mr-2"
+        />
+      </div>
 
       <Text
         fontWeight={FontWeights.BOLD}
         textColor={TextColors.WHITE}
         useCase={UseCases.LONGTEXT}
-        className="text-xl text-center py-4"
+        className="text-sm sm:text-lg lg:text-xl text-center py-3 sm:py-4"
       >
         {answer.text}
       </Text>
