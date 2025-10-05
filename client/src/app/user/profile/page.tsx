@@ -143,8 +143,8 @@ const UserSettingsProfileTab = () => {
           </div>
 
           <div id="user-information-content" className="grid grid-cols-12 gap-x-0 lg:gap-x-4 gap-y-4 lg:gap-y-0 mt-6">
-            <div id="user-information-content-image-wrapper" className="col-span-12 lg:col-span-4 bg-red-500">
-              <div id="user-information-content-image-content" className="flex justify-center items-start w-full bg-purple-500">
+            <div id="user-information-content-image-wrapper" className="col-span-12 lg:col-span-4">
+              <div id="user-information-content-image-content" className="flex justify-center items-start w-full">
                 <MediaSelector
                   imageSrc={userData?.mediaUrl ?? ""}
                   removeImageActions={() => {
