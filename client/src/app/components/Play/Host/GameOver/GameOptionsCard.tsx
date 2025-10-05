@@ -29,42 +29,74 @@ const GameOptionsCard = ({ className }: GameOptionsCardProps) => {
   }
 
   return (
-    <motion.div
-      id="game-options-content"
-      className={`flex justify-center bg-kahoot-purple-variant-3 py-4 z-10 overflow-hidden ${className}`}
-      initial={{
-        width: 0
-      }}
-      animate={{
-        width: 384
-      }}
-      transition={{
-        width: {
-          duration: 1.4,
-          delay: 0,
-          ease: "easeInOut"
-        }
-      }}
-    >
-      <div className="flex flex-col items-center w-[calc(100%-2rem)]">
-        <Logo
-          id="logo-game-options-card"
-          color={LogoColors.WHITE}
-          size={LogoSize.REGULAR}
-        />
-
-        <div
-          id="clickable-options-wrapper"
-          className="mt-4 w-full"
-        >
-          <ClickableOption
-            onClick={() => endTheGame()}
+    <>
+      {/* Mobile: Bottom sheet modal */}
+      <motion.div
+        id="game-options-content-mobile"
+        className="lg:hidden fixed bottom-0 left-0 right-0 bg-kahoot-purple-variant-3 rounded-t-3xl shadow-2xl z-50 overflow-hidden"
+        initial={{
+          y: "100%"
+        }}
+        animate={{
+          y: 0
+        }}
+        transition={{
+          duration: 0.5,
+          ease: "easeOut"
+        }}
+      >
+        <div className="flex flex-col items-center py-4 px-6">
+          <div
+            id="clickable-options-wrapper"
+            className="w-full"
           >
-            Go to homepage
-          </ClickableOption>
+            <ClickableOption
+              onClick={() => endTheGame()}
+            >
+              Go to homepage
+            </ClickableOption>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+
+      {/* Desktop: Sidebar */}
+      <motion.div
+        id="game-options-content-desktop"
+        className={`hidden lg:flex justify-center bg-kahoot-purple-variant-3 py-4 z-10 overflow-hidden ${className}`}
+        initial={{
+          width: 0
+        }}
+        animate={{
+          width: 384
+        }}
+        transition={{
+          width: {
+            duration: 1.4,
+            delay: 0,
+            ease: "easeInOut"
+          }
+        }}
+      >
+        <div className="flex flex-col items-center w-[calc(100%-2rem)]">
+          <Logo
+            id="logo-game-options-card"
+            color={LogoColors.WHITE}
+            size={LogoSize.REGULAR}
+          />
+
+          <div
+            id="clickable-options-wrapper"
+            className="mt-4 w-full"
+          >
+            <ClickableOption
+              onClick={() => endTheGame()}
+            >
+              Go to homepage
+            </ClickableOption>
+          </div>
+        </div>
+      </motion.div>
+    </>
   )
 }
 

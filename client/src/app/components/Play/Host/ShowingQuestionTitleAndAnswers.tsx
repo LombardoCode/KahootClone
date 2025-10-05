@@ -16,7 +16,7 @@ const ShowingQuestionTitleAndAnswers = () => {
   }, [everyoneHasAnsweredTheCurrentQuestion]);
 
   return (
-    <div id="showing-question-title-and-answers" className="flex flex-col h-screen mx-10">
+    <div id="showing-question-title-and-answers" className="flex flex-col h-screen mx-4 lg:mx-10 overflow-y-auto">
       {!everyoneHasAnsweredTheCurrentQuestion
         ? (
           <>
@@ -27,9 +27,13 @@ const ShowingQuestionTitleAndAnswers = () => {
             <ShowTheAnswersToTheGuests kahoot={kahoot} questionIndex={questionIndex} />
           </>
         )
-        : (<ShowCurrentQuestionStatistics
-          questionTitle={kahoot?.questions[questionIndex].title}
-        />)
+        : (
+          <div className="pb-20">
+            <ShowCurrentQuestionStatistics
+              questionTitle={kahoot?.questions[questionIndex].title}
+            />
+          </div>
+        )
       }
     </div>
   )

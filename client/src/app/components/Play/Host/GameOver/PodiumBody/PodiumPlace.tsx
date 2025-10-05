@@ -58,9 +58,9 @@ interface PodiumPlaceIndividualProps {
 
 const PodiumPlaceIndividual = ({ place = 0, playerName = "Unknown", playerPoints = 0, playerMediaUrl, className = "" }: PodiumPlaceIndividualProps) => {
   const podiumBarHeightsClasses: any = {
-    1: 'h-[36rem]',
-    2: 'h-[32rem]',
-    3: 'h-[28rem]'
+    1: { mobile: 'h-[32rem]', tablet: 'sm:h-[34rem]', desktop: 'lg:h-[36rem]' },
+    2: { mobile: 'h-[28rem]', tablet: 'sm:h-[30rem]', desktop: 'lg:h-[32rem]' },
+    3: { mobile: 'h-[24rem]', tablet: 'sm:h-[26rem]', desktop: 'lg:h-[28rem]' }
   };
 
   const podiumBarHeight = podiumBarHeightsClasses[place] || null;
@@ -70,19 +70,19 @@ const PodiumPlaceIndividual = ({ place = 0, playerName = "Unknown", playerPoints
   }
 
   return (
-    <div className={`relative bottom-0 w-[15rem] ${podiumBarHeight} ${className}`}>
+    <div className={`relative bottom-0 w-[8rem] sm:w-[12rem] lg:w-[15rem] ${podiumBarHeight.mobile} ${podiumBarHeight.tablet} ${podiumBarHeight.desktop} ${className}`}>
       <div
         id="podium-place-individual-profile-picture-wrapper"
-        className="flex justify-center mb-3 w-full top-0"
+        className="flex justify-center mb-2 sm:mb-3 w-full top-0"
       >
         <div id="podium-place-individual-profile-picture-content">
           {!!playerMediaUrl
             ? <DisplayUsersPhoto photo={playerMediaUrl} size={"medium"} />
-            : <div className="flex justify-center items-center bg-gray-500 w-28 h-28 rounded-full">
+            : <div className="flex justify-center items-center bg-gray-500 w-16 h-16 sm:w-20 sm:h-20 lg:w-28 lg:h-28 rounded-full">
               <FontAwesomeIcon
                 icon={faUser}
                 color="white"
-                size="3x"
+                className="text-2xl sm:text-3xl lg:text-5xl"
               />
             </div>
           }
@@ -92,11 +92,11 @@ const PodiumPlaceIndividual = ({ place = 0, playerName = "Unknown", playerPoints
       <div className={`bg-purple-900 h-full rounded-t-xl shadow-lg shadow-black/70`}>
         <div
           id="podium-place-individual-number-of-placement-wrapper"
-          className="absolute flex flex-col items-center mt-4 w-full"
+          className="absolute flex flex-col items-center mt-2 sm:mt-3 lg:mt-4 w-full"
         >
           <div
             id="podium-place-individual-number-of-placement-content"
-            className="rounded-full"
+            className="rounded-full scale-75 sm:scale-90 lg:scale-100"
           >
             <PodiumPlaceIcon
               place={place}
@@ -108,7 +108,7 @@ const PodiumPlaceIndividual = ({ place = 0, playerName = "Unknown", playerPoints
             fontWeight={FontWeights.BOLD}
             textColor={TextColors.WHITE}
             useCase={UseCases.LONGTEXT}
-            className="text-2xl mt-2 mb-3"
+            className="text-sm sm:text-lg lg:text-2xl mt-1 sm:mt-2 mb-2 sm:mb-3 px-1"
           >
             {playerName}
           </Text>
@@ -117,7 +117,7 @@ const PodiumPlaceIndividual = ({ place = 0, playerName = "Unknown", playerPoints
             fontWeight={FontWeights.BOLD}
             textColor={TextColors.WHITE}
             useCase={UseCases.LONGTEXT}
-            className="text-md mb-3"
+            className="text-xs sm:text-sm lg:text-md mb-2 sm:mb-3"
           >
             {playerPoints}
           </Text>

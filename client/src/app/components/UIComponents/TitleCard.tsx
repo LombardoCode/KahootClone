@@ -15,7 +15,7 @@ const TitleCard = ({ children, className = "" }: TitleCardProps) => {
         useCase={UseCases.LONGTEXT}
         textColor={TextColors.GRAY}
         fontWeight={FontWeights.BOLD}
-        className="text-3xl"
+        className="text-2xl lg:text-3xl"
       >
         {children}
       </Text>

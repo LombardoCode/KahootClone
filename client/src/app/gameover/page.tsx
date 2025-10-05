@@ -146,7 +146,7 @@ const GameOverScreen = () => {
           style={{ position: "fixed", top: 0, left: 0, zIndex: 100 }}
         />
 
-        <div className={`relative px-6 pt-8 bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>
+        <div className={`relative px-4 sm:px-6 pt-4 sm:pt-8 bg-creator-classroom bg-center bg-cover bg-no-repeat h-screen overflow-hidden`}>
           <div className="absolute inset-0 bg-black opacity-20"></div>
 
           <div className={`relative z-10 flex ${!disappearPodiumElementsFromDOM ? 'flex-row justify-center' : 'flex-col items-center'} w-full h-full`}>
@@ -156,7 +156,7 @@ const GameOverScreen = () => {
             >
               <div
                 id="kahoot-logo-kahoot-title-and-podium-header-content"
-                className={`h-full w-96`}
+                className={`h-full w-full sm:w-96`}
               >
                 <PodiumKahootLogoAndKahootTitle
                   moveToTheTop={hidePodiumHeader}

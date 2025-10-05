@@ -14,7 +14,7 @@ const PodiumKahootLogoAndKahootTitle = ({ moveToTheTop, podiumHeaderDisappeared 
   return (
     <div className={`relative ${!podiumHeaderDisappeared ? 'h-1/2' : ''}`}>
       <motion.div
-        className={`${!podiumHeaderDisappeared ? 'absolute' : 'relative'} w-full flex flex-col items-center max-h-min`}
+        className={`${!podiumHeaderDisappeared ? 'absolute' : 'relative'} w-full flex flex-col items-center max-h-min px-4`}
         initial={{
           bottom: 0,
         }}
@@ -28,10 +28,22 @@ const PodiumKahootLogoAndKahootTitle = ({ moveToTheTop, podiumHeaderDisappeared 
         }}
       >
         <div className="flex flex-col items-center">
-          <Logo
-            id="logo-podium"
-            size={LogoSize.REGULAR}
-          />
+          {/* Mobile Logo */}
+          <div className="block sm:hidden">
+            <Logo
+              id="logo-podium-mobile"
+              size={LogoSize.SMALL}
+            />
+          </div>
+
+          {/* Desktop Logo */}
+          <div className="hidden sm:block">
+            <Logo
+              id="logo-podium"
+              size={LogoSize.REGULAR}
+            />
+          </div>
+
           <TitleCard className="mt-2 text-center w-full">
             {kahoot?.title}
           </TitleCard>
