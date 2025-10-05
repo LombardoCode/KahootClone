@@ -68,30 +68,30 @@ const HomeContent = () => {
               className="min-w-[350px] flex flex-col justify-between"
             >
               {!userEnteredAValidLobbyId
-              ? (
-                <ShowEnterLobbyIdFields
-                  highlightInput={highlightInput}
-                  setError={setError}
-                  setHighlightInput={setHighlightInput}
-                  setLoading={setLoading}
-                  setUserEnteredAValidLobbyId={setUserEnteredAValidLobbyId}
-                  gamePINComesFromParams={gamePINComesFromParams}
-                  gamePIN={gamePIN}
-                  setGamePIN={setGamePIN}
-                />
-              )
-              : (
-                <ShowEnterNicknameFields
-                  highlightInput={highlightInput}
-                  nickName={nickName}
-                  setNickName={setNickName}
-                  gamePIN={gamePIN}
-                  setError={setError}
-                />
-              )}
+                ? (
+                  <ShowEnterLobbyIdFields
+                    highlightInput={highlightInput}
+                    setError={setError}
+                    setHighlightInput={setHighlightInput}
+                    setLoading={setLoading}
+                    setUserEnteredAValidLobbyId={setUserEnteredAValidLobbyId}
+                    gamePINComesFromParams={gamePINComesFromParams}
+                    gamePIN={gamePIN}
+                    setGamePIN={setGamePIN}
+                  />
+                )
+                : (
+                  <ShowEnterNicknameFields
+                    highlightInput={highlightInput}
+                    nickName={nickName}
+                    setNickName={setNickName}
+                    gamePIN={gamePIN}
+                    setError={setError}
+                  />
+                )}
             </Card>
           </div>
-          <footer className="text-center relative z-10 pb-12">
+          <footer className="text-center relative z-10 pb-12 space-y-3">
             <Text
               useCase={UseCases.LONGTEXT}
               textColor={TextColors.WHITE}
@@ -99,6 +99,38 @@ const HomeContent = () => {
             >
               Create your own Kahoot account for FREE by clicking <Link href="/signup">here</Link>!
             </Text>
+            <div className="flex justify-center gap-4 text-sm">
+              <Text
+                useCase={UseCases.LONGTEXT}
+                textColor={TextColors.WHITE}
+                fontWeight={FontWeights.LIGHT}
+              >
+                <Link
+                  href="https://github.com/LombardoCode/KahootClone/blob/master/TERMS_OF_SERVICE.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white no-underline hover:underline"
+                >
+                  Terms of Service
+                </Link>
+              </Text>
+              <span className="text-white opacity-50">•</span>
+              <Text
+                useCase={UseCases.LONGTEXT}
+                textColor={TextColors.WHITE}
+                fontWeight={FontWeights.LIGHT}
+              >
+                <Link
+                  href="https://github.com/LombardoCode/KahootClone/blob/master/PRIVACY_POLICY.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white no-underline hover:underline"
+                >
+                  Privacy Policy
+                </Link>
+              </Text>
+
+            </div>
           </footer>
         </div>
 
@@ -175,7 +207,7 @@ const ShowEnterLobbyIdFields = ({ highlightInput, setError, setHighlightInput, s
       setLoading(false);
     }
   }
-  
+
   return (
     <>
       <InputForm
