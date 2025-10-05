@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from "next/navigation";
 import useInGameStore from "../stores/Kahoot/useInGameStore";
 import Text from "../components/UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "../interfaces/Text.interface";
@@ -111,7 +110,7 @@ const ShowQuestionTitleAndCountdownToHost = ({ kahootTitle }: ShowQuestionTitleA
             fontWeight={FontWeights.BOLD}
             textColor={TextColors.GRAY}
             useCase={UseCases.LONGTEXT}
-            className="text-4xl"
+            className="text-2xl lg:text-4xl"
           >
             {kahootTitle}
           </Text>
@@ -132,7 +131,6 @@ const SquareCountdownTimer = () => {
   // Local component state
   const [countDisplay, setCountDisplay] = useState<number>(3);
   const [hasStarted, setHasStarted] = useState<boolean>(false);
-  const router = useRouter();
 
   useEffect(() => {
     if (!hasStarted) {

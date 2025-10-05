@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import ShowingQuestionTypeAndTitle from "./ShowingQuestionTypeAndTitle";
+import ShowingQuestionLayoutAndIcon from "./ShowingQuestionTypeAndTitle";
 import ShowingQuestionTitleAndProgressBarCountdown from "./ShowingQuestionTitleAndProgressBarCountdown";
 import ShowingQuestionTitleAndAnswers from "./ShowingQuestionTitleAndAnswers";
 import useInGameStore, { AnswerStatsForCurrentQuestion } from "@/app/stores/Kahoot/useInGameStore";
@@ -71,7 +71,7 @@ const PlayScreenForHost = () => {
   return (
     <div className="w-full">
       {showQuestionHeader && (
-        <ShowingQuestionTypeAndTitle
+        <ShowingQuestionLayoutAndIcon
           showQuestionCountdown={showQuestionCountdown}
         />
       )}

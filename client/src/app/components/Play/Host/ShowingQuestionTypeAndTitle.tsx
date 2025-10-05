@@ -7,19 +7,19 @@ import { useState } from "react";
 import GetQuestionIconBasedOnLayout from "../../utils/InGame/GetQuestionIconBasedOnLayout";
 import { getTextContentForLayout } from "../../utils/Quizes/KahootQuestion.utills";
 
-const ShowingQuestionTypeAndTitle = ({ showQuestionCountdown }: any) => {
+const ShowingQuestionLayoutAndIcon = ({ showQuestionCountdown }: any) => {
   const { kahoot, questionIndex } = useInGameStore();
   const [currentQuestionLayout] = useState<QuizQuestionLayoutTypes | undefined>(kahoot?.questions[questionIndex].layout);
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen px-4">
       <div
         id="showing-question-type-and-title-type-circle-wrapper"
         className="relative flex flex-col items-center w-full h-full"
       >
         <motion.div
           id="showing-question-type-and-title-type-circle"
-          className="absolute flex justify-center items-center w-96 h-96 bg-black/40 rounded-full z-20"
+          className="absolute flex justify-center items-center w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-black/40 rounded-full z-20"
           initial={{
             scale: 0,
             top: '40%',
@@ -43,7 +43,7 @@ const ShowingQuestionTypeAndTitle = ({ showQuestionCountdown }: any) => {
               {currentQuestionLayout && (
                 <GetQuestionIconBasedOnLayout
                   layout={currentQuestionLayout}
-                  className="scale-[5.3]"
+                  className="scale-[3] sm:scale-[4] lg:scale-[5.3]"
                 />
               )}
             </span>
@@ -52,7 +52,7 @@ const ShowingQuestionTypeAndTitle = ({ showQuestionCountdown }: any) => {
 
         <motion.div
           id="showing-question-type-and-title-type-label"
-          className="absolute w-96 text-center bg-white py-3 rounded-full mt-3 z-10"
+          className="absolute w-11/12 max-w-sm sm:max-w-md lg:max-w-lg text-center bg-white py-2 sm:py-3 rounded-full mt-3 z-10 px-4"
           initial={{
             scale: 0,
             top: '40%',
@@ -69,7 +69,7 @@ const ShowingQuestionTypeAndTitle = ({ showQuestionCountdown }: any) => {
             useCase={UseCases.LONGTEXT}
             textColor={TextColors.BLACK}
             fontWeight={FontWeights.BOLD}
-            className="text-4xl"
+            className="text-2xl sm:text-3xl lg:text-4xl"
           >
             {getTextContentForLayout(currentQuestionLayout)}
           </Text>
@@ -79,4 +79,4 @@ const ShowingQuestionTypeAndTitle = ({ showQuestionCountdown }: any) => {
   )
 }
 
-export default ShowingQuestionTypeAndTitle;
+export default ShowingQuestionLayoutAndIcon;
