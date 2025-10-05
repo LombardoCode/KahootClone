@@ -191,14 +191,14 @@ const LobbyPage = () => {
   const ScreenForHost = () => {
     return (
       <>
-        <div className="flex justify-center">
-          <div id="invitation-and-game-pin-header" className="grid grid-cols-5 gap-2 py-8">
-            <div id="invitation-header" className="col-span-3 flex flex-col justify-center items-center bg-white rounded-md px-8 py-3 shadow-lg shadow-black/20">
+        <div className="flex justify-center px-4">
+          <div id="invitation-and-game-pin-header" className="grid grid-cols-1 lg:grid-cols-5 gap-2 py-4 lg:py-8 w-full max-w-7xl">
+            <div id="invitation-header" className="lg:col-span-3 flex flex-col justify-center items-center bg-white rounded-md px-4 lg:px-8 py-3 shadow-lg shadow-black/20">
               <Text
                 fontWeight={FontWeights.REGULAR}
                 textColor={TextColors.GRAY}
                 useCase={UseCases.HEADER}
-                className="text-2xl text-center w-8/12"
+                className="text-lg lg:text-2xl text-center w-full lg:w-8/12"
               >
                 Join at{" "}
                 <Text
@@ -212,12 +212,12 @@ const LobbyPage = () => {
               </Text>
             </div>
 
-            <div id="game-pin-header" className="col-span-2 flex flex-col justify-center bg-white rounded-md px-8 pt-2 pb-6 shadow-lg shadow-black/20">
+            <div id="game-pin-header" className="lg:col-span-2 flex flex-col justify-center bg-white rounded-md px-4 lg:px-8 pt-2 pb-4 lg:pb-6 shadow-lg shadow-black/20">
               <Text
                 fontWeight={FontWeights.BOLD}
                 textColor={TextColors.GRAY}
                 useCase={UseCases.HEADER}
-                className="text-2xl mt-2 text-left"
+                className="text-xl lg:text-2xl mt-2 text-center lg:text-left"
               >
                 Game PIN
               </Text>
@@ -227,7 +227,7 @@ const LobbyPage = () => {
                   fontWeight={FontWeights.BLACK}
                   textColor={TextColors.GRAY}
                   useCase={UseCases.HEADER}
-                  className="text-7xl text-center hover:bg-zinc-300 px-3 py-2 cursor-pointer"
+                  className="text-4xl lg:text-7xl text-center hover:bg-zinc-300 px-3 py-2 cursor-pointer"
                   onClick={sendGamePINToClipboard}
                 >
                   {lobbyId}
@@ -240,8 +240,8 @@ const LobbyPage = () => {
         </div>
 
         <Container>
-          <div id="lobby-kahoot-logo-and-host-buttons" className="relative flex justify-center items-center">
-            <div id="lobby-kahoot-logo">
+          <div id="lobby-kahoot-logo-and-host-buttons" className="relative flex justify-center items-center flex-col lg:flex-row gap-4 lg:gap-0">
+            <div id="lobby-kahoot-logo" className="order-1 lg:order-none">
               <Logo
                 id="logo-lobby-page"
                 size={LogoSize.SMALL}
@@ -249,13 +249,13 @@ const LobbyPage = () => {
               />
             </div>
 
-            <div id="lobby-host-buttons" className="absolute right-0">
+            <div id="lobby-host-buttons" className="lg:absolute lg:right-0 order-2 lg:order-none mb-10 lg:mb-0">
               {players.length > 0 && isHost && (
                 <Button
                   backgroundColor={BackgroundColors.WHITE}
                   fontWeight={FontWeights.BOLD}
                   textColor={TextColors.GRAY}
-                  className={`text-md select-none ${!wasTheStartButtonClicked ? 'opacity-100' : 'opacity-45'}`}
+                  className={`text-sm lg:text-md select-none ${!wasTheStartButtonClicked ? 'opacity-100' : 'opacity-45'}`}
                   size={ButtonSize.MEDIUM}
                   perspective={PerspectiveSize.MEDIUM}
                   animateOnHover={false}
@@ -268,8 +268,8 @@ const LobbyPage = () => {
           </div>
         </Container>
 
-        <Container>
-          <div id="list-for-players" className="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-10">
+        <Container className="px-4">
+          <div id="list-for-players" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-10">
             {players.map((p: Player) => (
               <LobbyUserCard
                 key={p.connectionId}
