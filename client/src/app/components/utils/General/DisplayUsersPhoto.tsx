@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Logo, { LogoColors, LogoSize } from "../Logo";
 
 interface DisplayUsersPhotoProps {
@@ -6,36 +7,33 @@ interface DisplayUsersPhotoProps {
 }
 
 const DisplayUsersPhoto = ({ photo, size = "small" }: DisplayUsersPhotoProps) => {
-  const determinePhotoSize = () => {
-    let photoSize: string = "";
+  const determinePhotoSize = (size: string) => {
     switch (size) {
-      case "extra_small":
-        photoSize = "min-w-8 max-w-8 min-h-8 max-h-8";
-        break;
-      case "small":
-        photoSize = "min-w-10 max-w-10 min-h-10 max-h-10";
-        break;
-      case "medium":
-        photoSize = "min-w-24 max-w-24 min-h-24 max-h-24"
-        break;
-      case "large":
-        photoSize = "min-w-28 max-w-28 min-h-28 max-h-28"
-        break;
+      case "extra_small": return 32;
+      case "small": return 40;
+      case "medium": return 96;
+      case "large": return 112;
     }
-
-    return photoSize;
   }
+
+  const pixelSize = determinePhotoSize(size);
 
   return (
     <div className="border-1.5 border-kahoot-purple-variant-3 rounded-full">
       {photo ? (
-        <img
+        <Image
           src={photo}
-          crossOrigin="anonymous"
-          className={`top-0 left-0 object-cover rounded-full ${determinePhotoSize()}`}
+          alt="User profile photo"
+          width={pixelSize}
+          height={pixelSize}
+          className="object-cover rounded-full"
+          loading="lazy"
         />
       ) : (
-        <div className={`bg-kahoot-purple-variant-4 flex justify-center items-center w-full rounded-full ${determinePhotoSize()}`}>
+        <div
+          className="bg-kahoot-purple-variant-4 flex justify-center items-center rounded-full"
+          style={{ width: pixelSize, height: pixelSize }}
+        >
           <Logo
             id="logo-display-users-photo"
             size={LogoSize.SMALL}

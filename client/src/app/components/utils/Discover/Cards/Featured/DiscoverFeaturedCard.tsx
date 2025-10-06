@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Text from "@/app/components/UIComponents/Text";
 import useAverageImageColor from "@/app/hooks/useAverageImageColor";
 import { DiscoverFeaturedCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverFeaturedCardInfo";
@@ -49,16 +50,19 @@ const DiscoverFeaturedCard = ({ itemNumber, cardSize, featuredKahoot, onClick }:
             </Text>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center h-24">
             {featuredKahoot.mediaUrl ? (
-              <img
-                ref={imgRef}
-                src={featuredKahoot.mediaUrl}
-                crossOrigin="anonymous"
-                className="top-0 left-0 w-full object-cover"
-              />
+              <div className="relative w-36 h-24">
+                <Image
+                  ref={imgRef}
+                  src={featuredKahoot.mediaUrl}
+                  alt={featuredKahoot.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
             ) : (
-              <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full">
+              <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full h-24">
                 <Logo
                   id="logo-discover-featured-kahoot-card"
                   size={LogoSize.SMALL}

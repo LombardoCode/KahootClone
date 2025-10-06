@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import Text from "../../components/UIComponents/Text";
 import { FontWeights, TextColors, UseCases } from "../../interfaces/Text.interface";
 import { useEffect, useState } from "react";
@@ -162,9 +163,13 @@ const DisplayTableOfKahootsCreated = ({ kahoots, className, onRefreshKahoots }: 
                     />
                   </div>
                 ) : (
-                  <img
+                  <Image
                     src={kahoot.mediaUrl}
-                    className="w-24 h-14 rounded-md object-cover"
+                    alt={kahoot.title}
+                    width={96}
+                    height={56}
+                    className="rounded-md object-cover"
+                    loading="lazy"
                   />
                 )}
               </td>

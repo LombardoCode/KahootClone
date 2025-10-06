@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Text from "@/app/components/UIComponents/Text";
 import useAverageImageColor from "@/app/hooks/useAverageImageColor";
 import { DiscoverCategoryCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/DiscoverCategoryCardInfo";
@@ -25,11 +26,13 @@ const DiscoverCategoryCard = ({ cardSize, category }: DiscoverCategoryCardProps)
       onClick={() => router.push(`${ROUTES.CATEGORIES}/${category.slug}`)}
     >
       <div className="absolute w-full h-full top-0 left-0 z-10 bg-black/40" />
-      <img
+      <Image
         ref={imgRef}
         src={category.mediaUrl}
-        crossOrigin="anonymous"
-        className="absolute top-0 left-0 w-full min-h-32 object-cover"
+        alt={category.title}
+        fill
+        className="object-cover"
+        loading="lazy"
       />
       <Text
         textColor={TextColors.WHITE}

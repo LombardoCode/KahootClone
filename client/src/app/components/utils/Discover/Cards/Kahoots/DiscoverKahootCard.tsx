@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Text from "@/app/components/UIComponents/Text";
 import useAverageImageColor from "@/app/hooks/useAverageImageColor";
 import { DiscoverKahootCardInfo } from "@/app/interfaces/Kahoot/Dashboard/Discover/RecentlyPlayedKahoots.interface";
@@ -25,12 +26,16 @@ const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardPro
       onClick={() => onClick(kahoot.kahootId)}
     >
       {kahoot.mediaUrl ? (
-        <img
-          ref={imgRef}
-          src={kahoot.mediaUrl}
-          crossOrigin="anonymous"
-          className="top-0 left-0 w-full min-h-[10.5rem] object-cover"
-        />
+        <div className="relative w-full min-h-[10.5rem]">
+          <Image
+            ref={imgRef}
+            src={kahoot.mediaUrl}
+            alt={kahoot.title}
+            fill
+            className="object-cover"
+            loading="lazy"
+          />
+        </div>
       ) : (
         <div className="bg-kahoot-purple-variant-4 flex justify-center items-center w-full min-h-[10.5rem]">
           <Logo
