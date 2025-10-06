@@ -65,7 +65,7 @@ const SidebarNav = ({ className, isMobileBarOpen, setIsMobileBarOpen }: SidebarN
             text={"Credits"}
             selected={false}
             icon={faCircleInfo}
-            onClick={() => {}}
+            onClick={() => window.open('https://github.com/LombardoCode/KahootClone/blob/master/CREDITS.md', '_blank')}
             setIsMobileBarOpen={(isOpen: boolean) => setIsMobileBarOpen(isOpen)}
           />
         </div>
