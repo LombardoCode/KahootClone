@@ -17,7 +17,7 @@ interface DiscoverCategoryCardProps {
 }
 
 const DiscoverCategoryCard = ({ cardSize, category }: DiscoverCategoryCardProps) => {
-  const { imgRef, facColor } = useAverageImageColor();
+  const { imgRef } = useAverageImageColor();
   const router = useRouter();
 
   return (
@@ -38,7 +38,7 @@ const DiscoverCategoryCard = ({ cardSize, category }: DiscoverCategoryCardProps)
         textColor={TextColors.WHITE}
         useCase={UseCases.BODY}
         fontWeight={FontWeights.BOLD}
-        className={`absolute z-20 text-shadow shadow-black/80 ${facColor?.isDark ? 'text-shadow shadow-black/80' : ''}`}
+        className={`relative z-20 text-shadow shadow-black`}
       >
         {category.title}
       </Text>

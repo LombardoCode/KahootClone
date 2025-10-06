@@ -17,7 +17,7 @@ interface DiscoverFeaturedCardProps {
 }
 
 const DiscoverFeaturedCard = ({ itemNumber, cardSize, featuredKahoot, onClick }: DiscoverFeaturedCardProps) => {
-  const { imgRef, facColor, bgColor } = useAverageImageColor();
+  const { imgRef, bgColor } = useAverageImageColor();
   itemNumber = itemNumber + 1;
 
   return (
@@ -44,7 +44,7 @@ const DiscoverFeaturedCard = ({ itemNumber, cardSize, featuredKahoot, onClick }:
               textColor={TextColors.WHITE}
               useCase={UseCases.LONGTEXT}
               fontWeight={FontWeights.REGULAR}
-              className={`z-20 text-xs w-full overflow-hidden text-ellipsis line-clamp-2`}
+              className={`text-xs w-full overflow-hidden text-ellipsis line-clamp-2`}
             >
               {featuredKahoot.numberOfQuestions} {featuredKahoot.numberOfQuestions === 1 ? 'question' : 'questions'}
             </Text>
@@ -72,25 +72,26 @@ const DiscoverFeaturedCard = ({ itemNumber, cardSize, featuredKahoot, onClick }:
             )}
           </div>
         </div>
-        <div className="px-3">
-          <div id="kahoot-title" className="mb-2">
+        <div className="relative flex-1 h-full px-3 flex flex-col justify-center">
+          <div className="absolute top-0 left-0 w-full h-full bg-black/40 pointer-events-none" />
+          <div id="kahoot-title" className="mb-2 relative z-10">
             <Text
-              textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
+              textColor={TextColors.WHITE}
               useCase={UseCases.LONGTEXT}
               fontWeight={FontWeights.BOLD}
-              className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
+              className={`text-sm w-full overflow-hidden text-ellipsis line-clamp-2 text-shadow-sm shadow-black`}
             >
               {featuredKahoot.title}
             </Text>
           </div>
 
-          <div id="kahoot-owner-details">
+          <div id="kahoot-owner-details" className="relative z-10">
             <div id="kahoot-owner-username">
               <Text
-                textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
+                textColor={TextColors.WHITE}
                 useCase={UseCases.LONGTEXT}
                 fontWeight={FontWeights.REGULAR}
-                className={`z-20 text-xs w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
+                className={`z-20 text-xs w-full overflow-hidden text-ellipsis line-clamp-2 text-shadow-sm shadow-black`}
               >
                 {featuredKahoot.createdByUserName}
               </Text>

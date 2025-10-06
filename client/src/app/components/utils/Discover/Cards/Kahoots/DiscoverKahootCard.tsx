@@ -17,7 +17,7 @@ interface DiscoverKahootCardProps {
 }
 
 const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardProps) => {
-  const { imgRef, facColor, bgColor } = useAverageImageColor();
+  const { imgRef, bgColor } = useAverageImageColor();
 
   return (
     <div
@@ -46,13 +46,14 @@ const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardPro
         </div>
       )}
 
-      <div className="discover-kahoot-card-text w-full h-full px-2 pt-1 pb-2 flex flex-col justify-between">
+      <div className="discover-kahoot-card-text relative w-full h-full px-2 pt-1 pb-2 flex flex-col justify-between">
+        <div className="absolute inset-0 bg-black/40" />
         <div id="kahoot-title" className="">
           <Text
-            textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
+            textColor={TextColors.WHITE}
             useCase={UseCases.LONGTEXT}
             fontWeight={FontWeights.BOLD}
-            className={`z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
+            className={`relative z-20 text-sm w-full overflow-hidden text-ellipsis line-clamp-2 text-shadow-sm shadow-black`}
           >
             {kahoot.title}
           </Text>
@@ -61,10 +62,10 @@ const DiscoverKahootCard = ({ cardSize, kahoot, onClick }: DiscoverKahootCardPro
         <div id="kahoot-owner-details">
           <div id="kahoot-owner-username">
             <Text
-              textColor={facColor?.isDark ? TextColors.WHITE : TextColors.GRAY}
+              textColor={TextColors.WHITE}
               useCase={UseCases.LONGTEXT}
               fontWeight={FontWeights.REGULAR}
-              className={`z-20 text-xs w-full overflow-hidden text-ellipsis line-clamp-2 ${facColor?.isDark ? 'text-shadow-sm shadow-black' : ''}`}
+              className={`relative z-20 text-xs w-full overflow-hidden text-ellipsis line-clamp-2 text-shadow-sm shadow-black`}
             >
               {kahoot.createdByUserName}
             </Text>
