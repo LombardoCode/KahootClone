@@ -17,6 +17,7 @@ interface ButtonProps {
   size?: ButtonSize;
   roundness?: ButtonRoundness;
   onClick?: (e?: any) => void;
+  aria_label?: string;
 };
 
 export enum ButtonSize {
@@ -55,7 +56,8 @@ const Button = ({
   textColor = TextColors.BLACK,
   borderColor = "",
   roundness = ButtonRoundness.MEDIUM,
-  onClick
+  onClick,
+  aria_label
 }: ButtonProps) => {
   return (
     <button
@@ -74,6 +76,7 @@ const Button = ({
         outline-none`
       }
       onClick={onClick}
+      aria-label={aria_label}
     >
       {children}
     </button>

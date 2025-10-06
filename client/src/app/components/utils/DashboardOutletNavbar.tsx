@@ -91,7 +91,7 @@ const DashboardOutletNavbar = ({
           />
         </div>
 
-        <Link href={ROUTES.MENU.DISCOVER}>
+        <Link href={ROUTES.MENU.DISCOVER} aria-label="Go to Discover page">
           <Logo
             id="logo-dashboard"
             size={LogoSize.REGULAR}
@@ -165,6 +165,7 @@ const DashboardOutletNavbar = ({
             }}
             perspective={PerspectiveSize.MEDIUM}
             animateOnHover={false}
+            aria_label="Search"
           >
             <FontAwesomeIcon
               icon={faSearch}
@@ -183,6 +184,7 @@ const DashboardOutletNavbar = ({
             onClick={() => setIsCreateKahootModalOpen(true)}
             perspective={PerspectiveSize.MEDIUM}
             animateOnHover={false}
+            aria_label="Create Kahoot"
           >
             <span className="hidden lg:block text-lg">Create</span>
 
