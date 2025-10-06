@@ -188,7 +188,6 @@ const PageContent = ({ categorySlug }: PageContentProps) => {
             <SectionTitle
               key={index1}
               size={SectionTitleSizes.SMALL}
-              viewAll={true}
             >
               {subsection.title}
             </SectionTitle>

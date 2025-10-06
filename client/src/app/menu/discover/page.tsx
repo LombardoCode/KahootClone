@@ -162,7 +162,6 @@ const DiscoverMenuPage = () => {
               <SectionTitle
                 key={index2}
                 size={SectionTitleSizes.SMALL}
-                viewAll={true}
               >
                 {subsection.title}
               </SectionTitle>

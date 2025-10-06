@@ -4,7 +4,6 @@ import Text from "../../../UIComponents/Text"
 interface SectionTitleProps {
   children: React.ReactNode;
   size?: SectionTitleSizes;
-  viewAll?: boolean;
   className?: string;
 }
 
@@ -14,29 +13,16 @@ export enum SectionTitleSizes {
   SMALL = "text-lg"
 }
 
-const SectionTitle = ({ children, size = SectionTitleSizes.MEDIUM, viewAll = false, className = "" }: SectionTitleProps) => {
+const SectionTitle = ({ children, size = SectionTitleSizes.MEDIUM, className = "" }: SectionTitleProps) => {
   return (
-    <div className={`${viewAll ? 'flex justify-between items-center' : ''}`}>
-      <Text
-        fontWeight={FontWeights.BOLD}
-        useCase={UseCases.HEADER}
-        textColor={TextColors.BLACK}
-        className={`${size} ${className}`}
-      >
-        {children}
-      </Text>
-
-      {viewAll && (
-        <Text
-          fontWeight={FontWeights.REGULAR}
-          useCase={UseCases.HEADER}
-          textColor={TextColors.GRAY}
-          className={`${size}`}
-        >
-          View all
-        </Text>
-      )}
-    </div>
+    <Text
+      fontWeight={FontWeights.BOLD}
+      useCase={UseCases.HEADER}
+      textColor={TextColors.BLACK}
+      className={`${size} ${className}`}
+    >
+      {children}
+    </Text>
   )
 }
 
